@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('board', function (Blueprint $table) {
-            $table->increments('board_id');
+        Schema::create('blacklist', function (Blueprint $table) {
             $table->integer('user_id');
-            $table->string('board_title', 255);
-            $table->string('board_content', 2000);
-            $table->timestamps();
+            $table->timestamp('banned_at');
             $table->softDeletes();
-            $table->integer('board_hit')->default(0);
+            $table->integer('admin_id');
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('board');
+        Schema::dropIfExists('blacklist');
     }
 };

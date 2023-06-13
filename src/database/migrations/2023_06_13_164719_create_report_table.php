@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('board', function (Blueprint $table) {
-            $table->increments('board_id');
+        Schema::create('report', function (Blueprint $table) {
+            $table->increments('report_id');
+            $table->integer('board_id');
+            $table->integer('comment_id');
             $table->integer('user_id');
-            $table->string('board_title', 255);
-            $table->string('board_content', 2000);
+            $table->char('report_type', 1);
             $table->timestamps();
             $table->softDeletes();
-            $table->integer('board_hit')->default(0);
+            $table->integer('rr_id');
+            $table->integer('admin_id');
         });
     }
 
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('board');
+        Schema::dropIfExists('report');
     }
 };

@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('festival', function (Blueprint $table) {
-            $table->integer('festival_id')->increments();
+            $table->increments('festival_id');
             $table->string('festival_title', 255);
-            $table->timestamp('festival_start_date');
-            $table->timestamp('festival_end_date');
+            $table->date('festival_start_date');
+            $table->date('festival_end_date');
             $table->string('area_code', 64);
             $table->string('sigungu_code', 64);
             $table->string('map_x', 64);

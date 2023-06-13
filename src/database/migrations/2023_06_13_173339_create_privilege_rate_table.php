@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('board', function (Blueprint $table) {
-            $table->increments('board_id');
-            $table->integer('user_id');
-            $table->string('board_title', 255);
-            $table->string('board_content', 2000);
-            $table->timestamps();
-            $table->softDeletes();
-            $table->integer('board_hit')->default(0);
+        Schema::create('privilege_rate', function (Blueprint $table) {
+            $table->increments('rate_id');
+            $table->string('rate_name', 64);
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('board');
+        Schema::dropIfExists('privilege_rate');
     }
 };

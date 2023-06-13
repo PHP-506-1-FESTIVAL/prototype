@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('board', function (Blueprint $table) {
-            $table->increments('board_id');
+        Schema::create('comment', function (Blueprint $table) {
+            $table->increments('comment_id');
+            $table->integer('festival_id');
+            $table->integer('board_id');
             $table->integer('user_id');
-            $table->string('board_title', 255);
-            $table->string('board_content', 2000);
+            $table->char('comment_type', 1);
+            $table->string('comment_content', 2000);
             $table->timestamps();
             $table->softDeletes();
-            $table->integer('board_hit')->default(0);
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('board');
+        Schema::dropIfExists('comment');
     }
 };

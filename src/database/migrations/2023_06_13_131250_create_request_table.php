@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('request', function (Blueprint $table) {
-            $table->integer('req_id')->increments();
-            $table->foreign('user_id')->references('user_id')->on('user');
+            $table->increments('req_id');
+            $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();
             $table->string('req_title', 255);
-            $table->timestamp('req_start_date');
-            $table->timestamp('req_end_date');
+            $table->date('req_start_date');
+            $table->date('req_end_date');
             $table->string('area_code', 64);
             $table->string('sigungu_code', 64);
             $table->string('map_x', 64);
@@ -33,8 +33,7 @@ return new class extends Migration
             $table->string('business_id', 64);
             $table->char('req_state', 1)->default('0');
             $table->timestamp('allowed_at')->nullable();
-            // $table->integer('festival_hit')->default(0);
-            // $table->char('festival_state')->default('0');
+            $table->integer('admin_id');
         });
     }
 
@@ -45,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requests');
+        Schema::dropIfExists('request');
     }
 };
