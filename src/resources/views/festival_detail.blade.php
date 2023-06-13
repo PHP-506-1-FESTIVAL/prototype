@@ -69,9 +69,9 @@
     <div id="item-2">축제 내용(기간, 장소, 유/무료(체험별 상이), 장소, 전화</div>
     <div id="item-3">홈페이지 있다면 홈페이지링크  </div>
 </div>
-</span>
+</span>  
 <br>
-{{-- 길찾기 --}}
+{{-- 길 찾기 --}} 
 <h1>카카오 길찾기</h1>
 	<div id="map" style="width:1200px;height:400px;"></div>
     <div id="routeBtn">
