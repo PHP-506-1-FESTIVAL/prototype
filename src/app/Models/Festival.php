@@ -10,4 +10,5 @@ class Festival extends Model
     use HasFactory;
 
     protected $primaryKey = 'festival_id';
+    public $timestamps = false;
 }

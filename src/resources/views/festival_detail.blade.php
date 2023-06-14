@@ -61,6 +61,39 @@
 
 <body>
 {{-- 축제 정보 --}}
+<h1>공공api</h1>
+    <div id="api-response"></div>
+
+    <script>
+    // API 요청 URL
+    const apiUrl = "https://apis.data.go.kr/B551011/KorService1/searchFestival1?serviceKey=%2Bo8Vb5NgOSYJzSk0%2BzIXmtmXJjrt8BEfzTWdSne%2BbWytU6UOZxtWQpwXvNBYPcnxx1PUuTYdhZ6tq7sp%2BwksMw%3D%3D&numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=d&eventStartDate=20230101";
+
+    // API 요청
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const response = data; // JSON 응답 데이터
+            const items = response.response.body.items.item;
+
+            // HTML 요소를 생성하여 데이터 출력
+            const container = document.getElementById("api-response");
+            items.forEach(item => {
+                const { title, tel, firstimage, eventstartdate, eventenddate} = item;
+                const itemDiv = document.createElement("div");
+                itemDiv.innerHTML = `
+                    <h2>축제명: ${title}</h2>
+                    <p>전화번호: ${tel}</p>
+                    <p>시작일: ${eventstartdate}</p>
+                    <p>종료일: ${eventenddate}</p>
+                    <img src="${firstimage}" alt="First Image">
+                    <hr>
+                `;
+                container.appendChild(itemDiv);
+            });
+        })
+        .catch(error => console.error(error));
+    </script>
+
 <span>
 <h1>축제 정보</h1>
 <div class="angry-grid">
@@ -71,6 +104,7 @@
 </div>
 </span>  
 <br>
+
 {{-- 길찾기 test --}} 
 <h1>카카오 길찾기</h1>
 	<div id="map" style="width:1200px;height:400px;"></div>
@@ -87,7 +121,7 @@
 	var map = new kakao.maps.Map(container, options);
     
 	function openKakaoRoadView() {
-		window.open("https://map.kakao.com/link/to/공공API로불러올장소이름EX(해운대),35.159613, 129.163515");
+		window.open("https://map.kakao.com/link/to/공공API불러올장소이름EX해운대,35.159613, 129.163515");
 	}
 </script>
 <br>

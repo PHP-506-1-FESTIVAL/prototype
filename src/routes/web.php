@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OpenApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,12 @@ Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout
 Route::get('/user/signup', [UserController::class, 'signup'])->name('user.signup');
 Route::post('/user/signuppost', [UserController::class, 'signuppost'])->name('user.signuppost');
 Route::get('/user/withdraw', [UserController::class, 'withdraw'])->name('user.withdraw');
+
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : web.php
+ * 이력         : v001 0614 박진영 new
+ ************************************************/
+Route::post('/api/store', [OpenApiController::class, 'store']);
+Route::get('/api/store', [OpenApiController::class, 'store']);
