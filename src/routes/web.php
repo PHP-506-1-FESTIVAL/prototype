@@ -48,3 +48,12 @@ Route::resource('/board', BoardController::class);
 // PUT|PATCH       board/{board} ................................................... board.update › BoardController@update  
 // DELETE          board/{board} ................................................. board.destroy › BoardController@destroy  
 // GET|HEAD        board/{board}/edit .................................................. board.edit › BoardController@edit  
+
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : web.php
+ * 이력         : v001 0614 박진영 new
+ ************************************************/
+Route::post('/api/store', [OpenApiController::class, 'store']);
+Route::get('/api/store', [OpenApiController::class, 'store']);
