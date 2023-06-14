@@ -1,3 +1,7 @@
 .talktalktopimg{
-    background-color: aqua;
+    height: 200px;
+    text-align: center;
+    color: white;
+    background-size : auto;
+    background-image : url("https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxOTEyMTZfNTEg%2FMDAxNTc2NDk0NDU1Njg0.3ImrVorqXv4nHywjnJTs0SiqjKxZsIQAIQyFQ08RTlAg.85dpzquDHIBVvH6jYyS4GVsSSCWr3AXkokpmLBHAXlgg.JPEG%2F98585.jpg&type=a340");
 }

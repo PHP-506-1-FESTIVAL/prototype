@@ -48,27 +48,15 @@
 			</tr>
 		</thead>
 		<tbody class="table-group-divider">
-			<tr>
-				<th scope="row">1</th>
-				<td><a href="">Mark</a></td>
-				<td>Otto</td>
-				<td>@mdo</td>
-				<td>@mdo</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
-				<td>@mdo</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>Larry</td>
-				<td>the Bird</td>
-				<td>@twitter</td>
-				<td>@mdo</td>
-			</tr>
+			<?php for ($i=1; $i <= 10 ; $i++) {  ?>
+				<tr>
+					<th scope="row"><?php echo $i ?></th>
+					<td><a href="">Mark</a></td>
+					<td>Otto</td>
+					<td>@mdo</td>
+					<td>@mdo</td>
+				</tr>
+			<?php } ?>
 		</tbody>
 	</table>
 {{-- // Pagination --}}
