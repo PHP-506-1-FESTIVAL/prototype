@@ -31,7 +31,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->rememberToken();
-            $table->integer('wr_id');
+            $table->integer('wr_id')->nullable();
         });
     }
 
