@@ -14,6 +14,14 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     function login() {
-        return '로그인';
+        return view('login');
+    }
+
+    function loginpost() {
+        
+    }
+
+    function signup() {
+        return '회원가입 페이지';
     }
 }
