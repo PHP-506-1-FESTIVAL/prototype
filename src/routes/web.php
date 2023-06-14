@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,19 @@ Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout
 Route::get('/user/signup', [UserController::class, 'signup'])->name('user.signup');
 Route::post('/user/signuppost', [UserController::class, 'signuppost'])->name('user.signuppost');
 Route::get('/user/withdraw', [UserController::class, 'withdraw'])->name('user.withdraw');
+
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : web.php
+ * 이력         : v001 0614 신유진 new
+ ************************************************/
+// Board
+Route::resource('/board', BoardController::class);
+// GET|HEAD        board ............................................................. board.index › BoardController@index  
+// POST            board ............................................................. board.store › BoardController@store  
+// GET|HEAD        board/create .................................................... board.create › BoardController@create  
+// GET|HEAD        board/{board} ....................................................... board.show › BoardController@show  
+// PUT|PATCH       board/{board} ................................................... board.update › BoardController@update  
+// DELETE          board/{board} ................................................. board.destroy › BoardController@destroy  
+// GET|HEAD        board/{board}/edit .................................................. board.edit › BoardController@edit  
