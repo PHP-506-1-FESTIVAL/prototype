@@ -71,7 +71,7 @@
 </div>
 </span>  
 <br>
-{{-- 길 찾기 test --}} 
+{{-- 길찾기 test --}} 
 <h1>카카오 길찾기</h1>
 	<div id="map" style="width:1200px;height:400px;"></div>
     <div id="routeBtn">
