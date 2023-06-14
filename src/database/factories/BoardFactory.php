@@ -19,7 +19,7 @@ class BoardFactory extends Factory
         $date = $this->faker->dateTimeBetween('-1 years');
         return [
             'user_id' => $this->faker->randomNumber(4)
-            ,'board_title' =>$this->faker->
+            ,'board_title' 
             ,'board_content'
             ,'created_at' => $date
             ,'updated_at' => $date
