@@ -17,7 +17,6 @@ return new class extends Migration
             $table->increments('req_id');
             $table->integer('user_id');
             $table->timestamps();
-            $table->softDeletes();
             $table->string('req_title', 255);
             $table->date('req_start_date');
             $table->date('req_end_date');
@@ -27,8 +26,8 @@ return new class extends Migration
             $table->string('map_y', 64);
             $table->string('content_type_id', 64);
             $table->string('tel', 64);
-            $table->string('poster_img', 512);
-            $table->string('list_img', 512);
+            $table->string('poster_img', 512)->nullable();
+            $table->string('list_img', 512)->nullable();
             $table->string('homepage', 512)->nullable();
             $table->string('business_id', 64);
             $table->char('req_state', 1)->default('0');

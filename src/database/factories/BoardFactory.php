@@ -19,19 +19,12 @@ class BoardFactory extends Factory
         $date = $this->faker->dateTimeBetween('-1 years');
         return [
             'user_id' => $this->faker->randomNumber(4)
-            ,'board_title' 
-            ,'board_content'
+            ,'board_title' => $this->faker->realText(20)
+            ,'board_content' => $this->faker->paragraph(500)
             ,'created_at' => $date
             ,'updated_at' => $date
             ,'deleted_at' => $this->faker->randomNumber(1) <= 5 ? $date : null
             ,'board_hit' => $this->faker->randomNumber(3)
-            // $table->increments('board_id');
-            // $table->integer('user_id');
-            // $table->string('board_title', 255);
-            // $table->string('board_content', 2000);
-            // $table->timestamps();
-            // $table->softDeletes();
-            // $table->integer('board_hit')->default(0);
         ];
     }
 }

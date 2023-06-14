@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Board;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BoardSeeder extends Seeder
+class FestivalHitSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class BoardSeeder extends Seeder
      */
     public function run()
     {
-        Board::factory(800)->create();
+        //
     }
 }

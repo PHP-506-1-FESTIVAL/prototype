@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('map_y', 64);
             $table->string('content_type_id', 64);
             $table->string('tel', 64);
-            $table->string('poster_img', 512);
-            $table->string('list_img', 512);
+            $table->string('poster_img', 512)->nullable();
+            $table->string('list_img', 512)->nullable();
             $table->string('homepage', 512)->nullable();
             $table->integer('festival_hit')->default(0);
             $table->char('festival_state')->default('0');
