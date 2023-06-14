@@ -1,10 +1,10 @@
 @extends('layout.layout')
 
-@section('title','축제톡톡')
+@section('title','축제톡톡상세')
 
 @section('content')
 {{-- // 자유게시판제목(배경넣고 위치 잡아주기) --}}
-<a class="nav-link disabled talktalktopimg">축제 톡톡</a>
+<a class="nav-link disabled ">축제 톡톡</a>
 {{-- // navbar(검색,정렬) --}}
 <nav class="navbar navbar-expand-lg bg-light">
 	<div class="container-fluid">
