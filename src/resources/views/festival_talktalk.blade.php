@@ -4,9 +4,9 @@
 
 @section('content')
 {{-- // 자유게시판제목(배경넣고 위치 잡아주기) --}}
-<a class="nav-link disabled talktalktopimg">축제 톡톡</a>
+<div class="bg-success p-2 text-white bg-opacity-10 talktalktopimg">축제 톡톡</div>
 {{-- // navbar(검색,정렬) --}}
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg">
 	<div class="container-fluid">
 	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -36,7 +36,7 @@
 	</div>
 </nav>
 {{-- // Tables --}}
-	<table class="table caption-top">
+	<table class="table">
 		<caption></caption>
 		<thead>
 			<tr>
@@ -48,27 +48,26 @@
 			</tr>
 		</thead>
 		<tbody class="table-group-divider">
+
+		@forelse($data as $item)
 			<tr>
-				<th scope="row">1</th>
-				<td><a href="">Mark</a></td>
-				<td>Otto</td>
-				<td>@mdo</td>
-				<td>@mdo</td>
+				<td>{{$item->board_id}}</td>
+				<td><a href="{{route('boards.show', ['board' => $item->board_id])}}">{{$item->board_title}}</a></td>
+				<td>{{$item->user_id}}</td>
+				<td>{{$item->created_at}}</td>
+				<td>{{$item->board_hit}}</td>
 			</tr>
+		@empty
 			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
-				<td>@mdo</td>
+				<td></td>
+				<td>게시글 없음</td>
+				<td></td>
+				<td></td>
+				<td></td>
 			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>Larry</td>
-				<td>the Bird</td>
-				<td>@twitter</td>
-				<td>@mdo</td>
-			</tr>
+		@endforelse
+
+		
 		</tbody>
 	</table>
 {{-- // Pagination --}}
