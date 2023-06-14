@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Grant_privilege extends Model
+class GrantPrivilege extends Model
 {
     use HasFactory;
 

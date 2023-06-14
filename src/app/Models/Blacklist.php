@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class blacklist extends Model
+class Blacklist extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'blacklist_id';
 }

@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('grant_privilege', function (Blueprint $table) {
-            $table->increments('privilege_id');
-            $table->integer('admin_id');
-            $table->integer('rate_id');
+        Schema::create('favorites', function (Blueprint $table) {
+            $table->increments('favorite_id');
+            $table->integer('user_id');
+            $table->integer('festival_id');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grant_privilege');
+        Schema::dropIfExists('favorites');
     }
 };

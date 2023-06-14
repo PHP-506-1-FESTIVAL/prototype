@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Privilege_rate extends Model
+class WithdrawReason extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'rate_id';
+    protected $primaryKey = 'wr_id';
 }

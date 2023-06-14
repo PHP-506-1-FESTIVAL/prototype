@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('withdraw_reason', function (Blueprint $table) {
-            $table->increments('wr_id');
-            $table->string('wr_detail', 255);
+        Schema::create('report_reasons', function (Blueprint $table) {
+            $table->increments('rr_id');
+            $table->string('rr_detail', 255);
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('withdraw_reason');
+        Schema::dropIfExists('report_reasons');
     }
 };

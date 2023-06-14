@@ -10,4 +10,13 @@ class User extends Model
     use HasFactory;
 
     protected $primaryKey = 'user_id';
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }

@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Grant_privilege>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GrantPrivilege>
  */
 class GrantPrivilegeFactory extends Factory
 {

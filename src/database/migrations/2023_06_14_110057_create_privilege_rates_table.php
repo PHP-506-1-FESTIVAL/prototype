@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blacklist', function (Blueprint $table) {
-            $table->integer('user_id');
-            $table->timestamp('banned_at');
-            $table->softDeletes();
-            $table->integer('admin_id');
+        Schema::create('privilege_rates', function (Blueprint $table) {
+            $table->increments('rate_id');
+            $table->string('rate_name', 64);
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blacklist');
+        Schema::dropIfExists('privilege_rates');
     }
 };

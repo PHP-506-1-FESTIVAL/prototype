@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comment', function (Blueprint $table) {
-            $table->increments('comment_id');
-            $table->integer('festival_id');
-            $table->integer('board_id');
+        Schema::create('blacklists', function (Blueprint $table) {
+            $table->increments('blacklist_id');
             $table->integer('user_id');
-            $table->char('comment_type', 1);
-            $table->string('comment_content', 2000);
-            $table->timestamps();
+            $table->timestamp('banned_at');
             $table->softDeletes();
+            $table->integer('admin_id');
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment');
+        Schema::dropIfExists('blacklists');
     }
 };

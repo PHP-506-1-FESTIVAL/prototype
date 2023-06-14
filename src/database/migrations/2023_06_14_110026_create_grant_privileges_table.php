@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('privilege_rate', function (Blueprint $table) {
-            $table->increments('rate_id');
-            $table->string('rate_name', 64);
+        Schema::create('grant_privileges', function (Blueprint $table) {
+            $table->increments('privilege_id');
+            $table->integer('admin_id');
+            $table->integer('rate_id');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('privilege_rate');
+        Schema::dropIfExists('grant_privileges');
     }
 };
