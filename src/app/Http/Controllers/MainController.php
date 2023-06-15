@@ -22,12 +22,21 @@ class MainController extends Controller
     //메인 페이지 이동
     public function main()
     {
-        $data=Festival::select([
+        $result=Festival::select([
             'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
-        ]);
-        var_dump($data);
-        return view('protoMain',compact('data'));
-        // return view('protoMain')->with('data',$data);
+        ])->where('festival_state','<','2')->orderBy('festival_hit')->limit(4)->get();
+        // dump($data);
+        $month=[];
+        for ($i=0; $i < 13; $i++) {
+            if ($i===0) {
+                $month[]=null;
+            }
+            else{
+                $month[]=$i;
+            }
+        }
+        // return view('protoMain',compact('data'));
+        return view('main')->with('data',$result)->with('month',$month);
 
     }
     //로그인 클릭시

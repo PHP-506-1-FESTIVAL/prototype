@@ -52,7 +52,7 @@ Route::resource('/board', BoardController::class);
 
 // #routes/web.php
 // code
-Route::get('/', 'HomeController@index');
+// Route::get('/', 'HomeController@index');
 
 /************************************************
  * 프로젝트명   : festival_info
