@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OpenApiController;
 
@@ -41,13 +42,13 @@ Route::get('/user/withdraw', [UserController::class, 'withdraw'])->name('user.wi
  ************************************************/
 // Board
 Route::resource('/board', BoardController::class);
-// GET|HEAD        board ............................................................. board.index › BoardController@index  
-// POST            board ............................................................. board.store › BoardController@store  
-// GET|HEAD        board/create .................................................... board.create › BoardController@create  
-// GET|HEAD        board/{board} ....................................................... board.show › BoardController@show  
-// PUT|PATCH       board/{board} ................................................... board.update › BoardController@update  
-// DELETE          board/{board} ................................................. board.destroy › BoardController@destroy  
-// GET|HEAD        board/{board}/edit .................................................. board.edit › BoardController@edit  
+// GET|HEAD        board ............................................................. board.index › BoardController@index
+// POST            board ............................................................. board.store › BoardController@store
+// GET|HEAD        board/create .................................................... board.create › BoardController@create
+// GET|HEAD        board/{board} ....................................................... board.show › BoardController@show
+// PUT|PATCH       board/{board} ................................................... board.update › BoardController@update
+// DELETE          board/{board} ................................................. board.destroy › BoardController@destroy
+// GET|HEAD        board/{board}/edit .................................................. board.edit › BoardController@edit
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -57,3 +58,12 @@ Route::resource('/board', BoardController::class);
  ************************************************/
 Route::post('/api/store', [OpenApiController::class, 'store']);
 Route::get('/api/store', [OpenApiController::class, 'store']);
+
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : web.php
+ * 이력         : v001 0614 김재성 new
+ ************************************************/
+
+Route::get('main', [MainController::class, 'MainPage'])->name('main.page');
