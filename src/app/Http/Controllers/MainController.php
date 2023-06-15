@@ -7,6 +7,8 @@ use App\Models\Festival;
 use App\Models\FestivalHit;
 use App\Models\Notice;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -17,6 +19,17 @@ use App\Models\User;
 
 class MainController extends Controller
 {
+    //메인 페이지 이동
+    public function main()
+    {
+        $data=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ]);
+        var_dump($data);
+        return view('protoMain',compact('data'));
+        // return view('protoMain')->with('data',$data);
+
+    }
     //로그인 클릭시
     public function Login()
     {
@@ -41,7 +54,7 @@ class MainController extends Controller
         # code...
     }
     //네비 축제목록 클릭
-    public function FesList()
+    public function fesList()
     {
         return view('festival_list');
     }
@@ -51,7 +64,7 @@ class MainController extends Controller
         return view('boarder');
     }
     //네비 공지 클릭
-    public function NoticePage()
+    public function noticePage()
     {
         return view('Notice');
     }
