@@ -31,7 +31,6 @@ return new class extends Migration
             $table->string('homepage', 512)->nullable();
             $table->string('business_id', 64);
             $table->char('req_state', 1)->default('0');
-            $table->timestamp('allowed_at')->nullable();
             $table->integer('admin_id');
         });
     }

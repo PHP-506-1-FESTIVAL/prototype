@@ -62,6 +62,7 @@
 		<tbody class="table-group-divider">
 		@forelse($data as $item)
 			<tr>
+				{{-- <th scope="row">{{$key+1 + (($item->currentPage()-1) * 10)}}</th> --}}
 				<td>{{$item->board_id}}</td>
 				<td><a href="{{route('board.show', ['board' => $item->board_id])}}">{{$item->board_title}}</a></td>
 				<td>{{$item->user_id}}</td>

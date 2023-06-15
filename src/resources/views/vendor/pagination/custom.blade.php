@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<title>Page Title</title>
-</head>
-
-<body>
-	<h2>Welcome To GFG</h2>
-	
-<p>Default code has been loaded into the Editor.</p>
-
-</body>
-<!-- resources/views/vendor/pagination/custom.blade.php -->
-
 @if ($paginator->hasPages())
 <nav aria-label="Page navigation example">
 	<ul class="pagination justify-content-center">

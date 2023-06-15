@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('festival_title', 255);
             $table->date('festival_start_date');
             $table->date('festival_end_date');
-            $table->string('area_code', 64);
-            $table->string('sigungu_code', 64);
+            $table->string('area_code', 64)->nullable();
+            $table->string('sigungu_code', 64)->nullable();
             $table->string('map_x', 64);
             $table->string('map_y', 64);
             $table->string('content_type_id', 64);
-            $table->string('tel', 64);
+            $table->string('tel', 64)->nullable();
             $table->string('poster_img', 512)->nullable();
             $table->string('list_img', 512)->nullable();
             $table->string('homepage', 512)->nullable();
