@@ -66,6 +66,9 @@ Route::get('/api/store', [OpenApiController::class, 'store']);
  * 이력         : v001 0614 김재성 new
  ************************************************/
 
+ // 메인페이지 이동
 Route::get('main', [MainController::class, 'main'])->name('main');
+// 축제리시트 페이지 이동
 Route::get('feslist', [MainController::class, 'fesList'])->name('main.fesList');
+// 공지페이지 이동
 Route::get('noticepage', [MainController::class, 'noticePage'])->name('main.noticePage');
