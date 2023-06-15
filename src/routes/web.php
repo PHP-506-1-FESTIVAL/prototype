@@ -66,4 +66,6 @@ Route::get('/api/store', [OpenApiController::class, 'store']);
  * 이력         : v001 0614 김재성 new
  ************************************************/
 
-Route::get('main', [MainController::class, 'MainPage'])->name('main.page');
+Route::get('main', [MainController::class, 'main'])->name('main');
+Route::get('feslist', [MainController::class, 'fesList'])->name('main.fesList');
+Route::get('noticepage', [MainController::class, 'noticePage'])->name('main.noticePage');
