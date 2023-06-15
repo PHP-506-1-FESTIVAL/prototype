@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('user_password', 512);
             $table->string('user_name', 64);
-            $table->char('user_gender');
+            $table->char('user_gender', 1);
             $table->date('user_birthdate');
             $table->string('user_nickname', 64);
             $table->string('user_profile', 512)->nullable();

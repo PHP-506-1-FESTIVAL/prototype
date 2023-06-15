@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('comment_id');
-            $table->integer('festival_id');
-            $table->integer('board_id');
+            $table->integer('festival_id')->nullable();
+            $table->integer('board_id')->nullable();
             $table->integer('user_id');
             $table->char('comment_type', 1);
             $table->string('comment_content', 2000);
