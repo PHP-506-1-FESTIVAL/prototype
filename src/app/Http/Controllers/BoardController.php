@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BoardController extends Controller
@@ -14,6 +15,12 @@ class BoardController extends Controller
         // 이렇게 모델을 가져오는 것이 추천 코드
         $this->Board = $Board;
     }
+
+    // public function __construct(User $User){
+    //     // Laravel 의 IOC(Inversion of Control)
+    //     // 이렇게 모델을 가져오는 것이 추천 코드
+    //     $this->User = $User;
+    // }
 
     /**
      * Display a listing of the resource.
@@ -41,7 +48,7 @@ class BoardController extends Controller
      */
     public function create()
     {
-        //
+        return view('board_write');
     }
 
     /**
@@ -63,7 +70,9 @@ class BoardController extends Controller
      */
     // 상세 페이지
     public function show($board_id){
-        return view('board_detail', compact('board_id'));
+        $board_data = Board::find($board_id);
+        return view('board_detail')->with('board_data', Board::findOrFail($board_id));
+        // return view('board_detail', compact('board_id'));
     }
 
     /**
@@ -95,8 +104,10 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($board_id)
     {
-        //
+        // board_id에 해당하는 board를 destroy(ctrl+클릭해보기)
+        Board::destroy($board_id);
+        return redirect('/board');
     }
 }

@@ -16,7 +16,7 @@ class OpenApiController extends Controller
 
         // API에서 데이터를 가져옴
         $response = Http::withoutVerifying()->get($apiUrl)->json();//Http::withoutVerifying()는 SSL 인증서를 확인하지 않도록 설정하는 메서드
-        //응답 데이터에서 response, body, items, item을 차례대로 접근하여 items 배열과 그 안에 있는 item들을 추출합니다. 이 배열은 API에서 받은 축제 데이터의 목록을 나타냅니다
+        //응답 데이터에서 response, body, items, item을 차례대로 접근하여 items 배열과 그 안에 있는 item들을 추출. 이 배열은 API에서 받은 축제 데이터의 목록을 나타냅니다
         $items = $response['response']['body']['items']['item'];//
 
         foreach ($items as $item) {
@@ -37,6 +37,8 @@ class OpenApiController extends Controller
         
         return response()->json(['message' => '데이터 저장 성공.']);
     }
+
+
 }
 
 
