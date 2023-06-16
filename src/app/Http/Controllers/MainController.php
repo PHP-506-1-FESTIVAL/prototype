@@ -144,4 +144,17 @@ class MainController extends Controller
     {
 
     }
+    /************************************************
+     * 프로젝트명   : festival_info
+     * 디렉토리     : Controllers
+     * 파일명       : MainController.php
+     * 이력         : v001 0614 박진영 new
+     ************************************************/
+    public function detail()
+    {
+        $data=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code','map_x','map_y', 'tel','poster_img', 'festival_hit', 'festival_state', 'festival_hit','festival_state'
+        ])->limit(5)->get();
+        return view('festival_detail',compact('data'));
+    }
 }
