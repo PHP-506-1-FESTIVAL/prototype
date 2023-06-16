@@ -42,18 +42,21 @@
         </div>
     </div>
     <div class="col-sm">
-        {{-- 각각 맞는 축제 --}}
+            {{-- 각각 맞는 축제 --}}
         @foreach ($data as $item)
         <div id="Recommend">
-        @if ($item->poster_img)
-            <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" >
-        @else
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Red_x.svg/768px-Red_x.svg.png" alt="{{$item->festival_title}}" >
-        @endif
+            @if ($item->poster_img)
+                <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" >
+            @else
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Red_x.svg/768px-Red_x.svg.png" alt="{{$item->festival_title}}" >
+            @endif
+        </div>
+    @endforeach
     </div>
-@endforeach
+    <div id="moreFes">
+        <a href="{{route('main.FesOrder', ['id' => 1])}}">더보기>></a>
     </div>
-    </div>
+</div>
 
 <script src="{{asset('js/main.js')}}"></script>
 @endsection

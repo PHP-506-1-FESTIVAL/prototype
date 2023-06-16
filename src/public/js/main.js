@@ -27,7 +27,9 @@ function make_api_list(area_code) {
             .then((res) => { return res.json() })
             .then((date) => target([date]))
             // .catch(console.log)
-            .finally(scrollFlg=true)
+            .finally()
+            const moreFes= document.getElementById('moreFes').childNodes[1]
+            moreFes.setAttribute("href","{{route('main.FesOrder', ['id' => "+area_code+"])}}")//Todo
 }
 
 function target(date) {
