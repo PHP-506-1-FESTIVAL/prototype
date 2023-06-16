@@ -40,4 +40,5 @@ function deleteReply(reply) {
     var replyList = listItem.parentNode;
     replyList.removeChild(listItem);
 }
+
 </script>
