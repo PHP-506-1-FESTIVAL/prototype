@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 class MainController extends Controller
 {
     //메인 페이지 이동
-    public function main()
+    public function mainView()
     {
         $result=Festival::select([
             'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
@@ -36,13 +36,28 @@ class MainController extends Controller
             }
         }
         // return view('protoMain',compact('data'));
-        return view('main')->with('data',$result)->with('month',$month);
-
+        return view('main')->with('fesData',$result)->with('month',$month);
     }
-    //로그인 클릭시
-    public function Login()
+    // 로그인 이후 메인 페이지 이동
+    //$id = 로그인
+    public function mainUse($id)
     {
-        return view('login');
+        $result_fes=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state','<','2')->orderBy('festival_hit')->limit(4)->get();
+        // dump($data);
+        $month=[];
+        for ($i=0; $i < 13; $i++) {
+            if ($i===0) {
+                $month[]=null;
+            }
+            else{
+                $month[]=$i;
+            }
+        }
+        $result_user = User::find($id)->select(['user_email','user_nickname','user_profile'])->get();
+        // return view('protoMain',compact('data'));
+        return view('main')->with('fesData',$result_fes)->with('month',$month)->with('userData',$result_user);
     }
     //마이페이지
     //$id : 유저ID
@@ -65,7 +80,9 @@ class MainController extends Controller
     //네비 축제목록 클릭
     public function fesList()
     {
-        return view('festival_list');
+        $result = Festival::select(['festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'])
+        ->orderBy('festival_hit')->get();
+        return view('festival_list')->with('data',$result);
     }
     //네비 자유게시판 클릭
     public function Border()
@@ -149,11 +166,9 @@ class MainController extends Controller
      * 파일명       : MainController.php
      * 이력         : v001 0614 박진영 new
      ************************************************/
-    public function fesdetail()
+    public function fesDetail($id)
     {
-        $data=Festival::select([ //홈페이지가없어 히트랑 스테이지 두개씩 들어갔어요 거의 다 가지고오는데 all쓰는 거 어떤가요?
-            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code','map_x','map_y', 'tel','poster_img', 'festival_hit', 'festival_state', 'festival_hit','festival_state'
-        ])->limit(5)->get();
+        $data=Festival::find($id)->get();
         return view('festival_detail',compact('data'));
     }
 }

@@ -4,13 +4,15 @@
 
 {{-- 축제 배너 --}}
 
-@foreach ($data as $item)
-<div>
-        @if ($item->poster_img)
-            <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" >
-        @else
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Red_x.svg/768px-Red_x.svg.png" alt="{{$item->festival_title}}" >
-        @endif
+@foreach ($fesData as $item)
+    <div>
+        <a href="{{route('fes.detail',['id'=>$item->festival_id])}}">
+            @if ($item->poster_img)
+                <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" >
+            @else
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Red_x.svg/768px-Red_x.svg.png" alt="{{$item->festival_title}}" >
+            @endif
+        </a>
     </div>
 @endforeach
 
@@ -43,13 +45,15 @@
     </div>
     <div class="col-sm">
             {{-- 각각 맞는 축제 --}}
-        @foreach ($data as $item)
-        <div id="Recommend">
-            @if ($item->poster_img)
-                <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" >
-            @else
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Red_x.svg/768px-Red_x.svg.png" alt="{{$item->festival_title}}" >
-            @endif
+        @foreach ($fesData as $item)
+        <div>
+            <a href="{{route('fes.detail',['id'=>$item->festival_id])}}" id="Recommend">
+                @if ($item->poster_img)
+                    <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" >
+                @else
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Red_x.svg/768px-Red_x.svg.png" alt="{{$item->festival_title}}" >
+                @endif
+            </a>
         </div>
     @endforeach
     </div>
