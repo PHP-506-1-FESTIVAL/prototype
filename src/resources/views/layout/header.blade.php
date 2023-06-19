@@ -1,10 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid mx-5">
-        @if (true)
+        @auth
             <a class="navbar-brand" href="{{route('main.use', ['id' => 1])}}">마실가실?</a>
-        @else
+        @endauth
+
+        @guest
             <a class="navbar-brand" href="{{route('main.view')}}">마실가실?</a>
-        @endif
+        @endguest
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -40,7 +42,7 @@
                 </div>
             </form>
         </div>
-        @if (true)
+        @auth
             <li class="dropdown list-group-item">
                 <a class="dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="{{$userData[0]->user_profile}}" alt="" class="img-thumbnail img-fluid">
@@ -61,8 +63,9 @@
                     <li><a class="dropdown-item" href="">로그아웃</a></li>
                 </ul>
             </li>
-        @else
+        @endauth
+        @guest
             <a href="{{route('user.login')}}">로그인</a>
-        @endif
+        @endguest
     </div>
 </nav>
