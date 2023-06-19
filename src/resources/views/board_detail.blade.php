@@ -30,64 +30,7 @@
 </div>
 
 {{-- // 댓글 --}}
-<div id="entry49Comment">
-    <span>댓글</span>
-    <br><hr><br>
-    <div class="comments">
-        {{-- // 댓글리스트 --}}
-        <div class="comment-list">
-            <ul>
-                <li id="comment-item">
-                    <div class="author-meta">
-                        <img src="https://t1.daumcdn.net/tistory_admin/blog/admin/profile_default_01.png" style="width: 2%; min-width: 50px;" class="avatar" alt="" >
-                        <span class="nickname">댓글 작성자 닉네임</span>
-                        <span class="date">
-                            2023.06.16 11:04 
-                        </span>
-                        <a href="" onclick="">신고</a>
-                        <span class="control">
-                            <a href="#" onclick="deleteComment(13736003);return false">수정/삭제</a>
-                            <a href="#" onclick=" commentComment(13736003);return false">댓글쓰기</a>
-                        </span>
-                    </div>  
-                    <p>댓글의 내용 부분 입니다.</p>
-                </li>
-            </ul>
-        </div>
-        {{-- // 댓글 입력 --}}
-        <br><hr><br>
-        <form method="post" action="/comment/add/49" onsubmit="return false" style="margin: 0">
-            <div class="comment-form">
-                <div class="field">
-                    <input type="text" name="name" value="" placeholder="이름">
-                    <input type="password" name="password" value="[##_rp_admin_check_##]" placeholder="암호">
-                    <div class="secret">
-                        <input type="checkbox" name="secret" id="secret">
-                        <label for="secret" tabindex="0">Secret</label>
-                    </div>
-                </div>
-
-                <textarea name="comment" cols="" rows="4" placeholder="댓글을 입력해주세요."></textarea>
-                <div class="submit" onclick="addComment(this, 49); return false;">
-                    <button type="submit" class="btn">댓글달기</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-
-
-
-
-    {{-- @if($sesion) --}}
-        
-    {{-- @endif --}}
-    {{-- <div class="content mt-4 rounded-3 border border-secondary">
-        <div class="p-3">
-            {{$data->board_content}}
-        </div>
-    </div> --}}
+    @include('layout.comment')
 @endsection
 
 
