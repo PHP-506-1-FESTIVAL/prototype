@@ -61,7 +61,7 @@ Route::resource('/board', BoardController::class);
  * 이력         : v001 0614 박진영 new
  ************************************************/
 Route::get('/api/store', [OpenApiController::class, 'store']);
-Route::get('detail', [MainController::class, 'detail'])->name('detail');
+Route::get('fesdetail', [MainController::class, 'fesDetail'])->name('fes.detail');
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -77,4 +77,4 @@ Route::get('feslist', [MainController::class, 'fesList'])->name('main.fesList');
 // 공지페이지 이동
 Route::get('noticepage', [MainController::class, 'noticePage'])->name('main.noticePage');
 // 더보기로 축제리스트페이지 이동
-Route::get('fesorder/{id}', [MainController::class, 'FesOrder'])->name('main.FesOrder');
+Route::get('fesorder/{id}', [MainController::class, 'fesOrder'])->name('main.FesOrder');
