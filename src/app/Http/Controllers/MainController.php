@@ -118,10 +118,14 @@ class MainController extends Controller
         # code...
     }
     //더보기 클릭시
-    //$arr_parm : mon(월)/local(지역코드)
-    public function FesOrder($arr_parm)
+    //$id : local(지역코드)
+    //$arr_parm : mon(월)/local(지역코드) //월은 나중
+    public function FesOrder($id)
     {
-        # code...
+        $result = Festival::select(['festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'])
+        ->where('area_code',$id)->orderBy('festival_hit')->get();
+        // dump($result);
+        return view('festival_list')->with('date',$result);
     }
     //공지
     public function Notice(Notice $id)
@@ -143,5 +147,18 @@ class MainController extends Controller
     public function Profile(User $id)
     {
 
+    }
+    /************************************************
+     * 프로젝트명   : festival_info
+     * 디렉토리     : Controllers
+     * 파일명       : MainController.php
+     * 이력         : v001 0614 박진영 new
+     ************************************************/
+    public function detail()
+    {
+        $data=Festival::select([ //홈페이지가없어 히트랑 스테이지 두개씩 들어갔어요 거의 다 가지고오는데 all쓰는 거 어떤가요?
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code','map_x','map_y', 'tel','poster_img', 'festival_hit', 'festival_state', 'festival_hit','festival_state'
+        ])->limit(5)->get();
+        return view('festival_detail',compact('data'));
     }
 }

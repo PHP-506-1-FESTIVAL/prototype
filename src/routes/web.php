@@ -60,8 +60,8 @@ Route::resource('/board', BoardController::class);
  * 파일명       : web.php
  * 이력         : v001 0614 박진영 new
  ************************************************/
-Route::post('/api/store', [OpenApiController::class, 'store']);
 Route::get('/api/store', [OpenApiController::class, 'store']);
+Route::get('detail', [MainController::class, 'detail'])->name('detail');
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -76,3 +76,5 @@ Route::get('main', [MainController::class, 'main'])->name('main');
 Route::get('feslist', [MainController::class, 'fesList'])->name('main.fesList');
 // 공지페이지 이동
 Route::get('noticepage', [MainController::class, 'noticePage'])->name('main.noticePage');
+// 더보기로 축제리스트페이지 이동
+Route::get('fesorder/{id}', [MainController::class, 'FesOrder'])->name('main.FesOrder');
