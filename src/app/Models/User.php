@@ -10,6 +10,19 @@ class User extends Authenticatable
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'user_email',
+        'user_password',
+        'user_name',
+        'user_gender',
+        'user_birthdate',
+        'user_nickname',
+        'user_profile',
+        'user_zipcode',
+        'user_address',
+        'user_address_detail',
+    ];
+
     protected $primaryKey = 'user_id';
 
     protected $hidden = [
