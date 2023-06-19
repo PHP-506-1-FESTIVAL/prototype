@@ -92,7 +92,7 @@ class MainController extends Controller
     //네비 공지 클릭
     public function noticePage()
     {
-        return view('Notice');
+        return view('notice_list');
     }
     //공지알람 클릭시
     //$id : 공지ID
