@@ -38,7 +38,7 @@ class UserController extends Controller
         Auth::login($user);
         if(Auth::check()) {
             session($user->only('user_id')); // 세션에 인증된 회원 pk 등록
-            return redirect()->intended(route('main'));
+            return redirect()->intended(route('main.use', ['id' => $user->user_id]));
         } else {
             $error = '인증작업 에러';
             return redirect()->back()->with('error', $error);
@@ -49,7 +49,19 @@ class UserController extends Controller
         return view('signup');
     }
 
-    function signuppost() {
-        return '회원가입';
+    function signuppost(Request $req) {
+        
+        // 유효성검사
+        $req->validate([
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+        ]);
+
+        // 이미지 이름 설정
+        $imgName = 'profileimg'.'.'.$req->image->extension();
+
+        // 이미지가 저장될 path 설정
+        $req->image->move(public_path('img/profile'), $imgName);
+
+        return redirect()->route('user.login');
     }
 }
