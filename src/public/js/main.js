@@ -1,3 +1,4 @@
+const resource = 'http://localhost/api/mainapi/'
 let month = document.getElementById('month');
 function changText(item) {
     if (item===undefined) {
@@ -22,14 +23,15 @@ function changText(item) {
 function make_api_list(area_code) {
 
 
-    const url = "http://localhost/api/mainapi/"+area_code;
+    const url = resource+area_code;
         fetch(url)
             .then((res) => { return res.json() })
             .then((date) => target([date]))
             // .catch(console.log)
             .finally()
             const moreFes= document.getElementById('moreFes').childNodes[1]
-            moreFes.setAttribute("href","{{route('main.FesOrder', ['id' => "+area_code+"])}}")//Todo
+            // moreFes.setAttribute("href","{{route('main.FesOrder', ['id' => "+area_code+"])}}")//안먹히네
+            moreFes.setAttribute("href","http://localhost/fesorder/"+area_code)//Todo
 }
 
 function target(date) {

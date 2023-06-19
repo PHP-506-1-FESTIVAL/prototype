@@ -124,7 +124,7 @@ class MainController extends Controller
     {
         $result = Festival::select(['festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'])
         ->where('area_code',$id)->orderBy('festival_hit')->get();
-        dump($result);
+        // dump($result);
         return view('festival_list')->with('date',$result);
     }
     //공지
