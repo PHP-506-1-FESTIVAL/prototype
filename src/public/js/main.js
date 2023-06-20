@@ -1,13 +1,18 @@
 const api = 'http://localhost/api/mainapi/'
 const domaine = 'http://localhost/'
 const fesOrder = 'fesorder/'
+let monthStr="";
+
 let month = document.getElementById('month');
 function changText(item) {
     if (item===undefined) {
         month.innerHTML='전체';
+        monthStr="";
     }
-    else
+    else{
         month.innerHTML=item;
+        monthStr=item;
+    }
 }
 
 // function make_list(date) {
@@ -22,10 +27,10 @@ function changText(item) {
 
 //     });
 // }
-function make_api_list(area_code) {
+function make_api_list(str_val) {
 
 
-    const url = api+area_code;
+    const url = api+str_val;
         fetch(url)
             .then((res) => { return res.json() })
             .then((date) => target([date]))
@@ -158,86 +163,86 @@ function resColor() {
 AC1.addEventListener('click',()=>{
     resColor();
     AC1.style.fill='red';
-    make_api_list(1);
+    make_api_list(1+","+monthStr);
 })
 AC2.addEventListener('click',()=>{
     resColor();
     AC2.style.fill='red';
-    make_api_list(2);
+    make_api_list(2+","+monthStr);
 })
 AC3.addEventListener('click',()=>{
     resColor();
     AC3.style.fill='red';
-    make_api_list(3);
+    make_api_list(3+","+monthStr);
 })
 AC4.addEventListener('click',()=>{
     resColor();
     AC4.style.fill='red';
-    make_api_list(4);
+    make_api_list(4+","+monthStr);
 })
 AC5.addEventListener('click',()=>{
     resColor();
     AC5.style.fill='red';
-    make_api_list(5);
+    make_api_list(5+","+monthStr);
 })
 AC6.addEventListener('click',()=>{
     resColor();
     AC6.style.fill='red';
-    make_api_list(6);
+    make_api_list(6+","+monthStr);
 })
 AC7.addEventListener('click',()=>{
     resColor();
     AC7.style.fill='red';
-    make_api_list(7);
+    make_api_list(7+","+monthStr);
 })
 AC8.addEventListener('click',()=>{
     resColor();
     AC8.style.fill='red';
-    make_api_list(8);
+    make_api_list(8+","+monthStr);
 })
 AC31.addEventListener('click',()=>{
     resColor();
     AC31.style.fill='red';
-    make_api_list(31);
+    make_api_list(31+","+monthStr);
 })
 AC32.addEventListener('click',()=>{
     resColor();
     AC32.style.fill='red';
-    make_api_list(32);
+    make_api_list(32+","+monthStr);
 })
 AC33.addEventListener('click',()=>{
     resColor();
     AC33.style.fill='red';
-    make_api_list(33);
+    make_api_list(33+","+monthStr);
 })
 AC34.addEventListener('click',()=>{
     resColor();
     AC34.style.fill='red';
-    make_api_list(34);
+    make_api_list(34+","+monthStr);
 })
 AC35.addEventListener('click',()=>{
     resColor();
     AC35.style.fill='red';
-    make_api_list(35);
+    make_api_list(35+","+monthStr);
 })
 AC36.addEventListener('click',()=>{
     resColor();
     AC36.style.fill='red';
-    make_api_list(36);
+    make_api_list(36+","+monthStr);
 })
 AC37.addEventListener('click',()=>{
     resColor();
     AC37.style.fill='red';
-    make_api_list(37);
+    make_api_list(37+","+monthStr);
 })
 AC38.addEventListener('click',()=>{
     resColor();
     AC38.style.fill='red';
-    make_api_list(38);
+    make_api_list(38+","+monthStr);
 })
 AC39.addEventListener('click',()=>{
     resColor();
     AC39.style.fill='red';
-    make_api_list(39);
+    make_api_list(39+","+monthStr);
 })
 

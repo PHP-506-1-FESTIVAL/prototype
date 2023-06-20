@@ -1,164 +1,103 @@
 @extends('layout.layout')
 
-@section('title','축제정보상세')
+@section('title', '축제정보상세')
 
 @section('content')
 {{-- 축제 정보 --}}
-<div class="container">
-<h1>축제 정보</h1>
-    <div class="parent">
-        @foreach ($data as $item)
-        <div class="div1">
-            축제 제목: {{ $item->festival_title }}
-            <br>축제진행중:
-            @if (now() >= $item->festival_start_date && now() <= $item->festival_end_date)
-                진행중
-            @else
-                종료됨
-            @endif
-                <br>기간: {{ $item->festival_start_date }} ~ {{ $item->festival_end_date }}<br>찜: [찜 로직 추가]
-            </div>
-
-            <div class="div2">
-                <img src="{{ $item->poster_img }}" style="width:100%; height:auto; object-fit: fill;" alt="포스터">
-            </div>
-
-            <div class="div3">
-                시작일: {{ $item->festival_start_date }} ~ 종료일: {{ $item->festival_end_date }}
-                <br>지역:
-                @switch($item->area_code)
-                    @case(1)
-                        @lang('서울')
-                        @break
-                    @case(2)
-                        @lang('인천')
-                        @break
-                    @case(3)
-                        @lang('대전')
-                        @break
-                    @case(4)
-                        @lang('대구')
-                        @break
-                    @case(5)
-                        @lang('광주')
-                        @break
-                    @case(6)
-                        @lang('부산')
-                        @break
-                    @case(7)
-                        @lang('울산')
-                        @break
-                    @case(8)
-                        @lang('세종')
-                        @break
-                    @case(31)
-                        @lang('경기')
-                        @break
-                    @case(32)
-                        @lang('강원')
-                        @break
-                    @case(33)
-                        @lang('충북')
-                        @break
-                    @case(34)
-                        @lang('충남')
-                        @break
-                    @case(35)
-                        @lang('경북')
-                        @break
-                    @case(36)
-                        @lang('경남')
-                        @break
-                    @case(37)
-                        @lang('전북')
-                        @break
-                    @case(38)
-                        @lang('전남')
-                        @break
-                    @case(39)
-                        @lang('제주')
-                        @break
-                    @default
-                        @lang('default')
-                @endswitch
-
-                {{-- <br>좌표x: {{ $item->map_x }} 
-                <br>좌표y: {{ $item->map_y }} --}}
-                <br>장소: 장소는 좌표로 지도검색해서 결과값 집어넣기
-                <br>전화: {{ $item->tel }}
-            </div>
-        @endforeach
-    </div>
+<div class="festival-detail">
+    <h2>{{ $festival->festival_title }}</h2>
+    <img src="{{ $festival->poster_img }}" alt="포스터이미지">
+    <p>Start Date: {{ $festival->festival_start_date }}</p>
+    <p>End Date: {{ $festival->festival_end_date }}</p>
+    <p>Area: 
+        @php
+        $areaName = '';
+        switch($festival->area_code) {
+            case 1:
+                $areaName = '서울';
+                break;
+            case 2:
+                $areaName = '인천';
+                break;
+            case 3:
+                $areaName = '대전';
+                break;
+            case 4:
+                $areaName = '대구';
+                break;
+            case 5:
+                $areaName = '광주';
+                break;
+            case 6:
+                $areaName = '부산';
+                break;
+            case 7:
+                $areaName = '울산';
+                break;
+            case 8:
+                $areaName = '세종';
+                break;
+            case 31:
+                $areaName = '경기';
+                break;
+            case 32:
+                $areaName = '강원';
+                break;
+            case 33:
+                $areaName = '충북';
+                break;
+            case 34:
+                $areaName = '충남';
+                break;
+            case 35:
+                $areaName = '경북';
+                break;
+            case 36:
+                $areaName = '경남';
+                break;
+            case 37:
+                $areaName = '전북';
+                break;
+            case 38:
+                $areaName = '전남';
+                break;
+            case 39:
+                $areaName = '제주';
+                break;
+            default:
+                $areaName = 'Unknown';
+        }
+        @endphp
+        {{ $areaName }}
+    </p>
+</div>
 
 {{-- 지도 --}}
 <h1>지도</h1>
 <div id="map" style="width:1200px; height:400px;"></div>
-    <div id="routeBtn">
-        <button type="button" class="btn btn-primary" onclick="openKakaoView()">길찾기</button>
-    </div>
+<div id="routeBtn">
+    <button type="button" class="btn btn-primary" onclick="openKakaoView()">길찾기</button>
+</div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3b69612f6e4716fa9f2fdbedb810321e&libraries=services"></script>
-    <script>
-        var container = document.getElementById('map');
-        var mapx = <?php echo ($item->map_x) ?>;
-        var mapy = <?php echo ($item->map_y) ?>;
-        var options = {
-            center: new kakao.maps.LatLng(mapy, mapx),
-            level: 3
-        };
+<script>
+    var container = document.getElementById('map');
+    var mapx = {{ $festival->map_x }};
+    var mapy = {{ $festival->map_y }};
+    var options = {
+        center: new kakao.maps.LatLng(mapy, mapx),
+        level: 3
+    };
 
-        var map = new kakao.maps.Map(container, options);
+    var map = new kakao.maps.Map(container, options);
 
-        function openKakaoView() {
-            var link = "https://map.kakao.com/link/to/도착장소," + mapy + "," + mapx;
-            window.open(link);
-        }
-
-    </script>
+    function openKakaoView() {
+        var link = "https://map.kakao.com/link/to/도착장소," + mapy + "," + mapx;
+        window.open(link);
+    }
+</script>
 <br><hr>
 
 {{-- 댓글 --}}
-<div class="card mb-2">
-    <div class="card-header bg-light">
-        <i class="fa fa-comment fa"></i> 댓글
-    </div>
-    <div class="card-body">
-        <ul class="list-group list-group-flush" id="replyList">
-            <li class="list-group-item">
-                <div class="form-inline mb-2">
-                    <label for="replyId"><i class="fa fa-user-circle-o fa-2x"></i></label>
-                    <input type="text" class="form-control ml-2" placeholder="로그인 후 소중한 댓글을 남겨주세요" id="replyId">
-                </div>
-                <button type="button" class="btn btn-primary mt-3" onClick="addReply()">등록</button>
-            </li>
-        </ul>
-    </div>
-</div>
-
-<script>
-function addReply() {
-    var replyId = document.getElementById("replyId").value;
-
-    var newReply = document.createElement("li");
-    newReply.className = "list-group-item";
-    newReply.innerHTML =
-        '<div class="form-inline mb-2">' +
-        '<label for="replyId"><i class="fa fa-user-circle-o fa-2x"></i></label>' +
-        '<input type="text" class="form-control ml-2" value="' +
-        replyId +
-        '" disabled></div>' +
-        '<button type="button" class="btn btn-danger btn-sm float-right" onClick="deleteReply(this)">삭제</button>';
-
-    var replyList = document.getElementById("replyList");
-    replyList.appendChild(newReply);
-
-    document.getElementById("replyId").value = "";
-}
-
-function deleteReply(reply) {
-    var listItem = reply.parentNode;
-    var replyList = listItem.parentNode;
-    replyList.removeChild(listItem);
-}
-</script>
+{{-- @include('layout.comment') --}}
 
 @endsection

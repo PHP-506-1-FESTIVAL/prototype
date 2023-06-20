@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('mainapi/{area_code}', [MainApiController::class, 'index'])->name('mainApi.index');
+Route::get('mainapi/{str_val}', [MainApiController::class, 'index'])->name('mainApi.index');
