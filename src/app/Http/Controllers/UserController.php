@@ -38,6 +38,9 @@ class UserController extends Controller
         // 유저 인증작업
         Auth::login($user);
         if(Auth::check()) {
+            if(strlen($user->user_profile) < 1) {
+                $user->user_profile = 'profile.png';
+            }
             session($user->only('user_id', 'user_email', 'user_nickname', 'user_profile')); // 세션에 인증된 회원 pk 등록
             return redirect()->intended(route('main'));
         } else {
@@ -57,8 +60,6 @@ class UserController extends Controller
     }
 
     function signuppost(Request $req) {
-        
-
 
         // 유효성검사
         $req->validate([
@@ -69,7 +70,7 @@ class UserController extends Controller
         $data['user_password'] = $req->password;
         $data['user_name'] = $req->name;
         $data['user_gender'] = $req->gender;
-        $data['user_birthdate'] = $req->birthyear.'-'.$req->birthmonth.'-'.$req->birthdate;
+        $data['user_birthdate'] = $req->birthyear.'-'.$req->birthmonth.'-'.$req->birthday;
         $data['user_nickname'] = $req->nickname;
         $data['user_zipcode'] = $req->zipcode;
         $data['user_address'] = $req->address;
@@ -95,9 +96,89 @@ class UserController extends Controller
         return redirect()->route('user.login');
     }
 
-    function withdraw() {
+    function usermain() {
+
+        // 로그인 체크
+        if(auth()->guest()) {
+            return redirect()->route('user.login');
+        }
+
+        return view('usermain');
+    }
+
+    function useredit() {
         $id = session('user_id');
         $user = User::find($id);
-        return view('withdraw')->with('data', $user);
+        
+        if($user->user_gender === '0') {
+            $user->malechk = 'checked';
+            $user->femalechk = '';
+        } else {
+            $user->malechk = '';
+            $user->femalechk = 'checked';
+        }
+
+        if($user->user_marketing_agreement === '1') {
+            $user->marketingchk = 'checked';
+        } else {
+            $user->marketingchk = '';
+        }
+
+        if($user->user_email_agreement === '1') {
+            $user->promotionchk = 'checked';
+        } else {
+            $user->promotionchk = '';
+        }
+
+        $user->birthyear = substr($user->user_birthdate, 0, 4);
+        $user->birthmonth = substr($user->user_birthdate, 5, 2);
+        $user->birthday = substr($user->user_birthdate, 8, 2);
+
+        return view('useredit')->with('data', $user);
+    }
+
+    function update(Request $req) {
+        $id = session('user_id');
+        $user = User::find($id);
+        $user->user_name = $req->name;
+        $user->user_gender = $req->gender;
+        $user->user_birthdate = $req->birthyear.'-'.$req->birthmonth.'-'.$req->birthday;
+        $user->user_nickname = $req->nickname;
+        $user->user_zipcode = $req->zipcode;
+        $user->user_address = $req->address;
+        $user->user_address_detail = $req->address2;
+
+        if(!$req->marketing) {
+            $user->user_marketing_agreement = '0';
+        } else {
+            $user->user_marketing_agreement = '1';
+        }
+
+        if(!$req->promotion) {
+            $user->user_email_agreement = '0';
+        } else {
+            $user->user_email_agreement = '1';
+        }
+
+        $user->save();
+
+        return redirect()->route('user.main');
+    }
+
+    function pwchk() {
+        return '비밀번호 확인';
+    }
+
+    function withdraw() {
+        
+        return view('withdraw');
+    }
+
+    function withdrawpost() {
+        $id = session('user_id');
+        $result = User::destroy($id);
+        Session::flush();
+        Auth::logout(); // 에러처리(laravel error handling) 2차프로젝트에서 작성
+        return redirect()->route('user.login');
     }
 }
