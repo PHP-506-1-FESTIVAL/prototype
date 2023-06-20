@@ -38,15 +38,16 @@ class MainController extends Controller
         }
 
         // 0620 이가원 udt
-        if (isset(Auth::User()->user_id)) {
-            $result_user = User::find(Auth::User()->user_id)->select(['user_email','user_nickname','user_profile'])->get();
-        }
-        else{
-            $result_user=null;
-        }
+        // if (isset(Auth::User()->user_id)) {
+        //     $result_user = User::find(Auth::User()->user_id)->select(['user_email','user_nickname','user_profile'])->get();
+        // }
+        // else{
+        //     $result_user=null;
+        // }
 
         // return view('protoMain',compact('data'));
-        return view('main')->with('fesData',$result)->with('month',$month)->with('userData',$result_user);;
+        // return view('main')->with('fesData',$result)->with('month',$month)->with('userData',$result_user);
+        return view('main')->with('fesData',$result)->with('month',$month);
     }
     //  0620 이가원 del
     // 로그인 이후 메인 페이지 이동
@@ -122,10 +123,17 @@ class MainController extends Controller
     }
     //검색 직접입력
     //$id : 서치내용
-    public function search()
+    public function search(Request $val)
     {
-        $result_hot=FestivalHit::select('select_cnt')->count('select_cnt');
-        return view('search');
+        // $search_insert=new FestivalHit;
+        // $search_insert->select_cnt=$val->search;
+        // $search_insert->save();
+        if(isset($val->search)){
+            FestivalHit::create(['select_cnt'=>$val->search]);
+        }
+        $result_search=DB::table('festivals')->where('festival_title','like','%'.$val->search.'%')->get();
+        $result_hot=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
+        return view('search')->with('result',$result_search)->with('recommend',$result_hot)->with('search',$val->search);
     }
     //검색 추천 클릭
     //$id : 인기순위ID
@@ -134,12 +142,6 @@ class MainController extends Controller
         # code...
     }
 
-    //지도 클릭시 ??TODO API인가
-    //$arr_parm : mon(월)/local(지역코드)
-    public function FesSelect($arr_parm)
-    {
-        # code...
-    }
     //더보기 클릭시
     //$id : local(지역코드)
     //$arr_parm : mon(월)/local(지역코드) //월은 나중
@@ -150,26 +152,10 @@ class MainController extends Controller
         // dump($result);
         return view('festival_list')->with('date',$result);
     }
-    //공지
-    public function Notice(Notice $id)
-    {
-        # code...
-    }
-    //축제정보
-    public function Festival(Festival $id)
-    {
-        # code...
-    }
-    //인기순위
-    //$val : 검색내용
-    public function HotRecommend(FestivalHit $val)
-    {
-        # code...
-    }
-    //프로필
-    public function Profile(User $id)
-    {
 
+    public function fesRequest()
+    {
+        return view('festival_request');
     }
     /************************************************
      * 프로젝트명   : festival_info
