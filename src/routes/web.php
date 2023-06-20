@@ -80,3 +80,5 @@ Route::get('feslist', [MainController::class, 'fesList'])->name('main.fesList');
 Route::get('noticepage', [MainController::class, 'noticePage'])->name('main.noticePage');
 // 더보기로 축제리스트페이지 이동
 Route::get('fesorder/{id}', [MainController::class, 'fesOrder'])->name('main.FesOrder');
+//검색결과 페이지 이동
+Route::get('search', [MainController::class, 'search'])->name('main.search');
