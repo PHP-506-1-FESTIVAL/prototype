@@ -45,17 +45,17 @@
         @auth
             <li class="dropdown list-group-item">
                 <a class="dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{$userData[0]->user_profile}}" alt="" class="img-thumbnail img-fluid">
+                    <img src="/img/profile/{{session()->get('user_profile')}}" alt="" class="img-thumbnail img-fluid" style="width:50px">
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li>
                         <div>
-                            <img src="{{$userData[0]->user_profile}}" alt="">
+                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="" style="width:50px">
                         </div>
                         <div>
-                            {{$userData[0]->user_email}}
+                            {{session()->get('user_email')}}
                             <br>
-                            {{$userData[0]->user_nickname}}
+                            {{session()->get('user_nickname')}}
                         </div>
                     </li>
                     <li><a class="dropdown-item" href="">마이페이지</a></li>
