@@ -86,6 +86,8 @@ Route::get('noticepage', [MainController::class, 'noticePage'])->name('main.noti
 // 더보기로 축제리스트페이지 이동
 Route::get('fesorder/{id}', [MainController::class, 'fesOrder'])->name('main.FesOrder');
 //검색결과 페이지 이동
-Route::get('search', [MainController::class, 'search'])->name('main.search');
+Route::post('search', [MainController::class, 'search'])->name('main.search');
+//축체 요청 페이지 이동
+Route::get('request', [MainController::class, 'fesRequest'])->name('main.request');
 //로그아웃
 Route::get('logout', [MainController::class, 'logout'])->name('main.logout');
