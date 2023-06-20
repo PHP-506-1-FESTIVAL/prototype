@@ -33,6 +33,9 @@ Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout
 Route::get('/user/signup', [UserController::class, 'signup'])->name('user.signup');
 Route::post('/user/signuppost', [UserController::class, 'signuppost'])->name('user.signuppost');
 Route::get('/user/withdraw', [UserController::class, 'withdraw'])->name('user.withdraw');
+Route::get('/user/main', [UserController::class, 'usermain'])->name('user.main');
+Route::get('/user/edit', [UserController::class, 'useredit'])->name('user.edit');
+Route::get('/user/pwchk', [UserController::class, 'pwchk'])->name('pwchk');
 
 /************************************************
  * 프로젝트명   : festival_info
