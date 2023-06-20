@@ -72,8 +72,8 @@ Route::get('fesdetail/{id}', [MainController::class, 'fesDetail'])->name('fes.de
 
  // 메인페이지 이동(비로그인)
 Route::get('main', [MainController::class, 'mainView'])->name('main.view');
- // 메인페이지 이동(로그인)
-Route::get('main/{id}', [MainController::class, 'mainUse'])->name('main.use');
+//  // 메인페이지 이동(로그인)
+// Route::get('main/{id}', [MainController::class, 'mainUse'])->name('main.use'); // 0620 이가원 del
 // 축제리시트 페이지 이동
 Route::get('feslist', [MainController::class, 'fesList'])->name('main.fesList');
 // 공지페이지 이동

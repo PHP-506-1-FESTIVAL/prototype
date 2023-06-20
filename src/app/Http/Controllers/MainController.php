@@ -7,6 +7,7 @@ use App\Models\Festival;
 use App\Models\FestivalHit;
 use App\Models\Notice;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth; // 0620 이가원 udt
 use Illuminate\Support\Facades\DB;
 
 
@@ -35,30 +36,35 @@ class MainController extends Controller
                 $month[]=$i;
             }
         }
+
+        // 0620 이가원 udt
+        $result_user = User::find(Auth::User()->user_id)->select(['user_email','user_nickname','user_profile'])->get();
+        
         // return view('protoMain',compact('data'));
-        return view('main')->with('fesData',$result)->with('month',$month);
+        return view('main')->with('fesData',$result)->with('month',$month)->with('userData',$result_user);;
     }
+    //  0620 이가원 del
     // 로그인 이후 메인 페이지 이동
     //$id = 로그인
-    public function mainUse($id)
-    {
-        $result_fes=Festival::select([
-            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
-        ])->where('festival_state','<','2')->orderBy('festival_hit')->limit(4)->get();
-        // dump($data);
-        $month=[];
-        for ($i=0; $i < 13; $i++) {
-            if ($i===0) {
-                $month[]=null;
-            }
-            else{
-                $month[]=$i;
-            }
-        }
-        $result_user = User::find($id)->select(['user_email','user_nickname','user_profile'])->get();
-        // return view('protoMain',compact('data'));
-        return view('main')->with('fesData',$result_fes)->with('month',$month)->with('userData',$result_user);
-    }
+    // public function mainUse($id)
+    // {
+    //     $result_fes=Festival::select([
+    //         'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+    //     ])->where('festival_state','<','2')->orderBy('festival_hit')->limit(4)->get();
+    //     // dump($data);
+    //     $month=[];
+    //     for ($i=0; $i < 13; $i++) {
+    //         if ($i===0) {
+    //             $month[]=null;
+    //         }
+    //         else{
+    //             $month[]=$i;
+    //         }
+    //     }
+    //     $result_user = User::find($id)->select(['user_email','user_nickname','user_profile'])->get();
+    //     // return view('protoMain',compact('data'));
+    //     return view('main')->with('fesData',$result_fes)->with('month',$month)->with('userData',$result_user);
+    // }
     //마이페이지
     //$id : 유저ID
     public function MyPage(Request $id)
