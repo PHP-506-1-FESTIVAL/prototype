@@ -280,103 +280,106 @@ body{
 </div>
 <div class="image-container" id="festivalContainer">
     @foreach ($data as $festival)
-    <div data-hits="{{ $festival->festival_hit }}" data-start-date="{{ $festival->festival_start_date }}">
-        <div class="card">
-            @php
-            $today = date('Y-m-d');
-            if ($today < $festival->festival_start_date) {
-                $statusClass = 'btn-success';
-                $statusText = '진행예정';
-            } elseif ($today > $festival->festival_end_date) {
-                $statusClass = 'btn-secondary';
-                $statusText = '진행종료';
-            } else {
-                $statusClass = 'btn-primary';
-                $statusText = '진행중';
-            }
-            @endphp
-
-            <button type="button" class="btn {{ $statusClass }}" id="ing">
-                {{ $statusText }}
-            </button>
-            
-            <button type="button" class="heart" onclick="changeText(event)">🤍</button>
-
-
-            @if ($festival->poster_img)
-            <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image">
-            @else
-            <img class="card-img-top"  src="https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg" alt="No Image">
-            @endif
-
-            <div class="overlay">
-                <h2>{{ $festival->festival_title }}</h2>
-                <p>{{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}</p>
-                <p>
+        <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration: none;">
+            <div data-hits="{{ $festival->festival_hit }}" data-start-date="{{ $festival->festival_start_date }}">
+                <div class="card">
                     @php
-                    $areaName = '';
-                    switch($festival->area_code) {
-                        case 1:
-                            $areaName = '서울';
-                            break;
-                        case 2:
-                            $areaName = '인천';
-                            break;
-                        case 3:
-                            $areaName = '대전';
-                            break;
-                        case 4:
-                            $areaName = '대구';
-                            break;
-                        case 5:
-                            $areaName = '광주';
-                            break;
-                        case 6:
-                            $areaName = '부산';
-                            break;
-                        case 7:
-                            $areaName = '울산';
-                            break;
-                        case 8:
-                            $areaName = '세종';
-                            break;
-                        case 31:
-                            $areaName = '경기';
-                            break;
-                        case 32:
-                            $areaName = '강원';
-                            break;
-                        case 33:
-                            $areaName = '충북';
-                            break;
-                        case 34:
-                            $areaName = '충남';
-                            break;
-                        case 35:
-                            $areaName = '경북';
-                            break;
-                        case 36:
-                            $areaName = '경남';
-                            break;
-                        case 37:
-                            $areaName = '전북';
-                            break;
-                        case 38:
-                            $areaName = '전남';
-                            break;
-                        case 39:
-                            $areaName = '제주';
-                            break;
-                        default:
-                            $areaName = 'Unknown';
+                    $today = date('Y-m-d');
+                    if ($today < $festival->festival_start_date) {
+                        $statusClass = 'btn-success';
+                        $statusText = '진행예정';
+                    } elseif ($today > $festival->festival_end_date) {
+                        $statusClass = 'btn-secondary';
+                        $statusText = '진행종료';
+                    } else {
+                        $statusClass = 'btn-primary';
+                        $statusText = '진행중';
                     }
                     @endphp
-                    {{ $areaName }}
-                </p>
+
+                    <button type="button" class="btn {{ $statusClass }}" id="ing">
+                        {{ $statusText }}
+                    </button>
+            
+                    <button type="button" class="heart" onclick="changeText(event)">🤍</button>
+
+                    @if ($festival->poster_img)
+                        <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image">
+                    @else
+                        <img class="card-img-top" src="https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg" alt="No Image">
+                    @endif
+
+                    <div class="overlay">
+                        <h2>{{ $festival->festival_title }}</h2>
+                        <p>{{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}</p>
+                        <p>
+                            @php
+                            $areaName = '';
+                            switch($festival->area_code) {
+                                case 1:
+                                    $areaName = '서울';
+                                    break;
+                                case 2:
+                                    $areaName = '인천';
+                                    break;
+                                case 3:
+                                    $areaName = '대전';
+                                    break;
+                                case 4:
+                                    $areaName = '대구';
+                                    break;
+                                case 5:
+                                    $areaName = '광주';
+                                    break;
+                                case 6:
+                                    $areaName = '부산';
+                                    break;
+                                case 7:
+                                    $areaName = '울산';
+                                    break;
+                                case 8:
+                                    $areaName = '세종';
+                                    break;
+                                case 31:
+                                    $areaName = '경기';
+                                    break;
+                                case 32:
+                                    $areaName = '강원';
+                                    break;
+                                case 33:
+                                    $areaName = '충북';
+                                    break;
+                                case 34:
+                                    $areaName = '충남';
+                                    break;
+                                case 35:
+                                    $areaName = '경북';
+                                    break;
+                                case 36:
+                                    $areaName = '경남';
+                                    break;
+                                case 37:
+                                    $areaName = '전북';
+                                    break;
+                                case 38:
+                                    $areaName = '전남';
+                                    break;
+                                case 39:
+                                    $areaName = '제주';
+                                    break;
+                                default:
+                                    $areaName = 'Unknown';
+                            }
+                            @endphp
+                            {{ $areaName }}
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        </a>
     @endforeach
+</div>
+
 <script>
     function sortByPopularity() { //힛트순으로 인기도 정렬
         var festivals = Array.from(document.querySelectorAll('[data-hits]'));

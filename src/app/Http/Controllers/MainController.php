@@ -165,7 +165,8 @@ class MainController extends Controller
      ************************************************/
     public function fesDetail($id)
     {
-        $data=Festival::find($id)->get();
-        return view('festival_detail',compact('data'));
+        $festival = Festival::find($id);
+
+        return view('festival_detail', compact('festival'));
     }
 }
