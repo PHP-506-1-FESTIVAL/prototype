@@ -9,7 +9,7 @@ use App\Models\Notice;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth; // 0620 이가원 udt
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Session;
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\DB;
 class MainController extends Controller
 {
     //메인 페이지 이동
-    public function mainView()
+    public function main()
     {
         $result=Festival::select([
             'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
@@ -38,8 +38,13 @@ class MainController extends Controller
         }
 
         // 0620 이가원 udt
-        $result_user = User::find(Auth::User()->user_id)->select(['user_email','user_nickname','user_profile'])->get();
-        
+        if (isset(Auth::User()->user_id)) {
+            $result_user = User::find(Auth::User()->user_id)->select(['user_email','user_nickname','user_profile'])->get();
+        }
+        else{
+            $result_user=null;
+        }
+
         // return view('protoMain',compact('data'));
         return view('main')->with('fesData',$result)->with('month',$month)->with('userData',$result_user);;
     }
@@ -79,9 +84,11 @@ class MainController extends Controller
     }
     //로그아웃
     //$id : 유저ID
-    public function Logout(Request $id)
+    public function logout()
     {
-        # code...
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('main');
     }
     //네비 축제목록 클릭
     public function fesList()
@@ -115,12 +122,10 @@ class MainController extends Controller
     }
     //검색 직접입력
     //$id : 서치내용
-    public function Search($val)
+    public function search()
     {
-        FestivalHit::create([
-            "select_cnt" => $val
-        ]);
-        Festival::find();
+        $result_hot=FestivalHit::select('select_cnt')->count('select_cnt');
+        return view('search');
     }
     //검색 추천 클릭
     //$id : 인기순위ID
