@@ -26,19 +26,14 @@
                 </li>
             </ul>
         <div class="dropdown">
-            <form class="d-flex">
-                <input class="form-control me-2 dropdown-toggle" type="search" placeholder="Search" aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  autocomplete="off">
+            <form class="d-flex" method="POST" action="{{route('main.search')}}">
+                @csrf
+                <input class="form-control me-2 dropdown-toggle" type="search" placeholder="Search" aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  autocomplete="off" name="search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <div class="">
-                        <div class="">
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#"></a></li>
-                                <li><a class="dropdown-item" href="#"></a></li>
-                                <li><a class="dropdown-item" href="#"></a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <ul class="list-unstyled">
+                        <li><a class="dropdown-item" href="#">추후 추가</a></li>
+                    </ul>
                 </div>
             </form>
         </div>
