@@ -38,7 +38,7 @@ class UserController extends Controller
         Auth::login($user);
         if(Auth::check()) {
             session($user->only('user_id')); // 세션에 인증된 회원 pk 등록
-            return redirect()->intended(route('main.use', ['id' => $user->user_id]));
+            return redirect()->intended(route('main', ['id' => $user->user_id]));
         } else {
             $error = '인증작업 에러';
             return redirect()->back()->with('error', $error);
