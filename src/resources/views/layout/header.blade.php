@@ -60,7 +60,7 @@
                     </li>
                     <li><a class="dropdown-item" href="">마이페이지</a></li>
                     <li><a class="dropdown-item" href="">찜목록</a></li>
-                    <li><a class="dropdown-item" href="">로그아웃</a></li>
+                    <li><a class="dropdown-item" href="{{route('main.logout')}}">로그아웃</a></li>
                 </ul>
             </li>
         @endauth
