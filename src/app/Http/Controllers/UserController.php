@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -37,12 +38,18 @@ class UserController extends Controller
         // 유저 인증작업
         Auth::login($user);
         if(Auth::check()) {
-            session($user->only('user_id')); // 세션에 인증된 회원 pk 등록
+            session($user->only('user_id', 'user_email', 'user_nickname', 'user_profile')); // 세션에 인증된 회원 pk 등록
             return redirect()->intended(route('main', ['id' => $user->user_id]));
         } else {
             $error = '인증작업 에러';
             return redirect()->back()->with('error', $error);
         }
+    }
+
+    function logout() {
+        Session::flush(); // 세션 파기
+        Auth::logout(); // 로그아웃
+        return redirect()->route('user.login');
     }
 
     function signup() {
