@@ -55,9 +55,8 @@ Route::resource('/board', BoardController::class);
 // DELETE          board/{board} ................................................. board.destroy › BoardController@destroy
 // GET|HEAD        board/{board}/edit .................................................. board.edit › BoardController@edit
 
-// #routes/web.php
-// code
-// Route::get('/', 'HomeController@index');
+// Notice
+Route::get('/notice', [NoticeController::class , 'notice'])->name('notice.index');
 
 /************************************************
  * 프로젝트명   : festival_info
