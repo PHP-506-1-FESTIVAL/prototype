@@ -9,7 +9,8 @@
     <div class="">
         <h2 class="mt-4 mb-3">{{$board_detail_data->board_title}}</h2>
         <hr>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                {{-- user_id가 아닌 user_nickname이 올수있도록 수정 --}}
             <p style="text-align: right" class="pt-2">{{$board_detail_data->user_id}} | {{$board_detail_data->created_at}}</p>
             {{-- // 게시판 상세 BUTTON --}}
             <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a>
