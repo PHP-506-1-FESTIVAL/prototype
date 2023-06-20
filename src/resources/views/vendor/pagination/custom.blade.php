@@ -7,12 +7,12 @@
 		@if ($paginator->onFirstPage())
 		<li class="page-item disabled">
 			<a class="page-link" href="#"
-			tabindex="-1">Previous</a>
+			tabindex="-1">◀</a>
 		</li>
 		@else
 		<li class="page-item"><a class="page-link"
 			href="{{ $paginator->previousPageUrl() }}">
-				Previous</a>
+			◀</a>
 		</li>
 		@endif
 
@@ -41,11 +41,11 @@
 		<li class="page-item">
 			<a class="page-link"
 			href="{{ $paginator->nextPageUrl() }}"
-			rel="next">Next</a>
+			rel="next">▶</a>
 		</li>
 		@else
 		<li class="page-item disabled">
-			<a class="page-link" href="#">Next</a>
+			<a class="page-link" href="#">▶</a>
 		</li>
 		@endif
 	</ul>

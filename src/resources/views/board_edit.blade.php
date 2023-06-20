@@ -11,15 +11,17 @@
         <input type="text" value={{$board_edit_data->board_title}}>
         <hr>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            {{-- user_id가 아닌 user_nickname이 올수있도록 수정 --}}
         <p style="text-align: right" class="pt-2">{{$board_edit_data->user_id}} | {{$board_edit_data->created_at}}</p>
         </div>
     </div>
 
     {{-- // 게시판 상세 내용 --}}
     <div class="content mt-4 rounded-3 border border-secondary">
-        <div class="p-3">
+        {{-- <div class="p-3">
             {{$board_edit_data->board_content}}
-        </div>
+        </div> --}}
+        <input type="text" value={{$board_edit_data->board_content}} class="p-3">
     </div>
     {{-- // 게시판 수정 BUTTON --}}
 </form>
