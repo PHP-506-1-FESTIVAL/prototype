@@ -23,9 +23,6 @@ class MainController extends Controller
     //메인 페이지 이동
     public function main()
     {
-        $sdata = session()->all();
-        var_dump($sdata);
-
         $result=Festival::select([
             'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
         ])->where('festival_state','<','2')->orderBy('festival_hit')->limit(4)->get();
