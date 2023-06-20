@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('favorite_id');
             $table->integer('user_id');
             $table->integer('festival_id');
+            $table->softDeletes();
         });
     }
 

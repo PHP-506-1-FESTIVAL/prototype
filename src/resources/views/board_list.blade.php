@@ -34,9 +34,9 @@
 				</form>
 			</div>
 
-			<div class="d-grid gap-2 d-md-flex justify-content-md-end" href="{{route("board.create")}}">
-				<button class="btn btn-primary" type="button">글쓰기</button>
-			</div>
+			{{-- <div class="d-grid gap-2 d-md-flex justify-content-md-end" href="{{route("board.create")}}"> --}}
+				<a href="{{route("board.create")}}"><button class="btn btn-primary" type="button">글쓰기</button></a>
+			{{-- </div> --}}
 		</div>
 	</div>
 </nav>

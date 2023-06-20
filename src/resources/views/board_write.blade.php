@@ -1,12 +1,14 @@
 @extends('layout.layout')
 
-@section('title','글작성')
+@section('title','게시글 작성')
 
 @section('content')
+<h2 class="mt-0 mb-0">게시글 작성 페이지</h2>
+
 <div id="board_write">
     <h4>글을 작성하는 공간입니다.</h4>
         <div id="write_area">
-            <form enctype="multipart/form-data" action="write_ok.php?board_id=<?echo $board_id;?>" method="post">
+            {{-- <form enctype="multipart/form-data" action="write_ok.php?board_id=<?echo $board_id;?>" method="post"> --}}
                 <div id="in_title">
                     <textarea name="title" id="utitle" rows="1" cols="55" placeholder="제목" maxlength="100" required></textarea>
                 </div>
@@ -22,7 +24,7 @@
                 <div class="bt_se">
                     <button type="submit">글 작성</button>
                 </div>
-            </form>
+            {{-- </form> --}}
         </div>
     </div>
 @endsection
