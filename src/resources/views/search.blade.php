@@ -20,7 +20,7 @@
 
                 </tr>
             </thead>
-            <tbody class="table-group-divider">
+            <tbody class="table-group-divider container">
                 @forelse($result as $item)
                     <tr>
                         <td><img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" loading="lazy" class="img-fluid"></td>
@@ -52,5 +52,4 @@
             <div><a href="{{route('main.request')}}">축제 요청 페이지 이동</a></div>
     </div>
 </div>
-
 @endsection
