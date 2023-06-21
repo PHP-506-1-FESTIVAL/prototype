@@ -39,6 +39,8 @@ Route::get('/user/edit', [UserController::class, 'useredit'])->name('user.edit')
 Route::get('/user/pwchk', [UserController::class, 'pwchk'])->name('pwchk');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
 Route::post('/user/pwchkpost', [UserController::class, 'pwchkpost'])->name('pwchkpost');
+Route::get('/user/terms', [UserController::class, 'terms'])->name('user.terms');
+Route::post('/user/termspost', [UserController::class, 'termspost'])->name('user.termspost');
 
 /************************************************
  * 프로젝트명   : festival_info
