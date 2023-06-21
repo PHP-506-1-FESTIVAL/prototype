@@ -31,12 +31,13 @@
     </style>
 </head>
 <body>
+
     <div class="inner">
-        <form name="festivalSearch" id="festivalSearch" class="festival_search">
+        <form name="festivalSearch" id="festivalSearch" class="festival_search" >
             <div class="search_box_wrap">
                 <div class="select_box select_date col-md-4">
                     <label for="searchDate"></label>
-                    <select class="form-select form-select-lg" name="searchDate" id="searchDate" title="시기 선택" onchange="filterFestivals()">
+                    <select class="form-select form-select-lg" name="searchDate" id="searchDate" title="시기 선택">
                         <option value="">시기</option>
                         <option value="A">진행중</option>
                         <option value="B">진행예정</option>
@@ -56,7 +57,7 @@
                 </div>
                 <div class="select_box select_area col-md-4">
                     <label for="searchArea"></label>
-                    <select class="form-select form-select-lg" name="searchArea" id="searchArea" title="지역 선택" onchange="filterFestivals()">
+                    <select class="form-select form-select-lg" name="searchArea" id="searchArea" title="지역 선택" >
                         <option value="">지역</option>
                         <option value="1">서울</option>
                         <option value="2">인천</option>
@@ -79,8 +80,8 @@
                 </div>
                 <div class="btn_box">
                     <div> 
-                        <button class="btn btn-danger btn-lg btn-block" onclick="resetSearchForm()"><span>초기화</span></button>
-                        <button class="btn btn-primary btn-lg btn-block" id="btnSearch" onclick="searchFestivals()"><span>검색</span></button>
+                        <button class="btn btn-danger btn-lg btn-block"><span>초기화</span></button>
+                        <button type='button' class="btn btn-primary btn-lg btn-block" id="btnSearch" onclick='aaaname()'><span>검색</span></button>
                     </div>
                 </div>
             </div>
@@ -183,7 +184,7 @@ body{
                     {{ ($today < $festival->festival_start_date) ? '진행예정' : (($today > $festival->festival_end_date) ? '진행종료' : '진행중') }}
                 </span>
                 <div class="profile-container">
-                    <div class="profile-box" style="background-image: url('{{ $festival->poster_img ? $festival->poster_img : 'https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg' }}');">
+                    <div class="profile-box" style="background-image: url('{{ $festival->poster_img ? $festival->poster_img : "/img/festival.jpg" }}');">
                         <div class="profile-box-content">
                             <h2>{{ $festival->festival_title }}</h2>
                             <p>{{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}</p>
@@ -214,8 +215,8 @@ body{
 
 .image-container div {
     margin: 10px;
-    height: 300px;
-    width: 400px;
+    height: 360px;
+    width: 480px;
 }
 
 .card {
@@ -240,7 +241,7 @@ body{
     background-color: rgba(0, 0, 0, 0.7);
     color: #ffffff;
     max-height: 140px;
-    max-width: 380px;
+    max-width: 460px;
     bottom:0px;
 }
 
@@ -267,150 +268,228 @@ body{
     background-color: transparent;
     position: absolute;
 }
-
 /* Bootstrap CDN */
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css');
 
-    </style>
+</style>
 </head>
 <body>
-<div class="sort mt-3" style="text-align:right;">
-    <button class="btn btn-success" onclick="sortByPopularity()">인기도</button>
-    <button class="btn btn-warning" onclick="sortByLatest()">최신순</button>
-</div>
-<div class="image-container" id="festivalContainer">
-    @foreach ($data as $festival)
-        <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration: none;">
-            <div data-hits="{{ $festival->festival_hit }}" data-start-date="{{ $festival->festival_start_date }}">
-                <div class="card">
-                    @php
-                    $today = date('Y-m-d');
-                    if ($today < $festival->festival_start_date) {
-                        $statusClass = 'btn-success';
-                        $statusText = '진행예정';
-                    } elseif ($today > $festival->festival_end_date) {
-                        $statusClass = 'btn-secondary';
-                        $statusText = '진행종료';
-                    } else {
-                        $statusClass = 'btn-primary';
-                        $statusText = '진행중';
-                    }
-                    @endphp
 
-                    <button type="button" class="btn {{ $statusClass }}" id="ing">
-                        {{ $statusText }}
-                    </button>
-            
-                    <button type="button" class="heart" onclick="changeText(event)">🤍</button>
+    <div class="sort mt-3" style="text-align:right;">
+        <button class="btn btn-success" onclick="sortByPopularity()">인기도</button>
+        <button class="btn btn-warning" id="sortByLatestBtn" onclick="sortByLatest()">최신순</button>
+    </div>
+    <div class="image-container" id="festivalContainer">
+        @foreach ($data as $festival)
+            <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration: none;">
+                <div data-hits="{{ $festival->festival_hit }}" data-start-date="{{ $festival->festival_start_date }}" data-end-date="{{ $festival->festival_end_date }}">
+                    <div class="card">
+                        @php
+                        $today = date('Y-m-d');
+                        $startDate = $festival->festival_start_date;
+                        $endDate = $festival->festival_end_date;
 
-                    @if ($festival->poster_img)
-                        <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image">
-                    @else
-                        <img class="card-img-top" src="https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg" alt="No Image">
-                    @endif
+                        if ($today < $startDate) {
+                            $statusClass = 'btn-success';
+                            $statusText = '';
+                            $daysRemaining = date_diff(date_create($today), date_create($startDate))->format('%a');
+                            $statusText .= ' D-' . $daysRemaining . '';
+                        } elseif ($today > $endDate) {
+                            $statusClass = 'btn-secondary';
+                            $statusText = '진행종료';
+                        } else {
+                            $statusClass = 'btn-primary';
+                            $statusText = '진행중';
+                        }
+                        @endphp
 
-                    <div class="overlay">
-                        <h2>{{ $festival->festival_title }}</h2>
-                        <p>{{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}</p>
-                        <p>
-                            @php
-                            $areaName = '';
-                            switch($festival->area_code) {
-                                case 1:
-                                    $areaName = '서울';
-                                    break;
-                                case 2:
-                                    $areaName = '인천';
-                                    break;
-                                case 3:
-                                    $areaName = '대전';
-                                    break;
-                                case 4:
-                                    $areaName = '대구';
-                                    break;
-                                case 5:
-                                    $areaName = '광주';
-                                    break;
-                                case 6:
-                                    $areaName = '부산';
-                                    break;
-                                case 7:
-                                    $areaName = '울산';
-                                    break;
-                                case 8:
-                                    $areaName = '세종';
-                                    break;
-                                case 31:
-                                    $areaName = '경기';
-                                    break;
-                                case 32:
-                                    $areaName = '강원';
-                                    break;
-                                case 33:
-                                    $areaName = '충북';
-                                    break;
-                                case 34:
-                                    $areaName = '충남';
-                                    break;
-                                case 35:
-                                    $areaName = '경북';
-                                    break;
-                                case 36:
-                                    $areaName = '경남';
-                                    break;
-                                case 37:
-                                    $areaName = '전북';
-                                    break;
-                                case 38:
-                                    $areaName = '전남';
-                                    break;
-                                case 39:
-                                    $areaName = '제주';
-                                    break;
-                                default:
-                                    $areaName = 'Unknown';
-                            }
-                            @endphp
-                            {{ $areaName }}
-                        </p>
+                        <button type="button" class="btn {{ $statusClass }}" id="ing">
+                            {{ $statusText }}
+                        </button>
+
+                        <button type="button" class="heart" onclick="changeText(event)" style="border-radius: 5px; background-color: rgba(255, 255, 255, 0.5);">{{ $festival->festival_hit }}🤍</button>
+
+                        @if ($festival->poster_img)
+                            <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image">
+                        @else
+                            <img class="card-img-top" src="/img/festival.jpg" alt="No Image">
+                        @endif
+
+                        <div class="overlay">
+                            <h2>{{ $festival->festival_title }}</h2>
+                            <p>{{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}</p>
+                            <p>
+                                @php
+                                $areaName = '';
+                                switch($festival->area_code) {
+                                    case 1:
+                                        $areaName = '서울';
+                                        break;
+                                    case 2:
+                                        $areaName = '인천';
+                                        break;
+                                    case 3:
+                                        $areaName = '대전';
+                                        break;
+                                    case 4:
+                                        $areaName = '대구';
+                                        break;
+                                    case 5:
+                                        $areaName = '광주';
+                                        break;
+                                    case 6:
+                                        $areaName = '부산';
+                                        break;
+                                    case 7:
+                                        $areaName = '울산';
+                                        break;
+                                    case 8:
+                                        $areaName = '세종';
+                                        break;
+                                    case 31:
+                                        $areaName = '경기';
+                                        break;
+                                    case 32:
+                                        $areaName = '강원';
+                                        break;
+                                    case 33:
+                                        $areaName = '충북';
+                                        break;
+                                    case 34:
+                                        $areaName = '충남';
+                                        break;
+                                    case 35:
+                                        $areaName = '경북';
+                                        break;
+                                    case 36:
+                                        $areaName = '경남';
+                                        break;
+                                    case 37:
+                                        $areaName = '전북';
+                                        break;
+                                    case 38:
+                                        $areaName = '전남';
+                                        break;
+                                    case 39:
+                                        $areaName = '제주';
+                                        break;
+                                    default:
+                                        $areaName = 'Unknown';
+                                }
+                                @endphp
+                                {{ $areaName }}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
-    @endforeach
-</div>
+            </a>
+        @endforeach
+    </div>
 
 <script>
-    function sortByPopularity() { //힛트순으로 인기도 정렬
-        var festivals = Array.from(document.querySelectorAll('[data-hits]'));
-        festivals.sort(function (a, b) {
-            var hitsA = parseInt(a.getAttribute('data-hits'));
-            var hitsB = parseInt(b.getAttribute('data-hits'));
-            return hitsB - hitsA;
-        });
-        festivals.forEach(function (festival) {
-            festival.parentNode.appendChild(festival);
-        });
+
+// 정렬 버튼 클릭 시 호출되는 함수 - 인기도 순으로 정렬
+function sortByPopularity() {
+  var festivals = Array.from(document.querySelectorAll('[data-hits]'));
+  var today = new Date();
+
+  festivals.sort(function(a, b) {
+    var startDateA = new Date(a.getAttribute('data-start-date'));
+    var endDateA = new Date(a.getAttribute('data-end-date'));
+    var startDateB = new Date(b.getAttribute('data-start-date'));
+    var endDateB = new Date(b.getAttribute('data-end-date'));
+
+    var hitsA = parseInt(a.getAttribute('data-hits'));
+    var hitsB = parseInt(b.getAttribute('data-hits'));
+
+    // Sort by hits (popularity)
+    if (hitsB !== hitsA) {
+      return hitsB - hitsA;
     }
 
-function sortByLatest() {
-    var festivals = Array.from(document.querySelectorAll('[data-start-date]'));
-    festivals = festivals.filter(function (festival) {
-        var endDate = new Date(festival.getAttribute('data-end-date'));
-        var today = new Date();
-        return endDate < today; // Filter out festivals with end date greater than today
-    });
-    festivals.sort(function (a, b) {
-        var startDateA = new Date(a.getAttribute('data-start-date'));
-        var startDateB = new Date(b.getAttribute('data-start-date'));
-        var endDateA = new Date(a.getAttribute('data-end-date'));
-        var endDateB = new Date(b.getAttribute('data-end-date'));
-        return endDateB.getTime() - endDateA.getTime() || startDateA.getTime() - startDateB.getTime();
-    });
-    festivals.forEach(function (festival) {
-        festival.parentNode.appendChild(festival);
-    });
+    var statusA = getStatus(startDateA, endDateA, today);
+    var statusB = getStatus(startDateB, endDateB, today);
+
+    // Sort by status if hits are equal
+    if (statusB !== statusA) {
+      return statusOrder(statusB) - statusOrder(statusA);
+    }
+
+    // Sort by start date if hits and status are equal
+    return startDateA - startDateB;
+  });
+
+  var container = document.getElementById('festivalContainer');
+  container.innerHTML = ''; // Clear previous content
+
+  festivals.forEach(function(festival) {
+    container.appendChild(festival.parentNode);
+  });
 }
+// 축제의 진행 상태를 반환하는 함수
+function getStatus(startDate, endDate, today) {
+  if (startDate <= today && today <= endDate) {
+    return '진행중';
+  } else if (today < startDate) {
+    return '진행예정';
+  } else {
+    return '진행완료';
+  }
+}
+
+// 진행 상태의 정렬 순서를 반환하는 함수
+function statusOrder(status) {
+  switch (status) {
+    case '진행중':
+      return 1;
+    case '진행예정':
+      return 2;
+    case '진행완료':
+      return 3;
+    default:
+      return 0;
+  }
+}
+
+// 최신순으로 정렬
+function sortByLatest() {
+  var festivals = Array.from(document.querySelectorAll('[data-hits]'));
+  var today = new Date();
+
+  var ongoingFestivals = [];
+  var upcomingFestivals = [];
+  var completedFestivals = [];
+
+  festivals.forEach(function(festival) {
+    var startDate = new Date(festival.getAttribute('data-start-date'));
+    var endDate = new Date(festival.getAttribute('data-end-date'));
+    var status = getStatus(startDate, endDate, today);
+
+    if (status === '진행중') {
+      ongoingFestivals.push(festival);
+    } else if (status === '진행예정') {
+      upcomingFestivals.push(festival);
+    } else if (status === '진행완료') {
+      completedFestivals.push(festival);
+    }
+  });
+
+  var sortedFestivals = ongoingFestivals.concat(upcomingFestivals).concat(completedFestivals);
+
+  var container = document.getElementById('festivalContainer');
+  container.innerHTML = ''; // Clear previous content
+
+  sortedFestivals.forEach(function(festival) {
+    container.appendChild(festival.parentNode);
+  });
+}
+
+
+
+
+
+// 이벤트 리스너를 통해 최신순 버튼 클릭 시 sortByLatest 함수 호출
+document.getElementById('sortByLatestBtn').addEventListener('click', sortByLatest);
 
 function changeText(event) {
     var button = event.target;
@@ -423,6 +502,8 @@ function changeText(event) {
 </script>
 </div>
 </html>
+
+
 {{-- 이동버튼 --}}
 <!DOCTYPE html>
 <html>
@@ -449,12 +530,13 @@ function changeText(event) {
     <script>
         const $topBtn = document.querySelector(".moveTopBtn");
 
-        // Button click event to scroll to the top
         $topBtn.onclick = () => {
             window.scrollTo({ top: 0, behavior: "smooth" });  
         }
     </script>
 </body>
 </html>
+{{-- 관련축제 --}}
 
+<script src="{{asset('js/festival.js')}}"></script>
 @endsection
