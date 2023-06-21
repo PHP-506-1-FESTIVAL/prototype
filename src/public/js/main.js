@@ -50,7 +50,7 @@ function target(date) {
         targetDiv[index].setAttribute('href',domaine+fesDetail+date[0][index].festival_id);
         targetDiv[index].childNodes[1].setAttribute('alt',date[0][index].festival_title);
         if (date[0][index].poster_img==="") {
-            targetDiv[index].childNodes[1].setAttribute('src',"https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Red_x.svg/768px-Red_x.svg.png");
+            targetDiv[index].childNodes[1].setAttribute('src',"https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg");
         }
         else{
             targetDiv[index].childNodes[1].setAttribute('src',date[0][index].poster_img);
