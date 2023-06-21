@@ -21,7 +21,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{route('board.index')}}">축제톡톡</a></li>
-                        <li><a class="dropdown-item" href="{{route('main.noticePage')}}">공지사항</a></li>
+                        <li><a class="dropdown-item" href="{{route('notice.index')}}">공지사항</a></li>
                     </ul>
                 </li>
             </ul>

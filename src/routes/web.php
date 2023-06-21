@@ -3,6 +3,7 @@
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\NoticeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OpenApiController;
 
@@ -59,7 +60,7 @@ Route::resource('/board', BoardController::class);
 // GET|HEAD        board/{board}/edit .................................................. board.edit › BoardController@edit
 
 // Notice
-Route::get('/notice', [NoticeController::class , 'notice'])->name('notice.index');
+Route::get('/notice', [NoticeController::class , 'index'])->name('notice.index');
 
 /************************************************
  * 프로젝트명   : festival_info
