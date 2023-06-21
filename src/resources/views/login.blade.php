@@ -23,7 +23,7 @@
         </div>
         @include('layout.errormsg') 
         <div class="col-12" style="display:grid; grid-template-columns:1fr 1fr; justify-content:center;">
-            <button type="button" class="btn btn-light me-1" onclick="location.href='{{route('user.signup')}}'">회원가입</button>
+            <button type="button" class="btn btn-light me-1" onclick="location.href='{{route('user.terms')}}'">회원가입</button>
             <button type="submit" class="btn btn-primary ms-1">로그인</button>
         </div>
         <div class="container text-center mt-4" style="font-size:0.8rem">

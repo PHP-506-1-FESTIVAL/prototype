@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -25,12 +26,12 @@ class UserController extends Controller
         // 유효성 체크 (이메일: ~320글자 이메일 형식, 비밀번호: 8~24글자 숫자, 영어대소문자, 특수문자만 허용)
         $req->validate([
             'email'     => 'required|email|max:320'
-            ,'password' => 'required|regex:/^[a-zA-Z\\d`~!@#$%^&*()-_=+]{5,24}$/'
+            ,'password' => 'required|regex:/^[a-zA-Z\\d`~!@#$%^&*()-_=+]{4,20}$/'
         ]);
 
-        // 유저정보 습득 (아직 비밀번호 해쉬화 안됨)
+        // 유저정보 습득
         $user = User::where('user_email', $req->email)->first();
-        if(!$user || $req->password !== $user->user_password) {
+        if(!$user || !(Hash::check($req->password, $user->user_password))) {
             $error = '아이디와 비밀번호를 확인해 주세요.';
             return redirect()->back()->with('error', $error);
         }
@@ -38,7 +39,7 @@ class UserController extends Controller
         // 유저 인증작업
         Auth::login($user);
         if(Auth::check()) {
-            if(strlen($user->user_profile) < 1) {
+            if(strlen($user->user_profile) < 3) {
                 $user->user_profile = 'profile.png';
             }
             session($user->only('user_id', 'user_email', 'user_nickname', 'user_profile')); // 세션에 인증된 회원 pk 등록
@@ -67,7 +68,7 @@ class UserController extends Controller
         ]);
 
         $data['user_email'] = $req->email;
-        $data['user_password'] = $req->password;
+        $data['user_password'] = Hash::make($req->password);
         $data['user_name'] = $req->name;
         $data['user_gender'] = $req->gender;
         $data['user_birthdate'] = $req->birthyear.'-'.$req->birthmonth.'-'.$req->birthday;
@@ -75,6 +76,8 @@ class UserController extends Controller
         $data['user_zipcode'] = $req->zipcode;
         $data['user_address'] = $req->address;
         $data['user_address_detail'] = $req->address2;
+        $data['user_marketing_agreement'] = session()->get('marketing');
+        $data['user_email_agreement'] = session()->get('promotion');
 
         $user = User::create($data);
         
@@ -166,7 +169,24 @@ class UserController extends Controller
     }
 
     function pwchk() {
-        return '비밀번호 확인';
+        return view('pwchk');
+    }
+
+    function pwchkpost(Request $req) {
+        // 유효성 체크 (이메일: ~320글자 이메일 형식, 비밀번호: 8~24글자 숫자, 영어대소문자, 특수문자만 허용)
+        $req->validate([
+            'password' => 'required|regex:/^[a-zA-Z\\d`~!@#$%^&*()-_=+]{4,20}$/'
+        ]);
+
+        // 유저정보 습득, 비밀번호 체크
+        $user = User::where('user_email', session('user_email'))->first();
+        if(!$user || !(Hash::check($req->password, $user->user_password))) {
+            $error = '비밀번호를 다시 확인해 주세요.';
+            return redirect()->back()->with('error', $error);
+        }
+
+        session()->put('pwchk_flg', '1'); // 세션에 플래그 등록
+        return redirect()->intended(route('user.edit'));
     }
 
     function withdraw() {
@@ -174,11 +194,33 @@ class UserController extends Controller
         return view('withdraw');
     }
 
-    function withdrawpost() {
+    function withdrawpost(Request $req) {
         $id = session('user_id');
+        $user = User::find($id);
+        $user->wr_id = $req->wr;
+        $user->save();
         $result = User::destroy($id);
         Session::flush();
         Auth::logout(); // 에러처리(laravel error handling) 2차프로젝트에서 작성
         return redirect()->route('user.login');
+    }
+
+    function terms() {
+        return view('terms');
+    }
+
+    function termspost(Request $req) {
+        if(!$req->marketing) {
+            session()->put('marketing', '0');
+        } else {
+            session()->put('marketing', '1');
+        }
+
+        if(!$req->promotion) {
+            session()->put('promotion', '0');
+        } else {
+            session()->put('promotion', '1');
+        }
+        return redirect()->route('user.signup');
     }
 }
