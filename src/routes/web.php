@@ -85,7 +85,7 @@ Route::get('main', [MainController::class, 'main'])->name('main');
 // 축제리시트 페이지 이동
 Route::get('feslist', [MainController::class, 'fesList'])->name('main.fesList');
 // 공지페이지 이동
-Route::get('noticepage', [MainController::class, 'noticePage'])->name('main.noticePage');
+// Route::get('noticepage', [MainController::class, 'noticePage'])->name('main.noticePage'); // 0621 신유진 del
 // 더보기로 축제리스트페이지 이동
 Route::get('fesorder/{id}', [MainController::class, 'fesOrder'])->name('main.FesOrder');
 //검색결과 페이지 이동
