@@ -21,6 +21,8 @@ class User extends Authenticatable
         'user_zipcode',
         'user_address',
         'user_address_detail',
+        'user_marketing_agreement',
+        'user_email_agreement'
     ];
 
     protected $primaryKey = 'user_id';

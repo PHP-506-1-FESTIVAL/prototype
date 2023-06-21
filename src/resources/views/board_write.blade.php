@@ -5,26 +5,18 @@
 @section('content')
 <h2 class="mt-0 mb-0">게시글 작성 페이지</h2>
 
-<div id="board_write">
-    <h4>글을 작성하는 공간입니다.</h4>
-        <div id="write_area">
-            {{-- <form enctype="multipart/form-data" action="write_ok.php?board_id=<?echo $board_id;?>" method="post"> --}}
-                <div id="in_title">
-                    <textarea name="title" id="utitle" rows="1" cols="55" placeholder="제목" maxlength="100" required></textarea>
-                </div>
-
-                <div class="wi_line"></div>
-                <div id="in_content">
-                    <textarea name="content" id="ucontent" placeholder="내용" required></textarea>
-                </div>
-
-                    <input type="file" name="SelectFile" />
-
-
-                <div class="bt_se">
-                    <button type="submit">글 작성</button>
-                </div>
-            {{-- </form> --}}
-        </div>
-    </div>
+{{-- <%-- 입력 폼 --%> --}}
+<form action="{{route('board.store')}}" method="post">
+    @csrf
+	{{-- <input type="hidden" name="bdGroup" value=<%=bdGroup%>
+	<input type="hidden" name="bdOrder" value=<%=bdOrder%>
+	<input type="hidden" name="bdIndent" value=<%=bdIndent%> --}}
+	<input type="text" name="writetitle" class="form-control mt-4 mb-2" placeholder="제목을 입력해주세요." required>
+	<div class="form-group">
+		<textarea class="form-control" rows="10" name="writecontent" placeholder="내용을 입력해주세요" required></textarea>
+	</div>
+	@include('layout.errormsg') 
+	<button type="submit" class="btn btn-secondary mb-3">제출하기</button>
+	<a href="{{route("board.index")}}"><button class="btn btn-primary" type="button">취소하기</button></a>
+</form>
 @endsection

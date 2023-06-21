@@ -27,6 +27,7 @@ class MainController extends Controller
             'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
         ])->where('festival_state','<','2')->orderBy('festival_hit')->limit(4)->get();
         // dump($data);
+        $notice=Notice::all();
         $month=[];
         for ($i=0; $i < 13; $i++) {
             if ($i===0) {
@@ -47,7 +48,7 @@ class MainController extends Controller
 
         // return view('protoMain',compact('data'));
         // return view('main')->with('fesData',$result)->with('month',$month)->with('userData',$result_user);
-        return view('main')->with('fesData',$result)->with('month',$month);
+        return view('main')->with('fesData',$result)->with('month',$month)->with('notice',$notice);
     }
     //  0620 이가원 del
     // 로그인 이후 메인 페이지 이동
@@ -128,10 +129,11 @@ class MainController extends Controller
         // $search_insert=new FestivalHit;
         // $search_insert->select_cnt=$val->search;
         // $search_insert->save();
+        $val->validate(['search'=>'required|max:100']);
         if(isset($val->search)){
             FestivalHit::create(['select_cnt'=>$val->search]);
         }
-        $result_search=DB::table('festivals')->where('festival_title','like','%'.$val->search.'%')->get();
+        $result_search=DB::table('festivals')->where('festival_title','like','%'.$val->search.'%')->orderBy('festival_hit','desc')->get();
         $result_hot=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
         return view('search')->with('result',$result_search)->with('recommend',$result_hot)->with('search',$val->search);
     }

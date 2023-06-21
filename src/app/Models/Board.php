@@ -10,5 +10,11 @@ class Board extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'user_id',
+        'board_title',
+        'board_content'
+    ];
+
     protected $primaryKey = 'board_id';
 }

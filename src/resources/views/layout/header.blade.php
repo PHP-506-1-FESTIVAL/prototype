@@ -28,7 +28,7 @@
         <div class="dropdown">
             <form class="d-flex" method="POST" action="{{route('main.search')}}">
                 @csrf
-                <input class="form-control me-2 dropdown-toggle" type="search" placeholder="Search" aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  autocomplete="off" name="search">
+                <input class="form-control me-2 dropdown-toggle" type="search" placeholder="Search" aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  autocomplete="off" name="search" maxlength='100'>
                 <button class="btn btn-outline-success" type="submit">Search</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <ul class="list-unstyled">
