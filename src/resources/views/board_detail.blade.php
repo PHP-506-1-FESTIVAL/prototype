@@ -7,14 +7,14 @@
 <div class="container">
     {{-- // 게시판 상세 TOP --}}
     <div class="">
-        <h2 class="mt-4 mb-3">{{$board_detail_data->board_title}}</h2>
+        <h2 class="mt-4 mb-3">{{$boards->board_title}}</h2>
         <hr>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <p style="text-align: right" class="pt-2">{{$board_detail_data->user_id}} | {{$board_detail_data->created_at}}</p>
+            <p style="text-align: right" class="pt-2">{{$boards->user_id}} | {{$boards->created_at}}</p>
             {{-- // 게시판 상세 BUTTON --}}
             <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a>
-            <a href="{{route('board.edit', ['board' => $board_detail_data->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
-            <form action="{{route('board.destroy', ['board' => $board_detail_data->board_id])}}" method="post" name="removefrm">
+            <a href="{{route('board.edit', ['board' => $boards->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
+            <form action="{{route('board.destroy', ['board' => $boards->board_id])}}" method="post" name="removefrm">
                 @csrf
                 @method('delete')
                 <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">삭제하기</a>
@@ -61,7 +61,7 @@
     {{-- // 게시판 상세 내용 --}}
     <div class="content mt-4 rounded-3 border border-secondary">
         <div class="p-3">
-            {{$board_detail_data->board_content}}
+            {{$boards->board_content}}
         </div>
     </div>
 </div>
