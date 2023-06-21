@@ -11,7 +11,7 @@
                 @if ($item->poster_img)
                 <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid">
                 @else
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Red_x.svg/768px-Red_x.svg.png" alt="{{$item->festival_title}}" class="img-fluid">
+                <img src='https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg' alt="{{$item->festival_title}}" class="img-fluid">
                 @endif
             </a>
         </div>
@@ -19,15 +19,15 @@
 </div>
 
 {{-- 공지사항 후순위--}}
-<div>
+<div class="row alert alert-danger">
     공지사항 어찌고 저찌고
 </div>
 {{-- 지도 --}}
 <div class="row">
     <div class="col-sm-5">
         <div class="row">
-            <div class="mx-auto"> {{--Todo중앙정렬--}}
-                <div class="btn-group">
+            <div class="container text-center"> {{--Todo중앙정렬--}}
+                <div class="btn-group align-self-center">
                     <button type="button" class="btn btn-danger" id="month">전체</button>
                     <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="visually-hidden">Toggle Dropdown</span>
@@ -52,20 +52,20 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-7 row container text-end">
         {{-- 각각 맞는 축제 --}}
         @foreach ($fesData as $item)
-            <div class="col-3 col-sm-3">
+            <div class="col-6 col-sm-6">
                 <a href="{{route('fes.detail',['id'=>$item->festival_id])}}" id="Recommend">
                     @if ($item->poster_img)
                         <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid">
                     @else
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Red_x.svg/768px-Red_x.svg.png" alt="{{$item->festival_title}}" class="img-fluid">
+                        <img src='https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg' alt="{{$item->festival_title}}" class="img-fluid">
                     @endif
                 </a>
             </div>
         @endforeach
-        <div id="moreFes">
+        <div id="moreFes" class="align-self-end">
             <a href="{{route('main.FesOrder', ['id' => 1])}}">더보기>></a>
         </div>
     </div>
