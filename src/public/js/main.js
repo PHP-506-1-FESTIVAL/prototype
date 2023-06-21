@@ -1,6 +1,7 @@
 const api = 'http://localhost/api/mainapi/'
 const domaine = 'http://localhost/'
 const fesOrder = 'fesorder/'
+const fesDetail = 'fesdetail/'
 let monthStr="";
 
 let month = document.getElementById('month');
@@ -38,7 +39,7 @@ function make_api_list(str_val) {
             .finally()
             const moreFes= document.getElementById('moreFes').childNodes[1]
             // moreFes.setAttribute("href","{{route('main.FesOrder', ['id' => "+area_code+"])}}")//안먹히네
-            moreFes.setAttribute("href",domaine+fesOrder+area_code)//Todo
+            moreFes.setAttribute("href",domaine+fesOrder+str_val)//Todo
 }
 
 function target(date) {
@@ -46,6 +47,7 @@ function target(date) {
     let targetDiv = document.querySelectorAll('#Recommend');
     for (let index = 0; index < date[0].length; index++) {
         // console.log(date)
+        targetDiv[index].setAttribute('href',domaine+fesDetail+date[0][index].festival_id);
         targetDiv[index].childNodes[1].setAttribute('alt',date[0][index].festival_title);
         if (date[0][index].poster_img==="") {
             targetDiv[index].childNodes[1].setAttribute('src',"https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Red_x.svg/768px-Red_x.svg.png");
