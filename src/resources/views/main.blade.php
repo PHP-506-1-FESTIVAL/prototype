@@ -11,7 +11,7 @@
                 @if ($item->poster_img)
                 <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid">
                 @else
-                <img src='https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg' alt="{{$item->festival_title}}" class="img-fluid">
+                <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid">
                 @endif
             </a>
         </div>
@@ -20,7 +20,7 @@
 
 {{-- 공지사항 후순위--}}
 <div class="row alert alert-danger">
-    공지사항 어찌고 저찌고
+    {{$notice[0]->notice_title}} : {{$notice[0]->notice_content}}
 </div>
 {{-- 지도 --}}
 <div class="row">
@@ -60,7 +60,7 @@
                     @if ($item->poster_img)
                         <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid">
                     @else
-                        <img src='https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg' alt="{{$item->festival_title}}" class="img-fluid">
+                        <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid">
                     @endif
                 </a>
             </div>
