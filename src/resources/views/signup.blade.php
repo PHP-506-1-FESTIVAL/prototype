@@ -45,6 +45,8 @@
                                 Your username is required.
                             </div>
                         </div>
+                        <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+                        <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
                     </div>
 
                     <div class="col-12">
@@ -139,6 +141,28 @@
     </main>
 
 </div>
+
+​<script type="text/javascript">
+    $(function(){
+        $("#alert-success").hide();
+        $("#alert-danger").hide();
+        $("input").keyup(function(){
+            var pwd1=$("#pwd1").val();
+            var pwd2=$("#pwd2").val();
+            if(pwd1 != "" || pwd2 != ""){
+                if(pwd1 == pwd2){
+                    $("#alert-success").show();
+                    $("#alert-danger").hide();
+                    $("#submit").removeAttr("disabled");
+                }else{
+                    $("#alert-success").hide();
+                    $("#alert-danger").show();
+                    $("#submit").attr("disabled", "disabled");
+                }    
+            }
+        });
+    });
+</script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

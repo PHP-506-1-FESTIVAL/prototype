@@ -47,7 +47,7 @@
                             <li><a class="dropdown-item" href="{{route('user.logout')}}">로그아웃</a></li>
                         </ul>
                     </div>
-                    <img src="/img/profile/{{session()->get('user_profile')}}" alt="프로필" class="mb-4" style="width:100px; height:100px; object-fit:contain; border-radius:50%;">
+                    <img src="/img/profile/{{session()->get('user_profile')}}" alt="프로필" class="mb-4" style="width:100px; height:100px; object-fit:cover; border-radius:50%;">
                     <p style="color:white;">반가워요!</p>
                     <p style="font-size: 25px">{{session()->get('user_nickname')}} 님</p>
                     <a href="" class="align-items-center text-bg-dark text-decoration-none"><p>프로필 이미지 변경 ></p></a>
