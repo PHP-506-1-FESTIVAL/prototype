@@ -33,7 +33,7 @@ function target(date) {
       const start = date[0][index].festival_start_date; // 페스티벌 시작 날짜를 가져옵니다.
       const end = date[0][index].festival_end_date; // 페스티벌 종료 날짜를 가져옵니다.
       const title = date[0][index].festival_title; // 페스티벌 제목을 가져옵니다.
-      const area = date[0][index].area_code; // 지역 정보를 가져옵니다 . 
+      const area = date[0][index].area_code; // 지역 정보를 가져옵니다 .
 
       tempStr += `
         <a href="${domaine}${fesDetail}${id}" style="text-decoration: none;">
@@ -52,7 +52,7 @@ function target(date) {
   targetDiv.innerHTML = tempStr;
 }
 //메인 인기도/최신순
-//인기도 
+//인기도
 function sortByPopularity() {
   var festivals = Array.from(document.querySelectorAll('[data-hits]'));
   var today = new Date();
@@ -145,3 +145,15 @@ function sortByLatest() {
       container.appendChild(festival.parentNode);
   });
 }
+window.addEventListener('scroll',()=>{
+
+    if (!time) {
+        time=setTimeout(()=>{
+            time=null
+            if(Math.ceil( window.innerHeight+window.scrollY)>=document.body.offsetHeight){
+                make_api_list();
+                console.log(window.innerHeight+window.scrollY+":"+document.body.offsetHeight)
+            }
+        },1000);
+    }
+});
