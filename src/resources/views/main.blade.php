@@ -28,7 +28,7 @@
         <div class="row">
             <div class="container text-center"> {{--Todo중앙정렬--}}
                 <div class="btn-group align-self-center">
-                    <button type="button" class="btn btn-danger" id="month" value="{{}}">전체</button>
+                    <button type="button" class="btn btn-danger" id="month" value="">전체</button>
                     <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
