@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('mainapi/{str_val}', [MainApiController::class, 'index'])->name('mainApi.index');
+Route::get('mainapiall/', [MainApiController::class, 'all'])->name('mainapiall.all');
 
 Route::get('emailchk', [ApiUserController::class, 'emailindex']);
 Route::get('emailchk/{id}', [ApiUserController::class, 'emailshow']);

@@ -117,9 +117,15 @@
 <div class="sort mt-3" style="text-align:right;">
     <button class="btn btn-success" onclick="sortByPopularity()">인기도</button>
     <button class="btn btn-warning" id="sortByLatestBtn" onclick="sortByLatest()">최신순</button>
+    <a href="{{ route('main.request')}}" class="btn btn-info">요청페이지</a>
 </div>
 <div class="image-container" id="festivalContainer">
-    @foreach ($data as $festival)
+@php
+$count = 0;
+@endphp
+
+@foreach ($data as $festival)
+    @if ($count < 9)
         <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration: none;">
             <div data-hits="{{ $festival->festival_hit }}" data-start-date="{{ $festival->festival_start_date }}" data-end-date="{{ $festival->festival_end_date }}">
                 <div class="card">
@@ -155,15 +161,18 @@
                     <div class="overlay">
                         <h2>{{ $festival->festival_title }}</h2>
                         <p>{{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}</p>
-                        <p id='area'>{{$festival->area_code}}
-                        </p>
+                        <p id='area'>{{$festival->area_code}}</p>
                     </div>
                 </div>
             </div>
         </a>
-    @endforeach
+    @endif
+    @php $count++; @endphp
+@endforeach
+
 </div>
 <script>
+
 </script>
 {{-- 이동버튼 --}}
 <button class="moveTopBtn" title="맨 위로"></button>

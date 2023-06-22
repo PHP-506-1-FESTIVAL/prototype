@@ -1,11 +1,15 @@
 const api = 'http://localhost/api/mainapi/'; // API 기본 URL
+const apiAll = 'http://localhost/api/mainapiall/'; // API 기본 URL
 const domaine = 'http://localhost/'; // 도메인 URL
 const fesDetail = 'fesdetail/'; // 페스티벌 상세 URL
+let strVal=",";
+let a=9;
+let c=true;
 
 function aaaname() {
   const searchDate = document.getElementById('searchDate').value; // 검색 날짜 값을 가져옵니다.
   const searchArea = document.getElementById('searchArea').value; // 검색 지역 값을 가져옵니다.
-  const strVal = searchArea + ',' + searchDate; // 검색 지역과 날짜를 결합합니다.
+  strVal = searchArea + ',' + searchDate; // 검색 지역과 날짜를 결합합니다.
   makeApiList(strVal); // 결합된 값을 사용하여 API를 호출합니다.
 }
 
@@ -47,6 +51,7 @@ function target(date) {
           </div>
         </a>`;
     }
+    c=false
   }
 
   targetDiv.innerHTML = tempStr;
@@ -145,15 +150,85 @@ function sortByLatest() {
       container.appendChild(festival.parentNode);
   });
 }
-window.addEventListener('scroll',()=>{
+let time=null;
+window.addEventListener('scroll', () => {
 
-    if (!time) {
-        time=setTimeout(()=>{
-            time=null
-            if(Math.ceil( window.innerHeight+window.scrollY)>=document.body.offsetHeight){
-                make_api_list();
-                console.log(window.innerHeight+window.scrollY+":"+document.body.offsetHeight)
-            }
-        },1000);
-    }
+  if (!time) {
+    time = setTimeout(() => {
+      time = null;
+      if (Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        makeApiAllList()
+        console.log(window.innerHeight + window.scrollY + ':' + document.body.offsetHeight);
+      }
+    }, 1000);
+  }
 });
+
+function makeApiAllList() {
+  if(c){
+    const url = apiAll;
+    fetch(url)
+    .then((res) => res.json())
+    .then((data) => targetall([data]))
+    .catch((error) => console.log(error))
+    .finally(() => {});
+  }
+}
+
+function targetall(data) {
+  const targetDiv = document.getElementById('festivalContainer');
+
+  if (data[0].length === 0) {
+    const pElement = document.createElement('p');
+    pElement.textContent = '찾는 결과값이 없습니다.';
+    targetDiv.appendChild(pElement);
+  } else {
+    b=a
+    for (let index = b; index < b + 9 && index < data[0].length; index++) {
+      const id = data[0][index].festival_id;
+      const img = data[0][index].poster_img;
+      const start = data[0][index].festival_start_date;
+      const end = data[0][index].festival_end_date;
+      const title = data[0][index].festival_title;
+      const area = data[0][index].area_code;
+
+      const aTag = document.createElement('a');
+      aTag.href = `${domaine}${fesDetail}${id}`;
+      aTag.style.textDecoration = 'none';
+
+      const divElement = document.createElement('div');
+      divElement.className = 'card';
+
+      const imgElement = document.createElement('img');
+      imgElement.className = 'card-img-top';
+      imgElement.alt = '포스터 이미지';
+      imgElement.src = img !== '' ? img : '/img/festival.jpg';
+      imgElement.loading = 'lazy';
+      divElement.appendChild(imgElement);
+
+      const overlayDiv = document.createElement('div');
+      overlayDiv.className = 'overlay';
+
+      const h2Element = document.createElement('h2');
+      h2Element.textContent = title;
+      overlayDiv.appendChild(h2Element);
+
+      const pElement1 = document.createElement('p');
+      pElement1.textContent = `${start} ~ ${end}`;
+      overlayDiv.appendChild(pElement1);
+
+      const pElement2 = document.createElement('p');
+      pElement2.textContent = area;
+      overlayDiv.appendChild(pElement2);
+
+      divElement.appendChild(overlayDiv);
+      aTag.appendChild(divElement);
+      targetDiv.appendChild(aTag);
+    }
+
+    if (a < data[0].length) {
+      a += 9;
+    }
+  }
+}
+
