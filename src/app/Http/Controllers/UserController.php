@@ -64,7 +64,7 @@ class UserController extends Controller
 
         // 유효성검사
         $req->validate([
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+            'image' => 'image|mimes:png,jpg,jpeg|max:2048'
         ]);
 
         $data['user_email'] = $req->email;
@@ -83,18 +83,20 @@ class UserController extends Controller
         
         if(!$user) {
             $error = '시스템 에러가 발생하여 회원가입에 실패했습니다.<br>잠시 후에 다시 시도해 주십시오.';
-            return redirect()->route('users.registration')->with('error', $error);
+            return redirect()->route('user.signup')->with('error', $error);
         }
 
-        // 이미지 이름 설정
-        $imgName = $user->user_id.'.'.$req->image->extension();
+        if($req->image) {
+            $imgName = $user->user_id.'.'.$req->image->extension();
 
-        // 이미지가 저장될 path 설정
-        $req->image->move(public_path('img/profile'), $imgName);
-
-        $user2 = User::find($user->user_id);
-        $user2->user_profile = $imgName;
-        $user2->save();
+            // 이미지가 저장될 path 설정
+            $req->image->move(public_path('img/profile'), $imgName);
+    
+            // 이미지 이름 설정
+            $user2 = User::find($user->user_id);
+            $user2->user_profile = $imgName;
+            $user2->save();
+        }
 
         return redirect()->route('user.login');
     }
@@ -150,6 +152,10 @@ class UserController extends Controller
         $user->user_zipcode = $req->zipcode;
         $user->user_address = $req->address;
         $user->user_address_detail = $req->address2;
+
+        if($req->password) {
+            $user->user_password = $req->password;
+        }
 
         if(!$req->marketing) {
             $user->user_marketing_agreement = '0';
