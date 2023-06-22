@@ -33,7 +33,7 @@ function target(date) {
       const start = date[0][index].festival_start_date; // 페스티벌 시작 날짜를 가져옵니다.
       const end = date[0][index].festival_end_date; // 페스티벌 종료 날짜를 가져옵니다.
       const title = date[0][index].festival_title; // 페스티벌 제목을 가져옵니다.
-      const area = date[0][index].area_code; // 지역 정보를 가져옵니다.
+      const area = date[0][index].area_code; // 지역 정보를 가져옵니다 . 
 
       tempStr += `
         <a href="${domaine}${fesDetail}${id}" style="text-decoration: none;">
