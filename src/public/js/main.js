@@ -15,6 +15,7 @@ function changText(item) {
         month.innerHTML=item;
         monthStr=item;
     }
+    resColor()
 }
 
 // function make_list(date) {
@@ -78,7 +79,7 @@ function target(date) {
 // 37전북
 // 38전남
 // 39제주
-
+// let AC34 AC35 AC36 AC38 그룹 형식
 let AC1 = document.getElementById('AC1');
 let AC2 = document.getElementById('AC2');
 let AC3 = document.getElementById('AC3');
@@ -90,11 +91,11 @@ let AC8 = document.getElementById('AC8');
 let AC31 = document.getElementById('AC31');
 let AC32 = document.getElementById('AC32');
 let AC33= document.getElementById('AC33');
-let AC34 = document.getElementById('AC34').childNodes[0];
-let AC35 = document.getElementById('AC35').childNodes[0];
-let AC36 = document.getElementById('AC36').childNodes[0];
+let AC34 = document.getElementById('AC34');
+let AC35 = document.getElementById('AC35');
+let AC36 = document.getElementById('AC36');
 let AC37 = document.getElementById('AC37');
-let AC38 = document.getElementById('AC38').childNodes[0];
+let AC38 = document.getElementById('AC38');
 let AC39 = document.getElementById('AC39');
 
 function resColor() {
@@ -109,12 +110,21 @@ function resColor() {
     AC31.style.fill='#A8A8A8';
     AC32.style.fill='#A8A8A8';
     AC33.style.fill='#A8A8A8';
-    AC34.style.fill='#A8A8A8';
-    AC35.style.fill='#A8A8A8';
-    AC36.style.fill='#A8A8A8';
     AC37.style.fill='#A8A8A8';
-    AC38.style.fill='#A8A8A8';
     AC39.style.fill='#A8A8A8';
+    for (let index = 0; index < AC34.childNodes.length; index++) {
+        AC34.childNodes[index].style.fill='#A8A8A8';
+    }
+    for (let index = 0; index < AC35.childNodes.length; index++) {
+        AC35.childNodes[index].style.fill='#A8A8A8';
+    }
+    for (let index = 0; index < AC36.childNodes.length; index++) {
+        AC36.childNodes[index].style.fill='#A8A8A8';
+    }
+    for (let index = 0; index < AC38.childNodes.length; index++) {
+        AC38.childNodes[index].style.fill='#A8A8A8';
+    }
+
 }
 
 // AC1.addEventListener('click',()=>alert('체크'))
@@ -220,17 +230,23 @@ AC33.addEventListener('click',()=>{
 })
 AC34.addEventListener('click',()=>{
     resColor();
-    AC34.style.fill='red';
+    for (let index = 0; index < AC34.childNodes.length; index++) {
+        AC34.childNodes[index].style.fill='red';
+    }
     make_api_list(34+","+monthStr);
 })
 AC35.addEventListener('click',()=>{
     resColor();
-    AC35.style.fill='red';
+    for (let index = 0; index < AC35.childNodes.length; index++) {
+        AC35.childNodes[index].style.fill='red';
+    }
     make_api_list(35+","+monthStr);
 })
 AC36.addEventListener('click',()=>{
     resColor();
-    AC36.style.fill='red';
+    for (let index = 0; index < AC36.childNodes.length; index++) {
+        AC36.childNodes[index].style.fill='red';
+    }
     make_api_list(36+","+monthStr);
 })
 AC37.addEventListener('click',()=>{
@@ -240,7 +256,9 @@ AC37.addEventListener('click',()=>{
 })
 AC38.addEventListener('click',()=>{
     resColor();
-    AC38.style.fill='red';
+    for (let index = 0; index < AC38.childNodes.length; index++) {
+        AC38.childNodes[index].style.fill='red';
+    }
     make_api_list(38+","+monthStr);
 })
 AC39.addEventListener('click',()=>{
