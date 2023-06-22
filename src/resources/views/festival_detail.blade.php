@@ -3,17 +3,21 @@
 @section('title', '축제정보상세')
 
 @section('content')
+<link rel="stylesheet" href="/css/festival.css">
 {{-- 축제 정보 --}}
 <div class="festival-detail">
     <div>
         <p>축제정보</p>
+        <button id="back">뒤로가기</button>
+            <script>
+                document.querySelector('#back').onclick = function() {history.back();}
+            </script>
         <h2>{{ $festival->festival_title }}</h2>
-        {{-- <p>❤{{ $festival->festival_hit }}</p> --}}
         <p>
         @if (isset($jjmFlg[0]->favorite_id))
-            ❤
+            💗
         @else
-            ♡
+            🤍
         @endif
             {{ $festival->festival_hit }}</p>
         @php
@@ -40,14 +44,7 @@
         </button>
 
         {{-- 찜기능 --}}
-        <form action="{{route('favorite.jjm')}}" method="post">
-            @csrf
-            @if (isset($jjmFlg[0]->favorite_id))
-            @method('delete')
-            @endif
-            <input type="hidden" name="test" value="{{session()->get('user_id').','.$festival->festival_id}}">
-            <button type="submit">찜하기</button>
-        </form>
+
     </div> 
     <div>
         @if ($festival->poster_img)
@@ -64,6 +61,14 @@
     </div>
 </div>
 {{-- 지도 --}}
+        <form action="{{route('favorite.jjm')}}" method="post">
+            @csrf
+            @if (isset($jjmFlg[0]->favorite_id))
+            @method('delete')
+            @endif
+            <input type="hidden" name="test" value="{{session()->get('user_id').','.$festival->festival_id}}">
+            <button type="submit">찜하기</button>
+        </form>
 <div>
 <h1>지도</h1>
     <div id="map" style="width:1200px; height:400px;"></div>

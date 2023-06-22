@@ -147,9 +147,9 @@
                     </button>
 
                     @if ($festival->poster_img)
-                        <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image">
+                        <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image" loading="lazy">
                     @else
-                        <img class="card-img-top" src="/img/festival.jpg" alt="No Image">
+                        <img class="card-img-top" src="/img/festival.jpg" alt="No Image" loading="lazy">
                     @endif
 
                     <div class="overlay">
@@ -164,15 +164,7 @@
     @endforeach
 </div>
 <script>
-document.getElementById('refreshButton').addEventListener('click', function() {
-    location.reload(); // Refresh the page
-    sortByLatest(); // Execute the sortByLatest function
-});
-document.addEventListener('DOMContentLoaded', function() {
-    sortByLatest();
-});
 </script>
-
 {{-- 이동버튼 --}}
 <button class="moveTopBtn" title="맨 위로"></button>
 <script>
@@ -182,4 +174,5 @@ document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo({ top: 0, behavior: "smooth" });  
     }
 </script>
+
 @endsection
