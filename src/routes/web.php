@@ -97,3 +97,5 @@ Route::get('request', [MainController::class, 'fesRequest'])->name('main.request
 Route::get('logout', [MainController::class, 'logout'])->name('main.logout');
 //찜인서트
 Route::post('jjm', [FavoriteController::class, 'jjmPost'])->name('favorite.jjm');
+//찜 삭제
+Route::delete('jjm', [FavoriteController::class, 'jjmDel'])->name('favorite.jjm');

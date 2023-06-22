@@ -8,7 +8,14 @@
     <div>
         <p>축제정보</p>
         <h2>{{ $festival->festival_title }}</h2>
-        <p>❤{{ $festival->festival_hit }}</p>
+        {{-- <p>❤{{ $festival->festival_hit }}</p> --}}
+        <p>
+        @if (isset($jjmFlg[0]->favorite_id))
+            ❤
+        @else
+            ♡
+        @endif
+            {{ $festival->festival_hit }}</p>
         @php
             $today = date('Y-m-d');
             $startDate = $festival->festival_start_date;
@@ -133,6 +140,9 @@
 {{-- 찜기능 --}}
 <form action="{{route('favorite.jjm')}}" method="post">
     @csrf
+    @if (isset($jjmFlg[0]->favorite_id))
+    @method('delete')
+    @endif
     <input type="hidden" name="test" value="{{session()->get('user_id').','.$festival->festival_id}}">
     <button type="submit">찜하기</button>
 </form>

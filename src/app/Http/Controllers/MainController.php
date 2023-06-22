@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Models\Festival;
 use App\Models\FestivalHit;
@@ -195,7 +196,9 @@ class MainController extends Controller
     public function fesDetail($id)
     {
         $festival = Festival::find($id);
-
-        return view('festival_detail', compact('festival'));
+        // $jjmCount = Favorite::all()->where('festival_id',$id)->count('festival_id');
+        $jjmFlg = Favorite::select('favorite_id')->where('festival_id',$id)->where('user_id',session()->get('user_id'))->get();
+        // dump($jjmFlg);
+        return view('festival_detail')->with('festival',$festival)->with('jjmFlg',$jjmFlg);
     }
 }
