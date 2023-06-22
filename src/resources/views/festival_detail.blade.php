@@ -130,6 +130,12 @@
 </div>
 <button type="button" class="btn btn-warning" onclick="openKakaoView()">길찾기 <img src="https://cdn-icons-png.flaticon.com/512/2413/2413825.png" alt="길찾기 아이콘" style="width: 22px; height: 22px;"></button>
 
+{{-- 찜기능 --}}
+<form action="{{route('favorite.jjm')}}" method="post">
+    @csrf
+    <input type="hidden" name="test" value="{{session()->get('user_id').','.$festival->festival_id}}">
+    <button type="submit">찜하기</button>
+</form>
 {{-- 댓글 --}}
 {{-- @include('layout.comment') --}}
 @endsection

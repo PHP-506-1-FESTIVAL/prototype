@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
-    
+    public function jjmPost(Request $req)
+    {
+        // dump($req);
+        $arr_req=explode(',',$req->test);
+        $fav=new Favorite(['user_id'=>$arr_req[0]
+        ,'festival_id'=>$arr_req[1]]);
+        $fav->save();
+
+        return redirect()->route('fes.detail', ['id'=>$arr_req[1]]);
+    }
 }
 

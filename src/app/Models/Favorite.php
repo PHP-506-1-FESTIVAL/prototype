@@ -10,4 +10,9 @@ class Favorite extends Model
     use HasFactory;
 
     protected $primaryKey = 'favorite_id';
+    protected $fillable=[
+        'user_id',
+        'festival_id'
+    ];
+    public $timestamps = false;
 }

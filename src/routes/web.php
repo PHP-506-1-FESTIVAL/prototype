@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NoticeController;
@@ -94,3 +95,5 @@ Route::post('search', [MainController::class, 'search'])->name('main.search');
 Route::get('request', [MainController::class, 'fesRequest'])->name('main.request');
 //로그아웃
 Route::get('logout', [MainController::class, 'logout'])->name('main.logout');
+//찜인서트
+Route::post('jjm', [FavoriteController::class, 'jjmPost'])->name('favorite.jjm');
