@@ -14,6 +14,7 @@ use App\Models\Board;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Validator;
 
 class BoardController extends Controller
 {
@@ -104,7 +105,7 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // 상세 페이지
+    // [상세 페이지]
     public function show($board_id){
         $boards = Board::find($board_id);
 
@@ -139,15 +140,19 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // 수정 페이지
+    // [수정 페이지]
     public function edit($board_id)
     {
         // 로그인 체크(로그인 안된상태면 접근 못하게)
-        // if(auth()->guest()) {
-            // return redirect()->route('user.login');
+        if(auth()->guest()) {
+            return redirect()->route('user.login');
+        }
+        // 작성자 체크(작성자가 지금 로그인 되어있는 사람일 경우만 접근)
+        // if(auth() = $board_id) {
+        //     return redirect()->route('user.login');
         // }
-        $board_edit_data = Board::find($board_id);
-        return view('board_edit')->with('board_edit_data', Board::findOrFail($board_id));
+        $boards = Board::find($board_id);
+        return view('board_edit')->with('boards', Board::findOrFail($board_id));
     }
 
     /**
@@ -157,10 +162,34 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // 수정내용 등록
-    public function update($board_id)
+    // [수정 페이지] 수정내용 등록
+    public function update(Request $request, $board_id)
     {
-        //
+        // id를 리퀘스트 객체에 합치기
+        $request->request->add(['user_id' => $board_id]);
+
+        // 유효성 검사 : error나면 바로 return
+        $request->validate([
+            'title'     => 'required|between:3,30'
+            ,'content'  => 'required|max:2000'
+            ,'user_id'       => 'required|integer'
+        ]);
+
+        // $validator->fails() : error가 있다면 true
+        // if($validator->fails()) {
+            // redirect()->back(); : 이전에 요청이 왔던 페이지로 돌아감
+        //     return redirect()
+        //         ->back()
+        //         ->withErrors($validator)
+        //         ->withInput($request->only('title', 'content'));
+        // }
+
+        $boards = Board::find($board_id);
+        $boards->board_title = $request->title;
+        $boards->board_content = $request->content;
+        $boards->save();
+        
+        return redirect()->route('board.show', ['board' => $board_id]);
     }
 
     /**
