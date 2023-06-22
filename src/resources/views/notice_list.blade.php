@@ -3,8 +3,6 @@
 @section('title','공지사항')
 
 @section('content')
-{{$notices}}
-
 {{-- // 공지사항(배경넣고 위치 잡아주기) --}}
 <h2 class="mt-0 mb-0">공지사항</h2>
 {{-- // navbar(검색,정렬) --}}
