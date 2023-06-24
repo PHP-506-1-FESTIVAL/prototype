@@ -151,6 +151,7 @@ $count = 0;
                     <button type="button" class="btn {{ $statusClass }}" id="ing">
                         {{ $statusText }}
                     </button>
+                    
 
                     @if ($festival->poster_img)
                         <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image" loading="lazy">

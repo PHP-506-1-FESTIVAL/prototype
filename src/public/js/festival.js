@@ -23,39 +23,56 @@ function makeApiList(strVal) {
 }
 
 function target(date) {
-  const targetDiv = document.getElementById('festivalContainer'); // 대상 div 요소를 가져옵니다.
-  let tempStr = ""; // 생성된 HTML을 저장하기 위한 빈 문자열을 초기화합니다.
+  const targetDiv = document.getElementById('festivalContainer');
+  let tempStr = "";
 
   if (date[0].length === 0) {
-    // 검색 결과가 없는 경우를 확인합니다.
-    tempStr = "<p>찾는 결과값이 없습니다.</p>"; // 결과 없음을 나타내는 메시지를 설정합니다.
+    tempStr = "<p>찾는 결과값이 없습니다.</p>";
   } else {
     for (let index = 0; index < date[0].length; index++) {
-      // 검색 데이터의 각 결과에 대해 반복합니다.
-      const id = date[0][index].festival_id; // 페스티벌 ID를 가져옵니다.
-      const img = date[0][index].poster_img; // 포스터 이미지 URL을 가져옵니다.
-      const start = date[0][index].festival_start_date; // 페스티벌 시작 날짜를 가져옵니다.
-      const end = date[0][index].festival_end_date; // 페스티벌 종료 날짜를 가져옵니다.
-      const title = date[0][index].festival_title; // 페스티벌 제목을 가져옵니다.
-      const area = date[0][index].area_code; // 지역 정보를 가져옵니다 .
+      const id = date[0][index].festival_id;
+      const img = date[0][index].poster_img;
+      const start = date[0][index].festival_start_date;
+      const end = date[0][index].festival_end_date;
+      const title = date[0][index].festival_title;
+      const area = date[0][index].area_code;
+
+      const today = new Date().toISOString().slice(0, 10); // 현재 날짜를 YYYY-MM-DD 형식으로 가져옵니다.
+      let statusClass = "";
+      let statusText = "";
+
+      if (today < start) {
+        statusClass = "btn-success";
+        const daysDiff = Math.floor((new Date(start) - new Date(today)) / (1000 * 60 * 60 * 24)); // 날짜 차이 계산
+        statusText = `D-${daysDiff}`;
+      } else if (today > end) {
+        statusClass = "btn-secondary";
+        statusText = "진행종료";
+      } else {
+        statusClass = "btn-primary";
+        statusText = "진행중";
+      }
 
       tempStr += `
         <a href="${domaine}${fesDetail}${id}" style="text-decoration: none;">
           <div class="card">
+          <button type="button" class="btn ${statusClass}" style="margin: 2px;" id="ing">${statusText}</button>
             ${img !== "" ? `<img class="card-img-top" src="${img}" alt="포스터 이미지">` : `<img class="card-img-top" src="/img/festival.jpg" alt="이미지 없음">`}
             <div class="overlay">
               <h2>${title}</h2>
               <p>${start} ~ ${end}</p>
               <p>${area}</p>
+              
             </div>
           </div>
         </a>`;
     }
-    c=false
+    c = false;
   }
 
   targetDiv.innerHTML = tempStr;
 }
+
 //메인 인기도/최신순
 //인기도
 function sortByPopularity() {
@@ -183,7 +200,7 @@ function targetall(data) {
     pElement.textContent = '찾는 결과값이 없습니다.';
     targetDiv.appendChild(pElement);
   } else {
-    b=a
+    b = a;
     for (let index = b; index < b + 9 && index < data[0].length; index++) {
       const id = data[0][index].festival_id;
       const img = data[0][index].poster_img;
@@ -221,6 +238,14 @@ function targetall(data) {
       pElement2.textContent = area;
       overlayDiv.appendChild(pElement2);
 
+      const buttonElement = document.createElement('button');
+      buttonElement.type = 'button';
+      buttonElement.className = `btn ${getStatusClass(start, end, new Date())}`;
+      buttonElement.style.margin = '2px';
+      buttonElement.id = 'ing';
+      buttonElement.textContent = getStatusText(start, end, new Date());
+      divElement.appendChild(buttonElement);
+
       divElement.appendChild(overlayDiv);
       aTag.appendChild(divElement);
       targetDiv.appendChild(aTag);
@@ -232,3 +257,40 @@ function targetall(data) {
   }
 }
 
+function getStatus(start, end, today) {
+  const todayDate = today.toISOString().slice(0, 10); // 현재 날짜를 YYYY-MM-DD 형식으로 가져옵니다.
+
+  if (todayDate < start) {
+    const daysDiff = Math.floor((new Date(start) - new Date(todayDate)) / (1000 * 60 * 60 * 24)); // 날짜 차이 계산
+    return `진행예정 D-${daysDiff}일`;
+  } else if (todayDate > end) {
+    return '진행종료';
+  } else {
+    return '진행중';
+  }
+}
+
+function getStatusClass(start, end, today) {
+  const todayDate = today.toISOString().slice(0, 10); // 현재 날짜를 YYYY-MM-DD 형식으로 가져옵니다.
+
+  if (todayDate < start) {
+    return 'btn-success';
+  } else if (todayDate > end) {
+    return 'btn-secondary';
+  } else {
+    return 'btn-primary';
+  }
+}
+
+function getStatusText(start, end, today) {
+  const todayDate = today.toISOString().slice(0, 10); // 현재 날짜를 YYYY-MM-DD 형식으로 가져옵니다.
+
+  if (todayDate < start) {
+    const daysDiff = Math.floor((new Date(start) - new Date(todayDate)) / (1000 * 60 * 60 * 24)); // 날짜 차이 계산
+    return `D-${daysDiff}`;
+  } else if (todayDate > end) {
+    return '진행종료';
+  } else {
+    return '진행중';
+  }
+}

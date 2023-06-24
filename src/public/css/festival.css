@@ -151,3 +151,20 @@ body{
     outline: none;
     cursor: pointer;
 }
+/* 리스트메인 */
+.festival-detail {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.div1 {
+    flex: 1 1 100%;
+}
+
+.div2 {
+    flex: 1 1 30%;
+}
+
+.div3 {
+    flex: 1 1 70%;
+}
