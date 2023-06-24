@@ -151,20 +151,27 @@ body{
     outline: none;
     cursor: pointer;
 }
+
 /* 리스트메인 */
+.detailall{
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    margin: 0px 200px 0px 200px;
+}
 .festival-detail {
+    
     display: flex;
     flex-wrap: wrap;
+    
 }
-
 .div1 {
     flex: 1 1 100%;
 }
-
 .div2 {
     flex: 1 1 30%;
 }
-
 .div3 {
     flex: 1 1 70%;
 }
