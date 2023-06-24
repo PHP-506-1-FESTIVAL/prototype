@@ -10,6 +10,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
+use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\Festival;
 use App\Models\User;
@@ -298,6 +299,10 @@ class UserController extends Controller
     }
 
     function comments() {
-        return view('comments');
+        $data = Comment::select('comment_id', 'board_id', 'comment_type', 'comment_content', 'created_at')
+                ->where('user_id', session('user_id'))
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        return view('comments')->with('data', $data);
     }
 }
