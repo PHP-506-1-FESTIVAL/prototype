@@ -310,10 +310,13 @@ class MainController extends Controller
             default:
                 $areaName = 'Unknown';
         }
-        $festival->area_code=$areaName;
-        // $jjmCount = Favorite::all()->where('festival_id',$id)->count('festival_id');
-        $jjmFlg = Favorite::select('favorite_id')->where('festival_id',$id)->where('user_id',session()->get('user_id'))->get();
-        // dump($jjmFlg);
-        return view('festival_detail')->with('festival',$festival)->with('jjmFlg',$jjmFlg);
-    }
+        $festival->area_code = $areaName; // 축제의 지역 코드를 설정
+        $jjmFlg = Favorite::where('festival_id', $id)->where('user_id', session()->get('user_id'))->get(); // 현재 사용자가 해당 축제를 찜했는지 확인
+        $favoriteCount = Favorite::where('festival_id', $id)->count(); // 찜한 갯수
+        
+        return view('festival_detail')
+            ->with('festival', $festival) // 축제 정보를 뷰로 전달
+            ->with('favoriteCount', $favoriteCount) // 찜한 갯수를 뷰로 전달
+            ->with('jjmFlg', $jjmFlg); // 사용자의 찜 여부를 뷰로 전달합        
+        }
 }
