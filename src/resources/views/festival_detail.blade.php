@@ -34,7 +34,7 @@
             <img class="img" style="width:400px; height:600px; object-fit: cover; border: 1px solid black; " src="{{ $festival->poster_img ? $festival->poster_img : '/img/festival.jpg' }}" alt="{{ $festival->poster_img ? 'Poster Image' : 'No Image' }}">
         </div>
         <div class="div3">
-            <div class="div3in" style="border: 1px solid gray; width: 50%;">
+            <div class="div3in">
             <br><br><br>
             <p>
                 <img src="https://korean.visitkorea.or.kr/kfes/resources/img/valentine_day.png" alt="날짜 아이콘" style="width: 40px; height: 40px;">
