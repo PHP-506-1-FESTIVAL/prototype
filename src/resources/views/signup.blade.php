@@ -9,7 +9,7 @@
         <div class="py-5 text-center">
             <h1 class="mb-3">회원가입</h1>
         </div>
-        
+        @include('layout.errormsg')
         <div class="container" style="max-width:500px;">
             <form action="{{route('user.signuppost')}}" method="post" id="signupForm" class="needs-validation" enctype="multipart/form-data" onsubmit="return false">
                 @csrf
@@ -210,7 +210,7 @@
         const nick = document.getElementById('nickname');
         const nickval = document.getElementById('nickval');
         const url = "/api/nickchk/" + nick.value;
-        var regExp = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$/;
+        var regExp = /^[a-zA-Z가-힣]{2,10}$/;
         let apiData = null;
 
         // API
@@ -224,7 +224,7 @@
             if(nick.value.match(regExp) === null) {
                 nick.classList.remove('is-valid');
                 nick.classList.add('is-invalid');
-                nickval.innerHTML = "닉네임을 2~10글자로 입력해 주세요."
+                nickval.innerHTML = "한글, 영문을 사용해 2~10글자로 입력해 주세요."
             } else {
                 if(apiData["nickflg"] === "1") {
                     nick.classList.remove('is-valid');

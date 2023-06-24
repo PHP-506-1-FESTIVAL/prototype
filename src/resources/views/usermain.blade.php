@@ -58,15 +58,21 @@
                 <div class="container-fluid h-100 p-5 bg-light border rounded-3">
                     <div class="row">
                         <div class="col-4 text-center" style="display:grid; justify-content:center;">
-                            <div class="rounded-3 mb-2" style="width:80px; height:80px; background-color:gray;"></div>
+                            <a href="{{route('user.favorites')}}">
+                                <div class="rounded-3 mb-2" style="width:80px; height:80px; background-color:gray;"></div>
+                            </a>
                             <p>찜 목록</p>
                         </div>
                         <div class="col-4 text-center" style="display:grid; justify-content:center;">
-                            <div class="rounded-3 mb-2" style="width:80px; height:80px; background-color:gray;"></div>
+                            <a href="{{route('user.articles')}}">
+                                <div class="rounded-3 mb-2" style="width:80px; height:80px; background-color:gray;"></div>
+                            </a>
                             <p>작성 글</p>
                         </div>
                         <div class="col-4 text-center" style="display:grid; justify-content:center;">
-                            <div class="rounded-3 mb-2" style="width:80px; height:80px; background-color:gray;"></div>
+                            <a href="{{route('user.comments')}}">
+                                <div class="rounded-3 mb-2" style="width:80px; height:80px; background-color:gray;"></div>
+                            </a>
                             <p>작성 댓글</p>
                         </div>
                     </div>

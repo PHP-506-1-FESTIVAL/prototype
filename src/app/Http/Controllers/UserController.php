@@ -9,9 +9,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Board;
+use App\Models\Favorite;
+use App\Models\Festival;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -64,7 +68,15 @@ class UserController extends Controller
 
         // 유효성검사
         $req->validate([
-            'image' => 'image|mimes:png,jpg,jpeg|max:2048'
+            'email' => 'required|regex:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i|max:320'
+            ,'password' => 'required|regex:/(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$/'
+            ,'name' => 'required'
+            ,'gender' => 'required'
+            ,'birthyear' => 'required'
+            ,'birthmonth' => 'required'
+            ,'birthday' => 'required'
+            ,'nickname' => 'required|regex:/^[a-zA-Z가-힣]{2,10}$/'
+            ,'image' => 'image|mimes:png,jpg,jpeg|max:2048'
         ]);
 
         $data['user_email'] = $req->email;
@@ -143,6 +155,18 @@ class UserController extends Controller
     }
 
     function update(Request $req) {
+
+        // 유효성검사
+        $req->validate([
+            'name' => 'required'
+            ,'gender' => 'required'
+            ,'birthyear' => 'required'
+            ,'birthmonth' => 'required'
+            ,'birthday' => 'required'
+            ,'nickname' => 'required'
+            ,'image' => 'image|mimes:png,jpg,jpeg|max:2048'
+        ]);
+
         $id = session('user_id');
         $user = User::find($id);
         $user->user_name = $req->name;
@@ -154,7 +178,26 @@ class UserController extends Controller
         $user->user_address_detail = $req->address2;
 
         if($req->password) {
-            $user->user_password = $req->password;
+            $req->validate([
+                'password' => 'regex:/(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$/'
+            ]);
+            if(Hash::check($req->password, $user->user_password)) {
+                $alert = '변경하실 비밀번호가 기존 비밀번호와 같습니다.';
+                return redirect()->back()->with('alert', $alert);
+            }
+            $user->user_password = Hash::make($req->password);
+        }
+
+        if($req->image) {
+            $imgName = $user->user_id.'.'.$req->image->extension();
+
+            // 이미지가 저장될 path 설정
+            $req->image->move(public_path('img/profile'), $imgName);
+    
+            // 이미지 이름 설정
+            $user = User::find($user->user_id);
+            $user->user_profile = $imgName;
+            $user->save();
         }
 
         if(!$req->marketing) {
@@ -170,6 +213,11 @@ class UserController extends Controller
         }
 
         $user->save();
+
+        if(strlen($user->user_profile) < 3) {
+            $user->user_profile = 'profile.png';
+        }
+        session($user->only('user_id', 'user_email', 'user_nickname', 'user_profile'));
 
         return redirect()->route('user.main');
     }
@@ -228,5 +276,28 @@ class UserController extends Controller
             session()->put('promotion', '1');
         }
         return redirect()->route('user.signup');
+    }
+
+    function favorites() {
+        $data = DB::table('favorites')
+                        ->join('festivals', 'favorites.festival_id', '=', 'festivals.festival_id' )
+                        ->select('favorites.favorite_id', 'festivals.festival_id', 'festivals.festival_title', 'festivals.festival_start_date', 'festivals.festival_end_date')
+                        ->where('favorites.user_id', session('user_id'))
+                        ->orderBy('festivals.festival_start_date', 'desc')
+                        ->paginate(10);
+
+        return view('favorites')->with('data', $data);
+    }
+
+    function articles() {
+        $data = Board::select('board_id', 'board_title', 'created_at', 'board_hit')
+                ->where('user_id', session('user_id'))
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        return view('articles')->with('data', $data);
+    }
+
+    function comments() {
+        return view('comments');
     }
 }

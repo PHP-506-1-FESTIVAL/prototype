@@ -11,11 +11,12 @@
     
 
 <div class="container">
+    <script>if({{session()->has('alert')}}) { alert('{{session()->get('alert')}}') }</script>
     <main>
         <div class="py-5 text-center">
             <h1 class="mb-3">회원정보 수정</h1>
         </div>
-        
+        @include('layout.errormsg')
         <div class="container" style="max-width:500px;">
             <form action="{{route('user.update')}}" method="post" id="signupForm" class="needs-validation" enctype="multipart/form-data" onsubmit="return false">
                 @csrf
@@ -319,7 +320,12 @@
 
 <script type="text/javascript">
 
+    var pwchkflg = false;
     var pwflg = false;
+    var pwflg2 = false;
+    var nameflg = false;
+    var birthflg = false;
+    var nickflg = false;
 
     document.getElementById('submitBtn').onclick = function() {
         var pw = document.getElementById('password');
@@ -331,14 +337,16 @@
         var nick = document.getElementById('nickname');
         var signupForm = document.getElementById('signupForm');
 
-        if (pw.classList.contains('is-invalid')) {
+        if (pwflg && !pw.classList.contains('is-valid')) {
             alert('비밀번호를 다시 한번 확인해 주세요.');
-        } else if (pw.classList.contains('is-invalid') && !pwchk.classList.contains('is-valid')) {
+        } else if (pwflg2 && !pwchk.classList.contains('is-valid')) {
             alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
-        } else if (name.classList.contains('is-invalid')) {
+        } else if (nameflg && !name.classList.contains('is-valid')) {
             alert('이름을 다시 한번 확인해 주세요.');
-        } else if (year.classList.contains('is-invalid') || mon.classList.contains('is-invalid') || day.classList.contains('is-invalid')) {
+        } else if (birthflg && !year.classList.contains('is-valid') || birthflg && !mon.classList.contains('is-valid') || birthflg && !day.classList.contains('is-valid')) {
             alert('생년월일을 다시 한번 확인해 주세요.')
+        } else if (nickflg || !nick.classList.contains('is-valid')) {
+            alert('닉네임 중복체크를 진행해 주세요.')
         } else {
             signupForm.removeAttribute('onsubmit');
         }
@@ -347,9 +355,8 @@
     document.getElementById("nickChkBtn").onclick = function() {
         const nick = document.getElementById('nickname');
         const nickval = document.getElementById('nickval');
-        const nickval2 = document.getElementById('nickval2');
         const url = "/api/nickchk/" + nick.value;
-        var regExp = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$/;
+        var regExp = /^[a-zA-Z가-힣]{2,10}$/;
         let apiData = null;
 
         // API
@@ -363,7 +370,7 @@
             if(nick.value.match(regExp) === null) {
                 nick.classList.remove('is-valid');
                 nick.classList.add('is-invalid');
-                nickval.innerHTML = "닉네임을 2~10글자로 입력해 주세요."
+                nickval.innerHTML = "한글, 영문을 사용해 2~10글자로 입력해 주세요."
             } else {
                 if(apiData["nickflg"] === "1") {
                     if(document.getElementById('hiddennick').value === nick.value) {
@@ -378,6 +385,7 @@
                 } else {
                     nick.classList.remove('is-invalid');
                     nick.classList.add('is-valid');
+                    nickflg = false;
                 }
             }
         })
@@ -386,6 +394,7 @@
     }
 
     document.getElementById("password").onkeyup = function() {
+        pwflg = true;
         var val = document.getElementById('pwchk').value;
         var pw = this.value;
         var regExp = /(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$/;
@@ -394,7 +403,7 @@
         } else {
             document.getElementById('password').classList.replace('is-invalid', 'is-valid');
         }
-        if(pwflg) {
+        if(pwchkflg) {
             if( val === pw ){
                 document.getElementById('pwchk').classList.remove('is-invalid');
                 document.getElementById('pwchk').classList.add('is-valid');
@@ -406,18 +415,20 @@
     }
 
     document.getElementById('pwchk').onkeyup = function() {
+        pwflg2 = true;
         var val1 = document.getElementById('password').value;
         var msg = '';
         var val2 = this.value;
         if( val1 === val2 ){
             document.getElementById('pwchk').classList.replace('is-invalid', 'is-valid');
-            pwflg = true;
+            pwchkflg = true;
         }else{
             document.getElementById('pwchk').classList.add('is-invalid');
         };
     };
 
     document.getElementById("name").onkeyup = function() {
+        nameflg = true;
         var name = this.value;
         var regExp = /^[가-힣]{2,6}$/;
         if(name.match(regExp) === null) {
@@ -428,6 +439,7 @@
     }
 
     document.getElementById("birthyear").onkeyup = function() {
+        birthflg = true;
         var now = new Date();
         var year = this.value;
         var hidden = document.getElementById("birthhidden");
@@ -447,6 +459,7 @@
     }
 
     document.getElementById("birthmonth").onkeyup = function() {
+        birthflg = true;
         var month = this.value;
         var hidden = document.getElementById("birthhidden");
         var birthval = document.getElementById("birthval")
@@ -464,6 +477,7 @@
     }
 
     document.getElementById("birthday").onkeyup = function() {
+        birthflg = true;
         var day = this.value;
         var hidden = document.getElementById("birthhidden");
         var birthval = document.getElementById("birthval")
@@ -479,6 +493,11 @@
             hidden.classList.replace('is-invalid', 'is-valid');
         }
     }
+
+    document.getElementById("birthday").onkeyup = function() {
+        nickflg = true;
+    }
+
 </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
