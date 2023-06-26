@@ -1,6 +1,6 @@
 const api = 'http://localhost/api/mainapi/'
 const domaine = 'http://localhost/'
-const fesOrder = 'fesorder/'
+const fesOrder = 'feslist/'
 const fesDetail = 'fesdetail/'
 let monthStr="";
 let noneImg='img/festival.jpg';
@@ -14,6 +14,8 @@ function changText(item) {
     else{
         month.innerHTML=item;
         monthStr=item;
+        const changVal = document.getElementById('fesOrederIp');
+        changVal.setAttribute('value',","+monthStr);
     }
     resColor()
 }
@@ -39,9 +41,9 @@ function make_api_list(str_val) {
             .then((date) => target([date]))
             // .catch(console.log)
             .finally()
-            const moreFes= document.getElementById('moreFes').childNodes[1]
+            const changVal = document.getElementById('fesOrederIp');
             // moreFes.setAttribute("href","{{route('main.FesOrder', ['id' => "+area_code+"])}}")//안먹히네
-            moreFes.setAttribute("href",domaine+fesOrder+str_val)//Todo
+            changVal.setAttribute('value',str_val);
 }
 
 function target(date) {
@@ -112,18 +114,12 @@ function resColor() {
     AC33.style.fill='#A8A8A8';
     AC37.style.fill='#A8A8A8';
     AC39.style.fill='#A8A8A8';
-    for (let index = 0; index < AC34.childNodes.length; index++) {
-        AC34.childNodes[index].style.fill='#A8A8A8';
-    }
-    for (let index = 0; index < AC35.childNodes.length; index++) {
-        AC35.childNodes[index].style.fill='#A8A8A8';
-    }
-    for (let index = 0; index < AC36.childNodes.length; index++) {
-        AC36.childNodes[index].style.fill='#A8A8A8';
-    }
-    for (let index = 0; index < AC38.childNodes.length; index++) {
-        AC38.childNodes[index].style.fill='#A8A8A8';
-    }
+    AC35.style.fill='#A8A8A8';
+    AC36.style.fill='#A8A8A8';
+    AC38.style.fill='#A8A8A8';
+    AC34.style.fill='#A8A8A8';
+
+
 
 }
 
@@ -230,23 +226,17 @@ AC33.addEventListener('click',()=>{
 })
 AC34.addEventListener('click',()=>{
     resColor();
-    for (let index = 0; index < AC34.childNodes.length; index++) {
-        AC34.childNodes[index].style.fill='red';
-    }
+    AC34.style.fill='red';
     make_api_list(34+","+monthStr);
 })
 AC35.addEventListener('click',()=>{
     resColor();
-    for (let index = 0; index < AC35.childNodes.length; index++) {
-        AC35.childNodes[index].style.fill='red';
-    }
+    AC35.style.fill='red';
     make_api_list(35+","+monthStr);
 })
 AC36.addEventListener('click',()=>{
     resColor();
-    for (let index = 0; index < AC36.childNodes.length; index++) {
-        AC36.childNodes[index].style.fill='red';
-    }
+    AC36.style.fill='red';
     make_api_list(36+","+monthStr);
 })
 AC37.addEventListener('click',()=>{
@@ -256,9 +246,7 @@ AC37.addEventListener('click',()=>{
 })
 AC38.addEventListener('click',()=>{
     resColor();
-    for (let index = 0; index < AC38.childNodes.length; index++) {
-        AC38.childNodes[index].style.fill='red';
-    }
+    AC38.style.fill='red';
     make_api_list(38+","+monthStr);
 })
 AC39.addEventListener('click',()=>{
@@ -267,3 +255,7 @@ AC39.addEventListener('click',()=>{
     make_api_list(39+","+monthStr);
 })
 
+function FesSub() {
+    const frm=document.getElementById('fesOrderFrm')
+    frm.submit();
+}
