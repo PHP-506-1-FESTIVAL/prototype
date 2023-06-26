@@ -122,5 +122,24 @@
 {{-- 댓글 --}}
 {{-- @include('layout.comment') --}}
 {{-- 연관축제 --}}
-{{-- <h1>이런 축제는 어때요?</h1> --}}
+<h1>이런 축제는 어때요?</h1>
+<div class="row">
+    @php
+    $recom = \App\Models\Festival::all()->random(3);
+    @endphp
+    @foreach ($recom as $item)
+        <div class='col-3' style="max-width:400px; max-height:600px;  object-fit: cover;">
+            <a href="{{route('fes.detail',['id'=>$item->festival_id])}}">
+                @if ($item->poster_img)
+                    <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid" style="width:400px; height:400px;  object-fit:cover;">
+                @else
+                    <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid" >
+                @endif
+            </a>
+            {{$item->festival_title}}
+        </div>
+    @endforeach
+</div>
+<br><br>
+
 @endsection
