@@ -68,7 +68,7 @@
 					{{-- <th scope="row">{{$key+1 + (($item->currentPage()-1) * 10)}}</th> --}}
 					<td>{{$item->board_id}}</td>
 					<td><a href="{{route('board.show', ['board' => $item->board_id])}}">{{$item->board_title}}</a></td>
-					<td>{{$item->user_id}}</td>
+					<td>{{$item->user_nickname}}</td>
 					<td>{{$item->created_at}}</td>
 					<td>{{$item->board_hit}}</td>
 				</tr>

@@ -1,13 +1,13 @@
 
 {{-- --------------------add 신유진-------------------- --}}
-{{-- 참고 : https://may9noy.tistory.com/category/%E2%AD%90%20SpringBoot/%F0%9D%84%9C%20%EA%B2%8C%EC%8B%9C%ED%8C%90%20with%20SpringBoot --}}
-<div id="comments-list">
+{{-- 참고 : https://may9noy.tistory.com/category/%E2%AD%90%20SpringBoot/%F0%9D%84%9C%20%EA%B2%8C%EC%8B%9C%ED%8C%90%20with%20SpringBoot    https://sung-jun.tistory.com/92 --}}
+{{-- <div id="comments-list"> --}}
     {{-- {{#commentDtos}} --}}
-        <div class="card m-2" id="comments-{{$comment->comment_id}}">
-            <div class="card-header">
-                {{nickname}}
+        {{-- <div class="card m-2" id="comments-{{$comment->comment_id}}"> --}}
+            {{-- <div class="card-header"> --}}
+                {{-- {{nickname}} --}}
                 <!-- 모달 트리거 버튼 -->
-                <button type="button"
+                {{-- <button type="button"
                         class="btn btn-sm btn-outline-primary"
                         data-bs-toggle="modal"
                         data-bs-target="#comment-edit-modal"
@@ -15,9 +15,9 @@
                         data-bs-nickname="{{nickname}}"
                         data-bs-body="{{body}}"
                         data-bs-article-id="{{articleId}}">수정
-                </button>
+                </button> --}}
                 <!-- 댓글 삭제 버튼 -->
-                <button type="button"
+                {{-- <button type="button"
                         class="btn btn-sm btn-outline-danger comment-delete-btn"
                         data-comment-id="{{id}}">삭제
                 </button>
@@ -25,22 +25,22 @@
             <div class="card-body">
                 {{body}}
             </div>
-        </div>
+        </div> --}}
     {{-- {{/commentDtos}} --}}
-</div>
+{{-- </div> --}}
 
 
 <!-- Modal -->
-<div class="modal fade" id="comment-edit-modal" tabindex="-1">
+{{-- <div class="modal fade" id="comment-edit-modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body"> --}}
                 <!-- 댓글 작성 폼 -->
-                <form>
+                {{-- <form> --}}
                     <!-- 닉네임 입력-->
                     {{-- @if(auth()->guest()) --}}
                         {{-- <div class="bm-3">
@@ -53,7 +53,7 @@
                     {{-- @endif --}}
 
                     <!-- 댓글 본문 입력 -->
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label class="form-label">댓글 내용</label>
                         <textarea class="form-control form-control-sm" rows="3" id="edit-comment-body"></textarea>
                     </div>
@@ -68,10 +68,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <!-- 모달 이벤트 처리 -->
-<script>
+{{-- <script>
 {
     // 모달 요소 선택
     const commentEditModal = document.querySelector("#comment-edit-modal");
@@ -132,9 +132,9 @@
 
 
 
-</script>
+</script> --}}
 
-<!-- 댓글 삭제 -->
+{{-- <!-- 댓글 삭제 -->
 <script>
 {
     // 삭제 버튼 선택 (해당 값을 변수로 가져와야 한다.)
@@ -171,63 +171,63 @@
         });
     });
 }
+</script> --}}
+
+
+{{--  --------------------add 박진영-------------------- --}}
+<div class="card mb-2">
+    <div class="card-header bg-light">
+        <i class="fa fa-comment fa"></i> 댓글
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush" id="replyList">
+            <li class="list-group-item">
+                <div class="form-inline mb-2">
+                    <label for="replyId"><i class="fa fa-user-circle-o fa-2x"></i></label>
+                    <input type="text" class="form-control ml-2" placeholder="댓글을 남겨주세요" id="replyId">
+                </div>
+                <button type="button" class="btn btn-primary mt-3" onClick="addReply()">등록</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+function addReply() {
+    var replyId = document.getElementById("replyId").value;
+
+    var newReply = document.createElement("li");
+    newReply.className = "list-group-item";
+    newReply.innerHTML =
+        '<div class="form-inline mb-2">' +
+        '<label for="replyId"><i class="fa fa-user-circle-o fa-2x"></i></label>' +
+        '<input type="text" class="form-control ml-2" value="' +
+        replyId +
+        '" disabled></div>' +
+        '<button type="button" class="btn btn-danger btn-sm float-right" onClick="deleteReply(this)">삭제</button>';
+
+    var replyList = document.getElementById("replyList");
+    replyList.appendChild(newReply);
+
+    document.getElementById("replyId").value = "";
+
+    var replyId = document.getElementById("replyId").value;
+}
+
+function deleteReply(reply) {
+    var listItem = reply.parentNode;
+    var replyList = listItem.parentNode;
+    replyList.removeChild(listItem);
+}
+
 </script>
 
-
-{{-- // --------------------add 박진영-------------------- --}}
-{{-- // {{-- <div class="card mb-2"> --}}
-{{-- //     <div class="card-header bg-light">
-//         <i class="fa fa-comment fa"></i> 댓글
-//     </div>
-//     <div class="card-body">
-//         <ul class="list-group list-group-flush" id="replyList">
-//             <li class="list-group-item">
-//                 <div class="form-inline mb-2">
-//                     <label for="replyId"><i class="fa fa-user-circle-o fa-2x"></i></label>
-//                     <input type="text" class="form-control ml-2" placeholder="댓글을 남겨주세요" id="replyId">
-//                 </div>
-//                 <button type="button" class="btn btn-primary mt-3" onClick="addReply()">등록</button>
-//             </li>
-//         </ul>
-//     </div>
-// </div> --}}
-
-{{-- // {{-- <script> --}}
-{{-- // function addReply() {
-//     var replyId = document.getElementById("replyId").value;
-
-//     var newReply = document.createElement("li");
-//     newReply.className = "list-group-item";
-//     newReply.innerHTML =
-//         '<div class="form-inline mb-2">' +
-//         '<label for="replyId"><i class="fa fa-user-circle-o fa-2x"></i></label>' +
-//         '<input type="text" class="form-control ml-2" value="' +
-//         replyId +
-//         '" disabled></div>' +
-//         '<button type="button" class="btn btn-danger btn-sm float-right" onClick="deleteReply(this)">삭제</button>';
-
-//     var replyList = document.getElementById("replyList");
-//     replyList.appendChild(newReply);
-
-//     document.getElementById("replyId").value = "";
-
-//     // var replyId = document.getElementById("replyId").value;
-// }
-
-// function deleteReply(reply) {
-//     var listItem = reply.parentNode;
-//     var replyList = listItem.parentNode;
-//     replyList.removeChild(listItem);
-// }
-
-// </script> --}}
-
-{{-- // --------------------add 신유진-------------------- --}}
-{{-- // {{-- <div id="entry49Comment"> --}}
-{{-- //     <span>댓글</span>
+{{--  --------------------add 신유진-------------------- --}}
+{{--  {{-- <div id="entry49Comment"> --}}
+{{--      <span>댓글</span>
 //     <br><hr><br>
 //     <div class="comments"> --}}
-//         {{-- // 댓글리스트 --}}
+{{-- //          댓글리스트 --}}
 {{-- //         <div class="comment-list"> --}}
 {{-- //             <ul>
 //                 <li id="comment-item">
@@ -247,7 +247,7 @@
 //                 </li>
 //             </ul>
 //         </div> --}}
-//         {{-- // 댓글 입력 --}}
+{{-- //          댓글 입력 --}}
 {{-- //         {{-- <br><hr><br> --}}
 {{-- //         <form method="post" action="/comment/add/49" onsubmit="return false" style="margin: 0">
 //             <div class="comment-form">

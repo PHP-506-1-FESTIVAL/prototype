@@ -28,8 +28,8 @@ class NoticeController extends Controller
 // 공지 상세 페이지
     public function show($notice_id)
     {
-        $notice_detail_data = Notice::find($notice_id);
-        return view('notice_detail')->with('notice_detail_data', Notice::findOrFail($notice_id));
+        $notices = Notice::find($notice_id);
+        return view('notice_detail')->with('notices', Notice::findOrFail($notice_id))->with('notices', $notices);
     }
 }
 
