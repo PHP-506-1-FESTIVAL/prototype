@@ -76,7 +76,8 @@ class UserController extends Controller
             ,'birthyear' => 'required'
             ,'birthmonth' => 'required'
             ,'birthday' => 'required'
-            ,'nickname' => 'required|regex:/^[a-zA-Z가-힣]{2,10}$/'
+            // ,'nickname' => 'required|regex:/^[a-zA-Z가-힣]{2,10}$/'
+            ,'nickname' => 'required'
             ,'image' => 'image|mimes:png,jpg,jpeg|max:2048'
         ]);
 
