@@ -4,6 +4,169 @@
 
 @section('content')
 
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Registration</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <ul class="breadcrumb-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li>Registration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- start Registration section -->
+    <section class="login registration section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
+                    <div class="form-head">
+                        <h4 class="title">회원가입</h4>
+                        @include('layout.errormsg')
+                        <form action="{{route('user.signuppost')}}" method="post" id="signupForm" class="needs-validation" enctype="multipart/form-data" onsubmit="return false">
+                            @csrf
+                            <div class="row g-4">
+                                <div class="col-12">
+                                    <label for="email" class="form-label">이메일 <span class="text-danger">*</span></label>
+                                    <div class="input-group has-validation">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="email" name="email" required>
+                                            <button class="btn btn-outline-secondary" type="button" id="emailChkBtn" style="border-top-right-radius:5px; border-bottom-right-radius:5px;">이메일 중복체크</button>
+                                            <div class="valid-feedback">
+                                                사용 가능한 이메일 입니다.
+                                            </div>
+                                            <div class="invalid-feedback" id="emailval"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="password" class="form-label">비밀번호 <span class="text-danger">*</span></label>
+                                    <div class="input-group has-validation">
+                                        <input type="password" class="form-control" id="password" name="password">
+                                        <div class="invalid-feedback">
+                                            영문, 숫자, 특수문자를 포함해 8~20글자로 입력해 주세요.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="pwchk" class="form-label">비밀번호 확인 <span class="text-danger">*</span></label>
+                                    <div class="input-group has-validation">
+                                        <input type="password" class="form-control" id="pwchk" name="pwchk">
+                                        <div class="invalid-feedback">
+                                            비밀번호가 일치하지 않습니다.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="name" class="form-label">이름 <span class="text-danger">*</span></label>
+                                    <div class="input-group has-validation">
+                                        <input type="text" class="form-control" id="name" name="name">
+                                        <div class="invalid-feedback">
+                                            한글 2~5글자로 입력해 주세요.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="gender" class="form-label">성별 <span class="text-danger">*</span></label>
+                                    <div>
+                                        <input id="male" name="gender" type="radio" class="form-check-input" value="0" required>
+                                        <label class="form-check-label" for="male" style="margin-right:30px;">남성</label>
+                                        <input id="female" name="gender" type="radio" class="form-check-input" value="1" required>
+                                        <label class="form-check-label" for="female">여성</label>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Valid first name is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="birthDate" class="form-label">생년월일 <span class="text-danger">*</span></label>
+                                        <div class="input-group has-validation">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="birthyear" name="birthyear" placeholder="YYYY" maxlength='4' required>
+                                                <input type="text" class="form-control" id="birthmonth" name="birthmonth" placeholder="MM"  maxlength='2' required>
+                                                <input type="text" class="form-control" id="birthday" name="birthday" placeholder="DD" maxlength='2' required>
+                                            </div>
+                                        </div>
+                                        <input class="form-control" type="hidden" id="birthhidden">
+                                        <div class="invalid-feedback" id="birthval">
+                                        </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="nickname" class="form-label">닉네임 <span class="text-danger">*</span></label>
+                                    <div class="input-group has-validation">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="nickname" name="nickname" required>
+                                            <button class="btn btn-outline-secondary" type="button" id="nickChkBtn" style="border-top-right-radius:5px; border-bottom-right-radius:5px;">닉네임 중복체크</button>
+                                            <div class="valid-feedback">
+                                                사용 가능한 닉네임 입니다.
+                                            </div>
+                                            <div class="invalid-feedback" id="nickval"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label">프로필 이미지 <span class="text-muted">(선택)</span></label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="image" name=image>
+                                        <label class="input-group-text" for="image">업로드</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-5">
+                                    <label for="zipcode" class="form-label">우편번호 <span class="text-muted">(선택)</span></label>
+                                    <input type="text" class="form-control" id="zipcode" name="zipcode">
+                                    <div class="invalid-feedback">
+                                        Valid first name is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-7" style="display:grid">
+                                    <button class="btn btn-secondary" id="zipcodeBtn" type="button" style="justify-self:start; align-self:end;">우편번호 찾기</button>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="address" class="form-label">주소 <span class="text-muted">(선택)</span></label>
+                                    <input type="text" class="form-control" id="address" name="address">
+                                    <div class="invalid-feedback">
+                                        Please enter your shipping address.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="address2" class="form-label">상세주소 <span class="text-muted">(선택)</span></label>
+                                    <input type="text" class="form-control" id="address2" name="address2">
+                                </div>
+                            
+                                <div class="button">
+                                    <button type="submit" class="btn">Registration</button>
+                                </div>
+                                <p class="outer-link">Already have an account? <a href="login.html"> Login Now</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Registration section -->
+
 <div class="container">
     <main>
         <div class="py-5 text-center">
