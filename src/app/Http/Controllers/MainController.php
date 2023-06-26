@@ -27,7 +27,7 @@ class MainController extends Controller
         $result=Festival::select([
             'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
         ])->where('festival_state','<','2')->orderBy('festival_hit')->limit(4)->get();
-        // dump($data);
+        // dump($result);
         $notice=Notice::all();
         $month=[];
         for ($i=0; $i < 13; $i++) {
@@ -47,9 +47,34 @@ class MainController extends Controller
         //     $result_user=null;
         // }
 
+        $today = date('Y-m-d');
+        foreach ($result as $value) {
+            $startDate[] = $value->festival_start_date;
+            $endDate[] = $value->festival_end_date;
+        }
+        for ($i=0; $i < 4; $i++) {
+            if ($today < $startDate[$i]) {
+                $statusClass[$i] = 'btn-success';
+                $statusText[$i] = '';
+                $daysRemaining[$i] = date_diff(date_create($today), date_create($startDate[$i]))->format('%a');
+                $statusText[$i] .= ' D-' . $daysRemaining[$i] . '';
+            } elseif ($today > $endDate[$i]) {
+                $statusClass[$i] = 'btn-secondary';
+                $statusText[$i] = '진행종료';
+            } else {
+                $statusClass[$i] = 'btn-primary';
+                $statusText[$i] = '진행중';
+            }
+        }
+        // dump($startDate);
+        // dump($endDate);
+
+
+        // $stat=['statusClass'=>$statusClass,'statusText'=>$statusText];
+        // dump($stat);
         // return view('protoMain',compact('data'));
         // return view('main')->with('fesData',$result)->with('month',$month)->with('userData',$result_user);
-        return view('main')->with('fesData',$result)->with('month',$month)->with('notice',$notice);
+        return view('main')->with('fesData',$result)->with('month',$month)->with('notice',$notice)->with('statClass',$statusClass)->with('statText',$statusText);
     }
     //  0620 이가원 del
     // 로그인 이후 메인 페이지 이동

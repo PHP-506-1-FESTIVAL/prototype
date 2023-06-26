@@ -3,8 +3,27 @@
 @section('content')
 
 {{-- 축제 배너 --}}
-
-<div class="row">
+<div class="profile-container">
+	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=e52bf8f5-fcd0-43d7-945a-6c04f9c64c5b');">
+		<div class="profile-box-content">
+			<h2 style="color:white;">동대문디자인플라자(DDP)</h2>
+			<p>가장 매력적인 서울 야경을 볼 수 있는 동대문에 위치한 복합 문화공간</p>
+		</div>
+	</div>
+	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=58a44a35-5f34-4a39-a780-a292d8e76a3d');">
+		<div class="profile-box-content">
+			<h2 style="color:white;">부산 감천문화마을</h2>
+			<p>반려동물과 어린왕자 포토존에서 견생샷 남길 수 있는 곳</p>
+		</div>
+	</div>
+	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=72046952-ba47-42b3-ad2b-d38d28f96805');">
+		<div class="profile-box-content">
+			<h2 style="color:white;">담양 메타세쿼이아길</h2>
+			<p>가로수가 만든 초록빛 동굴</p>
+		</div>
+	</div>
+</div>
+{{-- <div class="row">
     @foreach ($fesData as $item)
         <div class='col-3'>
             <a href="{{route('fes.detail',['id'=>$item->festival_id])}}">
@@ -16,7 +35,7 @@
             </a>
         </div>
     @endforeach
-</div>
+</div> --}}
 
 {{-- 공지사항 후순위--}}
 <div class="row alert alert-danger">
@@ -65,6 +84,28 @@
                 </a>
             </div>
         @endforeach
+        {{-- <div class="image-container" id="festivalContainer">
+        @for ($i = 0; $i < 4; $i++)
+
+        <div class="col-6 col-sm-6">
+            <a href="{{route('fes.detail',['id'=>$fesData[$i]->festival_id])}}" id="Recommend" class="Recommend">
+                <div class="card">
+                    <button type="button" class="btn {{ $statClass[$i] }}" id="ing">
+                        {{ $statText[$i] }}
+                    </button>
+                    @if ($fesData[$i]->poster_img)
+                    <img src="{{$fesData[$i]->poster_img}}" alt="{{$fesData[$i]->festival_title}}" class="img-fluid card-img-top">
+                    @else
+                    <img src='{{asset('img/festival.jpg')}}' alt="{{$fesData[$i]->festival_title}}" class="img-fluid card-img-top">
+                    @endif
+                    <div class="overlay">
+                        <h2>{{ $fesData[$i]->festival_title }}</h2>
+                        <p>{{ $fesData[$i]->festival_start_date }} ~ {{ $fesData[$i]->festival_end_date }}</p>
+                        <p id='area'>{{$fesData[$i]->area_code}}</p>
+                    </div>
+                </a>
+            </div>
+        @endfor --}}
         <div id="moreFes" class="align-self-end">
             <a onclick="FesSub()">더보기>></a>
         </div>
