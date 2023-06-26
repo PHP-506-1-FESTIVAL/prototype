@@ -101,23 +101,23 @@ let AC38 = document.getElementById('AC38');
 let AC39 = document.getElementById('AC39');
 
 function resColor() {
-    AC1.style.fill='#A8A8A8';
-    AC2.style.fill='#A8A8A8';
-    AC3.style.fill='#A8A8A8';
-    AC4.style.fill='#A8A8A8';
-    AC5.style.fill='#A8A8A8';
-    AC6.style.fill='#A8A8A8';
-    AC7.style.fill='#A8A8A8';
-    AC8.style.fill='#A8A8A8';
-    AC31.style.fill='#A8A8A8';
-    AC32.style.fill='#A8A8A8';
-    AC33.style.fill='#A8A8A8';
-    AC37.style.fill='#A8A8A8';
-    AC39.style.fill='#A8A8A8';
-    AC35.style.fill='#A8A8A8';
-    AC36.style.fill='#A8A8A8';
-    AC38.style.fill='#A8A8A8';
-    AC34.style.fill='#A8A8A8';
+    AC1.style.fill='#e9e9e9';
+    AC2.style.fill='#e9e9e9';
+    AC3.style.fill='#e9e9e9';
+    AC4.style.fill='#e9e9e9';
+    AC5.style.fill='#e9e9e9';
+    AC6.style.fill='#e9e9e9';
+    AC7.style.fill='#e9e9e9';
+    AC8.style.fill='#e9e9e9';
+    AC31.style.fill='#e9e9e9';
+    AC32.style.fill='#e9e9e9';
+    AC33.style.fill='#e9e9e9';
+    AC37.style.fill='#e9e9e9';
+    AC39.style.fill='#e9e9e9';
+    AC35.style.fill='#e9e9e9';
+    AC36.style.fill='#e9e9e9';
+    AC38.style.fill='#e9e9e9';
+    AC34.style.fill='#e9e9e9';
 
 
 
@@ -171,87 +171,87 @@ function resColor() {
 
 AC1.addEventListener('click',()=>{
     resColor();
-    AC1.style.fill='red';
+    AC1.style.fill='#5830E0';
     make_api_list(1+","+monthStr);
 })
 AC2.addEventListener('click',()=>{
     resColor();
-    AC2.style.fill='red';
+    AC2.style.fill='#5830E0';
     make_api_list(2+","+monthStr);
 })
 AC3.addEventListener('click',()=>{
     resColor();
-    AC3.style.fill='red';
+    AC3.style.fill='#5830E0';
     make_api_list(3+","+monthStr);
 })
 AC4.addEventListener('click',()=>{
     resColor();
-    AC4.style.fill='red';
+    AC4.style.fill='#5830E0';
     make_api_list(4+","+monthStr);
 })
 AC5.addEventListener('click',()=>{
     resColor();
-    AC5.style.fill='red';
+    AC5.style.fill='#5830E0';
     make_api_list(5+","+monthStr);
 })
 AC6.addEventListener('click',()=>{
     resColor();
-    AC6.style.fill='red';
+    AC6.style.fill='#5830E0';
     make_api_list(6+","+monthStr);
 })
 AC7.addEventListener('click',()=>{
     resColor();
-    AC7.style.fill='red';
+    AC7.style.fill='#5830E0';
     make_api_list(7+","+monthStr);
 })
 AC8.addEventListener('click',()=>{
     resColor();
-    AC8.style.fill='red';
+    AC8.style.fill='#5830E0';
     make_api_list(8+","+monthStr);
 })
 AC31.addEventListener('click',()=>{
     resColor();
-    AC31.style.fill='red';
+    AC31.style.fill='#5830E0';
     make_api_list(31+","+monthStr);
 })
 AC32.addEventListener('click',()=>{
     resColor();
-    AC32.style.fill='red';
+    AC32.style.fill='#5830E0';
     make_api_list(32+","+monthStr);
 })
 AC33.addEventListener('click',()=>{
     resColor();
-    AC33.style.fill='red';
+    AC33.style.fill='#5830E0';
     make_api_list(33+","+monthStr);
 })
 AC34.addEventListener('click',()=>{
     resColor();
-    AC34.style.fill='red';
+    AC34.style.fill='#5830E0';
     make_api_list(34+","+monthStr);
 })
 AC35.addEventListener('click',()=>{
     resColor();
-    AC35.style.fill='red';
+    AC35.style.fill='#5830E0';
     make_api_list(35+","+monthStr);
 })
 AC36.addEventListener('click',()=>{
     resColor();
-    AC36.style.fill='red';
+    AC36.style.fill='#5830E0';
     make_api_list(36+","+monthStr);
 })
 AC37.addEventListener('click',()=>{
     resColor();
-    AC37.style.fill='red';
+    AC37.style.fill='#5830E0';
     make_api_list(37+","+monthStr);
 })
 AC38.addEventListener('click',()=>{
     resColor();
-    AC38.style.fill='red';
+    AC38.style.fill='#5830E0';
     make_api_list(38+","+monthStr);
 })
 AC39.addEventListener('click',()=>{
     resColor();
-    AC39.style.fill='red';
+    AC39.style.fill='#5830E0';
     make_api_list(39+","+monthStr);
 })
 
