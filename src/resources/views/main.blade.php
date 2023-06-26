@@ -20,7 +20,8 @@
 
 {{-- 공지사항 후순위--}}
 <div class="row alert alert-danger">
-    {{$notice[0]->notice_title}} : {{$notice[0]->notice_content}}
+    {{-- {{$notice[0]->notice_title}} : {{$notice[0]->notice_content}} --}}
+    <a href="{{route('notice.show', $notice[0])}}">📢{{ $notice[0]->notice_title }}📢</a>
 </div>
 {{-- 지도 --}}
 <div class="row">
