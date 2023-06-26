@@ -5,6 +5,29 @@ const fesDetail = 'fesdetail/'; // 페스티벌 상세 URL
 let strVal=",";
 let a=9;
 let c=true;
+let test=''
+
+window.onload=()=>{
+    strVal=document.getElementById('teststr').value;
+    if (strVal!==",") {
+        makeApiList(strVal)
+        const arrStr=strVal.split(',');
+        const tempMonth="0"+arrStr[1];
+        chkMonth=tempMonth.slice("-2");
+        selDate=document.getElementById('searchDate').options
+        for (let index = 0; index < selDate.length; index++) {
+            if (selDate[index].value===chkMonth) {
+                selDate[index].setAttribute('selected','selected');
+            }
+        }
+        selArea=document.getElementById('searchArea').options
+        for (let index = 0; index < selDate.length; index++) {
+            if (selArea[index].value===arrStr[0]) {
+                selArea[index].setAttribute('selected','selected');
+            }
+        }
+    }
+}
 
 function aaaname() {
   const searchDate = document.getElementById('searchDate').value; // 검색 날짜 값을 가져옵니다.
@@ -62,7 +85,7 @@ function target(date) {
               <h2>${title}</h2>
               <p>${start} ~ ${end}</p>
               <p>${area}</p>
-              
+
             </div>
           </div>
         </a>`;

@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="/css/festival.css">
 <script src="{{asset('js/festival.js')}}"></script>
 
+{{-- 더보기 왔을때 실행 --}}
+<form action="">
+    <input type="hidden" name="" id="teststr" value="{{isset($str->fesStr)?$str->fesStr : ","}}">
+</form>
+
 {{-- 검색부분 --}}
 <div class="inner">
     <form name="festivalSearch" id="festivalSearch" class="festival_search" >
@@ -54,7 +59,7 @@
                 </select>
             </div>
             <div class="btn_box">
-                <div> 
+                <div>
                     <button class="btn btn-danger btn-lg btn-block"><span>초기화</span></button>
                     <button type='button' class="btn btn-primary btn-lg btn-block" id="btnSearch" onclick='aaaname()'><span>검색</span></button>
                 </div>
@@ -151,7 +156,7 @@ $count = 0;
                     <button type="button" class="btn {{ $statusClass }}" id="ing">
                         {{ $statusText }}
                     </button>
-                    
+
 
                     @if ($festival->poster_img)
                         <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image" loading="lazy">
@@ -181,7 +186,7 @@ $count = 0;
     const $topBtn = document.querySelector(".moveTopBtn");
 
     $topBtn.onclick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });  
+    window.scrollTo({ top: 0, behavior: "smooth" });
     }
 </script>
 
