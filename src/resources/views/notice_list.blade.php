@@ -61,9 +61,9 @@
         @else
             @forelse($notices as $notice)
             <tr>
-                <td>{{$notice->notice_id}}</td>
-                {{-- <td><a href="{{route('notice.show', ['board' => $item->board_id])}}">{{$item->board_title}}</a></td> --}}
-                <td>{{ $notice->notice_title }}</td>
+                <td>{{ $notice->notice_id }}</td>
+                <td><a href="{{route('notice.show', ['id' => $notice->notice_id])}}">{{ $notice->notice_title }}</a></td>
+                {{-- <td>{{ $notice->notice_title }}</td> --}}
                 <td>{{ $notice->created_at }}</td>
             </tr>
             <tr>

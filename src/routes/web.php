@@ -65,6 +65,7 @@ Route::resource('/board', BoardController::class);
 
 // Notice
 Route::get('/notice', [NoticeController::class , 'index'])->name('notice.index');
+Route::get('/notice/{id}', [NoticeController::class , 'show'])->name('notice.show');
 
 /************************************************
  * 프로젝트명   : festival_info
