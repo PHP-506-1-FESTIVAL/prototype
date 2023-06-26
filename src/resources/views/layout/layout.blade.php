@@ -40,9 +40,9 @@
         <!-- /End Preloader -->
 
         @include('layout.header')
-        <div class="mx-5 my-5">
-            @yield('content')
-        </div>
+        {{-- <div class="mx-5 my-5"> --}}
+        @yield('content')
+        {{-- </div> --}}
         @include('layout.footer')
 
         <!-- JavaScript Bundle with Popper -->
