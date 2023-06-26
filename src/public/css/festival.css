@@ -15,8 +15,6 @@
 .search_box_wrap {
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 /* 배너 */
 *,*:after,*:before{

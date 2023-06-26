@@ -3,8 +3,125 @@
 @section('title','축제톡톡')
 
 @section('content')
+<!-- Start Breadcrumbs -->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 col-md-6 col-12">
+				<div class="breadcrumbs-content">
+					<h1 class="page-title">축제톡톡</h1>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-12">
+				<ul class="breadcrumb-nav">
+					<li><a href="index.html">Home</a></li>
+					<li>축제톡톡</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Breadcrumbs -->
+
+<!-- Start Dashboard Section -->
+<section class="dashboard section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-9 col-md-12 col-12">
+				<div class="main-content">
+					<div class="dashboard-block mt-0">
+						<h3 class="block-title">My Ads</h3>
+						{{-- <nav class="list-nav">
+							<ul>
+								<li class="active"><a href="javascript:void(0)">All Ads <span>42</span></a></li>
+								<li><a href="javascript:void(0)">Published <span>88</span></a></li>
+								<li><a href="javascript:void(0)">Featured <span>12</span></a></li>
+								<li><a href="javascript:void(0)">Sold <span>02</span></a></li>
+								<li><a href="javascript:void(0)">Active <span>45</span></a></li>
+								<li><a href="javascript:void(0)">Expired <span>55</span></a></li>
+							</ul>
+						</nav> --}}
+						<!-- Start Items Area -->
+						<div class="my-items">
+							<!-- Start Item List Title -->
+							<div class="item-list-title">
+								<div class="row align-items-center">
+									<div class="col-lg-1 col-md-1 col-12">
+										<p>No</p>
+									</div>
+									<div class="col-lg-5 col-md-5 col-12">
+										<p>제목</p>
+									</div>
+									<div class="col-lg-3 col-md-3 col-12">
+										<p>작성자</p>
+									</div>
+									<div class="col-lg-2 col-md-2 col-12">
+										<p>작성일</p>
+									</div>
+									<div class="col-lg-1 col-md-1 col-12">
+										<p>조회수</p>
+									</div>
+								</div>
+							</div>
+							<!-- End List Title -->
+							
+							<!-- Start Single List -->
+							@forelse($data as $item)
+							<div class="single-item-list">
+								<div class="row align-items-center">
+									<div class="col-lg-1 col-md-1 col-12">
+											{{$item->board_id}}
+									</div>
+									<div class="col-lg-5 col-md-5 col-12">
+										<div class="content">
+											<h3 class="title"><a href="{{route('board.show', ['board' => $item->board_id])}}">{{$item->board_title}}</a></h3>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-3 col-12">
+										<p>{{$item->user_nickname}}</p>
+									</div>
+									<div class="col-lg-2 col-md-2 col-12">
+										<p>{{$item->created_at}}</p>
+									</div>
+									<div class="col-lg-1 col-md-1 col-12">
+										<p>{{$item->board_hit}}</p>
+									</div>
+								</div>
+							</div>
+							<!-- End Single List -->
+							@empty
+							<tr>
+								<td></td>
+								<td>게시글 없음</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							@endforelse
+
+							<!-- Pagination -->
+							<div class="pagination left">
+								<ul class="pagination-list">
+									<li><a href="javascript:void(0)">1</a></li>
+									<li class="active"><a href="javascript:void(0)">2</a></li>
+									<li><a href="javascript:void(0)">3</a></li>
+									<li><a href="javascript:void(0)">4</a></li>
+									<li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a></li>
+								</ul>
+							</div>
+							<!--/ End Pagination -->
+						</div>
+						<!-- End Items Area -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
 {{-- // 자유게시판제목(배경넣고 위치 잡아주기) --}}
-<h2 class="mt-0 mb-0 talktalktopimg">축제 톡톡</h2>
+{{-- <h2 class="mt-0 mb-0 talktalktopimg">축제 톡톡</h2> --}}
 {{-- <div class="bg-success p-2 text-white bg-opacity-10 talktalktopimg">축제 톡톡</div> --}}
 
 <div class="mx-5 my-3">
