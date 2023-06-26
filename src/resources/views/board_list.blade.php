@@ -17,8 +17,8 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<div class="d-grid gap-2 d-md-flex mx-auto">
 					<form class="d-flex" role="search">
-						{{-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> --}}
-						{{-- <button class="btn btn-outline-success" type="submit">Search</button> --}}
+						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">정렬</a>

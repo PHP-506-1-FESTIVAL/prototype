@@ -73,18 +73,6 @@ class MainController extends Controller
     //     // return view('protoMain',compact('data'));
     //     return view('main')->with('fesData',$result_fes)->with('month',$month)->with('userData',$result_user);
     // }
-    //마이페이지
-    //$id : 유저ID
-    public function MyPage(Request $id)
-    {
-    # code...
-    }
-    //찜목록
-    //$id : 유저ID
-    public function MarkList(Request $id)
-    {
-        # code...
-    }
     //로그아웃
     //$id : 유저ID
     public function logout()
@@ -207,7 +195,7 @@ class MainController extends Controller
     //더보기 클릭시
     //$id : local(지역코드)
     //$arr_parm : mon(월)/local(지역코드) //월은 나중
-    public function FesOrder($str_val)
+    public function FesOrder(Request $str_val)
     {
         // $result = Festival::select(['festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'])
         // ->where('area_code',$id)->orderBy('festival_hit')->get();
@@ -215,31 +203,252 @@ class MainController extends Controller
         // return view('festival_list')->with('data',$result);
         //0621 김재성
         //축제 지역/월 별 출력
-        $arr_temp=explode(',',$str_val);
-        // var_dump($arr_temp);
-        $arr_val=['area_code'=>$arr_temp[0],'month'=>Date("Y-".sprintf('%02d',$arr_temp[1])."-d",time())];
-        // var_dump($month);
-        // $fes_info=Festival::all();
-        // var_dump($arr_val);
+        //0626 김재성
+        // $arr_temp=explode(',',$str_val->fesStr);
+        // switch ($arr_temp[0]) {
+        //     case "1":
+        //         $areaName = '서울';
+        //         break;
+        //     case "2":
+        //         $areaName = '인천';
+        //         break;
+        //     case "3":
+        //         $areaName = '대전';
+        //         break;
+        //     case "4":
+        //         $areaName = '대구';
+        //         break;
+        //     case "5":
+        //         $areaName = '광주';
+        //         break;
+        //     case 6:
+        //         $areaName = '부산';
+        //         break;
+        //     case 7:
+        //         $areaName = '울산';
+        //         break;
+        //     case 8:
+        //         $areaName = '세종';
+        //         break;
+        //     case 31:
+        //         $areaName = '경기';
+        //         break;
+        //     case 32:
+        //         $areaName = '강원';
+        //         break;
+        //     case 33:
+        //         $areaName = '충북';
+        //         break;
+        //     case 34:
+        //         $areaName = '충남';
+        //         break;
+        //     case 35:
+        //         $areaName = '경북';
+        //         break;
+        //     case 36:
+        //         $areaName = '경남';
+        //         break;
+        //     case 37:
+        //         $areaName = '전북';
+        //         break;
+        //     case 38:
+        //         $areaName = '전남';
+        //         break;
+        //     case 39:
+        //         $areaName = '제주';
+        //         break;
+        //     default:
+        //         $areaName = '지역';
+        // }
+        // $arr_temp[0]=$areaName;
+        // $arr_temp[1]=$arr_temp[1]===""?"시기":sprintf('%02d',$arr_temp[1])."월";
+        // $valInfo=['area'=>$arr_temp[0],'month'=>$arr_temp[1]];
+        // dump($valInfo);
+        // $arr_val=['area_code'=>$arr_temp[0],'month'=>Date("Y-".sprintf('%02d',$arr_temp[1])."-d",time())];
+        // // var_dump($month);
+        // // $fes_info=Festival::all();
+        // // var_dump($arr_val);
+        // if ($arr_temp[1]==="") {
+        //     $arr_val['month']=DATE("Y-m-d",time());
+        // }
+        // // $fes_info=Festival::select([
+        //     //     'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        //     // ])->where('area_code',$arr_val['area_code'])
+        //     // ->where('festival_end_date','<',$arr_val['month'])
+        //     // // ->where('festival_end_date','<',$month)
+        //     // ->orderBy('festival_hit')->limit(4)->get();
+        // $fes_temp=Festival::select([
+        // 'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        // ])->where('festival_end_date','<',$arr_val['month']);
+        // // ->where('festival_end_date','<',$month)
+        // if ($arr_temp[0]!=="") {
+        //     $fes_temp->where('area_code',$arr_val['area_code']);
+        // }
+        // $fes_info=$fes_temp->orderBy('festival_hit')->get();
+        $arr_temp=explode(',',$str_val->fesStr);
         if ($arr_temp[1]==="") {
-            $arr_val['month']=DATE("Y-m-d",time());
+            $select_month_val[]= "";
+            $select_month_str[]= '시기';
         }
-        // $fes_info=Festival::select([
-            //     'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
-            // ])->where('area_code',$arr_val['area_code'])
-            // ->where('festival_end_date','<',$arr_val['month'])
-            // // ->where('festival_end_date','<',$month)
-            // ->orderBy('festival_hit')->limit(4)->get();
-        $fes_temp=Festival::select([
-        'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
-        ])->where('festival_end_date','<',$arr_val['month']);
-        // ->where('festival_end_date','<',$month)
-        if ($arr_temp[0]!=="") {
-            $fes_temp->where('area_code',$arr_val['area_code']);
+        else {
+            $month_val[]="";
+            $month_str[]='시기';
         }
-        $fes_info=$fes_temp->orderBy('festival_hit')->get();
+        for ($i=1; $i <13 ; $i++) {
+            if ($arr_temp[1]===(string)$i) {
+                $select_month_val[]= sprintf('%02d',$i);
+                $select_month_str[]= sprintf('%02d',$i).'월';
+            }
+            else {
+                $month_val[]=sprintf('%02d',$i);
+                $month_str[]=sprintf('%02d',$i).'월';
+            }
+        }
+        $opsMonth=['sel_val'=>$select_month_val,'sel_str'=>$select_month_str,'val'=>$month_val,'str'=>$month_str];
+        // dump($select_month);
+        // dump($opsMonth);
+        if ($arr_temp[1]==="") {
+            $select_area[]=`<option value=""selected>지역</option>`;
+        }
+        else {
+            $select_area[]=`<option value="">지역</option>`;
+        }
+        for ($i=1; $i <9 ; $i++) {
+            switch ($i) {
+                case 1:
+                    $areaName = '서울';
+                    break;
+                case 2:
+                    $areaName = '인천';
+                    break;
+                case 3:
+                    $areaName = '대전';
+                    break;
+                case 4:
+                    $areaName = '대구';
+                    break;
+                case 5:
+                    $areaName = '광주';
+                    break;
+                case 6:
+                    $areaName = '부산';
+                    break;
+                case 7:
+                    $areaName = '울산';
+                    break;
+                case 8:
+                    $areaName = '세종';
+                    break;
 
-        return view('festival_list')->with('data',$fes_info);
+            }
+            if ($arr_temp[0]===(string)$i) {
+                $select_area[]=`<option value="'.$i.'"selected>'.$areaName.'</option>`;
+            }
+            else {
+                $select_area[]=`<option value="'.$i.'">'.$areaName.</option>`;
+            }
+        }
+        for ($i=31; $i <40 ; $i++) {
+            switch ($i) {
+                case 31:
+                    $areaName = '경기';
+                    break;
+                case 32:
+                    $areaName = '강원';
+                    break;
+                case 33:
+                    $areaName = '충북';
+                    break;
+                case 34:
+                    $areaName = '충남';
+                    break;
+                case 35:
+                    $areaName = '경북';
+                    break;
+                case 36:
+                    $areaName = '경남';
+                    break;
+                case 37:
+                    $areaName = '전북';
+                    break;
+                case 38:
+                    $areaName = '전남';
+                    break;
+                case 39:
+                    $areaName = '제주';
+                    break;
+                default:
+                    $areaName = 'Unknown';
+            }
+            if ($arr_temp[0]===(string)$i) {
+                $select_area[]=`<option value="'.$i.'"selected>'.$areaName.'</option>`;
+            }
+            else {
+                $select_area[]=`<option value="'.$i.'">'.$areaName.'</option>`;
+            }
+        }
+        // dump($select_area);
+
+        $festival = Festival::all();
+        foreach ($festival as $value) {
+        switch ($value->area_code) {
+            case "1":
+                $areaName = '서울';
+                break;
+            case "2":
+                $areaName = '인천';
+                break;
+            case "3":
+                $areaName = '대전';
+                break;
+            case "4":
+                $areaName = '대구';
+                break;
+            case "5":
+                $areaName = '광주';
+                break;
+            case 6:
+                $areaName = '부산';
+                break;
+            case 7:
+                $areaName = '울산';
+                break;
+            case 8:
+                $areaName = '세종';
+                break;
+            case 31:
+                $areaName = '경기';
+                break;
+            case 32:
+                $areaName = '강원';
+                break;
+            case 33:
+                $areaName = '충북';
+                break;
+            case 34:
+                $areaName = '충남';
+                break;
+            case 35:
+                $areaName = '경북';
+                break;
+            case 36:
+                $areaName = '경남';
+                break;
+            case 37:
+                $areaName = '전북';
+                break;
+            case 38:
+                $areaName = '전남';
+                break;
+            case 39:
+                $areaName = '제주';
+                break;
+            default:
+                $areaName = 'Unknown';
+        }
+        $value->area_code=$areaName;
+    }
+        return view('festival_list')->with('data',$festival)->with('str',$str_val)->with('opsMonth',$opsMonth);
     }
 
     public function fesRequest()
@@ -313,10 +522,10 @@ class MainController extends Controller
         $festival->area_code = $areaName; // 축제의 지역 코드를 설정
         $jjmFlg = Favorite::where('festival_id', $id)->where('user_id', session()->get('user_id'))->get(); // 현재 사용자가 해당 축제를 찜했는지 확인
         $favoriteCount = Favorite::where('festival_id', $id)->count(); // 찜한 갯수
-        
+
         return view('festival_detail')
             ->with('festival', $festival) // 축제 정보를 뷰로 전달
             ->with('favoriteCount', $favoriteCount) // 찜한 갯수를 뷰로 전달
-            ->with('jjmFlg', $jjmFlg); // 사용자의 찜 여부를 뷰로 전달합        
+            ->with('jjmFlg', $jjmFlg); // 사용자의 찜 여부를 뷰로 전달합
         }
 }

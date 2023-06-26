@@ -77,4 +77,8 @@
 
     </tbody>
 </table>
+
+{{-- // Pagination --}}
+    {{-- 라라벨 기본 지원 페이지네이션 --}}
+    {{-- {!! $notice->links('vendor.pagination.custom') !!} --}}
 @endsection
