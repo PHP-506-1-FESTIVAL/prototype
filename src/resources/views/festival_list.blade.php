@@ -61,10 +61,11 @@
 </div> --}}
 
 {{-- 검색부분 --}}
+<br>
 <div class="inner">
     <form name="festivalSearch" id="festivalSearch" class="festival_search">
-        <div class="search_box_wrap">
-            <div class="select_box select_date col-md-2">
+        <div class="search_box_wrap" >
+            <div class="select_box select_date" style="display:flex; align-items:center">
                 <label for="searchDate"></label>
                 <select class="form-select form-select-lg" name="searchDate" id="searchDate" title="시기 선택">
                     <option value="">시기</option>
@@ -82,7 +83,7 @@
                     <option value="12">12월</option>
                 </select>
             </div>
-            <div class="select_box select_area col-md-2">
+            <div class="select_box select_area" style="display:flex; align-items:center">
                 <label for="searchArea"></label>
                 <select class="form-select form-select-lg" name="searchArea" id="searchArea" title="지역 선택">
                     <option value="">지역</option>
@@ -118,11 +119,11 @@
 
 
 {{-- 메인출력 --}}
-<div class="sort mt-3" style="text-align:right;">
-    {{-- <button class="btn btn-success" onclick="sortByPopularity()">인기도</button>
-    <button class="btn btn-warning" id="sortByLatestBtn" onclick="sortByLatest()">최신순</button> --}}
+{{-- <div class="sort mt-3" style="text-align:right;">
+    <button class="btn btn-success" onclick="sortByPopularity()">인기도</button>
+    <button class="btn btn-warning" id="sortByLatestBtn" onclick="sortByLatest()">최신순</button>
     <a href="{{ route('main.request')}}" class="btn btn-info">요청페이지</a>
-</div>
+</div> --}}
 <div class="image-container" id="festivalContainer">
 @php
 $count = 0;
