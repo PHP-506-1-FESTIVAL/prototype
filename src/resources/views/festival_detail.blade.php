@@ -125,7 +125,14 @@
 <h1>이런 축제는 어때요?</h1>
 <div class="row">
     @php
-    $recom = \App\Models\Festival::all()->random(3);
+    // 현재 날짜 가져오기
+    $currentDate = date('Y-m-d');
+    // 현재 개최 중인 축제를 무작위로 3개 선택
+    $recom = \App\Models\Festival::where('festival_start_date', '<=', $currentDate)
+                                ->where('festival_end_date', '>=', $currentDate)
+                                ->inRandomOrder()
+                                ->limit(3)
+                                ->get();
     @endphp
     @foreach ($recom as $item)
         <div class='col-3' style="max-width:400px; max-height:600px;  object-fit: cover;">
@@ -136,10 +143,9 @@
                     <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid" >
                 @endif
             </a>
-            {{$item->festival_title}}
+            <h5>{{$item->festival_title}}</h5>
         </div>
     @endforeach
 </div>
-<br><br>
 
 @endsection
