@@ -100,7 +100,7 @@
 
     <br><h1>지도</h1>
     <div id="map" style="border: 1px solid ligtgrey; width:1200px; height:400px;"></div>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3b69612f6e4716fa9f2fdbedb810321e&libraries=services"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c445a81938b242294a005dc47ac83f13&libraries=services"></script>
     <script>
         var container = document.getElementById('map');
         var mapx = {{ $festival->map_x }};
