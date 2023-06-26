@@ -34,7 +34,7 @@
             <img class="img" style="width:400px; height:600px; object-fit: cover; border: 1px solid black; " src="{{ $festival->poster_img ? $festival->poster_img : '/img/festival.jpg' }}" alt="{{ $festival->poster_img ? 'Poster Image' : 'No Image' }}">
         </div>
         <div class="div3">
-            <div class="div3in" style="border: 1px solid gray; width: 50%;">
+            <div class="div3in">
             <br><br><br>
             <p>
                 <img src="https://korean.visitkorea.or.kr/kfes/resources/img/valentine_day.png" alt="날짜 아이콘" style="width: 40px; height: 40px;">
@@ -122,5 +122,24 @@
 {{-- 댓글 --}}
 {{-- @include('layout.comment') --}}
 {{-- 연관축제 --}}
-{{-- <h1>이런 축제는 어때요?</h1> --}}
+<h1>이런 축제는 어때요?</h1>
+<div class="row">
+    @php
+    $recom = \App\Models\Festival::all()->random(3);
+    @endphp
+    @foreach ($recom as $item)
+        <div class='col-3' style="max-width:400px; max-height:600px;  object-fit: cover;">
+            <a href="{{route('fes.detail',['id'=>$item->festival_id])}}">
+                @if ($item->poster_img)
+                    <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid" style="width:400px; height:400px;  object-fit:cover;">
+                @else
+                    <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid" >
+                @endif
+            </a>
+            {{$item->festival_title}}
+        </div>
+    @endforeach
+</div>
+<br><br>
+
 @endsection
