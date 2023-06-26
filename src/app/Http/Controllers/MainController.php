@@ -285,108 +285,6 @@ class MainController extends Controller
         //     $fes_temp->where('area_code',$arr_val['area_code']);
         // }
         // $fes_info=$fes_temp->orderBy('festival_hit')->get();
-        $arr_temp=explode(',',$str_val->fesStr);
-        if ($arr_temp[1]==="") {
-            $select_month_val[]= "";
-            $select_month_str[]= '시기';
-        }
-        else {
-            $month_val[]="";
-            $month_str[]='시기';
-        }
-        for ($i=1; $i <13 ; $i++) {
-            if ($arr_temp[1]===(string)$i) {
-                $select_month_val[]= sprintf('%02d',$i);
-                $select_month_str[]= sprintf('%02d',$i).'월';
-            }
-            else {
-                $month_val[]=sprintf('%02d',$i);
-                $month_str[]=sprintf('%02d',$i).'월';
-            }
-        }
-        $opsMonth=['sel_val'=>$select_month_val,'sel_str'=>$select_month_str,'val'=>$month_val,'str'=>$month_str];
-        // dump($select_month);
-        // dump($opsMonth);
-        if ($arr_temp[1]==="") {
-            $select_area[]=`<option value=""selected>지역</option>`;
-        }
-        else {
-            $select_area[]=`<option value="">지역</option>`;
-        }
-        for ($i=1; $i <9 ; $i++) {
-            switch ($i) {
-                case 1:
-                    $areaName = '서울';
-                    break;
-                case 2:
-                    $areaName = '인천';
-                    break;
-                case 3:
-                    $areaName = '대전';
-                    break;
-                case 4:
-                    $areaName = '대구';
-                    break;
-                case 5:
-                    $areaName = '광주';
-                    break;
-                case 6:
-                    $areaName = '부산';
-                    break;
-                case 7:
-                    $areaName = '울산';
-                    break;
-                case 8:
-                    $areaName = '세종';
-                    break;
-
-            }
-            if ($arr_temp[0]===(string)$i) {
-                $select_area[]=`<option value="'.$i.'"selected>'.$areaName.'</option>`;
-            }
-            else {
-                $select_area[]=`<option value="'.$i.'">'.$areaName.</option>`;
-            }
-        }
-        for ($i=31; $i <40 ; $i++) {
-            switch ($i) {
-                case 31:
-                    $areaName = '경기';
-                    break;
-                case 32:
-                    $areaName = '강원';
-                    break;
-                case 33:
-                    $areaName = '충북';
-                    break;
-                case 34:
-                    $areaName = '충남';
-                    break;
-                case 35:
-                    $areaName = '경북';
-                    break;
-                case 36:
-                    $areaName = '경남';
-                    break;
-                case 37:
-                    $areaName = '전북';
-                    break;
-                case 38:
-                    $areaName = '전남';
-                    break;
-                case 39:
-                    $areaName = '제주';
-                    break;
-                default:
-                    $areaName = 'Unknown';
-            }
-            if ($arr_temp[0]===(string)$i) {
-                $select_area[]=`<option value="'.$i.'"selected>'.$areaName.'</option>`;
-            }
-            else {
-                $select_area[]=`<option value="'.$i.'">'.$areaName.'</option>`;
-            }
-        }
         // dump($select_area);
 
         $festival = Festival::all();
@@ -448,7 +346,7 @@ class MainController extends Controller
         }
         $value->area_code=$areaName;
     }
-        return view('festival_list')->with('data',$festival)->with('str',$str_val)->with('opsMonth',$opsMonth);
+        return view('festival_list')->with('data',$festival)->with('str',$str_val);
     }
 
     public function fesRequest()
