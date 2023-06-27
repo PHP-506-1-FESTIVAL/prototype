@@ -9,13 +9,13 @@
 		<div class="row align-items-center">
 			<div class="col-lg-6 col-md-6 col-12">
 				<div class="breadcrumbs-content">
-					<h1 class="page-title">축제톡톡</h1>
+					<h1 class="page-title"><a href="{{route('board.index')}}">축제톡톡</a></h1>
 				</div>
 			</div>
 			<div class="col-lg-6 col-md-6 col-12">
 				<ul class="breadcrumb-nav">
-					<li><a href="index.html">Home</a></li>
-					<li>축제톡톡</li>
+					<li><a href="{{route('main')}}">메인</a></li>
+					<li><a href="{{route('board.index')}}">축제톡톡</a></li>
 				</ul>
 			</div>
 		</div>
@@ -27,7 +27,7 @@
 <section class="dashboard section">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-9 col-md-12 col-12">
+			<div class="board-list-ct col-lg-12 col-md-12 col-12">
 				<div class="main-content">
 					<div class="dashboard-block mt-0">
 						{{-- <h3 class="block-title">My Ads</h3> --}}
@@ -42,7 +42,7 @@
 							</ul>
 						</nav> --}}
 						<!-- Start Items Area -->
-						<div class="my-items">
+						<div class="board-list-items my-items"> {{-- my-items --}}
 							<!-- Start Item List Title -->
 							<div class="item-list-title">
 								<div class="row align-items-center">
@@ -74,7 +74,7 @@
 									</div>
 									<div class="col-lg-5 col-md-5 col-12">
 										<div class="content">
-											<h3 class="title"><a href="{{route('board.show', ['board' => $item->board_id])}}">{{$item->board_title}}</a></h3>
+											<p class="title"><a href="{{route('board.show', ['board' => $item->board_id])}}">{{$item->board_title}}</a></p>
 										</div>
 									</div>
 									<div class="col-lg-3 col-md-3 col-12">
@@ -108,6 +108,7 @@
 									<li><a href="javascript:void(0)">4</a></li>
 									<li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a></li>
 								</ul>
+								{!! $data->links('vendor.pagination.custom') !!}
 							</div>
 							<!--/ End Pagination -->
 						</div>

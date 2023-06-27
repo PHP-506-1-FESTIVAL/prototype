@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/assets/css/tiny-slider.css" />
     <link rel="stylesheet" href="/assets/css/glightbox.min.css" />
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/css/board.css"> {{-- add0627.shin --}}
 </head>
 <body>
     <div class="d-flex flex-column min-vh-100 ">
