@@ -129,7 +129,7 @@ class MainController extends Controller
         foreach ($result as $val) {
             if ($today<$val->festival_start_date) {
                 $val->statusClass='btn-success';
-                $val->statusText='D-'.date_diff(date_create($today), date_create($val->festival_start_date))->format('%a');
+                $val->statusText='D - '.date_diff(date_create($today), date_create($val->festival_start_date))->format('%a');
             }
             elseif ($today>$val->festival_end_date) {
                 $val->statusClass = 'btn-secondary';

@@ -12,7 +12,7 @@ function changText(item) {
         monthStr="";
     }
     else{
-        month.innerHTML=item;
+        month.innerHTML=item+'월';
         monthStr=item;
         const changVal = document.getElementById('fesOrederIp');
         changVal.setAttribute('value',","+monthStr);
@@ -87,7 +87,7 @@ function target(date) {
         c = false;
         tempStr +=`
         <div id="moreFes" class="align-self-end">
-            <a onclick="FesSub()" href="#">더보기>></a>
+            <a style="font-size: xx-large" onclick="FesSub()" href="#">더보기>></a>
         </div>`
     }
     targetDiv.innerHTML = tempStr;

@@ -17,9 +17,6 @@ class MainApiController extends Controller
     // 축제 지역 및 월 분리
     $arr_temp = explode(',', $str_val);
 
-    if ($arr_temp[1]==="") {
-        $arr_temp[1]=Date('m',time());
-    }
     $arr_val = [
         'area_code' => $arr_temp[0], // 축제 지역 코드
         'month' => sprintf('%02d', $arr_temp[1]), // 선택된 월
@@ -28,15 +25,34 @@ class MainApiController extends Controller
     $fes_temp = Festival::select([
         'festival_id', 'festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
     ]);
-    if ($arr_temp[0]!=="") {
-        $fes_info=$fes_temp ->where('area_code', $arr_val['area_code']);
+    // if ($arr_temp[0]!=="") {
+    //     $fes_info=$fes_temp ->where('area_code', $arr_val['area_code']);
+    // }
+    // $fes_info=$fes_temp->where(function ($query) use ($arr_val) {
+    //     $query->whereRaw('MONTH(festival_start_date) = ?', [$arr_val['month']]) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
+    //     ->orWhereRaw('MONTH(festival_end_date) = ?', [$arr_val['month']]); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
+    // })
+    // ->orderBy('festival_hit')
+    // ->get();
+    if ($arr_temp[0]==""&&$arr_temp[1]=="") {
+        $fes_info=$fes_temp->orderBy('festival_hit')->get();
     }
-    $fes_info=$fes_temp->where(function ($query) use ($arr_val) {
-        $query->whereRaw('MONTH(festival_start_date) = ?', [$arr_val['month']]) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
-        ->orWhereRaw('MONTH(festival_end_date) = ?', [$arr_val['month']]); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
-    })
-    ->orderBy('festival_hit')
-    ->get();
+    else if($arr_temp[0]!=""&&$arr_temp[1]==""){
+        $fes_info=$fes_temp->where('area_code', $arr_val['area_code'])->orderBy('festival_hit')->get();
+    }
+    else if($arr_temp[0]==""&&$arr_temp[1]!=""){
+        $fes_info=$fes_temp->where(function ($query) use ($arr_val) {
+                $query->whereRaw('MONTH(festival_start_date) = ?', [$arr_val['month']]) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
+                ->orWhereRaw('MONTH(festival_end_date) = ?', [$arr_val['month']]); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
+        })->orderBy('festival_hit')->get();
+    }
+    else if($arr_temp[0]!=""&&$arr_temp[1]!=""){
+        $fes_info=$fes_temp->where('area_code', $arr_val['area_code'])->where(function ($query) use ($arr_val) {
+            $query->whereRaw('MONTH(festival_start_date) = ?', [$arr_val['month']]) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
+            ->orWhereRaw('MONTH(festival_end_date) = ?', [$arr_val['month']])->orderBy('festival_hit')->get(); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
+    });
+    }
+    // $fes_info
 
     foreach ($fes_info as $value) {
         switch ($value->area_code) {
@@ -95,21 +111,6 @@ class MainApiController extends Controller
                 $areaName = 'Unknown';
         }
         $value->area_code=$areaName;
-    }
-    $today = date('Y-m-d');
-    foreach ($fes_info as $val) {
-        if ($today<$val->festival_start_date) {
-            $val->statusClass='btn-success';
-            $val->statusText='D-'.date_diff(date_create($today), date_create($val->festival_start_date))->format('%a');
-        }
-        elseif ($today>$val->festival_end_date) {
-            $val->statusClass = 'btn-secondary';
-            $val->statusText = '진행종료';
-        }
-        else {
-            $val->statusClass = 'btn-primary';
-            $val->statusText = '진행중';
-        }
     }
     // dump($fes_info);
     return $fes_info;

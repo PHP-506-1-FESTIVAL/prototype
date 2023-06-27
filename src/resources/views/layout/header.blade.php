@@ -50,7 +50,7 @@
                                 <a class="dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="/img/profile/{{session()->get('user_profile')}}" alt="" class="img-thumbnail img-fluid" style="width:50px">
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="padding: 0;">
                                     <li>
                                         <div>
                                             <img src="/img/profile/{{session()->get('user_profile')}}" alt="" class="img-fluid borderRadius">

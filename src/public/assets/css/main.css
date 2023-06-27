@@ -8580,7 +8580,7 @@ blockquote .shape {
 }
 .date{
     display: inline-block;
-    background: #5830E0;
+    /* background: #5830E0; */
     color: #fff;
     font-size: 14px;
     float: right;
@@ -8606,4 +8606,6 @@ blockquote .shape {
 .borderRadius{
     border-radius: 5%;
 }
-
+.padding10{
+    padding: 10px;
+}
