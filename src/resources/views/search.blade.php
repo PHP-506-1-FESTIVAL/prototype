@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-
+<div class="margindiv"></div>
 <span>"{{$search}}"의검색 결과 페이지 입니다</span>
 <div class="row">
     <div class="col-9">
