@@ -33,7 +33,7 @@
                                             <li class="nav-item"><a href="{{route('notice.index')}}">공지사항</a></li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item m-auto">
                                         <div class="dropdown">
                                             <form class="d-flex" method="POST" action="{{route('main.search')}}">
                                                 @csrf
@@ -44,7 +44,7 @@
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
-                            
+
                             @auth
                             <li class="dropdown list-group-item">
                                 <a class="dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
