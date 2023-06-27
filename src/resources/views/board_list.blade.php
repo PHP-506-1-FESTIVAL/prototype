@@ -30,7 +30,7 @@
 			<div class="col-lg-9 col-md-12 col-12">
 				<div class="main-content">
 					<div class="dashboard-block mt-0">
-						<h3 class="block-title">My Ads</h3>
+						{{-- <h3 class="block-title">My Ads</h3> --}}
 						{{-- <nav class="list-nav">
 							<ul>
 								<li class="active"><a href="javascript:void(0)">All Ads <span>42</span></a></li>
