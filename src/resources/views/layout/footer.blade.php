@@ -1,6 +1,7 @@
 <!-- Start Footer Area -->
     <footer class="footer">
-        <!-- Start Footer Top -->
+        {{-- 0627김재성 푸터수정 --}}
+        {{-- <!-- Start Footer Top -->
         <div class="footer-top">
             <div class="container">
                 <div class="row">
@@ -80,7 +81,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!--/ End Footer Middle -->
         <!-- Start Footer Bottom -->
         <div class="footer-bottom">
