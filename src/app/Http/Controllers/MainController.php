@@ -39,6 +39,64 @@ class MainController extends Controller
             }
         }
 
+        foreach ($result as $value) {
+            switch ($value->area_code) {
+                case "1":
+                    $areaName = '서울';
+                    break;
+                case "2":
+                    $areaName = '인천';
+                    break;
+                case "3":
+                    $areaName = '대전';
+                    break;
+                case "4":
+                    $areaName = '대구';
+                    break;
+                case "5":
+                    $areaName = '광주';
+                    break;
+                case 6:
+                    $areaName = '부산';
+                    break;
+                case 7:
+                    $areaName = '울산';
+                    break;
+                case 8:
+                    $areaName = '세종';
+                    break;
+                case 31:
+                    $areaName = '경기';
+                    break;
+                case 32:
+                    $areaName = '강원';
+                    break;
+                case 33:
+                    $areaName = '충북';
+                    break;
+                case 34:
+                    $areaName = '충남';
+                    break;
+                case 35:
+                    $areaName = '경북';
+                    break;
+                case 36:
+                    $areaName = '경남';
+                    break;
+                case 37:
+                    $areaName = '전북';
+                    break;
+                case 38:
+                    $areaName = '전남';
+                    break;
+                case 39:
+                    $areaName = '제주';
+                    break;
+                default:
+                    $areaName = 'Unknown';
+            }
+            $value->area_code=$areaName;
+        }
         // 0620 이가원 udt
         // if (isset(Auth::User()->user_id)) {
         //     $result_user = User::find(Auth::User()->user_id)->select(['user_email','user_nickname','user_profile'])->get();
@@ -48,33 +106,50 @@ class MainController extends Controller
         // }
 
         $today = date('Y-m-d');
-        foreach ($result as $value) {
-            $startDate[] = $value->festival_start_date;
-            $endDate[] = $value->festival_end_date;
-        }
-        for ($i=0; $i < 4; $i++) {
-            if ($today < $startDate[$i]) {
-                $statusClass[$i] = 'btn-success';
-                $statusText[$i] = '';
-                $daysRemaining[$i] = date_diff(date_create($today), date_create($startDate[$i]))->format('%a');
-                $statusText[$i] .= ' D-' . $daysRemaining[$i] . '';
-            } elseif ($today > $endDate[$i]) {
-                $statusClass[$i] = 'btn-secondary';
-                $statusText[$i] = '진행종료';
-            } else {
-                $statusClass[$i] = 'btn-primary';
-                $statusText[$i] = '진행중';
+        // foreach ($result as $value) {
+        //     $startDate[] = $value->festival_start_date;
+        //     $endDate[] = $value->festival_end_date;
+        // }
+        // for ($i=0; $i < 4; $i++) {
+        //     if ($today < $startDate[$i]) {
+        //         $statusClass[$i] = 'btn-success';
+        //         $statusText[$i] = '';
+        //         $daysRemaining[$i] = date_diff(date_create($today), date_create($startDate[$i]))->format('%a');
+        //         $statusText[$i] .= ' D-' . $daysRemaining[$i] . '';
+        //     } elseif ($today > $endDate[$i]) {
+        //         $statusClass[$i] = 'btn-secondary';
+        //         $statusText[$i] = '진행종료';
+        //     } else {
+        //         $statusClass[$i] = 'btn-primary';
+        //         $statusText[$i] = '진행중';
+        //     }
+        //     // $result[$i]=['test'=>'test1'];
+        // }
+
+        foreach ($result as $val) {
+            if ($today<$val->festival_start_date) {
+                $val->statusClass='btn-success';
+                $val->statusText='D-'.date_diff(date_create($today), date_create($val->festival_start_date))->format('%a');
+            }
+            elseif ($today>$val->festival_end_date) {
+                $val->statusClass = 'btn-secondary';
+                $val->statusText = '진행종료';
+            }
+            else {
+                $val->statusClass = 'btn-primary';
+                $val->statusText = '진행중';
             }
         }
-        // dump($startDate);
-        // dump($endDate);
+        // dump($result);
+        // dump($statusClass);
+        // dump($statusText);
 
 
         // $stat=['statusClass'=>$statusClass,'statusText'=>$statusText];
         // dump($stat);
         // return view('protoMain',compact('data'));
         // return view('main')->with('fesData',$result)->with('month',$month)->with('userData',$result_user);
-        return view('main')->with('fesData',$result)->with('month',$month)->with('notice',$notice)->with('statClass',$statusClass)->with('statText',$statusText);
+        return view('main')->with('fesData',$result)->with('month',$month)->with('notice',$notice);
     }
     //  0620 이가원 del
     // 로그인 이후 메인 페이지 이동
@@ -371,6 +446,7 @@ class MainController extends Controller
         }
         $value->area_code=$areaName;
     }
+    // dump($str_val);
         return view('festival_list')->with('data',$festival)->with('str',$str_val);
     }
 

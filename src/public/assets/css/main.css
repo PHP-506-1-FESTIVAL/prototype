@@ -8574,3 +8574,18 @@ blockquote .shape {
 .margindiv {
   min-height: 115px;
 }
+.date{
+    display: inline-block;
+    background: #5830E0;
+    color: #fff;
+    font-size: 14px;
+    float: right;
+    font-weight: 500;
+    padding: 7px 15px;
+    border-radius: 6px;
+    font-family: 'Jost', sans-serif;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+.image{height: 300px; width: 450px;}

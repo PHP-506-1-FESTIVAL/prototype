@@ -4,11 +4,12 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/festival.css">
-<script src="{{asset('js/festival.js')}}"></script>
 
+{{-- @dump(isset($str->fesStr));
+@dump(isset($str->fesStr)?$str->fesStr : ","); --}}
 {{-- 더보기 왔을때 실행 --}}
 <form action="">
-    <input type="hidden" name="" id="teststr" value="{{isset($str->fesStr)?$str->fesStr : ","}}">
+    <input type="hidden" name="" id="onload" value="{{isset($str->fesStr)?$str->fesStr:","}}">
 </form>
 
 {{-- 비주얼배너 --}}
@@ -178,8 +179,8 @@ $count = 0;
 
 </div>
 <script>
-
 </script>
+<script src="{{asset('js/festival.js')}}"></script>
 {{-- 이동버튼 --}}
 {{-- <button class="moveTopBtn" title="맨 위로"></button>
 <script>

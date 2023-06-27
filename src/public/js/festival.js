@@ -2,14 +2,12 @@ const api = 'http://localhost/api/mainapi/'; // API 기본 URL
 const apiAll = 'http://localhost/api/mainapiall/'; // API 기본 URL
 const domaine = 'http://localhost/'; // 도메인 URL
 const fesDetail = 'fesdetail/'; // 페스티벌 상세 URL
-let strVal=",";
+// let strVal=",";
 let a=9;
 let c=true;
-let test=''
 
-window.onload=()=>{
-    strVal=document.getElementById('teststr').value;
-    if (strVal!==",") {
+    strVal=document.getElementById('onload').value;
+    if (strVal!==',') {
         makeApiList(strVal)
         const arrStr=strVal.split(',');
         const tempMonth="0"+arrStr[1];
@@ -21,13 +19,12 @@ window.onload=()=>{
             }
         }
         selArea=document.getElementById('searchArea').options
-        for (let index = 0; index < selDate.length; index++) {
+        for (let index = 0; index < selArea.length; index++) {
             if (selArea[index].value===arrStr[0]) {
                 selArea[index].setAttribute('selected','selected');
             }
         }
     }
-}
 
 function aaaname() {
   const searchDate = document.getElementById('searchDate').value; // 검색 날짜 값을 가져옵니다.

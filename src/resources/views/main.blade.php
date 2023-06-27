@@ -74,8 +74,7 @@
     </div>
     <div class="col-sm-7 row container text-end">
         {{-- 각각 맞는 축제 --}}
-        @foreach ($fesData as $item)
-            <div class="col-6 col-sm-6">
+        {{-- @foreach ($fesData as $item)
                 <a href="{{route('fes.detail',['id'=>$item->festival_id])}}" id="Recommend">
                     @if ($item->poster_img)
                         <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid">
@@ -84,7 +83,46 @@
                     @endif
                 </a>
             </div>
-        @endforeach
+        @endforeach --}}
+        <section class="browse-cities section">
+            <div class="container">
+                <div class="row" id="Recommend">
+                    <!-- Start Single City -->
+                    @foreach ($fesData as $item)
+                        <div class="col-6 col-sm-6">
+                            <div class="single-city wow fadeInUp" data-wow-delay=".2s">
+                                <a href="{{route('fes.detail',['id'=>$item->festival_id])}}" class="info-box">
+                                    <div class="image">
+                                        @if ($item->poster_img)
+                                            <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid">
+                                        @else
+                                            <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid">
+                                        @endif
+                                    </div>
+                                    {{-- <p class="date {{$item->statusClass}}">{{$item->statusText}}</p> --}}
+                                    <p class="date {{$item->statusClass}}">{{$item->statusText}}</p>
+                                    <div class="content" style="text-align: left!important;">
+                                        <h4 class="name">
+                                            {{$item->festival_title}}
+                                            <span>{{$item->festival_start_date}}~{{$item->festival_end_date}}</span>
+                                            <span>{{$item->area_code}}</span>
+                                        </h4>
+                                    </div>
+                                    <div class="more-btn">
+                                        <i class="lni lni-circle-plus"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+                        <!-- Start Single City -->
+                        <div id="moreFes" class="align-self-end">
+                            <a onclick="FesSub()" href="#">더보기>></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         {{-- <div class="image-container" id="festivalContainer">
         @for ($i = 0; $i < 4; $i++)
 
@@ -107,9 +145,9 @@
                 </a>
             </div>
         @endfor --}}
-        <div id="moreFes" class="align-self-end">
+        {{-- <div id="moreFes" class="align-self-end">
             <a onclick="FesSub()">더보기>></a>
-        </div>
+        </div> --}}
     </div>
 </div>
 
