@@ -3,16 +3,40 @@
 @section('title','게시판 수정')
 
 @section('content')
+{{-- 메인>축제톡톡>글상세페이지>수정 --}}
+<!-- Start Breadcrumbs -->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 col-md-6 col-12">
+				<div class="breadcrumbs-content">
+					<h1 class="page-title"><a href="{{route('board.index')}}">수정 페이지</a></h1>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-12">
+				<ul class="breadcrumb-nav">
+					<li><a href="{{route('main')}}">메인</a></li>
+					<li><a href="{{route('board.index')}}">축제톡톡</a></li>
+                    <li><a href="{{route('board.show', ['board' => $boards->board_id])}}">{{$boards->board_title}}</a></li>
+                    <li><a href="{{route('board.index')}}">수정</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Breadcrumbs -->
+
+
 {{-- https://ee2ee2.tistory.com/entry/JSP-%EA%B2%8C%EC%8B%9C%ED%8C%90-%EB%A7%8C%EB%93%A4%EA%B8%B0-13%EA%B0%95-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%88%98%EC%A0%95-%EB%B0%8F-%EC%82%AD%EC%A0%9C-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0 --}}
 
 {{-- // 게시판 수정(상세base) --}}
-<div class="container">
+<div class="container mt-3  mb-3">
 <form action="{{route('board.update', ['board' => $boards->board_id])}}" method="post">
     @csrf
     @method('put')
     {{-- // 게시판 수정 item (상세base) --}}
     <div>
-        <input type="text" name="title" id="title" value="{{$boards->board_title}}" class="form-control mt-3 mb-0 p-0 rounded-3 form-floating fs-2" size=80>
+        <input type="text" name="title" id="title" value="{{$boards->board_title}}" class="form-control mb-0 p-0 rounded-3 form-floating fs-2" size=80>
         {{-- {{count($errors) > 0 ? old('board_title') : $boards->board_title}} --}}
         <hr>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
