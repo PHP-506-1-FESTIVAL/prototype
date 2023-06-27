@@ -38,7 +38,7 @@ Route::get('/user/withdraw', [UserController::class, 'withdraw'])->name('user.wi
 Route::post('/user/withdrawpost', [UserController::class, 'withdrawpost'])->name('user.withdrawpost');
 Route::get('/user/main', [UserController::class, 'usermain'])->name('user.main');
 Route::get('/user/edit', [UserController::class, 'useredit'])->name('user.edit');
-Route::get('/user/pwchk', [UserController::class, 'pwchk'])->name('pwchk');
+Route::get('/user/pwchk/{id}', [UserController::class, 'pwchk'])->name('pwchk');
 Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
 Route::post('/user/pwchkpost', [UserController::class, 'pwchkpost'])->name('pwchkpost');
 Route::get('/user/terms', [UserController::class, 'terms'])->name('user.terms');

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
@@ -224,8 +225,8 @@ class UserController extends Controller
         return redirect()->route('user.main');
     }
 
-    function pwchk() {
-        return view('pwchk');
+    function pwchk($id) {
+        return view('pwchk')->with('chkflg', $id);
     }
 
     function pwchkpost(Request $req) {
@@ -242,7 +243,12 @@ class UserController extends Controller
         }
 
         session()->put('pwchk_flg', '1'); // 세션에 플래그 등록
-        return redirect()->intended(route('user.edit'));
+
+        if ($req->chkflg === '1') {
+            return redirect()->route('user.withdraw');
+        } else {
+            return redirect()->route('user.edit');
+        }
     }
 
     function withdraw() {

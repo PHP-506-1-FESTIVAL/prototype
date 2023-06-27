@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html">메인</a></li>
+                        <li><a href="{{route('main')}}">메인</a></li>
                         <li>마이페이지</li>
                     </ul>
                 </div>
@@ -39,20 +39,17 @@
                         </div>
                         <div class="dashboard-menu">
                             <ul>
-                                <li><a class="active" href="dashboard.html"><i class="lni lni-dashboard"></i>
+                                <li><a class="active" href="{{route('user.main')}}"><i class="lni lni-user"></i>
                                         마이페이지</a></li>
-                                <li><a href="{{route('user.edit')}}"><i class="lni lni-pencil-alt"></i> 회원정보 수정</a>
+                                <li><a href="/user/pwchk/0"><i class="lni lni-pencil-alt"></i> 회원정보 수정</a>
                                 </li>
-                                <li><a href="my-items.html"><i class="lni lni-bolt-alt"></i> My Ads</a></li>
-                                <li><a href="favourite-items.html"><i class="lni lni-heart"></i> Favourite ads</a></li>
-                                <li><a href="post-item.html"><i class="lni lni-circle-plus"></i> Post An Ad</a></li>
-                                <li><a href="bookmarked-items.html"><i class="lni lni-bookmark"></i> Bookmarked</a></li>
-                                <li><a href="messages.html"><i class="lni lni-envelope"></i> Messages</a></li>
-                                <li><a href="delete-account.html"><i class="lni lni-trash"></i> Close account</a></li>
-                                <li><a href="invoice.html"><i class="lni lni-printer"></i> Invoice</a></li>
+                                <li><a href="{{route('user.favorites')}}"><i class="lni lni-heart"></i> 찜 목록</a></li>
+                                <li><a href="{{route('user.articles')}}"><i class="lni lni-pencil"></i> 작성 글 목록</a></li>
+                                <li><a href="{{route('user.comments')}}"><i class="lni lni-comments"></i> 작성 댓글 목록</a></li>
+                                <li><a href="/user/pwchk/1"><i class="lni lni-trash"></i> 회원탈퇴</a></li>
                             </ul>
                             <div class="button">
-                                <a class="btn" href="javascript:void(0)">로그아웃</a>
+                                <a class="btn" href="{{route('user.logout')}}">로그아웃</a>
                             </div>
                         </div>
                     </div>
@@ -67,11 +64,11 @@
                                     <!-- Start Single List -->
                                     <div class="single-list">
                                         <div class="list-icon">
-                                            <i class="lni lni-checkmark-circle"></i>
+                                            <i class="lni lni-heart"></i>
                                         </div>
                                         <h3>
                                             340
-                                            <span>찜 목록</span>
+                                            <span>찜</span>
                                         </h3>
                                     </div>
                                     <!-- End Single List -->
@@ -80,11 +77,11 @@
                                     <!-- Start Single List -->
                                     <div class="single-list two">
                                         <div class="list-icon">
-                                            <i class="lni lni-bolt"></i>
+                                            <i class="lni lni-pencil"></i>
                                         </div>
                                         <h3>
                                             23
-                                            <span>작성 글 목록</span>
+                                            <span>글</span>
                                         </h3>
                                     </div>
                                     <!-- End Single List -->
@@ -93,11 +90,11 @@
                                     <!-- Start Single List -->
                                     <div class="single-list three">
                                         <div class="list-icon">
-                                            <i class="lni lni-emoji-sad"></i>
+                                            <i class="lni lni-comments"></i>
                                         </div>
                                         <h3>
                                             45
-                                            <span>작성 댓글 목록</span>
+                                            <span>댓글</span>
                                         </h3>
                                     </div>
                                     <!-- End Single List -->

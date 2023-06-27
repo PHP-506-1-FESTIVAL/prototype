@@ -8,9 +8,198 @@
         <script>window.location.href = "{{route('pwchk')}}";</script>
     @endif
 
-    
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">마이페이지</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <ul class="breadcrumb-nav">
+                        <li><a href="{{route('main')}}">메인</a></li>
+                        <li>마이페이지</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
 
-<div class="container">
+    <!-- Start Dashboard Section -->
+    <section class="dashboard section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-12">
+                    <!-- Start Dashboard Sidebar -->
+                    <div class="dashboard-sidebar">
+                        <div class="user-image">
+                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="#">
+                            <h3>{{session()->get('user_nickname')}}
+                                <span><a href="javascript:void(0)">{{session()->get('user_email')}}</a></span>
+                            </h3>
+                        </div>
+                        <div class="dashboard-menu">
+                            <ul>
+                                <li><a href="{{route('user.main')}}"><i class="lni lni-user"></i>
+                                        마이페이지</a></li>
+                                <li><a class="active" href="/user/pwchk/0"><i class="lni lni-pencil-alt"></i> 회원정보 수정</a>
+                                </li>
+                                <li><a href="{{route('user.favorites')}}"><i class="lni lni-heart"></i> 찜 목록</a></li>
+                                <li><a href="{{route('user.articles')}}"><i class="lni lni-pencil"></i> 작성 글 목록</a></li>
+                                <li><a href="{{route('user.comments')}}"><i class="lni lni-comments"></i> 작성 댓글 목록</a></li>
+                                <li><a href="/user/pwchk/1"><i class="lni lni-trash"></i> 회원탈퇴</a></li>
+                            </ul>
+                            <div class="button">
+                                <a class="btn" href="{{route('user.logout')}}">로그아웃</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start Dashboard Sidebar -->
+                </div>
+                <div class="col-lg-9 col-md-8 col-12">
+                    <div class="main-content">
+                        <!-- Start Profile Settings Area -->
+                        <div class="dashboard-block mt-0 profile-settings-block">
+                            <h3 class="block-title">회원정보 수정</h3>
+                            <div class="inner-block">
+                                <div class="image mb-4">
+                                    <img src="/img/profile/{{session()->get('user_profile')}}" alt="#">
+                                </div>
+                                <form action="{{route('user.update')}}" method="post" id="signupForm" class="needs-validation" enctype="multipart/form-data" onsubmit="return false">
+                                    <div class="row g-4">
+                                        <div class="col-lg-6 col-12">
+                                            <label for="email" class="form-label">이메일 <span class="text-danger">*</span></label>
+                                            <div class="input-group has-validation">
+                                                    <input type="text" class="form-control" id="email" name="email" value="{{$data->user_email}}" readonly>
+                                                    <div class="valid-feedback">
+                                                        사용 가능한 이메일 입니다.
+                                                    <div class="invalid-feedback" id="emailval"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label for="name" class="form-label">이름 <span class="text-danger">*</span></label>
+                                            <div class="input-group has-validation">
+                                                <input type="text" class="form-control" id="name" name="name" value="{{$data->user_name}}">
+                                                <div class="invalid-feedback">
+                                                    한글 2~5글자로 입력해 주세요.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label for="password" class="form-label">비밀번호 <span class="text-danger">*</span></label>
+                                            <div class="input-group has-validation">
+                                                <input type="password" class="form-control" id="password" name="password">
+                                                <div class="invalid-feedback">
+                                                    영문, 숫자, 특수문자를 포함해 8~20글자로 입력해 주세요.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label for="pwchk" class="form-label">비밀번호 확인 <span class="text-danger">*</span></label>
+                                            <div class="input-group has-validation">
+                                                <input type="password" class="form-control" id="pwchk" name="pwchk">
+                                                <div class="invalid-feedback">
+                                                    비밀번호가 일치하지 않습니다.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label for="nickname" class="form-label">닉네임 <span class="text-danger">*</span></label>
+                                            <input type="hidden" id="hiddennick" value="{{session('user_nickname')}}">
+                                            <div class="input-group has-validation">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="nickname" name="nickname" required value="{{$data->user_nickname}}">
+                                                    <button class="btn btn-outline-secondary" type="button" id="nickChkBtn" style="border-top-right-radius:5px; border-bottom-right-radius:5px;">닉네임 중복체크</button>
+                                                    <div class="valid-feedback" id="nickval2">
+                                                        사용 가능한 닉네임 입니다.
+                                                    </div>
+                                                    <div class="invalid-feedback" id="nickval"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label for="gender" class="form-label">성별 <span class="text-danger">*</span></label>
+                                            <div>
+                                                <input id="male" name="gender" type="radio" class="form-check-input" value="0" required {{$data->malechk}}>
+                                                <label class="form-check-label" for="male" style="margin-right:30px;">남성</label>
+                                                <input id="female" name="gender" type="radio" class="form-check-input" value="1" required {{$data->femalechk}}>
+                                                <label class="form-check-label" for="female">여성</label>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Valid first name is required.
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="birthDate" class="form-label">생년월일 <span class="text-danger">*</span></label>
+                                                <div class="input-group has-validation">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="birthyear" name="birthyear" placeholder="YYYY" maxlength='4' required value="{{$data->birthyear}}">
+                                                        <input type="text" class="form-control" id="birthmonth" name="birthmonth" placeholder="MM"  maxlength='2' required value="{{$data->birthmonth}}">
+                                                        <input type="text" class="form-control" id="birthday" name="birthday" placeholder="DD" maxlength='2' required value="{{$data->birthday}}">
+                                                    </div>
+                                                </div>
+                                                <input class="form-control" type="hidden" id="birthhidden">
+                                                <div class="invalid-feedback" id="birthval">
+                                                </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">프로필 이미지 변경 <span class="text-muted">(선택)</span></label>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" id="image" name=image>
+                                                <label class="input-group-text" for="image">업로드</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label for="zipcode" class="form-label">우편번호 <span class="text-muted">(선택)</span></label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="zipcode" name="zipcode" value="{{$data->user_zipcode}}">
+                                                <button class="btn btn-outline-secondary" type="button" id="zipcodeBtn" style="border-top-right-radius:5px; border-bottom-right-radius:5px;" onclick="test()">우편번호 찾기  </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="address" class="form-label">주소 <span class="text-muted">(선택)</span></label>
+                                            <input type="text" class="form-control" id="address" name="address" value="{{$data->user_address}}">
+                                            <div class="invalid-feedback">
+                                                Please enter your shipping address.
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="address2" class="form-label">상세주소 <span class="text-muted">(선택)</span></label>
+                                            <input type="text" class="form-control" id="address2" name="address2" value="{{$data->user_address_detail}}">
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <div class="form-check mt-2">
+                                                <input type="checkbox" class="form-check-input" id="marketing" name="marketing" value="1" {{$data->marketingchk}}>
+                                                <label class="form-check-label" for="marketing">개인정보 마케팅 활용에 동의합니다.</label>
+                                            </div>
+
+                                            <div class="form-check mt-2">
+                                                <input type="checkbox" class="form-check-input" id="promotion" name="promotion" value="1" {{$data->promotionchk}}>
+                                                <label class="form-check-label" for="promotion">프로모션 이메일 수신에 동의합니다.</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group button mb-0">
+                                                <button type="submit" class="btn" id="submitBtn">수정하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Profile Settings Area -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Dashboard Section -->
+
+{{-- <div class="container">
     <script>if({{session()->has('alert')}}) { alert('{{session()->get('alert')}}') }</script>
     <main>
         <div class="py-5 text-center">
@@ -164,7 +353,7 @@
         </div>
     </main>
 
-</div>
+</div> --}}
 
 {{-- <div class="container">
     <main>
@@ -502,17 +691,15 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    window.onload = function(){
-        document.getElementById("zipcodeBtn").addEventListener("click", function(){ //주소입력칸을 클릭하면
-            //카카오 지도 발생
-            new daum.Postcode({
-                oncomplete: function(data) { //선택시 입력값 세팅
-                    document.getElementById("zipcode").value = data.zonecode;
-                    document.getElementById("address").value = data.address; // 주소 넣기
-                    document.querySelector("input[id=address2]").focus(); //상세입력 포커싱
-                }
-            }).open();
-        });
+    function test() {
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("zipcode").value = data.zonecode;
+                document.getElementById("address").value = data.address; // 주소 넣기
+                document.querySelector("input[id=address2]").focus(); //상세입력 포커싱
+            }
+        }).open();
     }
 </script>
 

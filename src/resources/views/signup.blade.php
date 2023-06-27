@@ -137,7 +137,7 @@
                                 </div>
 
                                 <div class="col-7" style="display:grid">
-                                    <button class="btn btn-secondary" id="zipcodeBtn" type="button" style="justify-self:start; align-self:end;">우편번호 찾기</button>
+                                    <button class="btn btn-secondary" id="zipcodeBtn" type="button" style="justify-self:start; align-self:end;" onclick="test()">우편번호 찾기</button>
                                 </div>
 
                                 <div class="col-12">
@@ -501,17 +501,15 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    window.onload = function(){
-        document.getElementById("zipcodeBtn").addEventListener("click", function(){ //주소입력칸을 클릭하면
-            //카카오 지도 발생
-            new daum.Postcode({
-                oncomplete: function(data) { //선택시 입력값 세팅
-                    document.getElementById("zipcode").value = data.zonecode;
-                    document.getElementById("address").value = data.address; // 주소 넣기
-                    document.querySelector("input[id=address2]").focus(); //상세입력 포커싱
-                }
-            }).open();
-        });
+    function test() {
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("zipcode").value = data.zonecode;
+                document.getElementById("address").value = data.address; // 주소 넣기
+                document.querySelector("input[id=address2]").focus(); //상세입력 포커싱
+            }
+        }).open();
     }
 </script>
 
