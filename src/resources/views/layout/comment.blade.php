@@ -1,6 +1,6 @@
                             <!-- Comments -->
                             <div class="post-comments">
-                                <h3 class="comment-title"><span>3 comments on this post</span></h3>
+                                <p class="comment-title"><span>3개의 댓글이 있습니다.</span></p>
                                 <ul class="comments-list">
                                     <li>
                                         <div class="comment-img">

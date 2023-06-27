@@ -4,7 +4,6 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/festival.css">
-
 {{-- @dump(isset($str->fesStr));
 @dump(isset($str->fesStr)?$str->fesStr : ","); --}}
 {{-- 더보기 왔을때 실행 --}}

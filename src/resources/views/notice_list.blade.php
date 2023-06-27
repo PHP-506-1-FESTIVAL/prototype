@@ -3,6 +3,7 @@
 @section('title','공지사항')
 
 @section('content')
+{{-- 메인>공지사항 --}}
 <!-- Start Breadcrumbs -->
 <div class="breadcrumbs">
 	<div class="container">
@@ -24,7 +25,7 @@
 <!-- End Breadcrumbs -->
 
 <!-- Start Dashboard Section -->
-<section class="dashboard section">
+<section class="dashboard section-board">
 	<div class="container">
 		<div class="row">
 			<div class="board-list-ct col-lg-12 col-md-12 col-12">

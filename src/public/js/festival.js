@@ -41,7 +41,7 @@ function makeApiList(strVal) {
     .catch((error) => console.log(error)) // 요청 중 발생한 오류를 기록합니다.
     .finally(() => {}); // 정리 작업이나 마무리 작업을 수행합니다.
 }
-
+// 셀렉트박스
 function target(date) {
   const targetDiv = document.getElementById('festivalContainer');
   let tempStr = "";
@@ -56,22 +56,23 @@ function target(date) {
       const end = date[0][index].festival_end_date;
       const title = date[0][index].festival_title;
       const area = date[0][index].area_code;
+      const statusClass=date[0][index].statusClass
+      const statusText=date[0][index].statusText
+      // const today = new Date().toISOString().slice(0, 10); // 현재 날짜를 YYYY-MM-DD 형식으로 가져옵니다.
+      // let statusClass = "";
+      // let statusText = "";
 
-      const today = new Date().toISOString().slice(0, 10); // 현재 날짜를 YYYY-MM-DD 형식으로 가져옵니다.
-      let statusClass = "";
-      let statusText = "";
-
-      if (today < start) {
-        statusClass = "btn-success";
-        const daysDiff = Math.floor((new Date(start) - new Date(today)) / (1000 * 60 * 60 * 24)); // 날짜 차이 계산
-        statusText = `D-${daysDiff}`;
-      } else if (today > end) {
-        statusClass = "btn-secondary";
-        statusText = "진행종료";
-      } else {
-        statusClass = "btn-primary";
-        statusText = "진행중";
-      }
+      // if (today < start) {
+      //   statusClass = "btn-success";
+      //   const daysDiff = Math.floor((new Date(start) - new Date(today)) / (1000 * 60 * 60 * 24)); // 날짜 차이 계산
+      //   statusText = `D-${daysDiff}`;
+      // } else if (today > end) {
+      //   statusClass = "btn-secondary";
+      //   statusText = "진행종료";
+      // } else {
+      //   statusClass = "btn-primary";
+      //   statusText = "진행중";
+      // }
 
       tempStr += `
         <a href="${domaine}${fesDetail}${id}" style="text-decoration: none;">
@@ -203,7 +204,6 @@ window.addEventListener('scroll', () => { // 스크롤 이벤트 리스너 등�
     }, 100);
   }
 });
-
 
 function makeApiAllList() {
   if(c){

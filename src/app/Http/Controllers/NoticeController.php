@@ -23,6 +23,7 @@ class NoticeController extends Controller
         // $notices = Notice::all();
         $notices = DB::table('notices')
         ->select('*')
+        ->where('deleted_at', null)
         ->orderBy('notice_id', 'DESC')
         ->paginate(10);
 
