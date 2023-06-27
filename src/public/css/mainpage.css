@@ -127,3 +127,23 @@
 #ing {
     position: absolute;
 }
+
+.line_notice{
+    font-size: 100%;
+    vertical-align: baseline;
+    display: block;
+    font-family: 'nbg', '맑은 고딕', HelveticaNeue, DroidSans, Sans-serif, Helvetica;
+    line-height: 1;
+    background: #111;
+    height: 62px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+.line_notice a{
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    grid-column: 2/3;
+}

@@ -3,6 +3,7 @@
 @section('content')
 
 {{-- 축제 배너 --}}
+<div class="margindiv"></div>
 <div class="profile-container">
 	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=e52bf8f5-fcd0-43d7-945a-6c04f9c64c5b');">
 		<div class="profile-box-content">
@@ -38,7 +39,7 @@
 </div> --}}
 
 {{-- 공지사항 후순위--}}
-<div class="row alert alert-danger">
+<div class="line_notice">
     {{-- {{$notice[0]->notice_title}} : {{$notice[0]->notice_content}} --}}
     <a href="{{route('notice.show', $notice[0])}}">📢{{ $notice[0]->notice_title }}📢</a>
 </div>
