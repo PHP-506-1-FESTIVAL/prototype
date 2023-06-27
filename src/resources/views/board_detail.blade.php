@@ -25,80 +25,81 @@
 </div>
 <!-- End Breadcrumbs -->
 
-    <!-- Start Blog Singel Area -->
-    <section class="section blog-single">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
-                    <div class="single-inner">
-                        <div class="post-details">
-                            <div class="detail-inner">
-                                <h2 class="post-title">
-                                    {{$data->board_title}}
-                                </h2>
-                                <!-- post meta -->
-                                <ul class="custom-flex post-meta">
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <i class="lni lni-user"></i>
-                                            {{$boards[0]->user_nickname}}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <i class="lni lni-calendar"></i>
-                                            {{$data->created_at}}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <i class="lni lni-comments"></i>
-                                            35 Comments
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <i class="lni lni-eye"></i>
-                                            {{$data->board_hit}} View
-                                        </a>
-                                    </li>
-                                    {{-- // 게시판 상세 BUTTON --}}
-                                    <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a>
-                                    <a href="{{route('board.edit', ['board' => $data->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
-                                    <form action="{{route('board.destroy', ['board' => $data->board_id])}}" method="post" name="removefrm">
-                                        @csrf
-                                        @method('delete')
-                                        <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">삭제하기</a>
-                                        {{-- 모달창 구현 --}}
-                                        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalToggleLabel"> </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        정말로 삭제 하시겠습니까?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        {{-- <button type="submit" onclick="history.back()" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">확인</button> --}}
-                                                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">확인</button>
-                                                    </div>
+<!-- Start Blog Singel Area -->
+<section class="section-board blog-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
+                <div class="single-inner">
+                    <div class="post-details">
+                        <div class="detail-inner">
+                            <h2 class="post-title">
+                                {{$data->board_title}}
+                            </h2>
+                            <!-- post meta -->
+                            <ul class="custom-flex post-meta">
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="lni lni-user"></i>
+                                        {{$boards[0]->user_nickname}}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="lni lni-calendar"></i>
+                                        {{$data->created_at}}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="lni lni-comments"></i>
+                                        35 Comments
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="lni lni-eye"></i>
+                                        {{$data->board_hit}} View
+                                    </a>
+                                </li>
+                                {{-- // 게시판 상세 BUTTON --}}
+                                <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a>
+                                <a href="{{route('board.edit', ['board' => $data->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
+                                <form action="{{route('board.destroy', ['board' => $data->board_id])}}" method="post" name="removefrm">
+                                    @csrf
+                                    @method('delete')
+                                    <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">삭제하기</a>
+                                    {{-- 모달창 구현 --}}
+                                    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalToggleLabel"> </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    정말로 삭제 하시겠습니까?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    {{-- <button type="submit" onclick="history.back()" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">확인</button> --}}
+                                                    <button type="submit" class="btn btn-primary">확인</button>
+                                                    {{-- data-bs-toggle="modal" data-bs-dismiss="modal" --}}
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </ul>
-                                <p><div style="white-space:pre;">{{$data->board_content}}</div></p>
-                            </div>
-                            @include('layout.comment')
+                                    </div>
+                                </form>
+                            </ul>
+                            <p><div style="white-space:pre;">{{$data->board_content}}</div></p>
                         </div>
+                        @include('layout.comment')
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- End Blog Singel Area -->
+    </div>
+</section>
+<!-- End Blog Singel Area -->
 
 
 <!-- Start Dashboard Section -->
