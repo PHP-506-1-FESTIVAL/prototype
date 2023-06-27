@@ -14,11 +14,17 @@ class FavoriteController extends Controller
         }
         // dump($req);
         $arr_req=explode(',',$req->test);
-        $fav=new Favorite(['user_id'=>$arr_req[0]
-        ,'festival_id'=>$arr_req[1]]);
-        $fav->save();
+        $jjm = Favorite::where('festival_id', 256)->where('user_id', session()->get('user_id'))->get();
+        if(!isset($jjm[0]->favorite_id)) {
+            $fav=new Favorite(['user_id'=>$arr_req[0]
+            ,'festival_id'=>$arr_req[1]]);
+            $fav->save();
+            return redirect()->route('fes.detail', ['id'=>$arr_req[1]]);
+        } else {
+            return back();
+        }
 
-        return redirect()->route('fes.detail', ['id'=>$arr_req[1]]);
+        
     }
     public function jjmDel(Request $req)
     {
