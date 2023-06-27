@@ -5,22 +5,26 @@
     padding: 30px;
 }
 
-a {
+/* a { */
       /* 기본 상태 */
-    color: inherit;
-    text-decoration: none;
-}
+    /* color: inherit; */
+    /* text-decoration: none; */
+/* } */
 
-a:focus,
-a:hover {
+/* a:focus, */
+/* a:hover { */
     /* 링크 위에 키보드 포커스가 위치한 상태 */
     /* 링크 위에 마우스 포인터가 위치한 상태 */
-    display: inline-block;
-    color: rebeccapurple;
+    /* display: inline-block; */
+    /* color: rebeccapurple; */
 
-    transform: scale(1.5);
+    /* transform: scale(1.5); */
     /* transform: scale(2);
     /* translateY(-2px) */
-    transition-duration: 0.5s;
+    /* transition-duration: 0.5s; */
     /* transition: 1s; */
+/* } */
+
+.boardline:hover {
+    background-color: rgb(235, 235, 235);
 }

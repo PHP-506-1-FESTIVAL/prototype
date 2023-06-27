@@ -3,6 +3,7 @@
 @section('title','축제톡톡')
 
 @section('content')
+
 <!-- Start Breadcrumbs -->
 <div class="breadcrumbs">
 	<div class="container">
@@ -67,7 +68,7 @@
 							
 							<!-- Start Single List -->
 							@forelse($data as $item)
-							<div class="single-item-list">
+							<div class="single-item-list boardline">
 								<div class="row align-items-center">
 									<div class="col-lg-1 col-md-1 col-12">
 											{{$item->board_id}}
@@ -121,11 +122,11 @@
 </section>
 
 
-{{-- // 자유게시판제목(배경넣고 위치 잡아주기) --}}
+{{-- // 자유게시판제목(배경넣고 위치 잡아주기)
 {{-- <h2 class="mt-0 mb-0 talktalktopimg">축제 톡톡</h2> --}}
 {{-- <div class="bg-success p-2 text-white bg-opacity-10 talktalktopimg">축제 톡톡</div> --}}
 
-<div class="mx-5 my-3">
+{{-- <div class="mx-5 my-3">
 	{{-- // navbar(검색,정렬) --}}
 	<nav class="navbar navbar-expand-lg">
 		<div class="container-fluid">
@@ -203,6 +204,6 @@
 		</table>
 	{{-- // Pagination --}}
 		{{-- 라라벨 기본 지원 페이지네이션 --}}
-		{!! $data->links('vendor.pagination.custom') !!}
-</div>
+		{{-- {!! $data->links('vendor.pagination.custom') !!} --}}
+{{-- </div> --}}
 @endsection
