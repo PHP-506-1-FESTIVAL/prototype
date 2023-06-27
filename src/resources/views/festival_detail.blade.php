@@ -5,12 +5,11 @@
 @section('content')
 <link rel="stylesheet" href="/css/festival.css">
 <script src="{{asset('js/festival.js')}}"></script>
-<br><br><br><br><br>
-<div class="container">
-    <link rel="stylesheet" href="/css/festival.css">
-    <div class="festival-detail">
-        <div class="div1">
-            <h1>축제정보</h1>
+ <!-- Start About Area -->
+<br><br>
+    <section class="about-us section">
+        <div class="container">
+                        <h1>축제정보</h1>
             <h3>{{ $festival->festival_title }} @if (isset($jjmFlg[0]->favorite_id)) 💖 @else 🤍 @endif {{ $favoriteCount }}</h3>
             @php
                 $today = date('Y-m-d');
@@ -19,7 +18,7 @@
 
                 if ($today < $startDate) {
                     $statusClass = 'btn-success';
-                    $statusText = '진행예정 D-' . date_diff(date_create($today), date_create($startDate))->format('%a') . '일';
+                    $statusText = 'D-' . date_diff(date_create($today), date_create($startDate))->format('%a');
                 } elseif ($today > $endDate) {
                     $statusClass = 'btn-secondary';
                     $statusText = '진행종료';
@@ -31,14 +30,17 @@
             <button type="button" class="btn {{ $statusClass }}"  style="margin: 2px;" id="ing">
                 {{ $statusText }}
             </button>
-        </div>
-        <div class="div2">
-            <img class="div2img"src="{{ $festival->poster_img ? $festival->poster_img : '/img/festival.jpg' }}" alt="{{ $festival->poster_img ? 'Poster Image' : 'No Image' }}">
-        </div>
-        <div class="div3">
-            <div class="div3in">
-                <div class="din3inin">
-                <h1>상세정보</h1>
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-6 col-md-12 col-12" style="width:640px;">
+                    <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
+                        <img class="div2img"src="{{ $festival->poster_img ? $festival->poster_img : '/img/festival.jpg' }}" alt="{{ $festival->poster_img ? 'Poster Image' : 'No Image' }}">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12">
+                    <!-- content-1 start -->
+                    <div class="content-right wow fadeInRight" data-wow-delay=".5s">
+                        <!-- Heading -->
+                        <span class="sub-heading">상세정보</span>
                 <p style="font-size: 20px;">
                     <img src="https://korean.visitkorea.or.kr/kfes/resources/img/valentine_day.png" alt="날짜 아이콘" style="width:40px; height:40px">
                     {{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}
@@ -96,11 +98,11 @@
                         };
                     </script>
                 </form>
+                        <!-- End Heading -->
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <br><h1>지도</h1>
+            <br><h1>지도</h1>
     <div id="map" style="border: 1px solid ligtgrey; width:1180px; height:400px;"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c445a81938b242294a005dc47ac83f13&libraries=services"></script>
     <script>
@@ -144,38 +146,9 @@
             </div>
         @endforeach
     </div>
-</div>
-{{-- 댓글 --}}
-{{-- @include('layout.comment') --}}
-    <!-- Start About Area -->
-    <section class="about-us section">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-6 col-md-12 col-12">
-                    <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
-                        <img src="https://via.placeholder.com/540x420" alt="#">
-                        <a href="https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM"
-                            class="glightbox video"><i class="lni lni-play"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-12">
-                    <!-- content-1 start -->
-                    <div class="content-right wow fadeInRight" data-wow-delay=".5s">
-                        <!-- Heading -->
-                        <span class="sub-heading">About</span>
-                        <h2>
-                            About Our Company</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi aliquip ex ea commodo consequat.</p>
-                        <h3>What We Do</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        <!-- End Heading -->
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <!-- End About Area -->
+{{-- 댓글 --}}
+{{-- @include('layout.comment') --}}
 @endsection
