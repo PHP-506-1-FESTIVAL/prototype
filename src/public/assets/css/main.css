@@ -4257,12 +4257,16 @@ blockquote .shape {
 }
 
 .browse-cities .single-city .image img {
-  height: 100%;
-  width: 100%;
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
+    height: 100%;
+    width: 100%;
+    min-width: 450px;
+    min-height: 350px;
+    /* max-height: 400px; */
+    /* max-width: 500px; */
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
 }
-
+/* todo */
 .browse-cities .single-city:hover .image img {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
@@ -8588,4 +8592,18 @@ blockquote .shape {
     top: 0%;
     left: 0%;
 }
-.image{height: 300px; width: 450px;}
+/* .image{height: 300px; width: 450px;} */
+.Pline{
+    display: flex;
+    margin: auto;
+    width: 80%;
+    border: 1px solid #d4d5d7;
+    border-radius: 10%;
+}
+.PfP{
+    padding: 0.25rem 1rem;
+}
+.borderRadius{
+    border-radius: 5%;
+}
+

@@ -53,14 +53,14 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
                                         <div>
-                                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="" style="width:50px">
+                                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="" class="img-fluid borderRadius">
                                         </div>
                                         <div>
-                                            {{session()->get('user_email')}}
-                                            <br>
-                                            {{session()->get('user_nickname')}}
+                                            <a class="dropdown-item" href="{{route('user.main')}}">{{session()->get('user_email')}}</a>
+                                            <a class="dropdown-item" href="{{route('user.main')}}">{{session()->get('user_nickname')}}</a>
                                         </div>
                                     </li>
+                                    <span class="Pline"></span>
                                     <li><a class="dropdown-item" href="{{route('user.main')}}">마이페이지</a></li>
                                     <li><a class="dropdown-item" href="{{route('user.favorites')}}">찜목록</a></li>
                                     <li><a class="dropdown-item" href="{{route('main.logout')}}">로그아웃</a></li>
