@@ -13,7 +13,41 @@
 </form>
 
 {{-- 비주얼배너 --}}
+@php
+    $banner = \App\Models\Festival::whereIn('festival_id', [322, 556, 412])->get();
+@endphp
 <div class="profile-container">
+    @foreach ($banner as $festival)
+        @if ($festival->festival_id === 322)
+            @php
+                $backgroundImage = 'https://sokorea.or.kr/img/mna5.jpg';
+                $festivalTitle = $festival->festival_title;
+                $description = '발달장애인과 비장애인이 함께 만들고 즐겨온 전세계유일의 국제 발달장애인문화축제';
+            @endphp
+        @elseif ($festival->festival_id === 556)
+            @php
+                $backgroundImage = 'https://cdn.imweb.me/thumbnail/20230529/fef8d075c2292.jpg';
+                $festivalTitle = $festival->festival_title;
+                $description = 'K-ROCK의 발상지, 인천에서 즐기는 국내 대표 아웃도어 음악축제';
+            @endphp
+        @else
+            @php
+                $backgroundImage = 'https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fcsearch-phinf.pstatic.net%2F20220706_211%2F1657105883433RFst6_PNG%2F2689776_image2_1.png';
+                $festivalTitle = $festival->festival_title;
+                $description = '다양한 치킨과 맥주를 비롯해 공연, 음악, 이색 체험을 즐기는 문화관광축제';
+            @endphp
+        @endif
+        <div class="profile-box" style="background-image: url('{{ $backgroundImage }}');">
+            <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration-line: none;">
+                <div class="profile-box-content">
+                    <h2 style="color:white;">{{ $festivalTitle }}</h2>
+                    <p>{{ $description }}</p>
+                </div>
+            </a>
+        </div>
+    @endforeach
+</div>
+{{-- <div class="profile-container">
 	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=e52bf8f5-fcd0-43d7-945a-6c04f9c64c5b');">
 		<div class="profile-box-content">
 			<h2 style="color:white;">동대문디자인플라자(DDP)</h2>
@@ -32,7 +66,30 @@
 			<p>가로수가 만든 초록빛 동굴</p>
 		</div>
 	</div>
-</div>
+</div> --}}
+{{-- <div class="row">
+    @php
+    $count = 0;
+    $today = date('Y-m-d');
+    @endphp
+    @foreach ($data as $festival)
+        @if ($count < 3 && in_array($festival->festival_id, [1, 257, 300]))
+        <div class="profile-container col-4">
+            <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration-line: none;">
+                <div class="profile-container">
+                    <div class="profile-box" style="background-image: url('{{ $festival->poster_img ? $festival->poster_img : "/img/festival.jpg" }}');">
+                        <div class="profile-box-content">
+                            <h2>{{ $festival->festival_title }}</h2>
+                            <p>{{ $festival->description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @php $count++; @endphp
+        @endif
+    @endforeach
+</div> --}}
 {{-- <div class="row">
     @php
     $count = 0;
@@ -60,7 +117,6 @@
         @php $count++; @endphp
     @endforeach
 </div> --}}
-
 {{-- 검색부분 --}}
 <br>
 <div class="inner">
@@ -109,16 +165,22 @@
             </div>
             <div class="btn_box">
                 <div>
-                    <button class="btn btn-danger btn-lg btn-block"><span>초기화</span></button>
-                    <button type='button' class="btn btn-primary btn-lg btn-block" id="btnSearch" onclick='aaaname()'><span>검색</span></button>
+                    <button class="btn btn-outline-danger btn-lg btn-block">
+                        <span>
+                            초기화 <img src="https://korean.visitkorea.or.kr/kfes/resources/img/reset_ico.png" alt="초기화" style="width:20px; height:20px;">
+                        </span>
+                    </button>
+                    <button type="button" class="btn btn-success btn-lg btn-block" id="btnSearch" onclick="aaaname()">
+                        <span>
+                            검색 <img src="https://korean.visitkorea.or.kr/kfes/resources/img/shortcut_black_ico.svg" alt="검색" style="width:30px; height:30px; filter: brightness(0) invert(1);">
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
     </form>
 </div>
 <br>
-
-
 {{-- 메인출력 --}}
 {{-- <div class="sort mt-3" style="text-align:right;">
     <button class="btn btn-success" onclick="sortByPopularity()">인기도</button>
@@ -129,54 +191,45 @@
 @php
 $count = 0;
 @endphp
-
 @foreach ($data as $festival)
     @if ($count < 9)
         <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration: none;">
-            <div data-hits="{{ $festival->festival_hit }}" data-start-date="{{ $festival->festival_start_date }}" data-end-date="{{ $festival->festival_end_date }}">
-                <div class="card">
-                    @php
-                    $today = date('Y-m-d');
-                    $startDate = $festival->festival_start_date;
-                    $endDate = $festival->festival_end_date;
-
-                    if ($today < $startDate) {
-                        $statusClass = 'btn-success';
-                        $statusText = '';
-                        $daysRemaining = date_diff(date_create($today), date_create($startDate))->format('%a');
-                        $statusText .= ' D-' . $daysRemaining . '';
-                    } elseif ($today > $endDate) {
-                        $statusClass = 'btn-secondary';
-                        $statusText = '진행종료';
-                    } else {
-                        $statusClass = 'btn-primary';
-                        $statusText = '진행중';
-                    }
-                    @endphp
-
-                    <button type="button" class="btn {{ $statusClass }}" id="ing">
-                        {{ $statusText }}
-                    </button>
-
-
-                    @if ($festival->poster_img)
-                        <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image" loading="lazy">
-                    @else
-                        <img class="card-img-top" src="/img/festival.jpg" alt="No Image" loading="lazy">
-                    @endif
-
-                    <div class="overlay">
-                        <h2>{{ $festival->festival_title }}</h2>
-                        <p>{{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}</p>
-                        <p id='area'>{{$festival->area_code}}</p>
-                    </div>
+            <div class="card">
+                @php
+                $today = date('Y-m-d');
+                $startDate = $festival->festival_start_date;
+                $endDate = $festival->festival_end_date;
+                if ($today < $startDate) {
+                    $statusClass = 'btn-success';
+                    $statusText = '';
+                    $daysRemaining = date_diff(date_create($today), date_create($startDate))->format('%a');
+                    $statusText .= ' D-' . $daysRemaining . '';
+                } elseif ($today > $endDate) {
+                    $statusClass = 'btn-secondary';
+                    $statusText = '진행종료';
+                } else {
+                    $statusClass = 'btn-primary';
+                    $statusText = '진행중';
+                }
+                @endphp
+                <button type="button" class="btn {{ $statusClass }}" id="ing">
+                    {{ $statusText }}
+                </button>
+                @if ($festival->poster_img)
+                    <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image" loading="lazy">
+                @else
+                    <img class="card-img-top" src="/img/festival.jpg" alt="No Image" loading="lazy">
+                @endif
+                <div class="overlay">
+                    <h2>{{ $festival->festival_title }}</h2>
+                    <p>{{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}</p>
+                    <p id='area'>{{$festival->area_code}}</p>
                 </div>
             </div>
         </a>
     @endif
     @php $count++; @endphp
 @endforeach
-
 </div>
 <script>
 </script>
@@ -190,5 +243,4 @@ $count = 0;
     window.scrollTo({ top: 0, behavior: "smooth" });
     }
 </script> --}}
-
 @endsection
