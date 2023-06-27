@@ -10,13 +10,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">Registration</h1>
+                        <h1 class="page-title">회원가입</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li>Registration</li>
+                        <li><a href="index.html">메인</a></li>
+                        <li>회원가입</li>
                     </ul>
                 </div>
             </div>
@@ -154,9 +154,9 @@
                                 </div>
                             
                                 <div class="button">
-                                    <button type="submit" class="btn">Registration</button>
+                                    <button type="submit" id="submitBtn" class="btn">회원가입</button>
                                 </div>
-                                <p class="outer-link">Already have an account? <a href="login.html"> Login Now</a>
+                                <p class="outer-link">이미 계정이 있으신가요? <a href="{{route('user.login')}}"> 로그인</a>
                                 </p>
                             </div>
                         </form>
@@ -167,7 +167,7 @@
     </section>
     <!-- End Registration section -->
 
-<div class="container">
+{{-- <div class="container">
     <main>
         <div class="py-5 text-center">
             <h1 class="mb-3">회원가입</h1>
@@ -303,7 +303,7 @@
         </div>
     </main>
 
-</div>
+</div> --}}
 
 <script type="text/javascript">
 
