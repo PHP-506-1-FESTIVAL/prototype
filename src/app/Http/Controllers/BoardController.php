@@ -226,6 +226,7 @@ class BoardController extends Controller
     {
         // board_id에 해당하는 board를 destroy(ctrl+클릭해보기)
         // destory()는 파라미터를 PK(id)를 받아야함
+        // dump($board_id);
         Board::destroy($board_id);
         return redirect('/board');
     }
