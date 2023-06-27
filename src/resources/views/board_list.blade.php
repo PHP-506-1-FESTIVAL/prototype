@@ -3,7 +3,7 @@
 @section('title','축제톡톡')
 
 @section('content')
-
+{{-- 메인>축제톡톡 --}}
 <!-- Start Breadcrumbs -->
 <div class="breadcrumbs">
 	<div class="container">
@@ -25,25 +25,41 @@
 <!-- End Breadcrumbs -->
 
 <!-- Start Dashboard Section -->
-<section class="dashboard section">
+<section class="dashboard section-board">
 	<div class="container">
 		<div class="row">
 			<div class="board-list-ct col-lg-12 col-md-12 col-12">
 				<div class="main-content">
 					<div class="dashboard-block mt-0">
 						{{-- <h3 class="block-title">My Ads</h3> --}}
-						{{-- <nav class="list-nav">
-							<ul>
-								<li class="active"><a href="javascript:void(0)">All Ads <span>42</span></a></li>
-								<li><a href="javascript:void(0)">Published <span>88</span></a></li>
-								<li><a href="javascript:void(0)">Featured <span>12</span></a></li>
-								<li><a href="javascript:void(0)">Sold <span>02</span></a></li>
-								<li><a href="javascript:void(0)">Active <span>45</span></a></li>
-								<li><a href="javascript:void(0)">Expired <span>55</span></a></li>
-							</ul>
-						</nav> --}}
 						<!-- Start Items Area -->
 						<div class="board-list-items my-items"> {{-- my-items --}}
+							<div class="board-items-top container">
+								<div class="row">
+									{{-- // 검색 --}}
+									<div class="col-md-8">
+										<form class="d-flex" method="POST" action="{{route('main.search')}}">
+											@csrf
+											<input class="form-control me-2 dropdown-toggle" type="search" placeholder="Search" aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  autocomplete="off" name="search" maxlength='100'>
+											<button class="btn btn-outline-success" type="submit">Search</button>
+										</form>
+									</div>
+									<div class="col-md-2">
+										<li class="board-array nav-item dropdown">
+											<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">정렬</a>
+											<ul class="dropdown-menu">
+											<li><a class="dropdown-item" href="#">최신순</a></li>
+											<li><a class="dropdown-item" href="#">오래된순</a></li>
+											<li><hr class="dropdown-divider"></li>
+											<li><a class="dropdown-item" href="#">모든 정렬 삭제</a></li>
+											</ul>
+										</li>
+									</div>
+									<div class="col-md-2">
+										<a href="{{route("board.create")}}"><button class="btn btn-primary" type="button">글쓰기</button></a>
+									</div>
+								</div>
+							</div>
 							<!-- Start Item List Title -->
 							<div class="item-list-title">
 								<div class="row align-items-center">
@@ -66,9 +82,9 @@
 							</div>
 							<!-- End List Title -->
 							
-							<!-- Start Single List -->
 							@forelse($data as $item)
-							<div class="single-item-list boardline">
+							<!-- Start Single List -->
+							<div class="board-list-item single-item-list boardline">
 								<div class="row align-items-center">
 									<div class="col-lg-1 col-md-1 col-12">
 											{{$item->board_id}}
@@ -91,13 +107,27 @@
 							</div>
 							<!-- End Single List -->
 							@empty
-							<tr>
-								<td></td>
-								<td>게시글 없음</td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
+							<div class="board-list-item single-item-list boardline">
+								<div class="row align-items-center">
+									<div class="col-lg-1 col-md-1 col-12">
+											
+									</div>
+									<div class="col-lg-5 col-md-5 col-12">
+										<div class="content">
+											<p>게시글 없음</p>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-3 col-12">
+										
+									</div>
+									<div class="col-lg-2 col-md-2 col-12">
+										
+									</div>
+									<div class="col-lg-1 col-md-1 col-12">
+										
+									</div>
+								</div>
+							</div>
 							@endforelse
 
 							<!-- Pagination -->
@@ -127,7 +157,7 @@
 {{-- <div class="bg-success p-2 text-white bg-opacity-10 talktalktopimg">축제 톡톡</div> --}}
 
 {{-- <div class="mx-5 my-3">
-	{{-- // navbar(검색,정렬) --}}
+	{{-- // navbar(검색,정렬)
 	<nav class="navbar navbar-expand-lg">
 		<div class="container-fluid">
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,12 +188,12 @@
 				{{-- <div class="d-grid gap-2 d-md-flex justify-content-md-end" href="{{route("board.create")}}"> --}}
 					{{-- <a href=""></a> --}}
 				{{-- </div> --}}
-				<a href="{{route("board.create")}}"><button class="btn btn-primary" type="button">글쓰기</button></a>
+				{{-- <a href="{{route("board.create")}}"><button class="btn btn-primary" type="button">글쓰기</button></a>
 			</div>
 		</div>
-	</nav>
+	</nav>  --}}
 	{{-- // Tables --}}
-		<table class="table">
+		{{-- <table class="table">
 			<caption></caption>
 			<colgroup>
 				<col width="5%"/>
@@ -185,7 +215,7 @@
 			@forelse($data as $item)
 				<tr>
 					{{-- <th scope="row">{{$key+1 + (($item->currentPage()-1) * 10)}}</th> --}}
-					<td>{{$item->board_id}}</td>
+					{{-- <td>{{$item->board_id}}</td>
 					<td><a href="{{route('board.show', ['board' => $item->board_id])}}">{{$item->board_title}}</a></td>
 					<td>{{$item->user_nickname}}</td>
 					<td>{{$item->created_at}}</td>
@@ -201,7 +231,7 @@
 				</tr>
 			@endforelse
 			</tbody>
-		</table>
+		</table> --}}
 	{{-- // Pagination --}}
 		{{-- 라라벨 기본 지원 페이지네이션 --}}
 		{{-- {!! $data->links('vendor.pagination.custom') !!} --}}

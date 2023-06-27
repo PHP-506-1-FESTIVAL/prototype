@@ -16,6 +16,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BoardController extends Controller
 {
@@ -45,6 +46,7 @@ class BoardController extends Controller
         ->join('users', 'boards.user_id', '=', 'users.user_id' )
         ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.deleted_at', 'boards.board_hit')
         // ->where('favorites.user_id', session('user_id'))
+        ->where('boards.deleted_at', null)
         ->orderBy('boards.board_id', 'DESC')
         ->paginate(10);
 
