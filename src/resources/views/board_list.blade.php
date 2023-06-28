@@ -37,14 +37,14 @@
 							<div class="board-items-top container">
 								<div class="row">
 									{{-- // 검색 --}}
-									<div class="col-md-8">
+									<div class="col-md-10">
 										<form class="d-flex" method="POST" action="{{route('main.search')}}">
 											@csrf
 											<input class="form-control me-2 dropdown-toggle" type="search" placeholder="Search" aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  autocomplete="off" name="search" maxlength='100'>
 											<button class="btn btn-outline-success" type="submit">Search</button>
 										</form>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-1">
 										<li class="board-array nav-item dropdown">
 											<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">정렬</a>
 											<ul class="dropdown-menu">
@@ -55,7 +55,7 @@
 											</ul>
 										</li>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-1">
 										<a href="{{route("board.create")}}"><button class="btn btn-primary" type="button">글쓰기</button></a>
 									</div>
 								</div>
