@@ -39,12 +39,15 @@
 									{{-- // 검색 --}}
 									<div class="col-md-11">
 										<form class="d-flex" method="POST" action="{{route('main.search')}}">
-											@csrf
-											<input class="form-control me-2 dropdown-toggle" type="search" placeholder="Search" aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  autocomplete="off" name="search" maxlength='100'>
-											<button class="btn btn-outline-success" type="submit">Search</button>
-										</form>
+                                            @csrf
+                                            <input class="form-control me-2 dropdown-toggle headersearch" type="search" placeholder="검색어를 입력하세요." aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off" name="search" maxlength='100' style="height:35px;">
+                                            <div class="button">
+                                                <button class="btn" type="submit" style="width:60px; height:35px; padding:5px;">검색</button>
+                                            </div>
+                                        </form>
 									</div>
-									<div class="col-md-1">
+									{{-- // 정렬기능 --}}
+									{{-- <div class="col-md-1">
 										<li class="board-array nav-item dropdown">
 											<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">정렬</a>
 											<ul class="dropdown-menu">
@@ -54,10 +57,7 @@
 											<li><a class="dropdown-item" href="#">모든 정렬 삭제</a></li>
 											</ul>
 										</li>
-									</div>
-									{{-- <div class="col-md-2"> --}}
-										{{-- <a href="{{route("board.create")}}"><button class="btn btn-primary" type="button">글쓰기</button></a> --}}
-									{{-- </div> --}}
+									</div> --}}
 								</div>
 							</div>
 
@@ -123,16 +123,16 @@
 
 
 							<!-- Pagination -->
-							<div class="pagination left">
+							{{-- <div class="pagination left">
 								<ul class="pagination-list">
 									<li><a href="javascript:void(0)">1</a></li>
 									<li class="active"><a href="javascript:void(0)">2</a></li>
 									<li><a href="javascript:void(0)">3</a></li>
 									<li><a href="javascript:void(0)">4</a></li>
 									<li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a></li>
-								</ul>
+								</ul> --}}
                             {!! $notices->links('vendor.pagination.custom') !!}
-							</div>
+							{{-- </div> --}}
 							<!--/ End Pagination -->
 						</div>
 						<!-- End Items Area -->

@@ -62,6 +62,8 @@
                                         {{$data->board_hit}} View
                                     </a>
                                 </li>
+                            </ul>
+                            <div class="">
                                 {{-- // 게시판 상세 BUTTON --}}
                                 <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a>
                                 <a href="{{route('board.edit', ['board' => $data->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
@@ -89,7 +91,7 @@
                                         </div>
                                     </div>
                                 </form>
-                            </ul>
+                            </div>
                             <p><div style="white-space:pre;">{{$data->board_content}}</div></p>
                         </div>
                         @include('layout.comment')

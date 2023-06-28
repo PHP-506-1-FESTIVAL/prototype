@@ -50,9 +50,9 @@
                                         {{$notices->notice_hit}} View
                                     {{-- </a> --}}
                                 </li>
-                                {{-- // 게시판 상세 BUTTON --}}
-                                <a href="{{route('notice.index')}}" ><button class="btn btn-primary" type="button">목록으로</button></a>
                             </ul>
+                            {{-- // 게시판 상세 BUTTON --}}
+                            <div class="text-end"><a href="{{route('notice.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a></div>
                             <p><div style="white-space:pre;">{{$notices->notice_content}}</div></p>
                         </div>
                         {{-- @include('layout.comment') --}}
