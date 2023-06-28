@@ -17,7 +17,7 @@
 				<ul class="breadcrumb-nav">
 					<li><a href="{{route('main')}}">메인</a></li>
 					<li><a href="{{route('board.index')}}">축제톡톡</a></li>
-                    <li><a href="{{route('board.show', ['board' => $data->board_id])}}">{{$data->board_title}}</a></li>
+                    <li><a href="{{route('board.show', ['board' => $boards->board_id])}}">{{$boards->board_title}}</a></li>
 				</ul>
 			</div>
 		</div>
@@ -34,7 +34,7 @@
                     <div class="post-details">
                         <div class="detail-inner">
                             <h2 class="post-title">
-                                {{$data->board_title}}
+                                {{$boards->board_title}}
                             </h2>
                             <!-- post meta -->
                             <div class='row align-items-center' >
@@ -43,13 +43,13 @@
                                         <li>
                                             <a href="javascript:void(0)">
                                                 <i class="lni lni-user"></i>
-                                                {{$boards[0]->user_nickname}}
+                                                {{$boards->user_nickname}}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="javascript:void(0)">
                                                 <i class="lni lni-calendar"></i>
-                                                {{$data->created_at}}
+                                                {{$boards->created_at}}
                                             </a>
                                         </li>
                                         <li>
@@ -61,7 +61,7 @@
                                         <li>
                                             <a href="javascript:void(0)">
                                                 <i class="lni lni-eye"></i>
-                                                {{$data->board_hit}} View
+                                                {{$boards->board_hit}} View
                                             </a>
                                         </li>
                                     </ul>
@@ -72,10 +72,10 @@
                                         <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a>
                                     </div>
                                     <div class="col-3" style="padding: 0 0 0 4%;">
-                                        <a href="{{route('board.edit', ['board' => $data->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
+                                        <a href="{{route('board.edit', ['board' => $boards->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
                                     </div>
                                     <div class="col-4" style="padding:0;">
-                                        <form action="{{route('board.destroy', ['board' => $data->board_id])}}" method="post" name="removefrm">
+                                        <form action="{{route('board.destroy', ['board' => $boards->board_id])}}" method="post" name="removefrm">
                                             @csrf
                                             @method('delete')
                                             <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">삭제하기</a>
@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p><div style="white-space:pre;">{{$data->board_content}}</div></p>
+                            <p><div style="white-space:pre;">{{$boards->board_content}}</div></p>
                         </div>
                         @include('layout.comment')
                     </div>
