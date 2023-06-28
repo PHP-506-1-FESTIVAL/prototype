@@ -147,3 +147,20 @@
     text-decoration: none;
     grid-column: 2/3;
 }
+/* .image{height: 300px; width: 450px;} */
+.Pline{
+    display: flex;
+    margin: auto;
+    width: 80%;
+    border: 1px solid #d4d5d7;
+    border-radius: 10%;
+}
+.PfP{
+    padding: 0.25rem 1rem;
+}
+.borderRadius{
+    border-radius: 5%;
+}
+.padding10{
+    padding: 10px;
+}
