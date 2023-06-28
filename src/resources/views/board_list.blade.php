@@ -38,8 +38,8 @@
 								<div class="row">
 									{{-- // 검색 --}}
 									<div class="col-md-10">
-										<form class="d-flex" method="POST" action="{{route('main.search')}}">
-											@csrf
+										<form class="d-flex" method="POST" action="{{route('board.search')}}">
+                                            @csrf
 											<input class="form-control me-2 dropdown-toggle" type="search" placeholder="Search" aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  autocomplete="off" name="search" maxlength='100'>
 											<button class="btn btn-outline-success" type="submit">Search</button>
 										</form>
@@ -81,7 +81,7 @@
 								</div>
 							</div>
 							<!-- End List Title -->
-							
+
 							@forelse($data as $item)
 							<!-- Start Single List -->
 							<div class="board-list-item single-item-list boardline">
@@ -110,7 +110,7 @@
 							<div class="board-list-item single-item-list boardline">
 								<div class="row align-items-center">
 									<div class="col-lg-1 col-md-1 col-12">
-											
+
 									</div>
 									<div class="col-lg-5 col-md-5 col-12">
 										<div class="content">
@@ -118,13 +118,13 @@
 										</div>
 									</div>
 									<div class="col-lg-3 col-md-3 col-12">
-										
+
 									</div>
 									<div class="col-lg-2 col-md-2 col-12">
-										
+
 									</div>
 									<div class="col-lg-1 col-md-1 col-12">
-										
+
 									</div>
 								</div>
 							</div>
