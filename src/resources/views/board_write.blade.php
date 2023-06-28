@@ -29,6 +29,7 @@
 <section class="dashboard section-board" style="padding-top : 10px">
 	<div class="container">
 		<h2 class="mt-0 mb-0">게시글 작성 페이지</h2>
+		@include('layout.errormsg') 
 		{{-- <%-- 입력 폼 --%> --}}
 		<form action="{{route('board.store')}}" method="post">
 			@csrf
@@ -39,7 +40,6 @@
 			<div class="form-group">
 				<textarea class="form-control" rows="10" name="writecontent" placeholder="내용을 입력해주세요" required></textarea>
 			</div>
-			@include('layout.errormsg') 
 			<div style="text-align: right; margin-top:10px;">
 				<button type="submit" class="btn btn-primary">작성 하기</button>
 				<a href="{{route("board.index")}}"><button class="btn btn-secondary" type="button">취소</button></a>

@@ -92,7 +92,8 @@
 										</div>
 									</div>
 									<div class="col-lg-1 col-md-2 col-12">
-										<p>{{ $notice->created_at }}</p>
+										{{-- <p>{{ $notice->created_at }}</p> --}}
+										<p>{{substr($notice->created_at, 0, 10)}}</p>
 									</div>
 									<div class="col-lg-1 col-md-1 col-12">
 										<p>{{ $notice->notice_hit }}</p>
