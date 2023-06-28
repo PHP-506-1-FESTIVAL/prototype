@@ -117,9 +117,13 @@
                         </div>
                     @endforeach
                         <!-- Start Single City -->
-                    <div id="moreFes" class="align-self-end">
+                        <div class="button" style="padding: 10px;
+                        margin: 10px;">
+                            <button type="button" class="btn">더보기</button>
+                        </div>
+                    {{-- <div id="moreFes" class="align-self-end">
                         <a style="font-size: xx-large" onclick="FesSub()" href="#">더보기>></a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>
