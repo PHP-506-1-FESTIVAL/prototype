@@ -4291,9 +4291,6 @@ blockquote .shape {
   display: inline-block;
 }
 
-.browse-cities .single-city .content .name:hover {
-  color: #5830E0;
-}
 
 .browse-cities .single-city .content .name span {
   color: #fff;
