@@ -55,7 +55,7 @@
                 @endphp --}}
                 <button type="button" class="btn {{ $festival->statusClass }}" style="" id="ing">
                     {{ $festival->statusText }}
-                </button>
+                </button><br><br>
             <p style="font-size: 20px;">
                 <img src="https://korean.visitkorea.or.kr/kfes/resources/img/valentine_day.png" alt="날짜 아이콘" style="width:40px; height:40px">
                 {{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}
