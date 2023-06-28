@@ -136,7 +136,5 @@ $count = 0;
     @php $count++; @endphp
 @endforeach
 </div>
-<script>
-</script>
 <script src="{{asset('js/festival.js')}}"></script>
 @endsection

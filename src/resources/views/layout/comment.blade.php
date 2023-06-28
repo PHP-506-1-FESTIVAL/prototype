@@ -1,4 +1,4 @@
-                            <!-- Comments -->
+                            {{-- <!-- Comments -->
                             <div class="post-comments">
                                 <p class="comment-title"><span>3개의 댓글이 있습니다.</span></p>
                                 <ul class="comments-list">
@@ -86,7 +86,7 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
+                            </div> --}}
     {{-- 댓글 --}}
     <img src='{{asset('img/comment.jpg')}}' style="width:1160px; object-fit:cover; text-align:center;">
 
