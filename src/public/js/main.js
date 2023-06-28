@@ -46,8 +46,9 @@ function target(date) {
     if (date[0].length === 0) {
         tempStr = "<p>찾는 결과값이 없습니다.</p>";
     } else {
-        for (let index = 0; index < 4; index++) {
-            const id = date[0][index].festival_id;
+        if (date[0].length<4) {
+            for (let index = 0; index < date[0].length; index++){
+                const id = date[0][index].festival_id;
             const img = date[0][index].poster_img;
             const start = date[0][index].festival_start_date;
             const end = date[0][index].festival_end_date;
@@ -77,6 +78,40 @@ function target(date) {
                     </a>
                 </div>
             </div>`
+            }
+        } else {
+            for (let index = 0; index < 4; index++){
+                const id = date[0][index].festival_id;
+            const img = date[0][index].poster_img;
+            const start = date[0][index].festival_start_date;
+            const end = date[0][index].festival_end_date;
+            const title = date[0][index].festival_title;
+            const area = date[0][index].area_code;
+            const statusClass=date[0][index].statusClass
+            const statusText=date[0][index].statusText
+
+            tempStr += `
+            <div class="col-6 col-sm-6">
+                <div class="single-city wow fadeInUp" data-wow-delay=".2s">
+                    <a href="${domaine}${fesDetail}${id}" class="info-box">
+                        <div class="image">
+                        ${img !== "" ? `<img class="img-fluid" src="${img}" alt="${title}">` : `<img class="img-fluid" src="/img/festival.jpg" alt="${title}">`}
+                        </div>
+                        <p class="date ${statusClass}">${statusText}</p>
+                        <div class="content" style="text-align: left!important;">
+                            <h4 class="name">
+                                ${title}
+                                <span>${start}~${end}</span>
+                                <span>${area}</span>
+                            </h4>
+                        </div>
+                        <div class="more-btn">
+                            <i class="lni lni-circle-plus"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>`
+        }
         }
         c = false;
         tempStr +=`
