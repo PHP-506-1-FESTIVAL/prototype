@@ -40,8 +40,10 @@
 				<textarea class="form-control" rows="10" name="writecontent" placeholder="내용을 입력해주세요" required></textarea>
 			</div>
 			@include('layout.errormsg') 
-			<button type="submit" class="btn btn-secondary mb-3">제출하기</button>
-			<a href="{{route("board.index")}}"><button class="btn btn-primary" type="button">취소하기</button></a>
+			<div style="text-align: right; margin-top:10px;">
+				<button type="submit" class="btn btn-primary">작성 하기</button>
+				<a href="{{route("board.index")}}"><button class="btn btn-secondary" type="button">취소</button></a>
+			</div>
 		</form>
 	</div>
 </section>
