@@ -1,4 +1,14 @@
-<div class="notice-line">
+
+{{-- /************************************************
+* 프로젝트명   : festival_info
+* 디렉토리     : views
+* 파일명       : noticeslide.blade.php
+* 이력         : v001 0621 신유진 new
+                      0628 신유진 del
+************************************************/ --}}
+{{-- [3차] 메인화면의 최신 공지사항 부분 위아래 스크롤 되게 바꾸기 --}}
+
+{{-- <div class="notice-line">
     <div class="bg-left"></div>
     <div class="bg-right"></div>
     <div class="inner">
@@ -31,4 +41,4 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}

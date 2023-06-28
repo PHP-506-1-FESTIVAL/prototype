@@ -20,32 +20,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BoardController extends Controller
 {
-    private $Board;
-
-    // public function __construct(Board $Board){
-    //     // Laravel 의 IOC(Inversion of Control)
-    //     // 이렇게 모델을 가져오는 것이 추천 코드
-    //     $this->Board = $Board;
-    // }
-
-    // // 제약) 로그인이 되어있을 경우에만 접근 가능 <단,index 메소드는 제외>
-    // public function __construct(){
-    // $this->middleware('auth')->except('index');
-    // }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-// [게시판 메인 페이지]
+    // [게시판 메인 페이지]
     public function index()
     {
         // user id가 아닌 user nickname으로 표현하기 위한 조인
         $data = DB::table('boards')
         ->join('users', 'boards.user_id', '=', 'users.user_id' )
         ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.deleted_at', 'boards.board_hit')
-        // ->where('favorites.user_id', session('user_id'))
         ->where('boards.deleted_at', null)
         ->orderBy('boards.board_id', 'DESC')
         ->paginate(10);
@@ -58,7 +44,6 @@ class BoardController extends Controller
         // $data = $this->Board->latest()->paginate(10);
 
         // return view('뷰파일 이름', compact('보내줄 변수명'));
-        // return view('board_list', compact('data'));
         return view('board_list', ['data' => $data]);
     }
 
@@ -67,7 +52,7 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-// [작성 페이지] 이동
+    // [작성 페이지] 이동
     public function create()
     {
         // 로그인 체크(로그인 안된상태면 접근 못하게)
@@ -85,7 +70,7 @@ class BoardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-// [작성 페이지] DB에 저장하는 함수
+    // [작성 페이지] DB에 저장하는 함수
     public function store(Request $request)
     {
         $request->validate([
@@ -104,9 +89,7 @@ class BoardController extends Controller
 
         $id = $boards->board_id;
 
-        // 게시판 메인페이지(목록)으로 이동
-        // return redirect()->route('board.index');
-        // 추가된 글 상세 페이지로 이동
+        // 추가된 글의 상세 페이지로 이동
         return redirect()->route('board.show', ['board' => $id]);
     }
 
@@ -118,44 +101,37 @@ class BoardController extends Controller
      */
     // [상세 페이지] 이동
     public function show($board_id){
-        // $data = Board::find($board_id);
-
-        // user id가 아닌 user nickname으로 표현하기 위한 조인
-
-        // $data = Board::find($board_id);
-        // dump($boards);
-        // $data->board_hit++;
-        // $data->save();
-
         // + 쿠키의 이름으로 사용할 고유한 값을 생성
         // + ex) 게시물 id가 1인 경우 $cookieKey는 'boardHits1'
         $cookieName = 'boardHits'.$board_id;
+
         $hitsTime = now()->addMinutes(10); // 조회수 쿨타임 설정
-        // dump($boards);
+
         // + 쿠키가 존재하지 않을 경우에만 아래의 로직을 실행
         // + Cookie::has($cookieName) : $cookieKey로 지정한 이름의 쿠키가 있는지 확인
         // + 쿠키가 존재하는 경우 true, 존재하지 않는 경우 false를 반환
         if (!Cookie::has($cookieName)) {
+            // find() : 에외발생시 false만 리턴, 프로그램이 계속 실행됨
+            // findOrFail() : 예외발생시 에러처리(404)
             $board2 = Board::find($board_id);
+
             $board2->board_hit++; // 조회수 올려주기
-            // $boards->timestamps = false; // 조회수 올려도 수정일자 바뀌지 않게
 
             // + Cookie::queue() : Laravel에서 제공하는 쿠키를 설정하고 브라우저에 전송하는 메서드
             // + $cookieKey는 쿠키의 이름, true는 쿠키의 값, $hitsTime->timestamp는 쿠키의 유효 기간을 초 단위의 정수 값으로 설정
             // + $hitsTime->timestamp : $hitsTime 변수가 Carbon 객체인데, Cookie::queue() 메서드는 세 번째 매개변수로 정수 값을 요구하기때문에 timestamp로 변환
             Cookie::queue($cookieName, true, $hitsTime->timestamp);
+
             $board2->save();
         }
+        
+        // user id가 아닌 user nickname으로 표현하기 위한 조인
         $boards = DB::table('boards')
         ->join('users', 'boards.user_id', '=', 'users.user_id' )
         ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.board_hit','boards.user_id')
         ->where('boards.board_id', $board_id)->get();
-        // find() : 에외발생시 false만 리턴, 프로그램이 계속 실행됨
-        // findOrFail() : 예외발생시 에러처리(404)
 
         return view('board_detail')->with('boards', $boards[0]);
-        // return view('board_detail')->with('boards', $boards)->with('data', $data);
-        // return view('board_detail')->with('data',$data);
     }
 
     /**
@@ -167,7 +143,6 @@ class BoardController extends Controller
     // [수정 페이지] 이동
     public function edit($board_id)
     {
-
         // 로그인 체크(로그인 안된상태면 접근 못하게)
         if(auth()->guest()) {
             return redirect()->route('user.login');
@@ -175,7 +150,8 @@ class BoardController extends Controller
 
         $boards = Board::find($board_id);
 
-        // 작성자 체크(작성자가 지금 로그인 되어있는 사람일 경우만 접근) 3차의 팀원에게 맡김 화면상에서는 안보이지만 악성 유저가 관리자 모드로 건드릴시를 위해 한번더 체크
+        // 작성자 체크(작성자가 지금 로그인 되어있는 사람일 경우만 접근)
+        // ***********************************************************3차의 팀원에게 맡김 화면상에서는 안보이지만 악성 유저가 관리자 모드로 건드릴시를 위해 한번더 체크
         // if(auth() === $boards->board_id) {
         //     return view('board_edit')->with('boards', Board::findOrFail($board_id));
         // }
@@ -184,7 +160,6 @@ class BoardController extends Controller
         // }
 
         return view('board_edit')->with('boards', Board::findOrFail($board_id));
-
     }
 
     /**
@@ -207,7 +182,7 @@ class BoardController extends Controller
             ,'user_id'       => 'required|integer'
         ]);
 
-        // $validator->fails() : error가 있다면 true
+        // $validator->fails() : error가 있다면 true ---------------------------3차에게
         // if($validator->fails()) {
             // redirect()->back(); : 이전에 요청이 왔던 페이지로 돌아감
         //     return redirect()
@@ -235,12 +210,11 @@ class BoardController extends Controller
     {
         // board_id에 해당하는 board를 destroy(ctrl+클릭해보기)
         // destory()는 파라미터를 PK(id)를 받아야함
-        // dump($board_id);
         Board::destroy($board_id);
         return redirect('/board');
     }
-    //0628 김재성 검색기능
-    public function search(Request $val)
+
+    public function search(Request $val)    // 0628 김재성 검색기능
     {
         $val->validate(['search'=>'required|max:100']);
         // dump($val);
