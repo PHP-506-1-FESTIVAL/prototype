@@ -24,44 +24,19 @@
 		</div>
 	</div>
 </div>
-{{-- <div class="row">
-    @foreach ($fesData as $item)
-        <div class='col-3'>
-            <a href="{{route('fes.detail',['id'=>$item->festival_id])}}">
-                @if ($item->poster_img)
-                <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid">
-                @else
-                <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid">
-                @endif
-            </a>
-        </div>
-    @endforeach
-</div> --}}
 
 {{-- 공지사항 후순위--}}
 <div class="line_notice">
-    {{-- {{$notice[0]->notice_title}} : {{$notice[0]->notice_content}} --}}
     <a href="{{route('notice.show', $notice[0])}}">📢{{ $notice[0]->notice_title }}📢</a>
 </div>
 {{-- 지도 --}}
 <div class="row">
     <div class="col-sm-5">
         <div class="row">
-        <div class="search-form wow fadeInUp" data-wow-delay=".7s">
+            <div class="search-form wow fadeInUp" data-wow-delay=".7s">
                 <div class="search-input">
                     <label for="category"><i class="lni lni-calendar"></i></label>
                     <select name="category" id="category" onchange="changText()">
-                        {{-- <option value="none" selected disabled>달력</option>
-                        <option value="none">Vehicle</option>
-                        <option value="none">Electronics</option>
-                        <option value="none">Mobiles</option>
-                        <option value="none">Furniture</option>
-                        <option value="none">Fashion</option>
-                        <option value="none">Jobs</option>
-                        <option value="none">Real Estate</option>
-                        <option value="none">Animals</option>
-                        <option value="none">Education</option>
-                        <option value="none">Matrimony</option> --}}
                         @foreach ($month as $item)
                             @if ($item)
                                 <option value="{{$item}}">
@@ -75,27 +50,7 @@
                         @endforeach
                     </select>
                 </div>
-                </div>
-            {{-- <div class="container text-center padding10">
-                <div class="btn-group align-self-center">
-                    <button type="button" class="btn btn-primary disabled" ><i class="lni lni-calendar"></i></button>
-                    <button type="button" class="btn btn-primary" id="month" value="">전체</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        @foreach ($month as $item)
-                            <li><a class="dropdown-item" onclick="(changText({{$item}}))">
-                                @if ($item)
-                                    {{$item}}월
-                            </a></li>
-                            @else
-                                전체
-                            @endif
-                        @endforeach
-                    </ul>
-                </div>
-            </div> --}}
+            </div>
         </div>
         <div class="row">
             <div class="krmap">
@@ -103,21 +58,9 @@
         </div>
     </div>
     <div class="col-sm-7 row container text-end">
-        {{-- 각각 맞는 축제 --}}
-        {{-- @foreach ($fesData as $item)
-                <a href="{{route('fes.detail',['id'=>$item->festival_id])}}" id="Recommend">
-                    @if ($item->poster_img)
-                        <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid">
-                    @else
-                        <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid">
-                    @endif
-                </a>
-            </div>
-        @endforeach --}}
         <section class="browse-cities section">
             <div class="container">
                 <div class="row" id="Recommend">
-                    <!-- Start Single City -->
                     @foreach ($fesData as $item)
                         <div class="col-6 col-sm-6">
                             <div class="single-city wow fadeInUp" data-wow-delay=".2s">
@@ -129,7 +72,6 @@
                                             <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid">
                                         @endif
                                     </div>
-                                    {{-- <p class="date {{$item->statusClass}}">{{$item->statusText}}</p> --}}
                                     <p class="date {{$item->statusClass}}">{{$item->statusText}}</p>
                                     <div class="content" style="text-align: left!important;">
                                         <h4 class="name">
@@ -145,41 +87,12 @@
                             </div>
                         </div>
                     @endforeach
-                        <!-- Start Single City -->
-                        <div class="button" style="padding: 10px; margin: 10px;">
-                            <button type="button" class="btn" onclick="FesSub()">더보기</button>
-                        </div>
-                    {{-- <div id="moreFes" class="align-self-end">
-                        <a style="font-size: xx-large" onclick="FesSub()" href="#">더보기>></a>
-                    </div> --}}
+                    <div class="button" style="padding: 10px; margin: 10px;">
+                        <button type="button" class="btn" onclick="FesSub()">더보기</button>
+                    </div>
                 </div>
             </div>
         </section>
-        {{-- <div class="image-container" id="festivalContainer">
-        @for ($i = 0; $i < 4; $i++)
-
-        <div class="col-6 col-sm-6">
-            <a href="{{route('fes.detail',['id'=>$fesData[$i]->festival_id])}}" id="Recommend" class="Recommend">
-                <div class="card">
-                    <button type="button" class="btn {{ $statClass[$i] }}" id="ing">
-                        {{ $statText[$i] }}
-                    </button>
-                    @if ($fesData[$i]->poster_img)
-                    <img src="{{$fesData[$i]->poster_img}}" alt="{{$fesData[$i]->festival_title}}" class="img-fluid card-img-top">
-                    @else
-                    <img src='{{asset('img/festival.jpg')}}' alt="{{$fesData[$i]->festival_title}}" class="img-fluid card-img-top">
-                    @endif
-                    <div class="overlay">
-                        <h2>{{ $fesData[$i]->festival_title }}</h2>
-                        <p>{{ $fesData[$i]->festival_start_date }} ~ {{ $fesData[$i]->festival_end_date }}</p>
-                        <p id='area'>{{$fesData[$i]->area_code}}</p>
-                    </div>
-                </a>
-            </div>
-        @endfor --}}
-        {{-- <div id="moreFes" class="align-self-end">
-            <a onclick="FesSub()">더보기>></a>
-        </div> --}}
     </div>
 </div>
 
