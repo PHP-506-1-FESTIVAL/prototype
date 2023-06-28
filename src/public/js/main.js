@@ -4,21 +4,6 @@ const fesOrder = 'feslist/'
 const fesDetail = 'fesdetail/'
 let noneImg='img/festival.jpg';
 
-
-// let month = document.getElementById('month');
-
-// function make_list(date) {
-
-//     date.forEach(item => {
-//         console.log(item)
-//         const a = document.createElement('img')
-//         a.setAttribute('src', item.image)
-//         a.setAttribute('loading', 'lazy')
-
-//         document.body.appendChild(a);
-
-//     });
-// }
 function changText() {
     const monthStr=document.getElementById('category').value
     const changVal = document.getElementById('fesOrederIp');
@@ -33,10 +18,8 @@ function make_api_list(str_val) {
         fetch(url)
             .then((res) => { return res.json() })
             .then((date) => target([date]))
-            // .catch(console.log)
             .finally()
             const changVal = document.getElementById('fesOrederIp');
-            // moreFes.setAttribute("href","{{route('main.FesOrder', ['id' => "+area_code+"])}}")//안먹히네
             changVal.setAttribute('value',str_val);
 }
 
@@ -140,7 +123,6 @@ function target(date) {
 // 37전북
 // 38전남
 // 39제주
-// let AC34 AC35 AC36 AC38 그룹 형식
 let AC1 = document.getElementById('AC1');
 let AC2 = document.getElementById('AC2');
 let AC3 = document.getElementById('AC3');
@@ -181,52 +163,6 @@ function resColor() {
 
 
 }
-
-// AC1.addEventListener('click',()=>alert('체크'))
-// let color_flg1=true
-// let color_flg2=0
-// AC1.addEventListener('click',()=>{
-//     if (color_flg1) {
-//         color_flg1=false;
-//         color_flg2=1;
-//         resColor();
-//         console.log(color_flg1+":"+color_flg2);
-//         AC1.style.fill='red';
-//         make_api_list(1);
-//     } else {
-//         if (color_flg2===1) {
-//             color_flg1=true;
-//             console.log(color_flg1+":"+color_flg2);
-//             resColor();
-//         } else {
-//             color_flg2=1;
-//             console.log(color_flg1+":"+color_flg2);
-//             AC1.style.fill='red';
-//             make_api_list(1);
-//         }
-//     }
-// })
-// AC2.addEventListener('click',()=>{
-//     if (color_flg1) {
-//         color_flg1=false;
-//         color_flg2=2;
-//         console.log(color_flg1+":"+color_flg2);
-//         resColor();
-//         AC2.style.fill='red';
-//         make_api_list(1);
-//     } else {
-//         if (color_flg2===2) {
-//             color_flg1=true;
-//             console.log(color_flg1+":"+color_flg2);
-//             resColor();
-//         } else {
-//             color_flg2=2;
-//             console.log(color_flg1+":"+color_flg2);
-//             AC2.style.fill='red';
-//             make_api_list(1);
-//         }
-//     }
-// })
 
 AC1.addEventListener('click',()=>{
     resColor();
