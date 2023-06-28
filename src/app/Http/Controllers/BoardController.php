@@ -174,13 +174,15 @@ class BoardController extends Controller
 
         $boards = Board::find($board_id);
 
-        // 작성자 체크(작성자가 지금 로그인 되어있는 사람일 경우만 접근)
-        if(auth() === $boards->board_id) {
-            return view('board_edit')->with('boards', Board::findOrFail($board_id));
-        }
-        else {
-            return redirect()->route('user.login');
-        }
+        // 작성자 체크(작성자가 지금 로그인 되어있는 사람일 경우만 접근) 3차의 팀원에게 맡김 화면상에서는 안보이지만 악성 유저가 관리자 모드로 건드릴시를 위해 한번더 체크
+        // if(auth() === $boards->board_id) {
+        //     return view('board_edit')->with('boards', Board::findOrFail($board_id));
+        // }
+        // else {
+        //     return redirect()->route('user.login');
+        // }
+
+        return view('board_edit')->with('boards', Board::findOrFail($board_id));
         
     }
 
@@ -199,7 +201,7 @@ class BoardController extends Controller
 
         // 유효성 검사 : error나면 바로 return
         $request->validate([
-            'title'     => 'required|between:3,30'
+            'title'     => 'required|between:1,50'
             ,'content'  => 'required|max:2000'
             ,'user_id'       => 'required|integer'
         ]);
