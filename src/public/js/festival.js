@@ -58,22 +58,6 @@ function target(date) {
       const area = date[0][index].area_code;
       const statusClass=date[0][index].statusClass
       const statusText=date[0][index].statusText
-      // const today = new Date().toISOString().slice(0, 10); // 현재 날짜를 YYYY-MM-DD 형식으로 가져옵니다.
-      // let statusClass = "";
-      // let statusText = "";
-
-      // if (today < start) {
-      //   statusClass = "btn-success";
-      //   const daysDiff = Math.floor((new Date(start) - new Date(today)) / (1000 * 60 * 60 * 24)); // 날짜 차이 계산
-      //   statusText = `D-${daysDiff}`;
-      // } else if (today > end) {
-      //   statusClass = "btn-secondary";
-      //   statusText = "진행종료";
-      // } else {
-      //   statusClass = "btn-primary";
-      //   statusText = "진행중";
-      // }
-
       tempStr += `
         <a href="${domaine}${fesDetail}${id}" style="text-decoration: none;">
           <div class="card">
@@ -93,44 +77,6 @@ function target(date) {
 
   targetDiv.innerHTML = tempStr;
 }
-
-//메인 인기도/최신순
-//인기도
-// function sortByPopularity() {
-//   var festivals = Array.from(document.querySelectorAll('[data-hits]'));
-//   var today = new Date();
-
-//   festivals.sort(function(a, b) {
-//   var startDateA = new Date(a.getAttribute('data-start-date'));
-//   var endDateA = new Date(a.getAttribute('data-end-date'));
-//   var startDateB = new Date(b.getAttribute('data-start-date'));
-//   var endDateB = new Date(b.getAttribute('data-end-date'));
-
-//   var hitsA = parseInt(a.getAttribute('data-hits'));
-//   var hitsB = parseInt(b.getAttribute('data-hits'));
-
-//   if (hitsB !== hitsA) {
-//       return hitsB - hitsA;
-//   }
-
-//   var statusA = getStatus(startDateA, endDateA, today);
-//   var statusB = getStatus(startDateB, endDateB, today);
-
-//   if (statusB !== statusA) {
-//       return statusOrder(statusB) - statusOrder(statusA);
-//   }
-
-//   return startDateA - startDateB;
-//   });
-
-//   var container = document.getElementById('festivalContainer');
-//   container.innerHTML = '';
-
-//   festivals.forEach(function(festival) {
-//   container.appendChild(festival.parentNode);
-//   });
-// }
-
 // 축제의 진행 상태를 반환하는 함수
 function getStatus(startDate, endDate, today) {
   if (startDate <= today && today <= endDate) {
@@ -155,39 +101,6 @@ function statusOrder(status) {
       return 0;
   }
 }
-
-//최신순
-// function sortByLatest() {
-//   var festivals = Array.from(document.querySelectorAll('[data-hits]'));
-//   var today = new Date();
-
-//   var ongoingFestivals = [];
-//   var upcomingFestivals = [];
-//   var completedFestivals = [];
-
-//   festivals.forEach(function(festival) {
-//       var startDate = new Date(festival.getAttribute('data-start-date'));
-//       var endDate = new Date(festival.getAttribute('data-end-date'));
-//       var status = getStatus(startDate, endDate, today);
-
-//       if (status === '진행중') {
-//           ongoingFestivals.push(festival);
-//       } else if (status === '진행예정') {
-//           upcomingFestivals.push(festival);
-//       } else if (status === '진행완료') {
-//           completedFestivals.push(festival);
-//       }
-//   });
-
-//   var sortedFestivals = ongoingFestivals.concat(upcomingFestivals).concat(completedFestivals);
-
-//   var container = document.getElementById('festivalContainer');
-//   container.innerHTML = '';
-
-//   sortedFestivals.forEach(function(festival) {
-//       container.appendChild(festival.parentNode);
-//   });
-// }
 // 스크롤
 let time = null; // 스크롤 이벤트 호출 간격을 조절하기 위한 변수
 window.addEventListener('scroll', () => { // 스크롤 이벤트 리스너 등록

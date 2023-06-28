@@ -4,8 +4,6 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/festival.css">
-{{-- @dump(isset($str->fesStr));
-@dump(isset($str->fesStr)?$str->fesStr : ","); --}}
 {{-- 더보기 왔을때 실행 --}}
 <form action="">
     <input type="hidden" name="" id="onload" value="{{isset($str->fesStr)?$str->fesStr:","}}">
@@ -46,76 +44,6 @@
         </div>
     @endforeach
 </div>
-{{-- <div class="profile-container">
-	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=e52bf8f5-fcd0-43d7-945a-6c04f9c64c5b');">
-		<div class="profile-box-content">
-			<h2 style="color:white;">동대문디자인플라자(DDP)</h2>
-			<p>가장 매력적인 서울 야경을 볼 수 있는 동대문에 위치한 복합 문화공간</p>
-		</div>
-	</div>
-	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=58a44a35-5f34-4a39-a780-a292d8e76a3d');">
-		<div class="profile-box-content">
-			<h2 style="color:white;">부산 감천문화마을</h2>
-			<p>반려동물과 어린왕자 포토존에서 견생샷 남길 수 있는 곳</p>
-		</div>
-	</div>
-	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=72046952-ba47-42b3-ad2b-d38d28f96805');">
-		<div class="profile-box-content">
-			<h2 style="color:white;">담양 메타세쿼이아길</h2>
-			<p>가로수가 만든 초록빛 동굴</p>
-		</div>
-	</div>
-</div> --}}
-{{-- <div class="row">
-    @php
-    $count = 0;
-    $today = date('Y-m-d');
-    @endphp
-    @foreach ($data as $festival)
-        @if ($count < 3 && in_array($festival->festival_id, [1, 257, 300]))
-        <div class="profile-container col-4">
-            <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration-line: none;">
-                <div class="profile-container">
-                    <div class="profile-box" style="background-image: url('{{ $festival->poster_img ? $festival->poster_img : "/img/festival.jpg" }}');">
-                        <div class="profile-box-content">
-                            <h2>{{ $festival->festival_title }}</h2>
-                            <p>{{ $festival->description }}</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        @php $count++; @endphp
-        @endif
-    @endforeach
-</div> --}}
-{{-- <div class="row">
-    @php
-    $count = 0;
-    $today = date('Y-m-d');
-    @endphp
-    @foreach ($data as $festival)
-        @if ($count < 3)
-        <div class="col-4">
-            <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration-line: none;">
-                <span class="btn {{ ($today < $festival->festival_start_date) ? 'btn-success' : (($today > $festival->festival_end_date) ? 'btn-secondary' : 'btn-primary') }}">
-                    {{ ($today < $festival->festival_start_date) ? '진행예정' : (($today > $festival->festival_end_date) ? '진행종료' : '진행중') }}
-                </span>
-                <div class="profile-container">
-                    <div class="profile-box" style="background-image: url('{{ $festival->poster_img ? $festival->poster_img : "/img/festival.jpg" }}');">
-                        <div class="profile-box-content">
-                            <h2>{{ $festival->festival_title }}</h2>
-                            <p>{{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}</p>
-                            <p>{{ $festival->area_code }}</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endif
-        @php $count++; @endphp
-    @endforeach
-</div> --}}
 {{-- 검색부분 --}}
 <br>
 <div class="listinner">
@@ -181,11 +109,6 @@
 </div>
 <br>
 {{-- 메인출력 --}}
-{{-- <div class="sort mt-3" style="text-align:right;">
-    <button class="btn btn-success" onclick="sortByPopularity()">인기도</button>
-    <button class="btn btn-warning" id="sortByLatestBtn" onclick="sortByLatest()">최신순</button>
-    <a href="{{ route('main.request')}}" class="btn btn-info">요청페이지</a>
-</div> --}}
 <div class="image-container" id="festivalContainer">
 @php
 $count = 0;
@@ -194,23 +117,6 @@ $count = 0;
     @if ($count < 9)
         <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration: none;">
             <div class="card">
-                {{-- @php
-                $today = date('Y-m-d');
-                $startDate = $festival->festival_start_date;
-                $endDate = $festival->festival_end_date;
-                if ($today < $startDate) {
-                    $statusClass = 'btn-success';
-                    $statusText = '';
-                    $daysRemaining = date_diff(date_create($today), date_create($startDate))->format('%a');
-                    $statusText .= ' D-' . $daysRemaining . '';
-                } elseif ($today > $endDate) {
-                    $statusClass = 'btn-secondary';
-                    $statusText = '진행종료';
-                } else {
-                    $statusClass = 'btn-primary';
-                    $statusText = '진행중';
-                }
-                @endphp --}}
                 <button type="button" class="btn {{ $festival->statusClass }}" id="ing">
                     {{ $festival->statusText }}
                 </button>
@@ -233,13 +139,4 @@ $count = 0;
 <script>
 </script>
 <script src="{{asset('js/festival.js')}}"></script>
-{{-- 이동버튼 --}}
-{{-- <button class="moveTopBtn" title="맨 위로"></button>
-<script>
-    const $topBtn = document.querySelector(".moveTopBtn");
-
-    $topBtn.onclick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-</script> --}}
 @endsection

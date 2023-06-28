@@ -3,52 +3,6 @@
 
 /* 메인페이지 */
 /* 검색부분 */
-/* .inner {
-    text-align: center;
-    max-width: 1600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.select_box {
-    margin-right: 10px;
-    width: 300px;
-}
-
-.btn_box {
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-}
-
-.search_box_wrap {
-    width: 100%;
-    display: flex;
-}
-.select_box.select_date::before {
-    content: "";
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    margin-right: 5px;
-    background-image: url('https://korean.visitkorea.or.kr/kfes/resources/img/date_ico.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-.select_box.select_area::before {
-    content: "";
-    display: inline-block;
-    width: 54px;
-    height: 54px;
-    margin-right: 5px;
-    background-image: url('https://korean.visitkorea.or.kr/kfes/resources/img/area_ico.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-} */
-/* 추가 */
 a {
     text-decoration: none;
 }
@@ -250,21 +204,6 @@ body{
 #ing {
     position: absolute;
 }
-
-/* 위로버튼 */
-/* .moveTopBtn {
-    position: fixed;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    width: 2rem;
-    height: 2rem;
-    background: url("https://cdn-icons-png.flaticon.com/512/55/55008.png") no-repeat center center;
-    background-size: cover;
-    border: none;
-    outline: none;
-    cursor: pointer;
-} */
-
 /* 리스트페이지 */
 /* 메인 */
 .lcontainer{
