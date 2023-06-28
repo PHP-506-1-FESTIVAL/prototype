@@ -8424,7 +8424,6 @@ blockquote .shape {
 }
 
 .footer .single-footer.mobile-app .app-button .btn i {
-  font-size: 28px;
   position: absolute;
   left: 22px;
   top: 50%;
@@ -8433,13 +8432,11 @@ blockquote .shape {
 }
 
 .footer .single-footer.mobile-app .app-button .btn .text {
-  font-size: 14px;
   font-weight: 500;
 }
 
 .footer .single-footer.mobile-app .app-button .btn .text .small-text {
   font-weight: 400;
-  font-size: 13px;
   display: block;
   margin-bottom: -1px;
 }
@@ -8475,19 +8472,17 @@ blockquote .shape {
 }
 
 .footer .single-footer h3 {
-  font-size: 18px;
   font-weight: 600;
   display: block;
   /*margin-bottom: 20px;  -------------change0628.35px-> 20px 신유진*/
-  color: #fff;
+  color: #ffffff;
 }
 
 .footer .single-footer h4 {
-  font-size: 15px;
   font-weight: 600;
   display: block;
   margin-bottom: 20px;  /*-------------del0628.margin 신유진*/
-  color: #fff;
+  color: #ffffff;
 }
 
 .footer .footer-bottom {
