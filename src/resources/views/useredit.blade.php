@@ -36,7 +36,7 @@
                     <!-- Start Dashboard Sidebar -->
                     <div class="dashboard-sidebar">
                         <div class="user-image">
-                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="#">
+                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
                             <h3>{{session()->get('user_nickname')}}
                                 <span><a href="javascript:void(0)">{{session()->get('user_email')}}</a></span>
                             </h3>
@@ -66,9 +66,10 @@
                             <h3 class="block-title">회원정보 수정</h3>
                             <div class="inner-block">
                                 <div class="image mb-4">
-                                    <img src="/img/profile/{{session()->get('user_profile')}}" alt="#">
+                                    <img src="/img/profile/{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
                                 </div>
                                 <form action="{{route('user.update')}}" method="post" id="signupForm" class="needs-validation" enctype="multipart/form-data" onsubmit="return false">
+                                    @csrf
                                     <div class="row g-4">
                                         <div class="col-lg-6 col-12">
                                             <label for="email" class="form-label">이메일 <span class="text-danger">*</span></label>
@@ -515,6 +516,7 @@
     var nameflg = false;
     var birthflg = false;
     var nickflg = false;
+    var nickflg2 = false;
 
     document.getElementById('submitBtn').onclick = function() {
         var pw = document.getElementById('password');
@@ -534,7 +536,7 @@
             alert('이름을 다시 한번 확인해 주세요.');
         } else if (birthflg && !year.classList.contains('is-valid') || birthflg && !mon.classList.contains('is-valid') || birthflg && !day.classList.contains('is-valid')) {
             alert('생년월일을 다시 한번 확인해 주세요.')
-        } else if (nickflg || !nick.classList.contains('is-valid')) {
+        } else if (nickflg || !nick.classList.contains('is-valid') && nickflg2) {
             alert('닉네임 중복체크를 진행해 주세요.')
         } else {
             signupForm.removeAttribute('onsubmit');
@@ -683,8 +685,8 @@
         }
     }
 
-    document.getElementById("birthday").onkeyup = function() {
-        nickflg = true;
+    document.getElementById("nickname").onkeyup = function() {
+        nickflg2 = true;
     }
 
 </script>
