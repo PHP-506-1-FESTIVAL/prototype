@@ -1,5 +1,4 @@
 <footer class="footer mt-auto mt-auto px-5">
-    {{-- 0627김재성 푸터수정 --}}
     <div class="footer-top">
         <div class="container">
             <div class="row">
