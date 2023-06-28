@@ -67,7 +67,7 @@
                                             <i class="lni lni-heart"></i>
                                         </div>
                                         <h3>
-                                            340
+                                            {{$data[0]}}
                                             <span>찜</span>
                                         </h3>
                                     </div>
@@ -80,7 +80,7 @@
                                             <i class="lni lni-pencil"></i>
                                         </div>
                                         <h3>
-                                            23
+                                            {{$data[1]}}
                                             <span>글</span>
                                         </h3>
                                     </div>
@@ -93,7 +93,7 @@
                                             <i class="lni lni-comments"></i>
                                         </div>
                                         <h3>
-                                            45
+                                            {{$data[2]}}
                                             <span>댓글</span>
                                         </h3>
                                     </div>
@@ -106,89 +106,51 @@
                             <div class="col-lg-6 col-md-12 col-12">
                                 <!-- Start Activity Log -->
                                 <div class="activity-log dashboard-block">
-                                    <h3 class="block-title">My Activity Log</h3>
+                                    <h3 class="block-title">최근 작성한 글</h3>
                                     <ul>
+                                        @forelse($board as $key => $val)
                                         <li>
                                             <div class="log-icon">
-                                                <i class="lni lni-alarm"></i>
+                                                <i class="lni lni-pencil"></i>
                                             </div>
-                                            <a href="javascript:void(0)" class="title">Your Profile Updated!</a>
-                                            <span class="time">12 Minutes Ago</span>
+                                            <a href="/board/{{$board[$key]->board_id}}" class="title">{{$board[$key]->board_title}}</a>
+                                            <span class="time">{{substr($board[$key]->created_at, 2, 14)}}</span>
                                             <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
                                         </li>
+                                        @empty
                                         <li>
                                             <div class="log-icon">
-                                                <i class="lni lni-alarm"></i>
+                                                <i class="lni lni-pencil"></i>
                                             </div>
-                                            <a href="javascript:void(0)" class="title">You change your password</a>
-                                            <span class="time">59 Minutes Ago</span>
-                                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                                            <a href="javascript:void(0)" class="title">아직 작성한 글이 없습니다.</a>
                                         </li>
-                                        <li>
-                                            <div class="log-icon">
-                                                <i class="lni lni-alarm"></i>
-                                            </div>
-                                            <a href="javascript:void(0)" class="title">Your ads approved!</a>
-                                            <span class="time">5 Hours Ago</span>
-                                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
-                                        </li>
-                                        <li>
-                                            <div class="log-icon">
-                                                <i class="lni lni-alarm"></i>
-                                            </div>
-                                            <a href="javascript:void(0)" class="title">You submit a new ads</a>
-                                            <span class="time">8 hours Ago</span>
-                                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
-                                        </li>
-                                        <li>
-                                            <div class="log-icon">
-                                                <i class="lni lni-alarm"></i>
-                                            </div>
-                                            <a href="javascript:void(0)" class="title">You subscribe as a pro user!</a>
-                                            <span class="time">1 day Ago</span>
-                                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
-                                        </li>
+                                        @endforelse
                                     </ul>
                                 </div>
                                 <!-- End Activity Log -->
                             </div>
                             <div class="col-lg-6 col-md-12 col-12">
                                 <!-- Start Recent Items -->
-                                <div class="recent-items dashboard-block">
-                                    <h3 class="block-title">Recent Ads</h3>
+                                <div class="activity-log dashboard-block">
+                                    <h3 class="block-title">최근 작성한 댓글</h3>
                                     <ul>
+                                        @forelse($comment as $key => $val)
                                         <li>
-                                            <div class="image">
-                                                <a href="javascript:void(0)"><img src="https://via.placeholder.com/100x100" alt="#"></a>
+                                            <div class="log-icon">
+                                                <i class="lni lni-comments"></i>
                                             </div>
-                                            <a href="javascript:void(0)" class="title">iPhone 11 Pro Max</a>
-                                            <span class="time">12 Minutes Ago</span>
+                                            <a href="/board/{{$comment[$key]->board_id}}" class="title">{{$comment[$key]->comment_content}}</a>
+                                            <span class="time">{{substr($comment[$key]->created_at, 2, 14)}}</span>
                                             <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
                                         </li>
+                                        @empty
                                         <li>
-                                            <div class="image">
-                                                <a href="javascript:void(0)"><img src="https://via.placeholder.com/100x100" alt="#"></a>
+                                            <div class="log-icon">
+                                                <i class="lni lni-comments"></i>
                                             </div>
-                                            <a href="javascript:void(0)" class="title">Polaris 600 Assault 144</a>
-                                            <span class="time">5 days Ago</span>
-                                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
+                                            <a href="javascript:void(0)" class="title">아직 작성한 댓글이 없습니다.</a>
                                         </li>
-                                        <li>
-                                            <div class="image">
-                                                <a href="javascript:void(0)"><img src="https://via.placeholder.com/100x100" alt="#"></a>
-                                            </div>
-                                            <a href="javascript:void(0)" class="title">Brand New Bagpack</a>
-                                            <span class="time">1 week Ago</span>
-                                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
-                                        </li>
-                                        <li>
-                                            <div class="image">
-                                                <a href="javascript:void(0)"><img src="https://via.placeholder.com/100x100" alt="#"></a>
-                                            </div>
-                                            <a href="javascript:void(0)" class="title">Honda Civic VTi 2023</a>
-                                            <span class="time">3 week Ago</span>
-                                            <span class="remove"><a href="javascript:void(0)"><i class="lni lni-close"></i></a></span>
-                                        </li>
+                                        @endforelse
                                     </ul>
                                 </div>
                                 <!-- End Recent Items -->

@@ -14,13 +14,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">마이페이지</h1>
+                        <h1 class="page-title">회원 탈퇴</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
                         <li><a href="{{route('main')}}">메인</a></li>
-                        <li>마이페이지</li>
+                        <li>회원 탈퇴</li>
                     </ul>
                 </div>
             </div>

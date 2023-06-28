@@ -124,7 +124,18 @@ class UserController extends Controller
             return redirect()->route('user.login');
         }
 
-        return view('usermain');
+        $fav = Favorite::where('user_id', session('user_id'))->get();
+        $favcount = $fav->count();
+        $board = Board::where('user_id', session('user_id'))->get();
+        $board2 = Board::where('user_id', session('user_id'))->limit(3)->orderBy('created_at', 'desc')->get();
+        $boardcount = $board->count();
+        $comment = Comment::where('user_id', session('user_id'))->get();
+        $comment2 = Comment::where('user_id', session('user_id'))->limit(3)->orderBy('created_at', 'desc')->get();
+        $commentcount = $comment->count();
+        $data = [];
+        $data = [$favcount, $boardcount, $commentcount];
+
+        return view('usermain')->with('data', $data)->with('board', $board2)->with('comment', $comment2);
     }
 
     function useredit() {
@@ -304,7 +315,7 @@ class UserController extends Controller
         $data = Board::select('board_id', 'board_title', 'created_at', 'board_hit')
                 ->where('user_id', session('user_id'))
                 ->orderBy('created_at', 'desc')
-                ->paginate(10);
+                ->paginate(5);
         return view('articles')->with('data', $data);
     }
 
@@ -312,7 +323,7 @@ class UserController extends Controller
         $data = Comment::select('comment_id', 'board_id', 'comment_type', 'comment_content', 'created_at')
                 ->where('user_id', session('user_id'))
                 ->orderBy('created_at', 'desc')
-                ->paginate(10);
+                ->paginate(5);
         return view('comments')->with('data', $data);
     }
 }
