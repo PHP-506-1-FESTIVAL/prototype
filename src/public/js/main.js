@@ -2,23 +2,10 @@ const api = 'http://localhost/api/mainapi/'
 const domaine = 'http://localhost/'
 const fesOrder = 'feslist/'
 const fesDetail = 'fesdetail/'
-let monthStr="";
 let noneImg='img/festival.jpg';
 
-let month = document.getElementById('month');
-function changText(item) {
-    if (item===undefined) {
-        month.innerHTML='전체';
-        monthStr="";
-    }
-    else{
-        month.innerHTML=item+'월';
-        monthStr=item;
-        const changVal = document.getElementById('fesOrederIp');
-        changVal.setAttribute('value',","+monthStr);
-    }
-    resColor()
-}
+
+// let month = document.getElementById('month');
 
 // function make_list(date) {
 
@@ -32,6 +19,13 @@ function changText(item) {
 
 //     });
 // }
+function changText() {
+    const monthStr=document.getElementById('category').value
+    const changVal = document.getElementById('fesOrederIp');
+    changVal.setAttribute('value',","+monthStr);
+    resColor()
+}
+
 function make_api_list(str_val) {
 
 
@@ -86,8 +80,8 @@ function target(date) {
         }
         c = false;
         tempStr +=`
-        <div id="moreFes" class="align-self-end">
-            <a style="font-size: xx-large" onclick="FesSub()" href="#">더보기>></a>
+        <div class="button" style="padding: 10px; margin: 10px;">
+            <button type="button" class="btn" onclick="FesSub()">더보기</button>
         </div>`
     }
     targetDiv.innerHTML = tempStr;
@@ -202,86 +196,103 @@ function resColor() {
 AC1.addEventListener('click',()=>{
     resColor();
     AC1.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(1+","+monthStr);
 })
 AC2.addEventListener('click',()=>{
     resColor();
     AC2.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(2+","+monthStr);
 })
 AC3.addEventListener('click',()=>{
     resColor();
     AC3.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(3+","+monthStr);
 })
 AC4.addEventListener('click',()=>{
     resColor();
     AC4.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(4+","+monthStr);
 })
 AC5.addEventListener('click',()=>{
     resColor();
     AC5.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(5+","+monthStr);
 })
 AC6.addEventListener('click',()=>{
     resColor();
     AC6.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(6+","+monthStr);
 })
 AC7.addEventListener('click',()=>{
     resColor();
     AC7.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(7+","+monthStr);
 })
 AC8.addEventListener('click',()=>{
     resColor();
     AC8.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(8+","+monthStr);
 })
 AC31.addEventListener('click',()=>{
     resColor();
     AC31.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(31+","+monthStr);
 })
 AC32.addEventListener('click',()=>{
     resColor();
     AC32.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(32+","+monthStr);
 })
 AC33.addEventListener('click',()=>{
     resColor();
     AC33.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(33+","+monthStr);
 })
 AC34.addEventListener('click',()=>{
     resColor();
     AC34.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(34+","+monthStr);
 })
 AC35.addEventListener('click',()=>{
     resColor();
     AC35.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(35+","+monthStr);
 })
 AC36.addEventListener('click',()=>{
     resColor();
     AC36.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(36+","+monthStr);
 })
 AC37.addEventListener('click',()=>{
     resColor();
     AC37.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(37+","+monthStr);
 })
 AC38.addEventListener('click',()=>{
     resColor();
     AC38.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(38+","+monthStr);
 })
 AC39.addEventListener('click',()=>{
     resColor();
     AC39.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
     make_api_list(39+","+monthStr);
 })
 
