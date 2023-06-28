@@ -121,13 +121,9 @@ class BoardController extends Controller
         // $data = Board::find($board_id);
 
         // user id가 아닌 user nickname으로 표현하기 위한 조인
-        $boards = DB::table('boards')
-        ->join('users', 'boards.user_id', '=', 'users.user_id' )
-        ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.board_hit','boards.user_id')
-        ->where('boards.board_id', $board_id)->get();
 
         // $data = Board::find($board_id);
-        // dump($data);
+        // dump($boards);
         // $data->board_hit++;
         // $data->save();
 
@@ -135,21 +131,25 @@ class BoardController extends Controller
         // + ex) 게시물 id가 1인 경우 $cookieKey는 'boardHits1'
         $cookieName = 'boardHits'.$board_id;
         $hitsTime = now()->addMinutes(10); // 조회수 쿨타임 설정
-
+        // dump($boards);
         // + 쿠키가 존재하지 않을 경우에만 아래의 로직을 실행
         // + Cookie::has($cookieName) : $cookieKey로 지정한 이름의 쿠키가 있는지 확인
         // + 쿠키가 존재하는 경우 true, 존재하지 않는 경우 false를 반환
         if (!Cookie::has($cookieName)) {
-            $boards[0]->hits++; // 조회수 올려주기
+            $board2 = Board::find($board_id);
+            $board2->board_hit++; // 조회수 올려주기
             // $boards->timestamps = false; // 조회수 올려도 수정일자 바뀌지 않게
-            $boards[0]->save();
 
             // + Cookie::queue() : Laravel에서 제공하는 쿠키를 설정하고 브라우저에 전송하는 메서드
             // + $cookieKey는 쿠키의 이름, true는 쿠키의 값, $hitsTime->timestamp는 쿠키의 유효 기간을 초 단위의 정수 값으로 설정
             // + $hitsTime->timestamp : $hitsTime 변수가 Carbon 객체인데, Cookie::queue() 메서드는 세 번째 매개변수로 정수 값을 요구하기때문에 timestamp로 변환
             Cookie::queue($cookieName, true, $hitsTime->timestamp);
+            $board2->save();
         }
-
+        $boards = DB::table('boards')
+        ->join('users', 'boards.user_id', '=', 'users.user_id' )
+        ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.board_hit','boards.user_id')
+        ->where('boards.board_id', $board_id)->get();
         // find() : 에외발생시 false만 리턴, 프로그램이 계속 실행됨
         // findOrFail() : 예외발생시 에러처리(404)
 
