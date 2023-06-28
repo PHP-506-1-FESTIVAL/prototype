@@ -1,13 +1,13 @@
 <!-- Start Footer Area -->
     <footer class="footer mt-auto mt-auto px-5">
         {{-- 0627김재성 푸터수정 --}}
-        {{-- <!-- Start Footer Top -->
+        <!-- Start Footer Top -->
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-12">
+                    {{-- <div class="col-lg-3 col-md-6 col-12"> --}}
                         <!-- Single Widget -->
-                        <div class="single-footer mobile-app">
+                        {{-- <div class="single-footer mobile-app">
                             <h3>Mobile Apps</h3>
                             <div class="app-button">
                                 <a href="javascript:void(0)" class="btn">
@@ -25,31 +25,33 @@
                                     </span>
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- End Single Widget -->
-                    </div>
+                    {{-- </div> --}}
                     <div class="col-lg-3 col-md-6 col-12">
                         <!-- Single Widget -->
                         <div class="single-footer f-link">
-                            <h3>Locations</h3>
+                            <h3>Team</h3>
+                            <h4><a href="https://github.com/PHP-506-1-FESTIVAL">여기어때요, 좋조?</a></h4>
+
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <ul>
-                                        <li><a href="javascript:void(0)">Chicago</a></li>
-                                        <li><a href="javascript:void(0)">New York City</a></li>
-                                        <li><a href="javascript:void(0)">San Francisco</a></li>
-                                        <li><a href="javascript:void(0)">Washington</a></li>
-                                        <li><a href="javascript:void(0)">Boston</a></li>
+                                        <li><a href="javascript:void(0)">이가원</a></li>
+                                        <li><a href="javascript:void(0)">박진영</a></li>
+                                        <li><a href="javascript:void(0)">김재성</a></li>
+                                        <li><a href="javascript:void(0)">신유진</a></li>
+                                        {{-- <li><a href="javascript:void(0)">Boston</a></li> --}}
                                     </ul>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-12">
+                                {{-- <div class="col-lg-6 col-md-6 col-12">
                                     <ul>
                                         <li><a href="javascript:void(0)">Los Angeles</a></li>
                                         <li><a href="javascript:void(0)">Seattle</a></li>
                                         <li><a href="javascript:void(0)">Las Vegas</a></li>
                                         <li><a href="javascript:void(0)">San Diego</a></li>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <!-- End Single Widget -->
@@ -57,13 +59,14 @@
                     <div class="col-lg-3 col-md-6 col-12">
                         <!-- Single Widget -->
                         <div class="single-footer f-link">
-                            <h3>Quick Links</h3>
+                            <h3>Academy Connect</h3>
+                            <h4><a href="https://daegu.greenart.co.kr/">그린컴퓨터아트학원 대구</a></h4>
                             <ul>
-                                <li><a href="javascript:void(0)">About Us</a></li>
-                                <li><a href="javascript:void(0)">How It's Works</a></li>
-                                <li><a href="javascript:void(0)">Login</a></li>
-                                <li><a href="javascript:void(0)">Signup</a></li>
-                                <li><a href="javascript:void(0)">Help & Support</a></li>
+                                <li>대구광역시 중구 중앙대로 394, 제일빌딩 5F</li>
+                                <li>053.572.1005</li>
+                                <li>기업요구를 반영한 PHP 풀스택(프론트앤드+백앤드) 개발자 양성과정</li>
+                                {{-- <li><a href="javascript:void(0)">Signup</a></li>
+                                <li><a href="javascript:void(0)">Help & Support</a></li> --}}
                             </ul>
                         </div>
                         <!-- End Single Widget -->
@@ -71,17 +74,24 @@
                     <div class="col-lg-3 col-md-6 col-12">
                         <!-- Single Widget -->
                         <div class="single-footer f-contact">
-                            <h3>Contact</h3>
-                            <ul>
+                            <h3>Reference Website</h3>
+                            <h4>참고 웹사이트</h4>
+                            {{-- <ul>
                                 <li>23 New Design Str, Lorem Upsum 10<br> Hudson Yards, USA</li>
                                 <li>Tel. +(123) 1800-567-8990 <br> Mail. support@classigrids.com</li>
+                            </ul> --}}
+                            <ul class="logo_list">
+                                <li><a href="https://api.visitkorea.or.kr/#/" target="_blank" title="새창"><img src="../resources/images/common/logo_foot_api.png?v=20230601001" alt="TourAPI 4.0"></a></li>
+                                <li><a href="http://www.wa.or.kr/board/list.asp?search=total&amp;SearchString=%B4%EB%C7%D1%B9%CE%B1%B9%20%B1%B8%BC%AE%B1%B8%BC%AE&amp;BoardID=0006" target="_blank" title="새창"><img src="https://cdn.visitkorea.or.kr/resources/images/common/logo_foot_wa.png" alt="과학기술정보통신부 웹 접근성 품질인증 마크"></a></li>
+                                <li><a href="https://kto.visitkorea.or.kr/kor.kto" target="_blank" title="새창"><img src="https://cdn.visitkorea.or.kr/resources/images/common/logo_foot_gg.png" alt="한국관광공사"></a></li>
+                                <li><a href="https://www.mcst.go.kr/kor/main.jsp" target="_blank" title="새창"><img src="https://cdn.visitkorea.or.kr/resources/images/common/logo_foot_mg.png" alt="문화체육관광부"></a></li>
                             </ul>
                         </div>
                         <!-- End Single Widget -->
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <!--/ End Footer Middle -->
         <!-- Start Footer Bottom -->
         <div class="footer-bottom">
@@ -90,22 +100,22 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="content">
-                                <ul class="footer-bottom-links">
+                                {{-- <ul class="footer-bottom-links">
                                     <li><a href="javascript:void(0)">Terms of use</a></li>
                                     <li><a href="javascript:void(0)"> Privacy Policy</a></li>
                                     <li><a href="javascript:void(0)">Advanced Search</a></li>
                                     <li><a href="javascript:void(0)">Site Map</a></li>
                                     <li><a href="javascript:void(0)">Information</a></li>
-                                </ul>
+                                </ul> --}}
                                 <p class="copyright-text">Designed and Developed by <a href="https://graygrids.com/"
                                         rel="nofollow" target="_blank">GrayGrids</a>
                                 </p>
-                                <ul class="footer-social">
+                                {{-- <ul class="footer-social">
                                     <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
                                     <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
                                     <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
                                     <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
-                                </ul>
+                                </ul> --}}
                             </div>
                         </div>
                     </div>

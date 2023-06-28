@@ -8369,7 +8369,7 @@ blockquote .shape {
   color: #081828;
   font-size: 15px;
   font-weight: 400;
-}
+}.footer-top
 
 .coming-soon .soon-content .box h1 {
   font-size: 26px;
@@ -8390,14 +8390,15 @@ blockquote .shape {
   background: #081828;
 }
 
-.footer .footer-top {
-  padding: 100px 0;
-  padding-top: 70px;
+.footer .footer-top {   /*-------------del0628.padding 신유진*/
+  /* padding: 100px 0; */
+  /* padding-top: 70px; */
   border-bottom: 1px solid #ebebeb s;
 }
 
 .footer .single-footer {
-  margin-top: 30px;
+  /*margin-top: 30px;   -------------del0628.margin-top 신유진*/
+  margin: 15px;   /*-------------add0628.T/B padding 신유진*/
 }
 
 .footer .single-footer.mobile-app .app-button .btn {
@@ -8445,7 +8446,7 @@ blockquote .shape {
 
 .footer .single-footer.f-link li {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 3px;   /*-------------change0628.10px-> 3px 신유진*/
 }
 
 .footer .single-footer.f-link li:last-child {
@@ -8464,7 +8465,7 @@ blockquote .shape {
 
 .footer .single-footer.f-contact ul li {
   display: block;
-  margin-bottom: 25px;
+  margin-bottom: 3px;   /*-------------change0628.25px-> 3px 신유진*/
   line-height: 25px;
   color: #e1e1e1;
 }
@@ -8477,7 +8478,15 @@ blockquote .shape {
   font-size: 18px;
   font-weight: 600;
   display: block;
-  margin-bottom: 35px;
+  /*margin-bottom: 20px;  -------------change0628.35px-> 20px 신유진*/
+  color: #fff;
+}
+
+.footer .single-footer h4 {
+  font-size: 15px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 20px;  /*-------------del0628.margin 신유진*/
   color: #fff;
 }
 
@@ -8489,7 +8498,7 @@ blockquote .shape {
 
 .footer .footer-bottom .inner {
   border-top: 1px solid #ebebeb4f;
-  padding: 50px 0;
+  padding: 20px 0;    /*-------------change0628.50px-> 20px 신유진*/
 }
 
 .footer .footer-bottom .footer-bottom-links li {
@@ -8518,6 +8527,7 @@ blockquote .shape {
   display: none;
 }
 
+footer-item-title,
 .footer .footer-bottom .footer-bottom-links li a {
   color: #e1e1e1;
   font-weight: 400;
@@ -8528,10 +8538,10 @@ blockquote .shape {
 }
 
 .footer .footer-bottom .copyright-text {
-  margin-top: 15px;
+  /*margin-top: 15px;   -------------del0628.margin 신유진*/
   color: #e1e1e1;
   font-family: 'Jost',
- sans-serif;
+  sans-serif;
 }
 
 .footer .footer-bottom .copyright-text a {
