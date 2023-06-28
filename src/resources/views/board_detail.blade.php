@@ -102,11 +102,11 @@
                                     @endif
                                     {{-- // [버튼] 목록으로 --}}
                                     <div class="col-5" style="padding: 0 0 0 15%;">
-                                        <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a>
+                                        <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button" style="width:90px;">목록으로</button></a>
                                     </div>
                                 </div>
                             </div>
-                            <p><div style="white-space:pre;">{{$data->board_content}}</div></p>
+                            <p><div style="white-space:pre-wrap; word-wrap: break-word;">{{$data->board_content}}</div></p>
                         </div>
                         @include('layout.comment')
                     </div>
