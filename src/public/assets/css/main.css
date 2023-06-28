@@ -8589,3 +8589,11 @@ blockquote .shape {
     top: 0%;
     left: 0%;
 }
+
+.headsearch{
+  margin:0;
+}
+
+.headersearch::placeholder {
+  font-size: 0.9rem;
+}
