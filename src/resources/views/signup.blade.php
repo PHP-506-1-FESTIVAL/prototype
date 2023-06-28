@@ -4,6 +4,11 @@
 
 @section('content')
 
+    @if (isset(session('signupflg')))
+        <script>alert('회원가입이 완료되었습니다.');</script>
+        <script>alert('다시 한번 로그인 해 주세요.');</script>
+    @endif
+
     <!-- Start Breadcrumbs -->
     <div class="breadcrumbs">
         <div class="container">

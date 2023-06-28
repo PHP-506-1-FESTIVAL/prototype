@@ -114,7 +114,9 @@ class UserController extends Controller
             $user2->save();
         }
 
-        return redirect()->route('user.login');
+        $signupflg = '1';
+
+        return redirect()->route('user.login')->with($signupflg);
     }
 
     function usermain() {
