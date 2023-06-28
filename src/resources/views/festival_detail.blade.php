@@ -151,10 +151,10 @@
             </div>
         @endforeach
         {{-- 댓글 --}}
-        <img src='{{asset('img/comment.jpg')}}' style="width:1160px; object-fit:cover; text-align:center;">
+        {{-- <img src='{{asset('img/comment.jpg')}}' style="width:1160px; object-fit:cover; text-align:center;"> --}}
     </div>
 </div>
 </section>
-{{-- @include('layout.comment') --}}
+    @include('layout.comment')
 <script src="{{asset('js/festival.js')}}"></script>
 @endsection
