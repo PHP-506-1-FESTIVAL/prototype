@@ -132,6 +132,7 @@ body{
 .profile-container{
     margin-top: 70px;
 	display: flex;
+    margin-bottom: 20px;
 }
 .profile-box{
 	flex-basis: calc(33.333%);
@@ -184,6 +185,8 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .image-container div {

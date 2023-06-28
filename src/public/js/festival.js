@@ -143,18 +143,18 @@ function getStatus(startDate, endDate, today) {
 }
 
 // 진행 상태의 정렬 순서를 반환하는 함수
-// function statusOrder(status) {
-//   switch (status) {
-//   case '진행중':
-//       return 1;
-//   case '진행예정':
-//       return 2;
-//   case '진행완료':
-//       return 3;
-//   default:
-//       return 0;
-//   }
-// }
+function statusOrder(status) {
+  switch (status) {
+  case '진행중':
+      return 1;
+  case '진행예정':
+      return 2;
+  case '진행완료':
+      return 3;
+  default:
+      return 0;
+  }
+}
 
 //최신순
 // function sortByLatest() {
