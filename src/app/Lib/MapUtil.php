@@ -66,6 +66,23 @@ class MapUtil {
         }
 
     }
-
+    public function fesStat($param)
+    {
+        $today = date('Y-m-d');
+        foreach ($param as $val) {
+            if ($today<$val->festival_start_date) {
+                $val->statusClass='btn-success';
+                $val->statusText='D - '.date_diff(date_create($today), date_create($val->festival_start_date))->format('%a');
+            }
+            elseif ($today>$val->festival_end_date) {
+                $val->statusClass = 'btn-secondary';
+                $val->statusText = '진행종료';
+            }
+            else {
+                $val->statusClass = 'btn-primary';
+                $val->statusText = '진행중';
+            }
+        }
+    }
 
 }

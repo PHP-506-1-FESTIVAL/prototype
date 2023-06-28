@@ -42,6 +42,8 @@ class MainController extends Controller
 
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($result);
+        $mapUtil->fesStat($result);
+
         // 0620 이가원 udt
         // if (isset(Auth::User()->user_id)) {
         //     $result_user = User::find(Auth::User()->user_id)->select(['user_email','user_nickname','user_profile'])->get();
@@ -50,7 +52,7 @@ class MainController extends Controller
         //     $result_user=null;
         // }
 
-        $today = date('Y-m-d');
+        // $today = date('Y-m-d');
         // foreach ($result as $value) {
         //     $startDate[] = $value->festival_start_date;
         //     $endDate[] = $value->festival_end_date;
@@ -71,20 +73,20 @@ class MainController extends Controller
         //     // $result[$i]=['test'=>'test1'];
         // }
 
-        foreach ($result as $val) {
-            if ($today<$val->festival_start_date) {
-                $val->statusClass='btn-success';
-                $val->statusText='D - '.date_diff(date_create($today), date_create($val->festival_start_date))->format('%a');
-            }
-            elseif ($today>$val->festival_end_date) {
-                $val->statusClass = 'btn-secondary';
-                $val->statusText = '진행종료';
-            }
-            else {
-                $val->statusClass = 'btn-primary';
-                $val->statusText = '진행중';
-            }
-        }
+        // foreach ($result as $val) {
+        //     if ($today<$val->festival_start_date) {
+        //         $val->statusClass='btn-success';
+        //         $val->statusText='D - '.date_diff(date_create($today), date_create($val->festival_start_date))->format('%a');
+        //     }
+        //     elseif ($today>$val->festival_end_date) {
+        //         $val->statusClass = 'btn-secondary';
+        //         $val->statusText = '진행종료';
+        //     }
+        //     else {
+        //         $val->statusClass = 'btn-primary';
+        //         $val->statusText = '진행중';
+        //     }
+        // }
         // dump($result);
         // dump($statusClass);
         // dump($statusText);
