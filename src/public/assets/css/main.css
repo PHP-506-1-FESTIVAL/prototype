@@ -1554,8 +1554,9 @@ ol {
   .navbar-collapse {
     position: absolute;
     top: 66px !important;
-    left: 0;
-    width: 100%;
+    /* left: 0;
+    width: 100%; */
+    right:0;
     background-color: #fff;
     z-index: 9;
     -webkit-box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.1);
@@ -1572,7 +1573,7 @@ ol {
     position: absolute;
     top: 165% !important;
     left: 0;
-    width: 100%;
+    /* width: 100%; */
     background-color: #fff;
     z-index: 9;
     -webkit-box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.1);
