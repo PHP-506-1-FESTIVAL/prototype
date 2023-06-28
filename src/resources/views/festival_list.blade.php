@@ -118,7 +118,7 @@
 </div> --}}
 {{-- 검색부분 --}}
 <br>
-<div class="inner">
+<div class="listinner">
     <form name="festivalSearch" id="festivalSearch" class="festival_search">
         <div class="search_box_wrap" >
             <div class="select_box select_date" style="display:flex; align-items:center">
