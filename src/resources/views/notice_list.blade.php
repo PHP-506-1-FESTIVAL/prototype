@@ -67,10 +67,10 @@
 									<div class="col-lg-1 col-md-1 col-12">
 										<p>No</p>
 									</div>
-									<div class="col-lg-5 col-md-5 col-12">
+									<div class="col-lg-9 col-md-5 col-12">
 										<p>제목</p>
 									</div>
-									<div class="col-lg-2 col-md-2 col-12">
+									<div class="col-lg-1 col-md-2 col-12">
 										<p>작성일</p>
 									</div>
 									<div class="col-lg-1 col-md-1 col-12">
@@ -86,12 +86,12 @@
 									<div class="col-lg-1 col-md-1 col-12">
                                         {{ $notice->notice_id }}
 									</div>
-									<div class="col-lg-5 col-md-5 col-12">
+									<div class="col-lg-9 col-md-5 col-12">
 										<div class="content">
 											<p class="title"><a href="{{route('notice.show', ['id' => $notice->notice_id])}}">{{ $notice->notice_title }}</a></p>
 										</div>
 									</div>
-									<div class="col-lg-2 col-md-2 col-12">
+									<div class="col-lg-1 col-md-2 col-12">
 										<p>{{ $notice->created_at }}</p>
 									</div>
 									<div class="col-lg-1 col-md-1 col-12">
