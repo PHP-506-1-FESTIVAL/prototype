@@ -114,9 +114,9 @@ class UserController extends Controller
             $user2->save();
         }
 
-        $signupflg = '1';
+        session()->put('signup_flg', '1');
 
-        return redirect()->route('user.login')->with($signupflg);
+        return redirect()->route('user.login');
     }
 
     function usermain() {
@@ -278,6 +278,8 @@ class UserController extends Controller
         $result = User::destroy($id);
         Session::flush();
         Auth::logout(); // 에러처리(laravel error handling) 2차프로젝트에서 작성
+
+        session()->put('withdraw_flg', '1');
         return redirect()->route('user.login');
     }
 

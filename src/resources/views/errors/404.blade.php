@@ -27,14 +27,6 @@
 </head>
 
 <body>
-  <!--[if lte IE 9]>
-      <p class="browserupgrade">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
-      </p>
-    <![endif]-->
-
   <!-- Preloader -->
   <div class="preloader">
     <div class="preloader-inner">
@@ -71,7 +63,7 @@
   <script src="assets/js/tiny-slider.js"></script>
   <script src="assets/js/glightbox.min.js"></script>
   <script>
-   window.onload = function () {
+  window.onload = function () {
         window.setTimeout(fadeout, 500);
     }
 
