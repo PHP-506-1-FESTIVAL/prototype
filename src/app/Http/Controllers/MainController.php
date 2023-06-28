@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Lib\MapUtil;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Models\Festival;
@@ -39,64 +40,8 @@ class MainController extends Controller
             }
         }
 
-        foreach ($result as $value) {
-            switch ($value->area_code) {
-                case "1":
-                    $areaName = '서울';
-                    break;
-                case "2":
-                    $areaName = '인천';
-                    break;
-                case "3":
-                    $areaName = '대전';
-                    break;
-                case "4":
-                    $areaName = '대구';
-                    break;
-                case "5":
-                    $areaName = '광주';
-                    break;
-                case 6:
-                    $areaName = '부산';
-                    break;
-                case 7:
-                    $areaName = '울산';
-                    break;
-                case 8:
-                    $areaName = '세종';
-                    break;
-                case 31:
-                    $areaName = '경기';
-                    break;
-                case 32:
-                    $areaName = '강원';
-                    break;
-                case 33:
-                    $areaName = '충북';
-                    break;
-                case 34:
-                    $areaName = '충남';
-                    break;
-                case 35:
-                    $areaName = '경북';
-                    break;
-                case 36:
-                    $areaName = '경남';
-                    break;
-                case 37:
-                    $areaName = '전북';
-                    break;
-                case 38:
-                    $areaName = '전남';
-                    break;
-                case 39:
-                    $areaName = '제주';
-                    break;
-                default:
-                    $areaName = 'Unknown';
-            }
-            $value->area_code=$areaName;
-        }
+        $mapUtil=new MapUtil;
+        $mapUtil->areacodeTrans($result);
         // 0620 이가원 udt
         // if (isset(Auth::User()->user_id)) {
         //     $result_user = User::find(Auth::User()->user_id)->select(['user_email','user_nickname','user_profile'])->get();
@@ -185,64 +130,8 @@ class MainController extends Controller
     public function fesList()
     {
         $festival = Festival::all();
-        foreach ($festival as $value) {
-        switch ($value->area_code) {
-            case "1":
-                $areaName = '서울';
-                break;
-            case "2":
-                $areaName = '인천';
-                break;
-            case "3":
-                $areaName = '대전';
-                break;
-            case "4":
-                $areaName = '대구';
-                break;
-            case "5":
-                $areaName = '광주';
-                break;
-            case 6:
-                $areaName = '부산';
-                break;
-            case 7:
-                $areaName = '울산';
-                break;
-            case 8:
-                $areaName = '세종';
-                break;
-            case 31:
-                $areaName = '경기';
-                break;
-            case 32:
-                $areaName = '강원';
-                break;
-            case 33:
-                $areaName = '충북';
-                break;
-            case 34:
-                $areaName = '충남';
-                break;
-            case 35:
-                $areaName = '경북';
-                break;
-            case 36:
-                $areaName = '경남';
-                break;
-            case 37:
-                $areaName = '전북';
-                break;
-            case 38:
-                $areaName = '전남';
-                break;
-            case 39:
-                $areaName = '제주';
-                break;
-            default:
-                $areaName = 'Unknown';
-        }
-        $value->area_code=$areaName;
-    }
+        $mapUtil=new MapUtil;
+        $mapUtil->areacodeTrans($festival);
         // $result = Festival::select(['festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'])
         // ->orderBy('festival_hit')->get();
         return view('festival_list')->with('data',$festival);
@@ -282,64 +171,8 @@ class MainController extends Controller
             FestivalHit::create(['select_cnt'=>$val->search]);
         }
         $result_search=DB::table('festivals')->where('festival_title','like','%'.$val->search.'%')->orderBy('festival_hit','desc')->get();
-        foreach ($result_search as $value) {
-            switch ($value->area_code) {
-                case "1":
-                    $areaName = '서울';
-                    break;
-                case "2":
-                    $areaName = '인천';
-                    break;
-                case "3":
-                    $areaName = '대전';
-                    break;
-                case "4":
-                    $areaName = '대구';
-                    break;
-                case "5":
-                    $areaName = '광주';
-                    break;
-                case 6:
-                    $areaName = '부산';
-                    break;
-                case 7:
-                    $areaName = '울산';
-                    break;
-                case 8:
-                    $areaName = '세종';
-                    break;
-                case 31:
-                    $areaName = '경기';
-                    break;
-                case 32:
-                    $areaName = '강원';
-                    break;
-                case 33:
-                    $areaName = '충북';
-                    break;
-                case 34:
-                    $areaName = '충남';
-                    break;
-                case 35:
-                    $areaName = '경북';
-                    break;
-                case 36:
-                    $areaName = '경남';
-                    break;
-                case 37:
-                    $areaName = '전북';
-                    break;
-                case 38:
-                    $areaName = '전남';
-                    break;
-                case 39:
-                    $areaName = '제주';
-                    break;
-                default:
-                    $areaName = 'Unknown';
-            }
-            $value->area_code=$areaName;
-        }
+        $mapUtil=new MapUtil;
+        $mapUtil->areacodeTrans($result_search);
         $result_hot=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
         return view('search')->with('result',$result_search)->with('recommend',$result_hot)->with('search',$val->search);
     }
@@ -362,62 +195,6 @@ class MainController extends Controller
         //0621 김재성
         //축제 지역/월 별 출력
         //0626 김재성
-        // $arr_temp=explode(',',$str_val->fesStr);
-        // switch ($arr_temp[0]) {
-        //     case "1":
-        //         $areaName = '서울';
-        //         break;
-        //     case "2":
-        //         $areaName = '인천';
-        //         break;
-        //     case "3":
-        //         $areaName = '대전';
-        //         break;
-        //     case "4":
-        //         $areaName = '대구';
-        //         break;
-        //     case "5":
-        //         $areaName = '광주';
-        //         break;
-        //     case 6:
-        //         $areaName = '부산';
-        //         break;
-        //     case 7:
-        //         $areaName = '울산';
-        //         break;
-        //     case 8:
-        //         $areaName = '세종';
-        //         break;
-        //     case 31:
-        //         $areaName = '경기';
-        //         break;
-        //     case 32:
-        //         $areaName = '강원';
-        //         break;
-        //     case 33:
-        //         $areaName = '충북';
-        //         break;
-        //     case 34:
-        //         $areaName = '충남';
-        //         break;
-        //     case 35:
-        //         $areaName = '경북';
-        //         break;
-        //     case 36:
-        //         $areaName = '경남';
-        //         break;
-        //     case 37:
-        //         $areaName = '전북';
-        //         break;
-        //     case 38:
-        //         $areaName = '전남';
-        //         break;
-        //     case 39:
-        //         $areaName = '제주';
-        //         break;
-        //     default:
-        //         $areaName = '지역';
-        // }
         // $arr_temp[0]=$areaName;
         // $arr_temp[1]=$arr_temp[1]===""?"시기":sprintf('%02d',$arr_temp[1])."월";
         // $valInfo=['area'=>$arr_temp[0],'month'=>$arr_temp[1]];
@@ -446,64 +223,8 @@ class MainController extends Controller
         // dump($select_area);
 
         $festival = Festival::all();
-        foreach ($festival as $value) {
-        switch ($value->area_code) {
-            case "1":
-                $areaName = '서울';
-                break;
-            case "2":
-                $areaName = '인천';
-                break;
-            case "3":
-                $areaName = '대전';
-                break;
-            case "4":
-                $areaName = '대구';
-                break;
-            case "5":
-                $areaName = '광주';
-                break;
-            case 6:
-                $areaName = '부산';
-                break;
-            case 7:
-                $areaName = '울산';
-                break;
-            case 8:
-                $areaName = '세종';
-                break;
-            case 31:
-                $areaName = '경기';
-                break;
-            case 32:
-                $areaName = '강원';
-                break;
-            case 33:
-                $areaName = '충북';
-                break;
-            case 34:
-                $areaName = '충남';
-                break;
-            case 35:
-                $areaName = '경북';
-                break;
-            case 36:
-                $areaName = '경남';
-                break;
-            case 37:
-                $areaName = '전북';
-                break;
-            case 38:
-                $areaName = '전남';
-                break;
-            case 39:
-                $areaName = '제주';
-                break;
-            default:
-                $areaName = 'Unknown';
-        }
-        $value->area_code=$areaName;
-    }
+        $mapUtil=new MapUtil;
+        $mapUtil->areacodeTrans($festival);
     // dump($str_val);
         return view('festival_list')->with('data',$festival)->with('str',$str_val);
     }
@@ -520,63 +241,9 @@ class MainController extends Controller
      ************************************************/
     public function fesDetail($id)
     {
-        $festival = Festival::find($id);
-        switch ($festival->area_code) {
-            case "1":
-                $areaName = '서울';
-                break;
-            case "2":
-                $areaName = '인천';
-                break;
-            case "3":
-                $areaName = '대전';
-                break;
-            case "4":
-                $areaName = '대구';
-                break;
-            case "5":
-                $areaName = '광주';
-                break;
-            case 6:
-                $areaName = '부산';
-                break;
-            case 7:
-                $areaName = '울산';
-                break;
-            case 8:
-                $areaName = '세종';
-                break;
-            case 31:
-                $areaName = '경기';
-                break;
-            case 32:
-                $areaName = '강원';
-                break;
-            case 33:
-                $areaName = '충북';
-                break;
-            case 34:
-                $areaName = '충남';
-                break;
-            case 35:
-                $areaName = '경북';
-                break;
-            case 36:
-                $areaName = '경남';
-                break;
-            case 37:
-                $areaName = '전북';
-                break;
-            case 38:
-                $areaName = '전남';
-                break;
-            case 39:
-                $areaName = '제주';
-                break;
-            default:
-                $areaName = 'Unknown';
-        }
-        $festival->area_code = $areaName; // 축제의 지역 코드를 설정
+        $festival[0] = Festival::find($id);
+        $mapUtil=new MapUtil;
+        $mapUtil->areacodeTrans($festival);
         $jjm = Favorite::where('festival_id', $id)->where('user_id', session()->get('user_id'))->get(); // 현재 사용자가 해당 축제를 찜했는지 확인
         $favoriteCount = Favorite::where('festival_id', $id)->count(); // 찜한 갯수
         $jjmFlg = [];
@@ -585,7 +252,7 @@ class MainController extends Controller
         }
 
         return view('festival_detail')
-            ->with('festival', $festival) // 축제 정보를 뷰로 전달
+            ->with('festival', $festival[0]) // 축제 정보를 뷰로 전달
             ->with('favoriteCount', $favoriteCount) // 찜한 갯수를 뷰로 전달
             ->with('jjmFlg', $jjmFlg)
             ->with('fesid', $id); // 사용자의 찜 여부를 뷰로 전달합
