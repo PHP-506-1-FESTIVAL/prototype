@@ -68,37 +68,41 @@
                                 </div>
                                 <div class="row col-4">
                                 {{-- // 게시판 상세 BUTTON --}}
-                                    <div class="col-5" style="padding: 0 0 0 15%;">
-                                        <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a>
-                                    </div>
-                                    <div class="col-3" style="padding: 0 0 0 4%;">
-                                        <a href="{{route('board.edit', ['board' => $data->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
-                                    </div>
-                                    <div class="col-4" style="padding:0;">
-                                        <form action="{{route('board.destroy', ['board' => $data->board_id])}}" method="post" name="removefrm">
-                                            @csrf
-                                            @method('delete')
-                                            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">삭제하기</a>
-                                            {{-- 모달창 구현 --}}
-                                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalToggleLabel"> </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            정말로 삭제 하시겠습니까?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                        {{-- <button type="submit" onclick="history.back()" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">확인</button> --}}
-                                                            <button type="submit" class="btn btn-primary">확인</button>
-                                                        {{-- data-bs-toggle="modal" data-bs-dismiss="modal" --}}
+                                    {{-- // 세션의 ID와 작성자가 다를시 안보임 --}}
+                                    @if(session('user_id') === $boards[0]->user_id)
+                                        <div class="col-3" style="padding: 0 0 0 4%;">
+                                            <a href="{{route('board.edit', ['board' => $data->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
+                                        </div>
+                                        <div class="col-4" style="padding:0;">
+                                            <form action="{{route('board.destroy', ['board' => $data->board_id])}}" method="post" name="removefrm">
+                                                @csrf
+                                                @method('delete')
+                                                <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">삭제하기</a>
+                                                {{-- 모달창 구현 --}}
+                                                <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalToggleLabel"> </h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                정말로 삭제 하시겠습니까?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            {{-- <button type="submit" onclick="history.back()" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">확인</button> --}}
+                                                                <button type="submit" class="btn btn-primary">확인</button>
+                                                            {{-- data-bs-toggle="modal" data-bs-dismiss="modal" --}}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
+                                    @endif
+                                    {{-- // [버튼] 목록으로 --}}
+                                    <div class="col-5" style="padding: 0 0 0 15%;">
+                                        <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a>
                                     </div>
                                 </div>
                             </div>

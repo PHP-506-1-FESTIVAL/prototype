@@ -67,7 +67,7 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-// [작성 페이지]
+// [작성 페이지] 이동
     public function create()
     {
         // 로그인 체크(로그인 안된상태면 접근 못하게)
@@ -116,14 +116,14 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // [상세 페이지]
+    // [상세 페이지] 이동
     public function show($board_id){
         // $data = Board::find($board_id);
 
         // user id가 아닌 user nickname으로 표현하기 위한 조인
         $boards = DB::table('boards')
         ->join('users', 'boards.user_id', '=', 'users.user_id' )
-        ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.board_hit')
+        ->select('boards.board_id', 'users.user_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.board_hit')
         ->where('boards.board_id', $board_id)->get();
 
         $data = Board::find($board_id);
@@ -163,19 +163,25 @@ class BoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // [수정 페이지]
+    // [수정 페이지] 이동
     public function edit($board_id)
     {
+
         // 로그인 체크(로그인 안된상태면 접근 못하게)
         if(auth()->guest()) {
             return redirect()->route('user.login');
         }
-        // 작성자 체크(작성자가 지금 로그인 되어있는 사람일 경우만 접근)
-        // if(auth() = $board_id) {
-        //     return redirect()->route('user.login');
-        // }
+
         $boards = Board::find($board_id);
-        return view('board_edit')->with('boards', Board::findOrFail($board_id));
+
+        // 작성자 체크(작성자가 지금 로그인 되어있는 사람일 경우만 접근)
+        if(auth() === $boards->board_id) {
+            return view('board_edit')->with('boards', Board::findOrFail($board_id));
+        }
+        else {
+            return redirect()->route('user.login');
+        }
+        
     }
 
     /**
