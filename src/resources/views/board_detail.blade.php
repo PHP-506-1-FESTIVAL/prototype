@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p><div style="white-space:pre;">{{$boards->board_content}}</div></p>
+                            <p><div style="white-space:pre-wrap; word-wrap: break-word;">{{$boards->board_content}}</div></p>
                         </div>
                         @include('layout.comment')
                     </div>

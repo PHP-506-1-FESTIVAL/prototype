@@ -37,6 +37,7 @@
     {{-- // 게시판 수정 item (상세base) --}}
     <div>
         <input type="text" name="title" id="title" value="{{$boards->board_title}}" class="form-control mb-0 p-0 rounded-3 form-floating fs-2" size=80>
+        @include('layout.errormsg') 
         {{-- {{count($errors) > 0 ? old('board_title') : $boards->board_title}} --}}
         <hr>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">

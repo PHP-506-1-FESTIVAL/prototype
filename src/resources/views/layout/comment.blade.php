@@ -87,7 +87,8 @@
                                     </div>
                                 </form>
                             </div>
-
+    {{-- 댓글 --}}
+    <img src='{{asset('img/comment.jpg')}}' style="width:1160px; object-fit:cover; text-align:center;">
 
 {{-- --------------------add 신유진-------------------- --}}
 {{-- 참고 : https://may9noy.tistory.com/category/%E2%AD%90%20SpringBoot/%F0%9D%84%9C%20%EA%B2%8C%EC%8B%9C%ED%8C%90%20with%20SpringBoot    https://sung-jun.tistory.com/92 --}}
