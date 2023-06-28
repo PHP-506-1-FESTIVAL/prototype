@@ -9,6 +9,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Lib\MapUtil;
 use App\Models\Board;
 use App\Models\Comment;
 use App\Models\Favorite;
@@ -289,10 +290,12 @@ class UserController extends Controller
     function favorites() {
         $data = DB::table('favorites')
                         ->join('festivals', 'favorites.festival_id', '=', 'festivals.festival_id' )
-                        ->select('favorites.favorite_id', 'festivals.festival_id', 'festivals.festival_title', 'festivals.festival_start_date', 'festivals.festival_end_date')
+                        ->select('favorites.favorite_id', 'festivals.festival_id', 'festivals.festival_title', 'festivals.festival_start_date', 'festivals.festival_end_date', 'festivals.poster_img', 'festivals.area_code')
                         ->where('favorites.user_id', session('user_id'))
                         ->orderBy('festivals.festival_start_date', 'desc')
-                        ->paginate(10);
+                        ->paginate(5);
+        $area = new MapUtil;
+        $area->areacodeTrans($data);
 
         return view('favorites')->with('data', $data);
     }

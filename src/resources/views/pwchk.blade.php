@@ -31,7 +31,7 @@
                     <!-- Start Dashboard Sidebar -->
                     <div class="dashboard-sidebar">
                         <div class="user-image">
-                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="#">
+                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
                             <h3>{{session()->get('user_nickname')}}
                                 <span><a href="javascript:void(0)">{{session()->get('user_email')}}</a></span>
                             </h3>
