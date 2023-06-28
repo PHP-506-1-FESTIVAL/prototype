@@ -40,5 +40,20 @@ class NoticeController extends Controller
         $notices->save();
         return view('notice_detail')->with('notices', Notice::findOrFail($notice_id))->with('notices', $notices);
     }
+
+    //공지 검색 페이지
+    public function search(Request $val)
+    {
+        $val->validate(['search'=>'required|max:100']);
+        // dump($val);
+        $result_search=DB::table('notices')
+        ->select('*')->where('deleted_at', null)
+        ->where(function ($query) use ($val) {
+            $query->where('notice_title','like','%'.$val->search.'%') // 제목에 검색내용이 포함된경우
+            ->orWhere('notice_content','like','%'.$val->search.'%'); // 보드내용에 검색내용이 포함된경우
+        })->paginate(10);
+        // dump($result_search);
+        return view('notice_list')->with('notices',$result_search);
+    }
 }
 

@@ -38,7 +38,7 @@
 								<div class="row">
 									{{-- // 검색 --}}
 									<div class="col-md-11">
-										<form class="d-flex" method="POST" action="{{route('main.search')}}">
+										<form class="d-flex" method="POST" action="{{route('notice.search')}}">
                                             @csrf
                                             <input class="form-control me-2 dropdown-toggle headersearch" type="search" placeholder="검색어를 입력하세요." aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off" name="search" maxlength='100' style="height:35px;">
                                             <div class="button">
@@ -104,7 +104,7 @@
 							<div class="board-list-item single-item-list boardline">
 								<div class="row align-items-center">
 									<div class="col-lg-1 col-md-1 col-12">
-											
+
 									</div>
 									<div class="col-lg-5 col-md-5 col-12">
 										<div class="content">
@@ -112,10 +112,10 @@
 										</div>
 									</div>
 									<div class="col-lg-2 col-md-2 col-12">
-										
+
 									</div>
 									<div class="col-lg-1 col-md-1 col-12">
-										
+
 									</div>
 								</div>
 							</div>
