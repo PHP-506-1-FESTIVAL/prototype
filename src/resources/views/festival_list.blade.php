@@ -194,7 +194,7 @@ $count = 0;
     @if ($count < 9)
         <a href="{{ route('fes.detail', ['id' => $festival->festival_id]) }}" style="text-decoration: none;">
             <div class="card">
-                @php
+                {{-- @php
                 $today = date('Y-m-d');
                 $startDate = $festival->festival_start_date;
                 $endDate = $festival->festival_end_date;
@@ -210,9 +210,9 @@ $count = 0;
                     $statusClass = 'btn-primary';
                     $statusText = '진행중';
                 }
-                @endphp
-                <button type="button" class="btn {{ $statusClass }}" id="ing">
-                    {{ $statusText }}
+                @endphp --}}
+                <button type="button" class="btn {{ $festival->statusClass }}" id="ing">
+                    {{ $festival->statusText }}
                 </button>
                 @if ($festival->poster_img)
                     <img class="card-img-top" src="{{ $festival->poster_img }}" alt="Poster Image" loading="lazy">

@@ -134,6 +134,7 @@ class MainController extends Controller
         $festival = Festival::all();
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($festival);
+        $mapUtil->fesStat($festival);
         // $result = Festival::select(['festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'])
         // ->orderBy('festival_hit')->get();
         return view('festival_list')->with('data',$festival);
@@ -246,6 +247,7 @@ class MainController extends Controller
         $festival[0] = Festival::find($id);
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($festival);
+        $mapUtil->fesStat($festival);
         $jjm = Favorite::where('festival_id', $id)->where('user_id', session()->get('user_id'))->get(); // 현재 사용자가 해당 축제를 찜했는지 확인
         $favoriteCount = Favorite::where('festival_id', $id)->count(); // 찜한 갯수
         $jjmFlg = [];
