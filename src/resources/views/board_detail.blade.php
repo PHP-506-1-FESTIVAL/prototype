@@ -69,12 +69,12 @@
                                 <div class="row col-4">
                                 {{-- // 게시판 상세 BUTTON --}}
                                     {{-- // 세션의 ID와 작성자가 다를시 안보임 --}}
-                                    @if(session('user_id') === $boards[0]->user_id)
+                                    @if(session('user_id') === $boards->user_id)
                                         <div class="col-3" style="padding: 0 0 0 4%;">
-                                            <a href="{{route('board.edit', ['board' => $data->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
+                                            <a href="{{route('board.edit', ['board' => $boards->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
                                         </div>
                                         <div class="col-4" style="padding:0;">
-                                            <form action="{{route('board.destroy', ['board' => $data->board_id])}}" method="post" name="removefrm">
+                                            <form action="{{route('board.destroy', ['board' => $boards->board_id])}}" method="post" name="removefrm">
                                                 @csrf
                                                 @method('delete')
                                                 <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">삭제하기</a>
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p><div style="white-space:pre;">{{$data->board_content}}</div></p>
+                            <p><div style="white-space:pre;">{{$boards->board_content}}</div></p>
                         </div>
                         @include('layout.comment')
                     </div>

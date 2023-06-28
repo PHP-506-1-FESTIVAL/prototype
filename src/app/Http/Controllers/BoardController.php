@@ -123,7 +123,7 @@ class BoardController extends Controller
         // user id가 아닌 user nickname으로 표현하기 위한 조인
         $boards = DB::table('boards')
         ->join('users', 'boards.user_id', '=', 'users.user_id' )
-        ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.board_hit')
+        ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.board_hit','boards.user_id')
         ->where('boards.board_id', $board_id)->get();
 
         // $data = Board::find($board_id);
