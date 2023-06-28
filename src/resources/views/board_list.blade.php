@@ -70,13 +70,13 @@
 									<div class="col-lg-1 col-md-1 col-12">
 										<p>No</p>
 									</div>
-									<div class="col-lg-5 col-md-5 col-12">
+									<div class="col-lg-7 col-md-5 col-12">
 										<p>제목</p>
 									</div>
-									<div class="col-lg-3 col-md-3 col-12">
+									<div class="col-lg-2 col-md-3 col-12">
 										<p>작성자</p>
 									</div>
-									<div class="col-lg-2 col-md-2 col-12">
+									<div class="col-lg-1 col-md-2 col-12">
 										<p>작성일</p>
 									</div>
 									<div class="col-lg-1 col-md-1 col-12">
@@ -93,16 +93,17 @@
 									<div class="col-lg-1 col-md-1 col-12">
 											{{$item->board_id}}
 									</div>
-									<div class="col-lg-5 col-md-5 col-12">
+									<div class="col-lg-7 col-md-5 col-12">
 										<div class="content">
 											<p class="title"><a href="{{route('board.show', ['board' => $item->board_id])}}">{{$item->board_title}}</a></p>
 										</div>
 									</div>
-									<div class="col-lg-3 col-md-3 col-12">
+									<div class="col-lg-2 col-md-3 col-12">
 										<p>{{$item->user_nickname}}</p>
 									</div>
-									<div class="col-lg-2 col-md-2 col-12">
-										<p>{{$item->created_at}}</p>
+									<div class="col-lg-1 col-md-2 col-12">
+										{{-- {{$item->created_at}} --}}
+										<p>{{substr($item->created_at, 0, 10)}}</p>
 									</div>
 									<div class="col-lg-1 col-md-1 col-12">
 										<p>{{$item->board_hit}}</p>
