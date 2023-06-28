@@ -179,10 +179,13 @@
             <h5 style="font-family: 'Noto Sans KR', sans-serif;">{{$item->festival_title}}</h5>
         </div>
     @endforeach
+    {{-- 댓글 --}}
+    <img src='{{asset('img/comment.jpg')}}' style="width:1160px; object-fit:cover; text-align:center;">
 </div>
     </div>
 </section>
-{{-- 댓글 --}}
+
+
 {{-- @include('layout.comment') --}}
 <script src="{{asset('js/festival.js')}}"></script>
 @endsection
