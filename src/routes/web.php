@@ -87,12 +87,8 @@ Route::get('fesdetail/{id}', [MainController::class, 'fesDetail'])->name('fes.de
 
  // 메인페이지 이동(비로그인)
 Route::get('main', [MainController::class, 'main'])->name('main');
-//  // 메인페이지 이동(로그인)
-// Route::get('main/{id}', [MainController::class, 'mainUse'])->name('main.use'); // 0620 이가원 del
 // 축제리시트 페이지 이동
 Route::get('feslist', [MainController::class, 'fesList'])->name('main.fesList');
-// 공지페이지 이동
-// Route::get('noticepage', [MainController::class, 'noticePage'])->name('main.noticePage'); // 0621 신유진 del
 // 더보기로 축제리스트페이지 이동
 Route::post('feslist/', [MainController::class, 'fesOrder'])->name('main.FesOrder');
 //검색결과 페이지 이동
