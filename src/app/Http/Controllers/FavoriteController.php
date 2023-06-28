@@ -14,7 +14,7 @@ class FavoriteController extends Controller
         }
         // dump($req);
         $arr_req=explode(',',$req->test);
-        $jjm = Favorite::where('festival_id', 256)->where('user_id', session()->get('user_id'))->get();
+        $jjm = Favorite::where('festival_id', $req->fesid)->where('user_id', session()->get('user_id'))->get();
         if(!isset($jjm[0]->favorite_id)) {
             $fav=new Favorite(['user_id'=>$arr_req[0]
             ,'festival_id'=>$arr_req[1]]);

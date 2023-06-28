@@ -577,12 +577,17 @@ class MainController extends Controller
                 $areaName = 'Unknown';
         }
         $festival->area_code = $areaName; // 축제의 지역 코드를 설정
-        $jjmFlg = Favorite::where('festival_id', $id)->where('user_id', session()->get('user_id'))->get(); // 현재 사용자가 해당 축제를 찜했는지 확인
+        $jjm = Favorite::where('festival_id', $id)->where('user_id', session()->get('user_id'))->get(); // 현재 사용자가 해당 축제를 찜했는지 확인
         $favoriteCount = Favorite::where('festival_id', $id)->count(); // 찜한 갯수
+        $jjmFlg = [];
+        if(isset($jjm[0])) {
+            $jjmFlg = [$jjm[0]->favorite_id, $jjm[0]->user_id, $jjm[0]->festival_id];
+        }
 
         return view('festival_detail')
             ->with('festival', $festival) // 축제 정보를 뷰로 전달
             ->with('favoriteCount', $favoriteCount) // 찜한 갯수를 뷰로 전달
-            ->with('jjmFlg', $jjmFlg); // 사용자의 찜 여부를 뷰로 전달합
+            ->with('jjmFlg', $jjmFlg)
+            ->with('fesid', $id); // 사용자의 찜 여부를 뷰로 전달합
         }
 }

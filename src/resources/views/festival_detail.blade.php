@@ -3,6 +3,7 @@
 @section('title', '축제정보상세')
 
 @section('content')
+
 <link rel="stylesheet" href="/css/festival.css">
 <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
@@ -27,7 +28,7 @@
 <section class="about-us section" style="padding-top:20px; padding-bottom: 20px;">
     <div class="lcontainer">
         <h1>축제정보</h1>
-        <h3>{{ $festival->festival_title }} @if (isset($jjmFlg[0]->favorite_id)) <i class="lni lni-heart-filled" style="color:#FF4A62;"></i> @else <i class="lni lni-heart" style="color:#FF4A62;"></i> @endif {{ $favoriteCount }}</h3>
+        <h3>{{ $festival->festival_title }} @if (isset($jjmFlg[0])) <i class="lni lni-heart-filled" style="color:#FF4A62;"></i> @else <i class="lni lni-heart" style="color:#FF4A62;"></i> @endif {{ $favoriteCount }}</h3>
         <div class="row align-items-center justify-content-left">
             <div class="col-lg-6 col-md-12 col-12" style="width:480px; height:600px;">
                 <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
@@ -77,9 +78,10 @@
             {{-- 찜하기 --}}
             <form action="{{ route('favorite.jjm') }}" method="post" >
                 @csrf
-                @if (isset($jjmFlg[0]->favorite_id))
+                @if (isset($jjmFlg[0]))
                     @method('delete')
                 @endif
+                <input type="hidden" name="fesid" value="{{$fesid}}">
                 <input type="hidden" name="test" value="{{ session()->get('user_id').','.$festival->festival_id }}">
                 <button type="submit" style="border:none; background:none; padding:0; font-size:20px; font-family: 'Noto Sans KR', sans-serif;">
                     <img src="https://emojigraph.org/media/joypixels/red-heart_2764-fe0f.png" alt="찜하기" style="width: 60px; height: 60px; cursor: pointer; ">찜하기 
