@@ -91,13 +91,13 @@
                 </select>
             </div>
             <div class="btn_box">
-                <div>
-                    <button class="btn btn-outline-danger btn-lg btn-block">
+                <div class="button">
+                    <button class="btn  btn-alt btn-lg btn-block">
                         <span>
                             초기화 <img src="https://korean.visitkorea.or.kr/kfes/resources/img/reset_ico.png" alt="초기화" style="width:20px; height:20px;">
                         </span>
                     </button>
-                    <button type="button" class="btn btn-success btn-lg btn-block" id="btnSearch" onclick="aaaname()">
+                    <button type="button" class="btn btn-success btn-lg btn-block" id="btnSearch" onclick="aaaname()" style="padding:11px; padding-left:20px; padding-right:20px;">
                         <span>
                             검색 <img src="https://korean.visitkorea.or.kr/kfes/resources/img/shortcut_black_ico.svg" alt="검색" style="width:30px; height:30px; filter: brightness(0) invert(1);">
                         </span>

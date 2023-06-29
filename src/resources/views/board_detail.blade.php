@@ -70,14 +70,14 @@
                                 {{-- // 게시판 상세 BUTTON --}}
                                     {{-- // 세션의 ID와 작성자가 다를시 안보임 --}}
                                     @if(session('user_id') === $boards->user_id)
-                                        <div class="col-3" style="padding: 0 0 0 4%;">
+                                        <div class="col-3" style="padding: 0 0 0 7%;">
                                             <a href="{{route('board.edit', ['board' => $boards->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
                                         </div>
                                         <div class="col-4" style="padding:0;">
                                             <form action="{{route('board.destroy', ['board' => $boards->board_id])}}" method="post" name="removefrm">
                                                 @csrf
                                                 @method('delete')
-                                                <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">삭제하기</a>
+                                                <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button" style="margin: 0 0 0 9%;">삭제하기</a>
                                                 {{-- 모달창 구현 --}}
                                                 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                                                     <div class="modal-dialog modal-dialog-centered">
@@ -99,7 +99,7 @@
                                         </div>
                                     @endif
                                     {{-- // [버튼] 목록으로 --}}
-                                    <div class="col-5" style="padding: 0 0 0 15%;">
+                                    <div class="col-5" style="padding: 0">
                                         <a href="{{route('board.index')}}"><button class="btn btn-primary" type="button" style="width:90px;">목록으로</button></a>
                                     </div>
                                 </div>
