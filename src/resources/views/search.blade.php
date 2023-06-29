@@ -62,7 +62,7 @@
                         <div class="widget sidebar-as">
                             <h5 class="widget-title"><span>축제요청 페이지</span></h5>
                             <a href="{{route('main.request')}}">
-                                <img src="https://via.placeholder.com/780x1300" alt="#">
+                                <img src="{{asset('img/ad.jpg')}}" alt="#">
                             </a>
                         </div>
                     </div>
