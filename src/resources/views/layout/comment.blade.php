@@ -9,7 +9,7 @@
                             <!-- Comments -->
                             <div class="comment-form">
                                 <h3 class="comment-reply-title"><span>축제 TALK</span></h3>
-                                <form action="#" method="POST">
+                                <form action="#">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-box form-group">
