@@ -18,11 +18,6 @@ use App\Http\Controllers\OpenApiController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 /************************************************
  * 프로젝트명   : festival_info
  * 디렉토리     : routes
