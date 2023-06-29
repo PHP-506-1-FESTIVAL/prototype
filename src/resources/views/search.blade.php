@@ -50,7 +50,7 @@
                 <aside class="col-lg-4 col-md-5 col-12">
                     <div class="sidebar blog-grid-page">
                         <div class="widget categories-widget">
-                            <h5 class="widget-title"><span>Categories</span></h5>
+                            <h5 class="widget-title"><span>인기검색어</span></h5>
                             <ul class="custom">
                                 @foreach ($recommend as $item)
                                     <li>
