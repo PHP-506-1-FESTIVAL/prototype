@@ -212,9 +212,9 @@ class UserController extends Controller
             $req->image->move(public_path('img/profile'), $imgName);
     
             // 이미지 이름 설정
-            $user = User::find($user->user_id);
-            $user->user_profile = $imgName;
-            $user->save();
+            $user2 = User::find($user->user_id);
+            $user2->user_profile = $imgName;
+            $user2->save();
         }
 
         if(!$req->marketing) {
