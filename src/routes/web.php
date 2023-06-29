@@ -19,9 +19,9 @@ use App\Http\Controllers\OpenApiController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -86,7 +86,7 @@ Route::get('fesdetail/{id}', [MainController::class, 'fesDetail'])->name('fes.de
  ************************************************/
 
  // 메인페이지 이동(비로그인)
-Route::get('main', [MainController::class, 'main'])->name('main');
+Route::get('/', [MainController::class, 'main'])->name('main');
 // 축제리시트 페이지 이동
 Route::get('feslist', [MainController::class, 'fesList'])->name('main.fesList');
 // 더보기로 축제리스트페이지 이동
