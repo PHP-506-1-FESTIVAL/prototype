@@ -111,13 +111,7 @@
                                             <p></p>
                                         </div>
                                         <div class="col-lg-6 col-md-5 col-12">
-                                            <div class="item-image">
-                                                <img src="https://via.placeholder.com/100x100" alt="#">
-                                                <div class="content">
-                                                    <h3 class="title"><a href="javascript:void(0)">찜한 축제가 없습니다.</a></h3>
-                                                    <span class="price"></span>
-                                                </div>
-                                            </div>
+                                            <p>찜한 축제가 없습니다.</p>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-12">
                                             <p></p>
