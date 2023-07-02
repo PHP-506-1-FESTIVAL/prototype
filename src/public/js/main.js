@@ -9,6 +9,7 @@ function changText() {
     const changVal = document.getElementById('fesOrederIp');
     changVal.setAttribute('value',","+monthStr);
     resColor()
+    make_api_list(","+monthStr);
 }
 
 function make_api_list(str_val) {
