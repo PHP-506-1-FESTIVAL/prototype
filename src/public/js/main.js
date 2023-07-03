@@ -4,7 +4,7 @@ const fesOrder = 'feslist/'
 const fesDetail = 'fesdetail/'
 let noneImg='img/festival.jpg';
 
-function changText() {
+function changeText() {
     const monthStr=document.getElementById('category').value
     const changVal = document.getElementById('fesOrederIp');
     changVal.setAttribute('value',","+monthStr);
@@ -42,11 +42,11 @@ function target(date) {
             const statusText=date[0][index].statusText
 
             tempStr += `
-            <div class="col-6 col-sm-6">
+            <div class="col-12">
                 <div class="single-city wow fadeInUp" data-wow-delay=".2s">
                     <a href="${domaine}${fesDetail}${id}" class="info-box">
                         <div class="image">
-                        ${img !== "" ? `<img class="img-fluid" src="${img}" alt="${title}">` : `<img class="img-fluid" src="/img/festival.jpg" alt="${title}">`}
+                        ${img !== "" ? `<img class="img-fluid" src="${img}" alt="${title}" style="width:550px; height:360px; object-fit:cover;">` : `<img class="img-fluid" src="/img/festival.jpg" alt="${title}">`}
                         </div>
                         <p class="date ${statusClass}">${statusText}</p>
                         <div class="content" style="text-align: left!important;">
@@ -75,11 +75,11 @@ function target(date) {
             const statusText=date[0][index].statusText
 
             tempStr += `
-            <div class="col-6 col-sm-6">
+            <div class="col-12">
                 <div class="single-city wow fadeInUp" data-wow-delay=".2s">
                     <a href="${domaine}${fesDetail}${id}" class="info-box">
                         <div class="image">
-                        ${img !== "" ? `<img class="img-fluid" src="${img}" alt="${title}">` : `<img class="img-fluid" src="/img/festival.jpg" alt="${title}">`}
+                        ${img !== "" ? `<img class="img-fluid" style="width:550px; height:360px; object-fit:cover;" src="${img}" alt="${title}">` : `<img class="img-fluid" src="/img/festival.jpg" alt="${title}">`}
                         </div>
                         <p class="date ${statusClass}">${statusText}</p>
                         <div class="content" style="text-align: left!important;">
@@ -99,6 +99,7 @@ function target(date) {
         }
         c = false;
         tempStr +=`
+        <div></div>
         <div class="button" style="padding: 10px; margin: 10px;">
             <button type="button" class="btn" onclick="FesSub()">더보기</button>
         </div>`
