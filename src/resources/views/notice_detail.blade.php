@@ -49,7 +49,7 @@
                             </ul>
                             {{-- // 게시판 상세 BUTTON --}}
                             <div class="text-end"><a href="{{route('notice.index')}}"><button class="btn btn-primary" type="button">목록으로</button></a></div>
-                            <p><div style="white-space:pre;">{{$notices->notice_content}}</div></p>
+                            <p><div style="white-space:pre-wrap; word-wrap: break-word;">{{$notices->notice_content}}</div></p>
                         </div>
                         {{-- @include('layout.comment') --}}
                     </div>
