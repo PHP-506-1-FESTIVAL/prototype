@@ -58,7 +58,6 @@ Route::resource('/board', BoardController::class);
 // DELETE          board/{board} ................................................. board.destroy › BoardController@destroy
 // GET|HEAD        board/{board}/edit .................................................. board.edit › BoardController@edit
 Route::post('/board/search}', [BoardController::class, 'search'])->name('board.search');
-
 // Notice
 Route::get('/notice', [NoticeController::class , 'index'])->name('notice.index');
 Route::get('/notice/{id}', [NoticeController::class , 'show'])->name('notice.show');
@@ -88,6 +87,8 @@ Route::get('feslist', [MainController::class, 'fesList'])->name('main.fesList');
 Route::post('feslist/', [MainController::class, 'fesOrder'])->name('main.FesOrder');
 //검색결과 페이지 이동
 Route::post('search', [MainController::class, 'search'])->name('main.search');
+//검색결과 페이지 이동
+Route::get('search', [MainController::class, 'searchGet'])->name('main.searchGet');
 //축체 요청 페이지 이동
 Route::get('request', [MainController::class, 'fesRequest'])->name('main.request');
 //로그아웃

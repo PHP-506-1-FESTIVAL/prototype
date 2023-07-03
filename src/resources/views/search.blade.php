@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         @empty
-                            검색결과 없음
+                        검색결과 없음
                         @endforelse
                     </div>
                 </div>

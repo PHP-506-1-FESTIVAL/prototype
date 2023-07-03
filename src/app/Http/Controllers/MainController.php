@@ -90,6 +90,12 @@ class MainController extends Controller
         $result_hot=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
         return view('search')->with('result',$result_search)->with('recommend',$result_hot)->with('search',$val->search);
     }
+    public function searchGet()
+    {
+        $tempArr=[];
+        $result_hot=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
+        return view('search')->with('result',$tempArr)->with('recommend',$result_hot)->with('search',' ');
+    }
     //검색 추천 클릭 /Todo 3차
     //$id : 인기순위ID
     public function Recommend($id)
