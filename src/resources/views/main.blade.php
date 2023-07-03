@@ -36,7 +36,7 @@
             <div class="search-form wow fadeInUp" data-wow-delay=".7s">
                 <div class="search-input">
                     <label for="category"><i class="lni lni-calendar"></i></label>
-                    <select name="category" id="category" onchange="changText()">
+                    <select name="category" id="category" onchange="changeText()">
                         @foreach ($month as $item)
                             @if ($item)
                                 <option value="{{$item}}">
@@ -61,16 +61,16 @@
     <div class="col-sm-7 row container text-end">
         <section class="browse-cities section">
             <div class="container">
-                <div class="row" id="Recommend">
+                <div class="row" id="Recommend" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows: 375px auto;">
                     @foreach ($fesData as $item)
-                        <div class="col-6 col-sm-6">
+                        <div class="col-12">
                             <div class="single-city wow fadeInUp" data-wow-delay=".2s">
                                 <a href="{{route('fes.detail',['id'=>$item->festival_id])}}" class="info-box">
                                     <div class="image">
                                         @if ($item->poster_img)
-                                            <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid">
+                                            <img src="{{$item->poster_img}}" alt="{{$item->festival_title}}" class="img-fluid" style="width:550px; height:360px; object-fit:cover;">
                                         @else
-                                            <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid">
+                                            <img src='{{asset('img/festival.jpg')}}' alt="{{$item->festival_title}}" class="img-fluid" style="width:550px; height:360px; object-fit:cover;">
                                         @endif
                                     </div>
                                     <p class="date {{$item->statusClass}}">{{$item->statusText}}</p>
@@ -88,6 +88,7 @@
                             </div>
                         </div>
                     @endforeach
+                    <div></div>
                     <div class="button" style="padding: 10px; margin: 10px;">
                         <button type="button" class="btn" onclick="FesSub()">더보기</button>
                     </div>
