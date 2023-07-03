@@ -31,17 +31,44 @@
 		<h2 class="mt-0 mb-0">게시글 작성 페이지</h2>
 		@include('layout.errormsg') 
 		{{-- <%-- 입력 폼 --%> --}}
-		<form action="{{route('board.store')}}" method="post">
+		<form action="{{route('board.store')}}" method="post" id="insertform" onsubmit="return false;">
 			@csrf
-			<input type="text" name="writetitle" class="form-control mt-4 mb-2" placeholder="제목을 입력해주세요." required>
+			<input type="text" name="writetitle" id="title" class="form-control mt-4 mb-2" placeholder="제목을 입력해주세요." required>
 			<div class="form-group">
-				<textarea class="form-control" rows="10" name="writecontent" placeholder="내용을 입력해주세요" required></textarea>
+				<textarea class="form-control" rows="10" id="content" name="writecontent" placeholder="내용을 입력해주세요" required></textarea>
 			</div>
 			<div style="text-align: right; margin-top:10px;">
-				<button type="submit" class="btn btn-primary">작성 하기</button>
+				<button type="submit" class="btn btn-primary" onclick="submittest()">작성 하기</button>
 				<a href="{{route("board.index")}}"><button class="btn btn-secondary" type="button">취소</button></a>
 			</div>
 		</form>
 	</div>
 </section>
+
+<script>
+	var submitflg = false;
+
+    function submittest() {
+		var insertform = document.getElementById('insertform');
+		var title = document.getElementById('title').value;
+		var content = document.getElementById('content').value;
+		if(title.length < 1) {
+			alert('제목을 입력해 주세요.');
+		} else if (content.length < 1) {
+			alert('내용을 입력해 주세요.');
+		} else if (title.length > 50) {
+			alert('제목을 50글자 이하로 입력해 주세요.');
+		} else if (content.length > 2000) {
+			alert('내용을 2000글자 이하로 입력해 주세요.')
+		} else {
+			if(!submitflg) {
+				submitflg = true;
+				insertform.removeAttribute('onsubmit');
+			} else {
+				alert('요청이 진행 중입니다.');
+			}
+		}
+    }
+</script>
+
 @endsection
