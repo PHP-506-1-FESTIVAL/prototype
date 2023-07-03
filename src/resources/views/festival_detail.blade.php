@@ -95,7 +95,7 @@
     </div>
     <br><h1>지도</h1>
     <div id="map" style="border: 1px solid ligtgrey; max-width:100%; width:1180px; height: 400px; border-radius: 10px;"></div>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c445a81938b242294a005dc47ac83f13&libraries=services"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{ env('KAKAO_MAP_API_KEY') }}&libraries=services"></script>
     <script>
         var container = document.getElementById('map');
         var mapx = {{ $festival->map_x }};
@@ -124,6 +124,7 @@
             window.open(link); // 링크를 새 창에서 열기
         }
     </script>
+
     {{-- 연관축제 --}}
     <br>
     <h1>이런 축제는 어때요?</h1>

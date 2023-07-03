@@ -6,25 +6,46 @@ const fesDetail = 'fesdetail/'; // 페스티벌 상세 URL
 let a=9;
 let c=true;
 
-    strVal=document.getElementById('onload').value;
-    if (strVal!==',') {
-        makeApiList(strVal)
-        const arrStr=strVal.split(',');
-        const tempMonth="0"+arrStr[1];
-        chkMonth=tempMonth.slice("-2");
-        selDate=document.getElementById('searchDate').options
-        for (let index = 0; index < selDate.length; index++) {
-            if (selDate[index].value===chkMonth) {
-                selDate[index].setAttribute('selected','selected');
-            }
-        }
-        selArea=document.getElementById('searchArea').options
-        for (let index = 0; index < selArea.length; index++) {
-            if (selArea[index].value===arrStr[0]) {
-                selArea[index].setAttribute('selected','selected');
-            }
-        }
-    }
+// strVal=document.getElementById('onload').value;
+// if (strVal!==',') {
+//     makeApiList(strVal)
+//     const arrStr=strVal.split(',');
+//     const tempMonth="0"+arrStr[1];
+//     chkMonth=tempMonth.slice("-2");
+//     selDate=document.getElementById('searchDate').options
+//     for (let index = 0; index < selDate.length; index++) {
+//         if (selDate[index].value===chkMonth) {
+//             selDate[index].setAttribute('selected','selected');
+//         }
+//     }
+//     selArea=document.getElementById('searchArea').options
+//     for (let index = 0; index < selArea.length; index++) {
+//         if (selArea[index].value===arrStr[0]) {
+//             selArea[index].setAttribute('selected','selected');
+//         }
+//     }
+// }
+window.addEventListener('DOMContentLoaded', function() {
+  const strVal = document.getElementById('onload');
+  if (strVal && strVal.value !== ',') {
+      makeApiList(strVal);
+      const arrStr = strVal.split(',');
+      const tempMonth = "0" + arrStr[1];
+      const chkMonth = tempMonth.slice(-2);
+      const selDate = document.getElementById('searchDate').options;
+      for (let index = 0; index < selDate.length; index++) {
+          if (selDate[index].value === chkMonth) {
+              selDate[index].setAttribute('selected', 'selected');
+          }
+      }
+      const selArea = document.getElementById('searchArea').options;
+      for (let index = 0; index < selArea.length; index++) {
+          if (selArea[index].value === arrStr[0]) {
+              selArea[index].setAttribute('selected', 'selected');
+          }
+      }
+  }
+});
 
 function aaaname() {
   const searchDate = document.getElementById('searchDate').value; // 검색 날짜 값을 가져옵니다.
