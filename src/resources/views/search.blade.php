@@ -24,12 +24,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-7 col-12">
-                    <div class="row" style="display:grid; grid-template-columns:50% 50%; grid-template-rows: auto;">
+                    <div class="row">
                         @forelse ($result as $item)
-                        <div class="col-12">
+                        <div class="col-lg-6 col-md-12 col-12">
                             <div class="single-news wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
-                                    <a href="{{route('fes.detail',['id'=>$item->festival_id])}}"><img class="thumb" src="{{$item->poster_img}}" alt="{{$item->festival_title}}" loading="lazy" style="width:550px; height:360px; object-fit:cover;"></a>
+                                    <a href="{{route('fes.detail',['id'=>$item->festival_id])}}"><img class="thumb" src="{{$item->poster_img}}" alt="{{$item->festival_title}}" loading="lazy" style="height:300px; object-fit:cover;"></a>
                                 </div>
                                 <div class="content-body">
                                     <h4 class="title" style="height: 80px"><a href="{{route('fes.detail',['id'=>$item->festival_id])}}">{{$item->festival_title}}</a></h4>
