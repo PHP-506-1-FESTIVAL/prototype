@@ -66,9 +66,9 @@
                         </li>
                         @endauth
                         @guest
-                        <div class="login-button">
+                        <div class="login-button col" style="display: block;" >
                             <ul>
-                                <li>
+                                <li style="margin: 0;">
                                     <a href="{{route('user.login')}}"><i class="lni lni-enter"></i> 로그인</a>
                                 </li>
                                 <li>
