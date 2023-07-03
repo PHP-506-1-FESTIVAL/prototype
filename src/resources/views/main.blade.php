@@ -5,10 +5,10 @@
 {{-- 축제 배너 --}}
 <div class="margindiv"></div>
 <div class="profile-container">
-	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=e52bf8f5-fcd0-43d7-945a-6c04f9c64c5b');">
+	<div class="profile-box" style="background-image: url('https://korean.visitkorea.or.kr/kfes/upload/contents/db/4300fc7c-4d4b-4d40-85d3-c92c69fa52bb_6.png');">
 		<div class="profile-box-content">
-			<h2 style="color:white;">동대문디자인플라자(DDP)</h2>
-			<p>가장 매력적인 서울 야경을 볼 수 있는 동대문에 위치한 복합 문화공간</p>
+			<h2 style="color:white;">쁘띠프랑스 & 이탈리아마을 베니스가면축제</h2>
+			<p>한국 안에 작은 유럽마을 쁘띠프랑스 & 이탈리아마을</p>
 		</div>
 	</div>
 	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=58a44a35-5f34-4a39-a780-a292d8e76a3d');">
@@ -17,10 +17,10 @@
 			<p>반려동물과 어린왕자 포토존에서 견생샷 남길 수 있는 곳</p>
 		</div>
 	</div>
-	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=72046952-ba47-42b3-ad2b-d38d28f96805');">
+	<div class="profile-box" style="background-image: url('https://cdn.visitkorea.or.kr/img/call?cmd=VIEW&id=e223d74e-888e-4e7f-9030-0eafdf96e094');">
 		<div class="profile-box-content">
-			<h2 style="color:white;">담양 메타세쿼이아길</h2>
-			<p>가로수가 만든 초록빛 동굴</p>
+			<h2 style="color:white;">스페이스워크</h2>
+			<p>포항의 아름다운 풍경과 제철소의 야경을 두눈에 담을 수 있는 곳</p>
 		</div>
 	</div>
 </div>
