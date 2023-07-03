@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html">메인</a></li>
+                        <li><a href="{{route('main')}}">메인</a></li>
                         <li>회원가입</li>
                     </ul>
                 </div>
@@ -34,7 +34,7 @@
                         @include('layout.errormsg')
             <form action="{{route('user.termspost')}}" method="post" class="needs-validation" enctype="multipart/form-data">
                 @csrf
-                
+
                 <div class="row g-3">
                     <div class="mb-3">
                         <input type="checkbox" class="form-check-input" id="termsagree" name="termsagree" value="1" required>
