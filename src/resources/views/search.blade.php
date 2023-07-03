@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="{{route('main')}}">Home</a></li>
+                        <li><a href="{{route('main')}}">메인</a></li>
                         <li>검색결과</li>
                     </ul>
                 </div>
@@ -24,15 +24,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-7 col-12">
-                    <div class="row">
+                    <div class="row" style="display:grid; grid-template-columns:50% 50%; grid-template-rows: auto;">
                         @forelse ($result as $item)
-                        <div class="col-lg-6 col-12">
+                        <div class="col-12">
                             <div class="single-news wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
-                                    <a href="{{route('fes.detail',['id'=>$item->festival_id])}}"><img class="thumb" src="{{$item->poster_img}}" alt="{{$item->festival_title}}" loading="lazy"></a>
+                                    <a href="{{route('fes.detail',['id'=>$item->festival_id])}}"><img class="thumb" src="{{$item->poster_img}}" alt="{{$item->festival_title}}" loading="lazy" style="width:550px; height:360px; object-fit:cover;"></a>
                                 </div>
                                 <div class="content-body">
-                                    <h4 class="title"><a href="{{route('fes.detail',['id'=>$item->festival_id])}}">{{$item->festival_title}}</a></h4>
+                                    <h4 class="title" style="height: 80px"><a href="{{route('fes.detail',['id'=>$item->festival_id])}}">{{$item->festival_title}}</a></h4>
                                     <div class="meta-details">
                                         <ul>
                                             <li><a href="{{route('fes.detail',['id'=>$item->festival_id])}}">{{$item->festival_start_date}}~{{$item->festival_end_date}}</a></li>
