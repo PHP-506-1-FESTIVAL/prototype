@@ -57,11 +57,11 @@ Route::resource('/board', BoardController::class);
 // PUT|PATCH       board/{board} ................................................... board.update › BoardController@update
 // DELETE          board/{board} ................................................. board.destroy › BoardController@destroy
 // GET|HEAD        board/{board}/edit .................................................. board.edit › BoardController@edit
-Route::post('/board/{search}', [BoardController::class, 'search'])->name('board.search');
+Route::post('/board/search', [BoardController::class, 'search'])->name('board.search');
 // Notice
 Route::get('/notice', [NoticeController::class , 'index'])->name('notice.index');
 Route::get('/notice/{id}', [NoticeController::class , 'show'])->name('notice.show');
-Route::post('/notice/{search}', [NoticeController::class, 'search'])->name('notice.search');
+Route::post('/notice/search', [NoticeController::class, 'search'])->name('notice.search');
 
 /************************************************
  * 프로젝트명   : festival_info
