@@ -16,7 +16,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12" style="margin-top:20px;">
+                <div class="col-lg-4 col-md-6 col-12" style="margin-top:15px;">
                     <h5 style="color:#ffffff; margin-bottom:5px;">Academy Connect</h5>
                     <p><a href="https://daegu.greenart.co.kr/" style="color:#ffffff; text-decoration-line: none;">그린컴퓨터아트학원 대구</a></p>
                     <ul style="color:#ffffff;"><br>
@@ -28,9 +28,9 @@
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="single-footer f-contact" style="float:right;">
                         <h5 style="color:#ffffff; margin-bottom:5px;">Reference Website</h5>
-                        <p style="color:#ffffff;">참고 웹사이트</p><br>
+                        <a style="color:#ffffff;">참고 웹사이트</a><br>
                         <ul class="logo_list" style="width:280px; background-color:#f7f7f7; text-align:center; border-radius:10px; display: flex; flex-wrap: wrap; justify-content: space-between;">
-                            <li style="width: 140px;"><a href="http://www.wa.or.k>r/board/list.asp?search=total&amp;SearchString=%B4%EB%C7%D1%B9%CE%B1%B9%20%B1%B8%BC%AE%B1%B8%BC%AE&amp;BoardID=0006" target="_blank" title="새창"><img src="https://cdn.visitkorea.or.kr/resources/images/common/logo_foot_wa.png" alt="과학기술정보통신부 웹 접근성 품질인증 마크"></a></li>
+                            <li style="width: 140px;"><a href="http://www.wa.or.kr/board/list.asp?search=total&amp;SearchString=%B4%EB%C7%D1%B9%CE%B1%B9%20%B1%B8%BC%AE%B1%B8%BC%AE&amp;BoardID=0006" target="_blank" title="새창"><img src="https://cdn.visitkorea.or.kr/resources/images/common/logo_foot_wa.png" alt="과학기술정보통신부 웹 접근성 품질인증 마크"></a></li>
                             <li style="width: 140px;"><a href="https://kto.visitkorea.or.kr/kor.kto" target="_blank" title="새창"><img src="https://cdn.visitkorea.or.kr/resources/images/common/logo_foot_gg.png" alt="한국관광공사"></a></li>
                             <li style="width: 140px;"><a href="https://www.mcst.go.kr/kor/main.jsp" target="_blank" title="새창"><img src="https://cdn.visitkorea.or.kr/resources/images/common/logo_foot_mg.png" alt="문화체육관광부"></a></li>
                             <li style="width: 140px;"><a href="https://api.visitkorea.or.kr/#/" target="_blank" title="새창"><img src="https://korean.visitkorea.or.kr/resources/images/common/logo_foot_api.png?v=20230601001" alt="TourAPI 4.0"></a></li>
