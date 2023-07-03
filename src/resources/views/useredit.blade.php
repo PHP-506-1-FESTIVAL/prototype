@@ -208,7 +208,6 @@
     var nameflg = false;
     var birthflg = false;
     var nickflg = false;
-    var nickflg2 = false;
 
     document.getElementById('submitBtn').onclick = function() {
         var pw = document.getElementById('password');
@@ -228,7 +227,7 @@
             alert('이름을 다시 한번 확인해 주세요.');
         } else if (birthflg && !year.classList.contains('is-valid') || birthflg && !mon.classList.contains('is-valid') || birthflg && !day.classList.contains('is-valid')) {
             alert('생년월일을 다시 한번 확인해 주세요.')
-        } else if (nickflg || !nick.classList.contains('is-valid') && nickflg2) {
+        } else if (nickflg || !nick.classList.contains('is-valid')) {
             alert('닉네임 중복체크를 진행해 주세요.')
         } else {
             signupForm.removeAttribute('onsubmit');
@@ -260,6 +259,7 @@
                         nick.classList.remove('is-invalid');
                         nick.classList.add('is-valid');
                         nickval2.innerHTML = "현재 사용 중인 닉네임 입니다."
+                        nick.setAttribute('readonly', true);
                     } else {
                         nick.classList.remove('is-valid');
                         nick.classList.add('is-invalid');
@@ -268,7 +268,9 @@
                 } else {
                     nick.classList.remove('is-invalid');
                     nick.classList.add('is-valid');
+                    nickval2.innerHTML = "사용 가능한 닉네임 입니다."
                     nickflg = false;
+                    nick.setAttribute('readonly', true);
                 }
             }
         })
@@ -375,10 +377,6 @@
             this.classList.replace('is-invalid', 'is-valid');
             hidden.classList.replace('is-invalid', 'is-valid');
         }
-    }
-
-    document.getElementById("nickname").onkeyup = function() {
-        nickflg2 = true;
     }
 
 </script>

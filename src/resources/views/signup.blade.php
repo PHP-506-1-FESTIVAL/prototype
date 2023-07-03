@@ -224,6 +224,7 @@
                 } else {
                     email.classList.remove('is-invalid');
                     email.classList.add('is-valid');
+                    email.setAttribute('readonly', true);
                 }
             }
         })
@@ -258,6 +259,7 @@
                 } else {
                     nick.classList.remove('is-invalid');
                     nick.classList.add('is-valid');
+                    nick.setAttribute('readonly', true);
                 }
             }
         })
