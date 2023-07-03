@@ -52,7 +52,7 @@
     </div>
 
     <!-- ========================= scroll-top ========================= -->
-    <a href="#" class="scroll-top btn-hover">
+    <a href="#" class="scroll-top btn-hover" style="display: none">
         <i class="lni lni-chevron-up"></i>
     </a>
 
@@ -63,7 +63,7 @@
     <script src="/assets/js/glightbox.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <script type="text/javascript">
-        //========= Category Slider 
+        //========= Category Slider
         tns({
             container: '.category-slider',
             items: 3,
@@ -92,8 +92,8 @@
                 }
             }
         });
-        
-        //========= testimonial 
+
+        //========= testimonial
         tns({
             container: '.testimonial-slider',
             items: 3,
