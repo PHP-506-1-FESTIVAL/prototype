@@ -227,7 +227,7 @@
             alert('이름을 다시 한번 확인해 주세요.');
         } else if (birthflg && !year.classList.contains('is-valid') || birthflg && !mon.classList.contains('is-valid') || birthflg && !day.classList.contains('is-valid')) {
             alert('생년월일을 다시 한번 확인해 주세요.')
-        } else if (nickflg || !nick.classList.contains('is-valid')) {
+        } else if (nickflg || nick.classList.contains('is-invalid')) {
             alert('닉네임 중복체크를 진행해 주세요.')
         } else {
             signupForm.removeAttribute('onsubmit');
@@ -259,6 +259,7 @@
                         nick.classList.remove('is-invalid');
                         nick.classList.add('is-valid');
                         nickval2.innerHTML = "현재 사용 중인 닉네임 입니다."
+                        nickflg = false;
                         nick.setAttribute('readonly', true);
                     } else {
                         nick.classList.remove('is-valid');
@@ -276,6 +277,10 @@
         })
         // 에러는 alert로 처리
         .catch(error => alert(error.message));
+    }
+
+    document.getElementById("nickname").onkeyup = function() {
+        nickflg = true;
     }
 
     document.getElementById("password").onkeyup = function() {
