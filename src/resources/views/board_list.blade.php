@@ -39,7 +39,7 @@
 									<div class="col-md-11">
                                         <form class="d-flex" method="POST" action="{{route('board.search')}}">
                                             @csrf
-                                            <input class="form-control me-2 dropdown-toggle headersearch" type="search" placeholder="검색어를 입력하세요." aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off" name="search" maxlength='100' style="height:35px;">
+                                            <input class="form-control me-2 dropdown-toggle headersearch" type="search" placeholder="검색어를 입력하세요." aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off" name="search" maxlength='100' style="height:35px;" required>
                                             <div class="button">
                                                 <button class="btn" type="submit" style="width:60px; height:35px; padding:5px;">검색</button>
                                             </div>
