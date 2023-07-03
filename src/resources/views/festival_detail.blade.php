@@ -18,7 +18,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-12">
                 <ul class="breadcrumb-nav">
-                    <li><a href="{{route('main')}}" style="color: #ffffff;">홈</a></li>
+                    <li><a href="{{route('main')}}" style="color: #ffffff;">메인</a></li>
                     <li>축제 상세</li>
                 </ul>
             </div>
@@ -40,26 +40,26 @@
                     <span class="sub-heading" style="font-size:20px;">상세정보</span>
                 <button type="button" class="btn {{ $festival->statusClass }}" style="" id="ing">
                     {{ $festival->statusText }}
-                </button><br><br>
-                <p style="font-size: 20px;">
+                </button>
+                <p style="font-size: 20px; padding:20px;">
                     <img src="https://korean.visitkorea.or.kr/kfes/resources/img/valentine_day.png" alt="날짜 아이콘" style="width:40px; height:40px">
                     {{ $festival->festival_start_date }} ~ {{ $festival->festival_end_date }}
-                </p><br>
-                <p style="font-size: 20px;">
+                </p>
+                <p style="font-size: 20px; padding:20px;">
                     <img src="https://korean.visitkorea.or.kr/kfes/resources/img/location_ico.png" alt="지역 아이콘" style="width:40px; height:40px;">
                     {{ $festival->area_code }}
-                </p><br>
-                <p style="font-size: 20px;">
+                </p>
+                <p style="font-size: 20px; padding:20px;">
                     <img src="https://korean.visitkorea.or.kr/kfes/resources/img/coin_ico.png" alt="체험료 아이콘" style="width:40px; height:40px;"> 유/무료 (체험별 상이)
-                </p><br>
-                <p style="font-size: 20px;">
+                </p>
+                <p style="font-size: 20px; padding:20px;  padding-bottom: 30px;">
                     <img src="https://korean.visitkorea.or.kr/kfes/resources/img/call_ico.png" alt="전화 아이콘" style="width:40px; height:40px;">
                     @if ($festival->tel)
                         {{ $festival->tel }}
                     @else
                         연락처 없음
                     @endif
-                </p><br><br>
+                </p>
                 {{-- 찜하기 --}}
                 <form action="{{ route('favorite.jjm') }}" method="post" >
                     @csrf
@@ -93,7 +93,7 @@
             </div>
         </div>
     </div>
-    <br><h1>지도</h1>
+    <h1 style="padding-top:30px;">지도</h1>
     <div id="map" style="border: 1px solid ligtgrey; max-width:100%; width:1180px; height: 400px; border-radius: 10px;"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{ env('KAKAO_MAP_API_KEY') }}&libraries=services"></script>
     <script>
@@ -126,8 +126,7 @@
     </script>
 
     {{-- 연관축제 --}}
-    <br>
-    <h1>이런 축제는 어때요?</h1>
+    <h1 style="padding-top:30px;">이런 축제는 어때요?</h1>
     <div class="row" style="text-align:center;">
         @php
         // 현재 날짜 가져오기
@@ -151,11 +150,10 @@
                 <h5 style="font-family: 'Noto Sans KR', sans-serif;">{{$item->festival_title}}</h5>
             </div>
         @endforeach
-        {{-- 댓글 --}}
-        {{-- <img src='{{asset('img/comment.jpg')}}' style="width:1160px; object-fit:cover; text-align:center;"> --}}
     </div>
 </div>
 </section>
+{{-- 댓글 --}}
     @include('layout.comment')
 <script src="{{asset('js/festival.js')}}"></script>
 @endsection
