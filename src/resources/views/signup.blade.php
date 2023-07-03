@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html">메인</a></li>
+                        <li><a href="{{route('main')}}">메인</a></li>
                         <li>회원가입</li>
                     </ul>
                 </div>
@@ -152,7 +152,7 @@
                                     <label for="address2" class="form-label">상세주소 <span class="text-muted">(선택)</span></label>
                                     <input type="text" class="form-control" id="address2" name="address2">
                                 </div>
-                            
+
                                 <div class="button">
                                     <button type="submit" id="submitBtn" class="btn">회원가입</button>
                                 </div>
