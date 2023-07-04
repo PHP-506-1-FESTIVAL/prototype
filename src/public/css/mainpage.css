@@ -35,7 +35,7 @@
 	position: relative;
 	border-right: 1px solid #000;
 	display: flex;
-	align-items: flex-end;
+	align-items: flex-start;
 	padding: 40px;
 }
 .profile-box-content{
