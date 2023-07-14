@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\AdminReportController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\MailSendController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NoticeController;
@@ -112,6 +113,8 @@ Route::delete('jjm', [FavoriteController::class, 'jjmDel'])->name('favorite.jjm'
 Route::get('/send', function () {
     Mail::to('test@test.com')->send(new OrderShipped());
 });
+Route::get('/regist/mail', [MailSendController::class, 'index'])->name('regist.mail');
+Route::post('/send', [MailSendController::class, 'registMail'])->name('mail.send');
 
 /************************************************
  * 프로젝트명   : festival_info
