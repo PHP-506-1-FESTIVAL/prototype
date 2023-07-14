@@ -7,6 +7,8 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\NoticeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OpenApiController;
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,3 +99,14 @@ Route::get('logout', [MainController::class, 'logout'])->name('main.logout');
 Route::post('jjm', [FavoriteController::class, 'jjmPost'])->name('favorite.jjm');
 //찜 삭제
 Route::delete('jjm', [FavoriteController::class, 'jjmDel'])->name('favorite.jjm');
+
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : web.php
+ * 이력         : v002 0714 김재성 new
+ ************************************************/
+
+Route::get('/send', function () {
+    Mail::to('test@test.com')->send(new OrderShipped());
+});
