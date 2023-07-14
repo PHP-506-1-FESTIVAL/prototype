@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminReportController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\UserController;
@@ -110,3 +111,12 @@ Route::delete('jjm', [FavoriteController::class, 'jjmDel'])->name('favorite.jjm'
 Route::get('/send', function () {
     Mail::to('test@test.com')->send(new OrderShipped());
 });
+
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : web.php
+ * 이력         : v002 0714 이가원 new
+ ************************************************/
+
+Route::get('admin/report', [AdminReportController::class, 'reportget'])->name('admin.report');
