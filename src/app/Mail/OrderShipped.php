@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\RegistToken;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,14 +14,17 @@ class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
 
+
+    protected $RegistToken;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(RegistToken $RegistToken)
     {
-        //
+        $this->RegistToken=$RegistToken;
     }
 
     /**
@@ -44,6 +48,7 @@ class OrderShipped extends Mailable
     {
         return new Content(
             markdown: 'emails.orders.shipped',
+            text: 'test'
         );
     }
 

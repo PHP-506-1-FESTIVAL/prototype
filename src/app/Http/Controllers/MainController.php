@@ -82,13 +82,14 @@ class MainController extends Controller
     {
         $val->validate(['search'=>'required|max:100']);
         if(isset($val->search)){
-            FestivalHit::create(['select_cnt'=>$val->search]);
+            $a=FestivalHit::create(['select_cnt'=>$val->search]);
         }
+        dump($a);
         $result_search=DB::table('festivals')->where('festival_title','like','%'.$val->search.'%')->orderBy('festival_hit','desc')->get();
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($result_search);
         $result_hot=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
-        return view('search')->with('result',$result_search)->with('recommend',$result_hot)->with('search',$val->search);
+        // return view('search')->with('result',$result_search)->with('recommend',$result_hot)->with('search',$val->search);
     }
     public function searchGet()
     {
