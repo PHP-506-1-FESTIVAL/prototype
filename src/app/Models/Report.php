@@ -10,5 +10,12 @@ class Report extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'user_id',
+        'report_no',
+        'report_detail',
+        'report_type',
+    ];
+
     protected $primaryKey = 'report_id';
 }
