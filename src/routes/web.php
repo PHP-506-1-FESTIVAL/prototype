@@ -120,3 +120,12 @@ Route::get('/send', function () {
  ************************************************/
 
 Route::get('admin/report', [AdminReportController::class, 'reportget'])->name('admin.report');
+
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : web.php
+ * 이력         : v002 0714 신유진 new
+ ************************************************/
+
+Route::get('admin/main', [AdminMainController::class, 'main'])->name('admin.main');
