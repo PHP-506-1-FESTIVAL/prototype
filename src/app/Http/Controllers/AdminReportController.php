@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class AdminReportController extends Controller
 {
     function reportget() {
-        return view('report');
+        return view('admin/report');
     }
 }
