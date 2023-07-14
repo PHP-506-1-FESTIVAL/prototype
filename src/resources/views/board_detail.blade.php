@@ -64,9 +64,15 @@
                                                 {{$boards->board_hit}} View
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="javascript:popup()">
+                                                <i class="lni lni-alarm"></i>
+                                                신고하기
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
-                                <div class="row col-4">
+                                <div class="row col-4 justify-content-end">
                                 {{-- // 게시판 상세 BUTTON --}}
                                     {{-- // 세션의 ID와 작성자가 다를시 안보임 --}}
                                     @if(session('user_id') === $boards->user_id)
@@ -114,4 +120,14 @@
     </div>
 </section>
 <!-- End Blog Singel Area -->
+
+<script>
+        function popup(){
+            var url = "{{ route('main') }}";
+            var name = "popup test";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(url, name, option);
+        }
+</script>
+
 @endsection
