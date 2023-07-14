@@ -23,7 +23,7 @@
       <div class="col-lg-8">
         <div class="row">
 
-          <!-- Sales Card -->
+          <!-- 회원수 관리 Card -->
           <div class="col-xxl-4 col-md-6">
             <div class="card info-card sales-card">
 
@@ -37,11 +37,12 @@
                   <li><a class="dropdown-item" href="#">Today</a></li>
                   <li><a class="dropdown-item" href="#">This Month</a></li>
                   <li><a class="dropdown-item" href="#">This Year</a></li>
+                  <li><a class="dropdown-item" href="#">ALL</a></li>
                 </ul>
               </div>
 
               <div class="card-body">
-                <h5 class="card-title">접속 회원수 <span>| Today</span></h5>
+                <h5 class="card-title">회원 <span>| Today</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -58,7 +59,7 @@
             </div>
           </div><!-- End Sales Card -->
 
-          <!-- 새로운 글수 Card -->
+          <!-- 축제 수 Card -->
           <div class="col-xxl-4 col-md-6">
             <div class="card info-card revenue-card">
 
@@ -72,11 +73,13 @@
                   <li><a class="dropdown-item" href="#">Today</a></li>
                   <li><a class="dropdown-item" href="#">This Month</a></li>
                   <li><a class="dropdown-item" href="#">This Year</a></li>
+                  <li><a class="dropdown-item" href="#">ALL</a></li>
+
                 </ul>
               </div>
 
               <div class="card-body">
-                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+                <h5 class="card-title">축제 <span>| This Month</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -93,7 +96,7 @@
             </div>
           </div><!-- End Revenue Card -->
 
-          <!-- Customers Card -->
+          <!-- 게시글 Card -->
           <div class="col-xxl-4 col-xl-12">
 
             <div class="card info-card customers-card">
@@ -108,11 +111,13 @@
                   <li><a class="dropdown-item" href="#">Today</a></li>
                   <li><a class="dropdown-item" href="#">This Month</a></li>
                   <li><a class="dropdown-item" href="#">This Year</a></li>
+                  <li><a class="dropdown-item" href="#">ALL</a></li>
+
                 </ul>
               </div>
 
               <div class="card-body">
-                <h5 class="card-title">Customers <span>| This Year</span></h5>
+                <h5 class="card-title">게시글 <span>| This Year</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -212,7 +217,7 @@
             </div>
           </div><!-- End Reports -->
 
-          <!-- Recent Sales -->
+          <!-- 최근 축제 요청 -->
           <div class="col-12">
             <div class="card recent-sales overflow-auto">
 
@@ -223,14 +228,14 @@
                     <h6>Filter</h6>
                   </li>
 
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                  <li><a class="dropdown-item" href="#">ALL</a></li>
+                  <li><a class="dropdown-item" href="#">승인</a></li>
+                  <li><a class="dropdown-item" href="#">미승인</a></li>
                 </ul>
               </div>
 
               <div class="card-body">
-                <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                <h5 class="card-title">축제요청 <span>| Today</span></h5>
 
                 <table class="table table-borderless datatable">
                   <thead>
@@ -286,7 +291,7 @@
             </div>
           </div><!-- End Recent Sales -->
 
-          <!-- Top Selling -->
+          <!-- 게시글 -->
           <div class="col-12">
             <div class="card top-selling overflow-auto">
 
@@ -304,7 +309,7 @@
               </div>
 
               <div class="card-body pb-0">
-                <h5 class="card-title">Top Selling <span>| Today</span></h5>
+                <h5 class="card-title">게시글 <span>| Today</span></h5>
 
                 <table class="table table-borderless">
                   <thead>
@@ -366,7 +371,7 @@
       <!-- Right side columns -->
       <div class="col-lg-4">
 
-        <!-- Recent Activity -->
+        <!-- 신고관리 -->
         <div class="card">
           <div class="filter">
             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -382,7 +387,7 @@
           </div>
 
           <div class="card-body">
-            <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+            <h5 class="card-title">신고 관리 <span>| Today</span></h5>
 
             <div class="activity">
 
@@ -513,7 +518,7 @@
           </div>
         </div><!-- End Budget Report -->
 
-        <!-- Website Traffic -->
+        <!-- 축제 지역 인기순 -->
         <div class="card">
           <div class="filter">
             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -529,7 +534,85 @@
           </div>
 
           <div class="card-body pb-0">
-            <h5 class="card-title">Website Traffic <span>| Today</span></h5>
+            <h5 class="card-title">축제 지역 인기 <span>| Today</span></h5>
+
+            <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                echarts.init(document.querySelector("#trafficChart")).setOption({
+                  tooltip: {
+                    trigger: 'item'
+                  },
+                  legend: {
+                    top: '5%',
+                    left: 'center'
+                  },
+                  series: [{
+                    name: 'Access From',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                      show: false,
+                      position: 'center'
+                    },
+                    emphasis: {
+                      label: {
+                        show: true,
+                        fontSize: '18',
+                        fontWeight: 'bold'
+                      }
+                    },
+                    labelLine: {
+                      show: false
+                    },
+                    data: [{
+                        value: 1048,
+                        name: 'Search Engine'
+                      },
+                      {
+                        value: 735,
+                        name: 'Direct'
+                      },
+                      {
+                        value: 580,
+                        name: 'Email'
+                      },
+                      {
+                        value: 484,
+                        name: 'Union Ads'
+                      },
+                      {
+                        value: 300,
+                        name: 'Video Ads'
+                      }
+                    ]
+                  }]
+                });
+              });
+            </script>
+
+          </div>
+        </div><!-- End Website Traffic -->
+
+        <!-- 인기 축제 -->
+        <div class="card">
+          <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <li class="dropdown-header text-start">
+                <h6>Filter</h6>
+              </li>
+
+              <li><a class="dropdown-item" href="#">Today</a></li>
+              <li><a class="dropdown-item" href="#">This Month</a></li>
+              <li><a class="dropdown-item" href="#">This Year</a></li>
+            </ul>
+          </div>
+
+          <div class="card-body pb-0">
+            <h5 class="card-title">인기 축제 <span>| Today</span></h5>
 
             <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
 
@@ -592,7 +675,7 @@
         </div><!-- End Website Traffic -->
 
         <!-- News & Updates Traffic -->
-        <div class="card">
+        {{-- <div class="card">
           <div class="filter">
             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -643,7 +726,7 @@
             </div><!-- End sidebar recent posts-->
 
           </div>
-        </div><!-- End News & Updates -->
+        </div><!-- End News & Updates --> --}}
 
       </div><!-- End Right side columns -->
 
