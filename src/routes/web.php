@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\AdminReportController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\FavoriteController;
