@@ -121,6 +121,8 @@ Route::get('/send', function () {
  ************************************************/
 
 Route::get('admin/report', [AdminReportController::class, 'reportget'])->name('admin.report');
+Route::get('report', [AdminReportController::class, 'insertget'])->name('insert.report');
+Route::post('report', [AdminReportController::class, 'insertpost'])->name('insert.post');
 
 /************************************************
  * 프로젝트명   : festival_info
