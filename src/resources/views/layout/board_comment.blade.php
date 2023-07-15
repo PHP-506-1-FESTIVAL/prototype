@@ -43,13 +43,10 @@
                         <!-- Comments -->
                         <div class="comment-form">
                             <h3 class="comment-reply-title"><span>축제 TALK</span></h3>
-                            <form action="{{ route('comments.create') }}" method="POST">
+                            <form action="{{ route('comment.create') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="type_flg" value="1" >
-                                <input type="hidden" name="board_id">
-                                {{-- <input type="hidden" name="board_id" value="{{ $comment.board_id }}">
-                                <input type="hidden" name="user_id" value="{{ user_id }}"> --}}
-                                {{-- <input type="hidden" name="comment_type" value="{{ comment_type }}"> --}}
+                                <input type="hidden" name="type_flg" value="1">
+                                <input type="hidden" name="board_id" id="board-id-input" value="">
                                 <textarea name="comment_content" class="form-control" placeholder="댓글을 입력하세요" required></textarea>
                                 <button type="submit" class="btn btn-primary">댓글 작성</button>
                             </form>
@@ -60,3 +57,11 @@
         </div>
     </div>
 </section>
+{{-- 현재 페이지 숫자 추출 --}}
+<script>
+    var initialUrl = window.location.href;
+    var numericPart = initialUrl.match(/\d+/)[0];
+
+    document.getElementById("board-id-input").value = numericPart;
+</script>
+

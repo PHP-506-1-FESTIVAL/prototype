@@ -112,7 +112,7 @@
                             </div>
                             <p><div style="white-space:pre-wrap; word-wrap: break-word;">{{$boards->board_content}}</div></p>
                         </div>
-                        @include('layout.list_comment')
+                        @include('layout.board_comment')
                     </div>
                 </div>
             </div>
