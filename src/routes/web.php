@@ -127,6 +127,9 @@ Route::get('admin/report', [AdminReportController::class, 'reportget'])->name('a
 Route::post('admin/report', [AdminReportController::class, 'reportpost'])->name('report.post');
 Route::get('report', [AdminReportController::class, 'insertget'])->name('insert.report');
 Route::post('report', [AdminReportController::class, 'insertpost'])->name('insert.post');
+Route::get('admin/articled', [AdminReportController::class, 'articleget'])->name('report.article');
+Route::get('admin/commentd', [AdminReportController::class, 'commentget'])->name('report.comment');
+Route::get('admin/userd', [AdminReportController::class, 'articleget'])->name('report.user');
 
 /************************************************
  * 프로젝트명   : festival_info
