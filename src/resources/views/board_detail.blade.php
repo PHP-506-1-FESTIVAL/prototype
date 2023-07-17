@@ -17,7 +17,7 @@
 				<ul class="breadcrumb-nav">
 					<li><a href="{{route('main')}}">메인</a></li>
 					<li><a href="{{route('board.index')}}">축제톡톡</a></li>
-                    <li><a href="{{route('board.show', ['board' => $boards->board_id])}}">{{$boards->board_title}}</a></li>
+                    <li><a href="{{route('board.show', ['board' => $boards->board_id])}}">게시글 상세</a></li>
 				</ul>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
                 <div class="single-inner">
                     <div class="post-details">
                         <div class="detail-inner">
-                            <h2 class="post-title">
+                            <h2 class="post-title" style="line-height:50px;">
                                 {{$boards->board_title}}
                             </h2>
                             <!-- post meta -->
@@ -64,12 +64,14 @@
                                                 {{$boards->board_hit}} View
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="javascript:popup()">
-                                                <i class="lni lni-alarm"></i>
-                                                신고하기
-                                            </a>
-                                        </li>
+                                        @if(session('user_id') != $boards->user_id)
+                                            <li>
+                                                <a href="javascript:popup()">
+                                                    <i class="lni lni-alarm"></i>
+                                                    신고하기
+                                                </a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                                 <div class="row col-4 justify-content-end">
@@ -123,7 +125,7 @@
 
 <script>
         function popup(){
-            var url = "{{ route('insert.report') }}";
+            var url = "{!! route('insert.report', ['no' => $boards->board_id, 'type' => '0']) !!}";
             var name = "popup test";
             var option = "width = 500, height = 500, top = 100, left = 200, location = no"
             window.open(url, name, option);

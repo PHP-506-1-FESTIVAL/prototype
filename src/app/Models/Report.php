@@ -11,6 +11,8 @@ class Report extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'board_id',
+        'comment_id',
         'user_id',
         'report_no',
         'report_detail',

@@ -51,7 +51,8 @@
                     <div class="search-input">
                         <label for="detail"><i class="lni lni-pencil-alt theme-color"></i></label>
                         <input type="text" name="detail" id="detail" placeholder="상세 내용 입력">
-                        <input type="hidden" value="">
+                        <input type="hidden" name="type" value="{{$type}}">
+                        <input type="hidden" name="no" value="{{$no}}">
                     </div>
                 </div>
                 <div class="col-12">
