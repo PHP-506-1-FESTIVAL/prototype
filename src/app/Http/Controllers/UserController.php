@@ -264,19 +264,6 @@ class UserController extends Controller
      * 이력         : v002 0717 김재성 new
      ************************************************/
 
-    function terms($id) {
-
-        $data=RegistToken::select('send_mail','send_timer')->where('mail_token',$id)->get();
-        // dump($data[0]->send_timer);
-        $now=Carbon::now();
-        // dump($now);
-        if ($data[0]->send_timer<$now) {
-            return view('errors.404'); //todo 토큰만료 페이지
-        }
-        return view('terms')->with('data',$data);
-    }
-
-
     function termspost(Request $req) {
         if(!$req->marketing) {
             session()->put('marketing', '0');
@@ -351,6 +338,26 @@ class UserController extends Controller
 
         return redirect()->route('user.login');
     }
+    function pwChang(Request $req) {
 
+        // dump($req);
+        $user=User::select('user_password')->where('user_email',$req->email)->get();
+
+        if($req->password) {
+            $req->validate([
+                'password' => 'same:pwchk|regex:/(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$/'
+            ]);
+            if(Hash::check($req->password, $user[0]->user_password)) {
+                $alert = '변경하실 비밀번호가 기존 비밀번호와 같습니다.';
+                return redirect()->back()->with('alert', $alert);
+            }
+            $user[0]->user_password = Hash::make($req->password);
+        }
+
+        $user[0]->save();
+
+
+        return redirect()->route('user.login');
+    }
 }
 

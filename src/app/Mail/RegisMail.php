@@ -47,6 +47,7 @@ class RegisMail extends Mailable
     {
         return new Content(
             view: 'emails.orders.registMail',
+
         );
     }
 

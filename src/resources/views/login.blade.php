@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <a href="javascript:void(0)" class="lost-pass">비밀번호 찾기</a>
+                                        <a href="{{route('find.mail')}}" class="lost-pass">비밀번호 찾기</a>
                                     </div>
                                 </div>
                             </div>

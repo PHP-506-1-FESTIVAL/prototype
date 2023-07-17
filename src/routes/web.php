@@ -113,7 +113,8 @@ Route::delete('jjm', [FavoriteController::class, 'jjmDel'])->name('favorite.jjm'
 
 Route::get('/regist/mail', [MailSendController::class, 'index'])->name('regist.mail');
 Route::get('/find/mail', [MailSendController::class, 'findIndex'])->name('find.mail');
-Route::get('/regist/mail/{token}', [UserController::class, 'terms'])->name('mail.terms');
+Route::get('/distributor/mail/{token}', [MailSendController::class, 'mailIC'])->name('mail.terms');
+Route::post('/find/mail/', [UserController::class, 'pwChang'])->name('pw.chang');
 Route::post('/send/mail', [MailSendController::class, 'registMail'])->name('mail.send');
 Route::post('/send/find', [MailSendController::class, 'findMail'])->name('mail.find');
 
