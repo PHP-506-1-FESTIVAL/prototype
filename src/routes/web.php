@@ -124,6 +124,7 @@ Route::post('/send', [MailSendController::class, 'registMail'])->name('mail.send
  ************************************************/
 
 Route::get('admin/report', [AdminReportController::class, 'reportget'])->name('admin.report');
+Route::post('admin/report', [AdminReportController::class, 'reportpost'])->name('report.post');
 Route::get('report', [AdminReportController::class, 'insertget'])->name('insert.report');
 Route::post('report', [AdminReportController::class, 'insertpost'])->name('insert.post');
 
