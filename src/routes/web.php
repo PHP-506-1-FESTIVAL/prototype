@@ -110,11 +110,10 @@ Route::delete('jjm', [FavoriteController::class, 'jjmDel'])->name('favorite.jjm'
  * 이력         : v002 0714 김재성 new
  ************************************************/
 
-Route::get('/send', function () {
-    Mail::to('test@test.com')->send(new OrderShipped());
-});
 Route::get('/regist/mail', [MailSendController::class, 'index'])->name('regist.mail');
+Route::get('/regist/mail/{token}', [UserController::class, 'terms'])->name('mail.terms');
 Route::post('/send', [MailSendController::class, 'registMail'])->name('mail.send');
+
 
 /************************************************
  * 프로젝트명   : festival_info
