@@ -112,7 +112,7 @@
                             </div>
                             <p><div style="white-space:pre-wrap; word-wrap: break-word;">{{$boards->board_content}}</div></p>
                         </div>
-                        @include('layout.comment')
+                        @include('layout.board_comment')
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
 
 <script>
         function popup(){
-            var url = "{{ route('main') }}";
+            var url = "{{ route('insert.report') }}";
             var name = "popup test";
             var option = "width = 500, height = 500, top = 100, left = 200, location = no"
             window.open(url, name, option);

@@ -8,6 +8,7 @@ use App\Http\Controllers\MailSendController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OpenApiController;
 use App\Mail\OrderShipped;
@@ -134,3 +135,11 @@ Route::post('report', [AdminReportController::class, 'insertpost'])->name('inser
  ************************************************/
 
 Route::get('admin/main', [AdminMainController::class, 'main'])->name('admin.main');
+
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : web.php
+ * 이력         : v002 0714 박진영 new
+ ************************************************/
+Route::post('comment/create', [CommentController::class, 'create'])->name('comment.create');

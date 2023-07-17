@@ -156,6 +156,6 @@
 </div>
 </section>
 {{-- 댓글 --}}
-    @include('layout.comment')
+    @include('layout.list_comment')
 <script src="{{asset('js/festival.js')}}"></script>
 @endsection

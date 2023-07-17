@@ -19,10 +19,11 @@ return new class extends Migration
             $table->integer('comment_id')->nullable();
             $table->integer('user_id');
             $table->char('report_type', 1);
+            $table->char('report_no', 1);
+            $table->string('report_detail', 512)->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->integer('rr_id');
-            $table->integer('admin_id');
+            $table->integer('admin_id')->nullable();
         });
     }
 
