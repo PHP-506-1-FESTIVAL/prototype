@@ -16,6 +16,7 @@ use App\Models\Favorite;
 use App\Models\Festival;
 use App\Models\RegistToken;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -265,8 +266,13 @@ class UserController extends Controller
 
     function terms($id) {
 
-        $data=RegistToken::select('send_mail')->where('mail_token',$id)->get();
-
+        $data=RegistToken::select('send_mail','send_timer')->where('mail_token',$id)->get();
+        // dump($data[0]->send_timer);
+        $now=Carbon::now();
+        // dump($now);
+        if ($data[0]->send_timer<$now) {
+            return view('errors.404'); //todo 토큰만료 페이지
+        }
         return view('terms')->with('data',$data);
     }
 

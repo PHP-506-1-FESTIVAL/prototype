@@ -32,13 +32,24 @@ class MailSendController extends Controller
 
         // dump($req);
         // dump($req->user);
+        $req->validate([
+            'email' => 'same:emailChk|required|regex:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i|max:320'
+        ]);
+
+        $data=User::all()->where('user_email',$req->email)->count('*');
+        // dump($data);
+        if ($data!==0) {
+            $error = '이미 존재한 이메일입니다';
+            return redirect()->back()->with('error', $error);
+        }
+
         $mail=new RegistToken;
-        $mail->send_mail=$req->user;
+        $mail->send_mail=$req->email;
         $mail->mail_flg='0';
         $mail->mail_token=Str::random(40);
         $mail->save();
         // dump($mail);
-        Mail::to($req->user)->send(new RegisMail($mail));
+        Mail::to($req->email)->send(new RegisMail($mail));
         return view('mail_success');
     }
 
