@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>신고하기</title>
+    <title>@yield('title','') 상세</title>
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png" />
     <!-- Web Font -->
@@ -28,40 +28,9 @@
 <body>
     <!-- Start Search Form -->
     <div class="search-form style2 wow fadeInRight" data-wow-delay=".5s" style="margin:0;">
-        <h3 class="heading-title">신고하기</h3>
-        <p class="sub-heding-text">신고해주신 내용은 담당자가 확인한 후 운영원칙에 따라 적절한 조치를 취하고 있습니다.</p>
-        <form action="{{route('insert.post')}}" method="post">
-            @csrf
-            <div class="row">
-                <div class="col-12">
-                    <div class="search-input">
-                        <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
-                        <select name="reason" id="category" required>
-                            <option value="" selected disabled>신고 사유 선택</option>
-                            <option value="0">영리/홍보</option>
-                            <option value="1">음란물</option>
-                            <option value="2">욕설/비하</option>
-                            <option value="3">신상노출</option>
-                            <option value="4">도배</option>
-                            <option value="5">기타</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="search-input">
-                        <label for="detail"><i class="lni lni-pencil-alt theme-color"></i></label>
-                        <input type="text" name="detail" id="detail" placeholder="상세 내용 입력" size=3 maxlength =500>
-                        <input type="hidden" name="type" value="{{$type}}">
-                        <input type="hidden" name="no" value="{{$no}}">
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="search-btn button">
-                        <button class="btn" type="submit"><i class="lni lni-telegram-original"></i> 보내기</button>
-                    </div>
-                </div>
-            </div>
-        </form>
+        <h3 class="heading-title">@yield('title','') 상세</h3>
+        <p class="sub-heding-text"> </p>
+        @yield('content')
     </div>
     <!-- End Search Form -->
 
