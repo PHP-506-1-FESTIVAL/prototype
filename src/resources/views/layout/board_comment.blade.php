@@ -1,39 +1,29 @@
-{{-- <img src='{{asset('img/comment.jpg')}}' style="width:1160px; object-fit:cover; text-align:center;"> --}}
-    <!-- Start Blog Singel Area -->
-    {{-- <section class="section blog-single" style="padding-top:0;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-12">
-                    <div class="single-inner">
-                        <div class="post-details">
-                            <!-- Comments -->
-                            <div class="comment-form">
-                                <h3 class="comment-reply-title"><span>축제 TALK</span></h3>
-                                <form method="post" action=""{{route('user.comments')}}">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-box form-group">
-                                                <input type="hidden" name="comment_id" value="{{$comment->id}}"> 
-                                                <textarea name="#" class="form-control form-control-custom"
-                                                    placeholder="댓글을 남겨주세요."></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="button">
-                                                <button type="submit" class="btn">댓글 등록</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- End Blog Singel Area -->
+<style>
+.comment-list {
+    margin-top: 20px;
+}
+
+.comment {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    position: relative; /* 추가 */
+}
+    .comment-profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.comment-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
+
 <section class="section blog-single" style="padding-top:0;">
     <div class="container">
         <div class="row">
@@ -50,6 +40,21 @@
                                 <textarea name="comment_content" class="form-control" placeholder="댓글을 입력하세요" required></textarea>
                                 <button type="submit" class="btn btn-primary">댓글 작성</button>
                             </form>
+                        </div>
+                        {{-- 댓글 목록 --}}
+                        <div class="comment-form">
+                            @foreach($comments as $comment)
+                                <div id="comment-form">
+                                    <button type="submit" class="btn btn-warning">삭제</button>
+                                    <p>신고하기</p>
+                                    <div class="comment-profile">
+                                        <img class="comment-profile-img" src="{{ $comment->user_profile ? $comment->user_profile : 'https://cdn-icons-png.flaticon.com/512/1361/1361876.png' }}" alt="프로필 이미지">
+                                    </div>
+                                    <p class="comment-name">{{ $comment->user_nickname }}</p>
+                                    <p class="comment-content">{{ $comment->comment_content }}</p>
+                                    <p class="comment-time">{{ $comment->updated_at }}</p>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
