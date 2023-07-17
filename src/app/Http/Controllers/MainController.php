@@ -11,6 +11,8 @@ use App\Models\Notice;
 use Illuminate\Support\Facades\Auth; // 0620 이가원 udt
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Models\Comment;
+use App\Models\User;
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -136,10 +138,18 @@ class MainController extends Controller
         if(isset($jjm[0])) {
             $jjmFlg = [$jjm[0]->favorite_id, $jjm[0]->user_id, $jjm[0]->festival_id];
         }
+        $comments = Comment::where('festival_id', $id)
+        ->join('users', 'comments.user_id', '=', 'users.user_id')
+        ->select('comments.*', 'users.user_nickname', 'users.user_profile')
+        ->orderBy('comments.updated_at', 'desc')
+        ->get();
+
+
         return view('festival_detail')
             ->with('festival', $festival[0]) // 축제 정보를 뷰로 전달
             ->with('favoriteCount', $favoriteCount) // 찜한 갯수를 뷰로 전달
             ->with('jjmFlg', $jjmFlg)
-            ->with('fesid', $id); // 사용자의 찜 여부를 뷰로 전달합
+            ->with('fesid', $id) // 사용자의 찜 여부를 뷰로 전달
+            ->with('comments', $comments);
         }
 }
