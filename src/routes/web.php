@@ -149,3 +149,6 @@ Route::get('admin/main', [AdminMainController::class, 'main'])->name('admin.main
  * 이력         : v002 0714 박진영 new
  ************************************************/
 Route::post('comment/create', [CommentController::class, 'create'])->name('comment.create');
+Route::get('admin/login', [AdminMainController::class, 'login'])->name('admin.login');
+Route::post('admin/loginpost', [AdminMainController::class, 'loginpost'])->name('admin.loginpost');
+Route::get('admin/logout', [AdminMainController::class, 'logout'])->name('admin.logout');

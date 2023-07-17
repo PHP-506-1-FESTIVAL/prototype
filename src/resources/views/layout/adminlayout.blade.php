@@ -255,10 +255,10 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.logout') }}">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>로그아웃</span>
+                </a>
             </li>
 
           </ul><!-- End Profile Dropdown Items -->

@@ -13,8 +13,11 @@ use App\Models\Board;
 use App\Models\Festival;
 use App\Models\Report;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminMainController extends Controller
 {
@@ -50,6 +53,35 @@ class AdminMainController extends Controller
         ->with('data', $data)
         ->with('reportdata', $reportdata)
         ;
+        
+    }
+    public function login()
+    {
+        return view('admin.admin_login');
+    }
+    public function logout()
+    {
+        Session::flush(); // 세션 파기
+        Auth::logout(); // 로그아웃
+        return redirect()->route('admin.login');
+    }
+    public function loginpost(Request $req)
+    {
+        $admin = Admin::where('admin_email', $req->username)->first();
+
+        if (!$admin || $req->password != $admin->admin_password) {
+            $error = '아이디와 비밀번호를 확인해 주세요.';
+            return redirect()->back()->with('error', $error);
+        }
+        Auth::login($admin);
+
+        if (Auth::check()) {
+            session($admin->only('admin_id', 'admin_email', 'admin_name')); // 세션에 인증된 회원 pk 등록
+            return redirect()->intended(route('admin.main'));
+        } else {
+            $error = '인증 작업 에러';
+            return redirect()->back()->with('error', $error);
+        }
     }
 
     // 회원
