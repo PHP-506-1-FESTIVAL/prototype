@@ -8,6 +8,7 @@ use App\Http\Controllers\MailSendController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OpenApiController;
 use App\Mail\OrderShipped;
@@ -110,11 +111,10 @@ Route::delete('jjm', [FavoriteController::class, 'jjmDel'])->name('favorite.jjm'
  * 이력         : v002 0714 김재성 new
  ************************************************/
 
-Route::get('/send', function () {
-    Mail::to('test@test.com')->send(new OrderShipped());
-});
 Route::get('/regist/mail', [MailSendController::class, 'index'])->name('regist.mail');
+Route::get('/regist/mail/{token}', [UserController::class, 'terms'])->name('mail.terms');
 Route::post('/send', [MailSendController::class, 'registMail'])->name('mail.send');
+
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -135,3 +135,11 @@ Route::post('report', [AdminReportController::class, 'insertpost'])->name('inser
  ************************************************/
 
 Route::get('admin/main', [AdminMainController::class, 'main'])->name('admin.main');
+
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : web.php
+ * 이력         : v002 0714 박진영 new
+ ************************************************/
+Route::post('comment/create', [CommentController::class, 'create'])->name('comment.create');
