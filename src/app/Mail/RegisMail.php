@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\RegistToken;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,21 +9,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderShipped extends Mailable
+class RegisMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-
-    protected $RegistToken;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(RegistToken $RegistToken)
+
+    public $mailData;
+
+    public function __construct($mailData)
     {
-        $this->RegistToken=$RegistToken;
+        $this->mailData=$mailData;
     }
 
     /**
@@ -35,7 +34,7 @@ class OrderShipped extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Order Shipped',
+            subject: '마실가실 이메일인증 입니다',
         );
     }
 
@@ -47,8 +46,7 @@ class OrderShipped extends Mailable
     public function content()
     {
         return new Content(
-            markdown: 'emails.orders.shipped',
-            text: 'test'
+            view: 'emails.orders.registMail',
         );
     }
 

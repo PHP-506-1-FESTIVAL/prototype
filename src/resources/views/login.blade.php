@@ -66,11 +66,11 @@
                                     </div>
                                 </div>
                             </div>
-                            @include('layout.errormsg') 
+                            @include('layout.errormsg')
                             <div class="button">
                                 <button type="submit" class="btn">로그인</button>
                             </div>
-                            <p class="outer-link">계정이 없으신가요? <a href="{{route('user.terms')}}">회원가입</a>
+                            <p class="outer-link">계정이 없으신가요? <a href="{{route('regist.mail')}}">회원가입</a>
                             </p>
                         </form>
                     </div>
@@ -79,5 +79,5 @@
         </div>
     </section>
     <!-- end login section -->
-    
+
 @endsection

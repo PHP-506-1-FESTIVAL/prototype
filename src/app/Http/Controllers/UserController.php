@@ -14,6 +14,7 @@ use App\Models\Board;
 use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\Festival;
+use App\Models\RegistToken;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,62 +64,6 @@ class UserController extends Controller
         return redirect()->route('user.login');
     }
 
-    function signup() {
-        return view('signup');
-    }
-
-    function signuppost(Request $req) {
-
-        // 유효성검사
-        $req->validate([
-            'email' => 'required|regex:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i|max:320'
-            ,'password' => 'required|regex:/(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$/'
-            ,'name' => 'required'
-            ,'gender' => 'required'
-            ,'birthyear' => 'required'
-            ,'birthmonth' => 'required'
-            ,'birthday' => 'required'
-            // ,'nickname' => 'required|regex:/^[a-zA-Z가-힣]{2,10}$/'
-            ,'nickname' => 'required'
-            ,'image' => 'image|mimes:png,jpg,jpeg|max:2048'
-        ]);
-
-        $data['user_email'] = $req->email;
-        $data['user_password'] = Hash::make($req->password);
-        $data['user_name'] = $req->name;
-        $data['user_gender'] = $req->gender;
-        $data['user_birthdate'] = $req->birthyear.'-'.$req->birthmonth.'-'.$req->birthday;
-        $data['user_nickname'] = $req->nickname;
-        $data['user_zipcode'] = $req->zipcode;
-        $data['user_address'] = $req->address;
-        $data['user_address_detail'] = $req->address2;
-        $data['user_marketing_agreement'] = session()->get('marketing');
-        $data['user_email_agreement'] = session()->get('promotion');
-
-        $user = User::create($data);
-        
-        if(!$user) {
-            $error = '시스템 에러가 발생하여 회원가입에 실패했습니다.<br>잠시 후에 다시 시도해 주십시오.';
-            return redirect()->route('user.signup')->with('error', $error);
-        }
-
-        if($req->image) {
-            $imgName = $user->user_id.'.'.$req->image->extension();
-
-            // 이미지가 저장될 path 설정
-            $req->image->move(public_path('img/profile'), $imgName);
-    
-            // 이미지 이름 설정
-            $user2 = User::find($user->user_id);
-            $user2->user_profile = $imgName;
-            $user2->save();
-        }
-
-        session()->put('signup_flg', '1');
-
-        return redirect()->route('user.login');
-    }
-
     function usermain() {
 
         // 로그인 체크
@@ -143,7 +88,7 @@ class UserController extends Controller
     function useredit() {
         $id = session('user_id');
         $user = User::find($id);
-        
+
         if($user->user_gender === '0') {
             $user->malechk = 'checked';
             $user->femalechk = '';
@@ -210,7 +155,7 @@ class UserController extends Controller
 
             // 이미지가 저장될 path 설정
             $req->image->move(public_path('img/profile'), $imgName);
-    
+
             // 이미지 이름 설정
             $user2 = User::find($user->user_id);
             $user2->user_profile = $imgName;
@@ -266,7 +211,7 @@ class UserController extends Controller
     }
 
     function withdraw() {
-        
+
         return view('withdraw');
     }
 
@@ -281,25 +226,6 @@ class UserController extends Controller
 
         session()->put('withdraw_flg', '1');
         return redirect()->route('user.login');
-    }
-
-    function terms() {
-        return view('terms');
-    }
-
-    function termspost(Request $req) {
-        if(!$req->marketing) {
-            session()->put('marketing', '0');
-        } else {
-            session()->put('marketing', '1');
-        }
-
-        if(!$req->promotion) {
-            session()->put('promotion', '0');
-        } else {
-            session()->put('promotion', '1');
-        }
-        return redirect()->route('user.signup');
     }
 
     function favorites() {
@@ -330,4 +256,95 @@ class UserController extends Controller
                 ->paginate(5);
         return view('comments')->with('data', $data);
     }
+        /************************************************
+     * 프로젝트명   : festival_info
+     * 디렉토리     : UserController
+     * 파일명       : web.php
+     * 이력         : v002 0717 김재성 new
+     ************************************************/
+
+    function terms($id) {
+
+        $data=RegistToken::select('send_mail')->where('mail_token',$id)->get();
+
+        return view('terms')->with('data',$data);
+    }
+
+
+    function termspost(Request $req) {
+        if(!$req->marketing) {
+            session()->put('marketing', '0');
+        } else {
+            session()->put('marketing', '1');
+        }
+
+        if(!$req->promotion) {
+            session()->put('promotion', '0');
+        } else {
+            session()->put('promotion', '1');
+        }
+        session()->put('send_mail', $req->send_mail);
+        // dump(session());
+        return redirect()->route('user.signup');
+    }
+
+    function signup() {
+
+        return view('signup');
+    }
+
+    function signuppost(Request $req) {
+
+        // 유효성검사
+        $req->validate([
+            // 'email' => 'required|regex:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i|max:320'
+            // ,
+            'password' => 'required|regex:/(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$/'
+            ,'name' => 'required'
+            ,'gender' => 'required'
+            ,'birthyear' => 'required'
+            ,'birthmonth' => 'required'
+            ,'birthday' => 'required'
+            // ,'nickname' => 'required|regex:/^[a-zA-Z가-힣]{2,10}$/'
+            ,'nickname' => 'required'
+            ,'image' => 'image|mimes:png,jpg,jpeg|max:2048'
+        ]);
+
+        $data['user_email'] = session()->get('send_mail');
+        $data['user_password'] = Hash::make($req->password);
+        $data['user_name'] = $req->name;
+        $data['user_gender'] = $req->gender;
+        $data['user_birthdate'] = $req->birthyear.'-'.$req->birthmonth.'-'.$req->birthday;
+        $data['user_nickname'] = $req->nickname;
+        $data['user_zipcode'] = $req->zipcode;
+        $data['user_address'] = $req->address;
+        $data['user_address_detail'] = $req->address2;
+        $data['user_marketing_agreement'] = session()->get('marketing');
+        $data['user_email_agreement'] = session()->get('promotion');
+
+        $user = User::create($data);
+
+        if(!$user) {
+            $error = '시스템 에러가 발생하여 회원가입에 실패했습니다.<br>잠시 후에 다시 시도해 주십시오.';
+            return redirect()->route('user.signup')->with('error', $error);
+        }
+
+        if($req->image) {
+            $imgName = $user->user_id.'.'.$req->image->extension();
+
+            // 이미지가 저장될 path 설정
+            $req->image->move(public_path('img/profile'), $imgName);
+
+            // 이미지 이름 설정
+            $user2 = User::find($user->user_id);
+            $user2->user_profile = $imgName;
+            $user2->save();
+        }
+
+        session()->put('signup_flg', '1');
+
+        return redirect()->route('user.login');
+    }
+
 }
+

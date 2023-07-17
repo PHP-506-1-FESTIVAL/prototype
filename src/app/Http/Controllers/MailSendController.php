@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\OrderShipped;
+
+use App\Mail\RegisMail;
 use App\Models\RegistToken;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class MailSendController extends Controller
         $mail->mail_token=Str::random(40);
         $mail->save();
         // dump($mail);
-        Mail::to($req->user)->send(new OrderShipped($mail));
+        Mail::to($req->user)->send(new RegisMail($mail));
         return view('mail_success');
     }
 

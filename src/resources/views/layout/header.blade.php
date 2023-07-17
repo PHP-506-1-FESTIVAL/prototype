@@ -72,7 +72,7 @@
                                     <a href="{{route('user.login')}}"><i class="lni lni-enter"></i> 로그인</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('user.terms')}}"><i class="lni lni-user"></i> 회원가입</a>
+                                    <a href="{{route('regist.mail')}}"><i class="lni lni-user"></i> 회원가입</a>
                                 </li>
                             </ul>
                         </div>

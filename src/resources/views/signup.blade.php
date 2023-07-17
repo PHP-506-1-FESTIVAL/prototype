@@ -31,11 +31,17 @@
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
                     <div class="form-head">
                         <h4 class="title">회원가입</h4>
+                        <div class="col-12">
+                            <label for="email" class="form-label">이메일 <span class="text-danger">*</span></label>
+                            <div class="input-group has-validation">
+                                <input type="text" class="form-control" id="email" name="email" readonly='true'  value="{{session()->get('send_mail')}}">
+                            </div>
+                        </div>
                         @include('layout.errormsg')
                         <form action="{{route('user.signuppost')}}" method="post" id="signupForm" class="needs-validation" enctype="multipart/form-data" onsubmit="return false">
                             @csrf
                             <div class="row g-4">
-                                <div class="col-12">
+                                {{-- <div class="col-12">
                                     <label for="email" class="form-label">이메일 <span class="text-danger">*</span></label>
                                     <div class="input-group has-validation">
                                         <div class="input-group">
@@ -47,7 +53,7 @@
                                             <div class="invalid-feedback" id="emailval"></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-12">
                                     <label for="password" class="form-label">비밀번호 <span class="text-danger">*</span></label>
@@ -172,7 +178,7 @@
     var pwflg = false;
 
     document.getElementById('submitBtn').onclick = function() {
-        var email = document.getElementById('email');
+        // var email = document.getElementById('email');
         var pw = document.getElementById('password');
         var pwchk = document.getElementById('pwchk');
         var name = document.getElementById('name');
@@ -182,9 +188,10 @@
         var nick = document.getElementById('nickname');
         var signupForm = document.getElementById('signupForm');
 
-        if (!email.classList.contains('is-valid')) {
-            alert('이메일 중복체크를 먼저 진행해 주세요.');
-        } else if (!pw.classList.contains('is-valid')) {
+        // if (!email.classList.contains('is-valid')) {
+        //     alert('이메일 중복체크를 먼저 진행해 주세요.');
+        // }
+        if (!pw.classList.contains('is-valid')) {
             alert('비밀번호를 다시 한번 확인해 주세요.');
         } else if (!pwchk.classList.contains('is-valid')) {
             alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
@@ -197,40 +204,40 @@
         }
     }
 
-    document.getElementById("emailChkBtn").onclick = function() {
-        const email = document.getElementById('email');
-        const emailval = document.getElementById('emailval');
-        const url = "/api/emailchk/" + email.value;
-        var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-        let apiData = null;
+    // document.getElementById("emailChkBtn").onclick = function() {
+    //     const email = document.getElementById('email');
+    //     const emailval = document.getElementById('emailval');
+    //     const url = "/api/emailchk/" + email.value;
+    //     var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    //     let apiData = null;
 
-        // API
-        fetch(url)
-        .then(res => {
-            if(res.status !== 200) {
-                throw new Error(res.status + ' : API Response Error' );
-            }
-            return res.json();})
-        .then(apiData => {
-            if(email.value.match(regExp) === null) {
-                email.classList.remove('is-valid');
-                email.classList.add('is-invalid');
-                emailval.innerHTML = "이메일을 형식에 맞춰 입력해 주세요."
-            } else {
-                if(apiData["emailflg"] === "1") {
-                    email.classList.remove('is-valid');
-                    email.classList.add('is-invalid');
-                    emailval.innerHTML = "이미 등록된 이메일 입니다."
-                } else {
-                    email.classList.remove('is-invalid');
-                    email.classList.add('is-valid');
-                    email.setAttribute('readonly', true);
-                }
-            }
-        })
-        // 에러는 alert로 처리
-        .catch(error => alert(error.message));
-    }
+    //     // API
+    //     fetch(url)
+    //     .then(res => {
+    //         if(res.status !== 200) {
+    //             throw new Error(res.status + ' : API Response Error' );
+    //         }
+    //         return res.json();})
+    //     .then(apiData => {
+    //         if(email.value.match(regExp) === null) {
+    //             email.classList.remove('is-valid');
+    //             email.classList.add('is-invalid');
+    //             emailval.innerHTML = "이메일을 형식에 맞춰 입력해 주세요."
+    //         } else {
+    //             if(apiData["emailflg"] === "1") {
+    //                 email.classList.remove('is-valid');
+    //                 email.classList.add('is-invalid');
+    //                 emailval.innerHTML = "이미 등록된 이메일 입니다."
+    //             } else {
+    //                 email.classList.remove('is-invalid');
+    //                 email.classList.add('is-valid');
+    //                 email.setAttribute('readonly', true);
+    //             }
+    //         }
+    //     })
+    //     // 에러는 alert로 처리
+    //     .catch(error => alert(error.message));
+    // }
 
     document.getElementById("nickChkBtn").onclick = function() {
         const nick = document.getElementById('nickname');
