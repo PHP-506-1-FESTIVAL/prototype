@@ -112,8 +112,10 @@ Route::delete('jjm', [FavoriteController::class, 'jjmDel'])->name('favorite.jjm'
  ************************************************/
 
 Route::get('/regist/mail', [MailSendController::class, 'index'])->name('regist.mail');
+Route::get('/find/mail', [MailSendController::class, 'findIndex'])->name('find.mail');
 Route::get('/regist/mail/{token}', [UserController::class, 'terms'])->name('mail.terms');
-Route::post('/send', [MailSendController::class, 'registMail'])->name('mail.send');
+Route::post('/send/mail', [MailSendController::class, 'registMail'])->name('mail.send');
+Route::post('/send/find', [MailSendController::class, 'findMail'])->name('mail.find');
 
 
 /************************************************
