@@ -69,16 +69,24 @@ class CommentController extends Controller
     //     return view('comment.index', ['comments' => $comment]);
     // }
     public function create(Request $request)
-    {
-        $comment = new Comment();
-        $comment->user_id = Auth::id();
-        $comment->comment_type = $request->input('type_flg', 0); // 상세페이지0, 자유게시판1
-        $comment->comment_content = $request->input('comment_content');
-        $comment->festival_id = $request->input('festival_id');
-        $comment->board_id = $request->input('board_id');
-        $comment->save();
-
-        return redirect()->back()->with('comment', $comment);
+{
+    // 첫 번째로 로그인 체크를 수행합니다.
+    if (!Auth::check()) {
+        // 로그인되지 않은 경우 로그인 페이지로 리다이렉트합니다.
+        return redirect()->route('user.login'); // 로그인 라우트 이름에 맞게 수정해야 합니다.
     }
+
+    // 로그인이 되어있는 경우, 새로운 댓글을 생성합니다.
+    $comment = new Comment();
+    $comment->user_id = Auth::id();
+    $comment->comment_type = $request->input('type_flg', 0); // 상세페이지0, 자유게시판1
+    $comment->comment_content = $request->input('comment_content');
+    $comment->festival_id = $request->input('festival_id');
+    $comment->board_id = $request->input('board_id');
+    $comment->save();
+
+    return redirect()->back()->with('comment', $comment);
+}
+
 
 }
