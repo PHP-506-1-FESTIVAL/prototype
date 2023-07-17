@@ -46,13 +46,18 @@
                             @foreach($comments as $comment)
                                 <div id="comment-form">
                                     <button type="submit" class="btn btn-warning">삭제</button>
-                                    <p>신고하기</p>
+                                    @if(session('user_id') != $comment->user_id)
+                                        <a href="javascript:popup2({{$comment->comment_id}})">
+                                            <i class="lni lni-alarm"></i>
+                                            신고하기
+                                        </a>
+                                    @endif
                                     <div class="comment-profile">
                                         <img class="comment-profile-img" src="{{ $comment->user_profile ? $comment->user_profile : 'https://cdn-icons-png.flaticon.com/512/1361/1361876.png' }}" alt="프로필 이미지">
                                     </div>
-                                    <p class="comment-name">{{ $comment->user_nickname }}</p>
-                                    <p class="comment-content">{{ $comment->comment_content }}</p>
-                                    <p class="comment-time">{{ $comment->updated_at }}</p>
+                                    <p class="comment-name">닉네임: {{ $comment->user_nickname }}</p>
+                                    <p class="comment-content">내용: {{ $comment->comment_content }}</p>
+                                    <p class="comment-time">수정일자: {{ $comment->updated_at }}</p>
                                 </div>
                             @endforeach
                         </div>
@@ -69,4 +74,12 @@
     var numericPart = initialUrl.match(/\d+/)[0];
 
     document.getElementById("festival-id-input").value = numericPart;
+
+    function popup2(e){
+        var url = "{!! route('insert.report', ['type' => '1']) !!}";
+        url = url + "&no=" + e;
+        var name = "popup test";
+        var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+        window.open(url, name, option);
+    }
 </script>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->integer('admin_id')->nullable();
+            $table->char('handle_flg', 1)->nullable();
         });
     }
 
