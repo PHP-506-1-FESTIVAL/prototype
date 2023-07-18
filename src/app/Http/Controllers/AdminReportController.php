@@ -11,13 +11,41 @@ use Illuminate\Http\Request;
 class AdminReportController extends Controller
 {
     function reportget() {
-        $data = Report::select('report_id', 'board_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
+
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
+
+        $status = request()->status;
+
+        if($status == '0') {
+            $data = Report::select('report_id', 'board_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
+                ->where('handle_flg', null)
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
-        return view('admin/report')->with('data', $data);
+        } else if ($status == '1') {
+            $data = Report::select('report_id', 'board_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
+                ->where('handle_flg', '0')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else if ($status == '2') {
+            $data = Report::select('report_id', 'board_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
+                ->where('handle_flg', '1')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $data = Report::select('report_id', 'board_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
+
+        return view('admin/report')->with('data', $data)->with('status', $status);
     }
 
-    function reportpost(Request $req) {
+    function reportput(Request $req) {
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
         if($req->flg == '0') {
             if($req->board_id) {
                 Board::destroy($req->board_id);
@@ -29,7 +57,7 @@ class AdminReportController extends Controller
         $report->handle_flg = $req->flg;
         $report->admin_id = session('admin_id');
         $report->save();
-        return redirect()->route('admin.report');
+        return redirect()->route('admin.report', ['status' => $req->status]);
     }
 
     function insertget() {
@@ -54,6 +82,10 @@ class AdminReportController extends Controller
 
     function insertpost(Request $req) {
 
+        if(auth()->guest()) {
+            return "<script>alert('로그인 후 이용해 주세요.'); window.close();</script>";
+        }
+
         $req->validate([
             'detail'     => 'max:500'
         ]);
@@ -73,17 +105,29 @@ class AdminReportController extends Controller
     }
 
     function articleget() {
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
         $board = Board::withTrashed()->find(request()->id);   
         return view('admin/report_article')->with('board', $board);
     }
 
     function commentget() {
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
         $comment = Comment::withTrashed()->find(request()->id);
         return view('admin/report_comment')->with('comment', $comment);
     }
 
     function userget() {
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
         $user = User::withTrashed()->find(request()->id);
+        if(strlen($user->user_profile) < 3) {
+            $user->user_profile = 'profile.png';
+        }
         return view('admin/report_user')->with('user', $user);
     }
 }
