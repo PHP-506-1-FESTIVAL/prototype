@@ -160,7 +160,7 @@ Route::get('admin/logout', [AdminMainController::class, 'logout'])->name('admin.
 Route::get('admin/user', [AdminMainController::class, 'userget'])->name('admin.user');
 Route::post('admin/userpost', [AdminMainController::class, 'userpost'])->name('admin.userpost');
 
-Route::get('/kakao',[SocialController::class,'redirect']);
+Route::get('/kakao',[SocialController::class,'redirect'])->name('kakao.login');
 Route::get('/kakao/back',[SocialController::class,'back']);
 
 Route::post('admin/search', [AdminMainController::class, 'search'])->name('admin.search');

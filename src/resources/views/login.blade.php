@@ -76,6 +76,11 @@
                             <div class="button">
                                 <button type="submit" class="btn">로그인</button>
                             </div>
+                            <div>
+                                <a href="{{route('kakao.login')}}">
+                                    <img src="/assets/images/kakaotalk_sharing_btn_medium.png" alt="카카오톡 로그인" >
+                                </a>
+                            </div>
                             <p class="outer-link">계정이 없으신가요? <a href="{{route('regist.mail')}}">회원가입</a>
                             </p>
                         </form>
