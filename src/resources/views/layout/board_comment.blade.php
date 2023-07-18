@@ -45,7 +45,32 @@
                         <div class="comment-form">
                             @foreach($comments as $comment)
                                 <div id="comment-form">
-                                    <button type="submit" class="btn btn-warning">삭제</button>
+                                    <form action="{{ route('comment.delete', ['id' => $comment->comment_id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        @if(session('user_id') == $comment->user_id)
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $comment->comment_id }}">삭제</button>
+                                        @endif
+
+                                        <!-- Delete Confirmation Modal -->
+                                        <div class="modal fade" id="deleteModal{{ $comment->comment_id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $comment->comment_id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteModalLabel{{ $comment->comment_id }}">삭제 확인</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        정말 삭제하시겠습니까?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                        <button type="submit" class="btn btn-danger">삭제</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                     @if(session('user_id') != $comment->user_id)
                                         <a href="javascript:popup2({{$comment->comment_id}})">
                                             <i class="lni lni-alarm"></i>
@@ -53,7 +78,7 @@
                                         </a>
                                     @endif
                                     <div class="comment-profile">
-                                        <img class="comment-profile-img" src="{{ $comment->user_profile ? $comment->user_profile : 'https://cdn-icons-png.flaticon.com/512/1361/1361876.png' }}" alt="프로필 이미지">
+                                        <img class="comment-profile-img" src="/img/profile/{{ $comment->user_profile }}" alt="프로필 이미지">
                                     </div>
                                     <p class="comment-name">{{ $comment->user_nickname }}</p>
                                     <p class="comment-content">{{ $comment->comment_content }}</p>

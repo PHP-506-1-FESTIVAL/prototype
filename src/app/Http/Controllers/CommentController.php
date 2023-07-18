@@ -79,4 +79,12 @@ class CommentController extends Controller
 
         return redirect()->back()->with('comment', $comment);
     }
+
+    public function delete($id)
+    {
+    $comment = Comment::findOrFail($id);
+    $comment->delete();
+
+    return redirect()->back()->with('success', '댓글이 삭제되었습니다.');
+    }
 }
