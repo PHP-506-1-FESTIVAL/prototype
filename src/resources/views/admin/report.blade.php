@@ -140,7 +140,7 @@
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
-              {!! $data->links('vendor.pagination.custom') !!}
+              {!! $data->links('vendor.pagination.custom2') !!}
             </div>
           </div>
 
