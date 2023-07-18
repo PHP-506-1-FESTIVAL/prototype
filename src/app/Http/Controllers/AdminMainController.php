@@ -14,6 +14,7 @@ use App\Models\Festival;
 use App\Models\Report;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Blacklist;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -56,6 +57,7 @@ class AdminMainController extends Controller
         ;
         
     }
+    // 로그인
     public function login()
     {
         return view('admin.admin_login');
@@ -84,6 +86,7 @@ class AdminMainController extends Controller
             return redirect()->back()->with('error', $error);
         }
     }
+    //유저관리
     public function userget(){
         $users = User::orderBy('created_at', 'desc')->paginate(10);
     
@@ -96,11 +99,38 @@ class AdminMainController extends Controller
         return view('admin.user')->with('users', $users);
     }
     
-    public function userpost(){
+    public function userpost(Request $request)
+    {
+        $userId = $request->input('user_id');
 
+        // 유저 삭제 로직
+        User::where('user_id', $userId)->delete();
+
+        // 블랙리스트 테이블에 정보 저장 로직
+        $blacklist = new Blacklist;
+        $blacklist->user_id = $userId;
+        $blacklist->banned_at = now();
+        // 필요한 다른 정보들을 설정합니다.
+        $blacklist->save();
+
+        return redirect()->back()->with('success', '유저가 블랙리스트로 처리되었습니다.');
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // 검색 로직을 구현하고 검색 결과를 가져옵니다.
+        $users = User::where('user_name', 'like', '%' . $query . '%')
+            ->orWhere('user_email', 'like', '%' . $query . '%')
+            ->orWhere('user_nickname', 'like', '%' . $query . '%')
+            ->orWhere('user_id', 'like', '%' . $query . '%')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('admin.user')->with('users', $users);
     }
 
-    // 회원
+
     // 축제
     // 게시글
     // 축제 요청
