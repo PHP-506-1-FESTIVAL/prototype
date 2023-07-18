@@ -93,30 +93,61 @@
                                                             <div class="form-group">
                                                                 <label>축제명</label>
                                                                 <input name="title" type="text"
-                                                                    placeholder="Enter Title">
+                                                                    placeholder="축제명을 입력해주세요.">
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <label>Category*</label>
+                                                                <label>축제 카테고리*</label>
                                                                 <div class="selector-head">
                                                                     <span class="arrow"><i
                                                                             class="lni lni-chevron-down"></i></span>
                                                                     <select class="user-chosen-select">
-                                                                        <option value="none">Select a Category</option>
-                                                                        <option value="none">Mobile Phones</option>
-                                                                        <option value="none">Electronics</option>
-                                                                        <option value="none">Computers</option>
-                                                                        <option value="none">Headphones</option>
-                                                                        <option value="none">Furnitures</option>
-                                                                        <option value="none">Books</option>
+                                                                        <option value="none">문화관광축제</option>
+                                                                        <option value="none">일반축제</option>
+                                                                        <option value="none">전통공연</option>
+                                                                        <option value="none">뮤지컬</option>
+                                                                        <option value="none">오페라</option>
+                                                                        <option value="none">영화</option>
+                                                                        <option value="none">기타행사</option>
+                                                                        <option value="1">직접입력</option>
+                                                                    </select>3  
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-12">
+                                                            <div class="form-group">
+                                                                <label>시작일*</label>
+                                                                <div class="selector-head">
+                                                                    <span class="arrow"><i
+                                                                            class="lni lni-chevron-down"></i></span>
+                                                                    <select class="user-chosen-select">
+                                                                        <option value="none">Select an option</option>
+                                                                        <option value="none">Option 1</option>
+                                                                        <option value="none">Option 2</option>
+                                                                        <option value="none">Option 3</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-12">
+                                                            <div class="form-group">
+                                                                <label>종료일*</label>
+                                                                <div class="selector-head">
+                                                                    <span class="arrow"><i
+                                                                            class="lni lni-chevron-down"></i></span>
+                                                                    <select class="user-chosen-select">
+                                                                        <option value="none">Select an option</option>
+                                                                        <option value="none">Used</option>
+                                                                        <option value="none">Brand New</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-group button mb-0">
-                                                                <button type="submit" class="btn ">Next Step</button>
+                                                                <button type="submit" class="btn ">다음으로</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -240,8 +271,8 @@
                                                         <div class="col-12">
                                                             <div class="form-group button mb-0">
                                                                 <button type="submit"
-                                                                    class="btn alt-btn">Previous</button>
-                                                                <button type="submit" class="btn ">Next Step</button>
+                                                                    class="btn alt-btn">이전으로</button>
+                                                                <button type="submit" class="btn ">다음으로</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -370,8 +401,8 @@
                                                             </div>
                                                             <div class="form-group button mb-0">
                                                                 <button type="submit"
-                                                                    class="btn alt-btn">Previous</button>
-                                                                <button type="submit" class="btn ">Submit Ad</button>
+                                                                    class="btn alt-btn">이전으로</button>
+                                                                <button type="submit" class="btn ">작성완료</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -391,33 +422,5 @@
         </div>
     </section>
     <!-- End Dashboard Section -->
-
-    <!-- Start Newsletter Area -->
-    <div class="newsletter section">
-        <div class="container">
-            <div class="inner-content">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="title">
-                            <i class="lni lni-alarm"></i>
-                            <h2>Newsletter</h2>
-                            <p>We don't send spam so don't worry.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="form">
-                            <form action="#" method="get" target="_blank" class="newsletter-form">
-                                <input name="EMAIL" placeholder="Your email address" type="email">
-                                <div class="button">
-                                    <button class="btn">Subscribe<span class="dir-part"></span></button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Newsletter Area -->
 
 @endsection

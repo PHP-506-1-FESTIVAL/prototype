@@ -649,11 +649,11 @@
           <div class="card-body pb-0">
             <h5 class="card-title">인기 축제 <span>| Today</span></h5>
 
-            <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
+            <div id="trafficChart2" style="min-height: 400px;" class="echart"></div>
 
             <script>
               document.addEventListener("DOMContentLoaded", () => {
-                echarts.init(document.querySelector("#trafficChart")).setOption({
+                echarts.init(document.querySelector("#trafficChart2")).setOption({
                   tooltip: {
                     trigger: 'item'
                   },
