@@ -128,6 +128,7 @@ Route::post('/send/find', [MailSendController::class, 'findMail'])->name('mail.f
 
 Route::get('admin/report', [AdminReportController::class, 'reportget'])->name('admin.report');
 Route::post('admin/report', [AdminReportController::class, 'reportpost'])->name('report.post');
+Route::put('admin/report', [AdminReportController::class, 'reportput'])->name('report.put');
 Route::get('report', [AdminReportController::class, 'insertget'])->name('insert.report');
 Route::post('report', [AdminReportController::class, 'insertpost'])->name('insert.post');
 Route::get('admin/articled', [AdminReportController::class, 'articleget'])->name('report.article');
