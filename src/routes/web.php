@@ -153,3 +153,5 @@ Route::post('comment/create', [CommentController::class, 'create'])->name('comme
 Route::get('admin/login', [AdminMainController::class, 'login'])->name('admin.login');
 Route::post('admin/loginpost', [AdminMainController::class, 'loginpost'])->name('admin.loginpost');
 Route::get('admin/logout', [AdminMainController::class, 'logout'])->name('admin.logout');
+Route::get('admin/user', [AdminMainController::class, 'userget'])->name('admin.user');
+Route::post('admin/user', [AdminMainController::class, 'userpost'])->name('admin.userpost');

@@ -53,7 +53,7 @@
                                         </a>
                                     @endif
                                     <div class="comment-profile">
-                                        <img class="comment-profile-img" src="{{ $comment->user_profile ? $comment->user_profile : 'https://cdn-icons-png.flaticon.com/512/1361/1361876.png' }}" alt="프로필 이미지">
+                                        <img class="comment-profile-img" src="{{ $comment->user_profile }}" alt="프로필 이미지">
                                     </div>
                                     <p class="comment-name">닉네임: {{ $comment->user_nickname }}</p>
                                     <p class="comment-content">내용: {{ $comment->comment_content }}</p>

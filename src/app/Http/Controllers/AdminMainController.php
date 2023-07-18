@@ -14,6 +14,7 @@ use App\Models\Festival;
 use App\Models\Report;
 use App\Models\User;
 use App\Models\Admin;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -82,6 +83,13 @@ class AdminMainController extends Controller
             $error = '인증 작업 에러';
             return redirect()->back()->with('error', $error);
         }
+    }
+    public function userget(){
+        $users = User::paginate(10);
+        return view('admin.user')->with('users', $users);
+    }
+    public function userpost(){
+
     }
 
     // 회원
