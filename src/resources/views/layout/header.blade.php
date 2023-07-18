@@ -19,9 +19,19 @@
                                 <li class="nav-item">
                                     <a href="{{route('main')}}" aria-label="Toggle navigation">메인</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">                                                          230718 del 신유진
                                     <a href="{{route('main.fesList')}}" aria-label="Toggle navigation">축제일정</a>
-                                </li>
+                                </li> --}}
+                                <li class="nav-item">{{--                                                           230718 add start 신유진 --}}
+                                    <a class="dd-menu collapsed" href="javascript:void(0)"
+                                        data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
+                                        aria-controls="navbarSupportedContent" aria-expanded="false"
+                                        aria-label="Toggle navigation">축제</a>
+                                    <ul class="sub-menu collapse" id="submenu-1-3">
+                                        <li class="nav-item"><a href="{{route('main.fesList')}}">축제일정</a></li>
+                                        <li class="nav-item"><a href="{{route('main.request')}}">축제요청</a></li>
+                                    </ul>
+                            </li>{{--                                                                               230718 add end 신유진 --}}
                                 <li class="nav-item">
                                     <a class="dd-menu collapsed" href="javascript:void(0)"
                                         data-bs-toggle="collapse" data-bs-target="#submenu-1-3"

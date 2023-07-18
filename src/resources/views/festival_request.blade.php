@@ -1,6 +1,28 @@
+{{-- CREATE TABLE `festival_requests` (
+    요청번호 `req_id`	INT	NOT NULL	COMMENT 'PK, AUTO_INCREMENT',
+    요청자 ID `user_id`	INT	NOT NULL	COMMENT 'FK',
+    요청 날짜 `created_at`	TIMESTAMP	NULL,
+    축제 이름 `req_title`	VARCHAR(255)	NOT NULL,
+    행사 시작일 `req_start_date`	DATE	NOT NULL,
+    행사 종료일 `req_end_date`	DATE	NOT NULL,
+    지역코드 `area_code`	VARCHAR(64)	NOT NULL,
+    시군구 코드 `sigungu_code`	VARCHAR(64)	NOT NULL,
+    GPS X좌표 `map_x`	VARCHAR(64)	NOT NULL,
+    GPS Y좌표 `map_y`	VARCHAR(64)	NOT NULL,
+    관광타입 `content_type_id`	VARCHAR(64)	NOT NULL,
+    전화 번호 `tel`	VARCHAR(64)	NOT NULL,
+    포스터 이미지 `poster_img`	VARCHAR(512)	NULL	COMMENT 'path',
+    썸네일 이미지 `list_img`	VARCHAR(512)	NULL	COMMENT 'path',
+    홈페이지 `homepage`	VARCHAR(512)	NULL,
+    사업자 번호 `business_id`	VARCHAR(64)	NOT NULL,
+    요청 상태 `req_state`	CHAR(1)	NOT NULL	DEFAULT '0'	COMMENT '0미승인, 1승인,2 반려',
+    처리 날짜 `updated_at`	TIMESTAMP	NULL,
+    처리관리자 번호 `admin_id`	INT	NOT NULL	COMMENT 'FK'
+); --}}
+
 @extends('layout.layout')
 
-@section('title','축제 목록')
+@section('title','축제 요청')
 
 @section('content')
     <!-- Start Breadcrumbs -->
@@ -9,13 +31,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">Post Ad</h1>
+                        <h1 class="page-title"><a href="{{route('main.request')}}">축제 요청</a></h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li>Post Ad</li>
+                        <li><a href="{{route('main')}}">메인</a></li>
+                        <li><a href="{{route('main.request')}}">축제 요청</a></li>
                     </ul>
                 </div>
             </div>
@@ -27,41 +49,11 @@
     <section class="dashboard section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-12">
-                    <!-- Start Dashboard Sidebar -->
-                    <div class="dashboard-sidebar">
-                        <div class="user-image">
-                            <img src="https://via.placeholder.com/300x300" alt="#">
-                            <h3>Steve Aldridge
-                                <span><a href="javascript:void(0)">@username</a></span>
-                            </h3>
-                        </div>
-                        <div class="dashboard-menu">
-                            <ul>
-                                <li><a href="dashboard.html"><i class="lni lni-dashboard"></i> Dashboard</a></li>
-                                <li><a href="profile-settings.html"><i class="lni lni-pencil-alt"></i> Edit Profile</a>
-                                </li>
-                                <li><a href="my-items.html"><i class="lni lni-bolt-alt"></i> My Ads</a></li>
-                                <li><a href="favourite-items.html"><i class="lni lni-heart"></i> Favourite ads</a></li>
-                                <li><a class="active" href="post-item.html"><i class="lni lni-circle-plus"></i> Post An
-                                        Ad</a></li>
-                                <li><a href="bookmarked-items.html"><i class="lni lni-bookmark"></i> Bookmarked</a></li>
-                                <li><a href="messages.html"><i class="lni lni-envelope"></i> Messages</a></li>
-                                <li><a href="delete-account.html"><i class="lni lni-trash"></i> Close account</a></li>
-                                <li><a href="invoice.html"><i class="lni lni-printer"></i> Invoice</a></li>
-                            </ul>
-                            <div class="button">
-                                <a class="btn" href="javascript:void(0)">Logout</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Start Dashboard Sidebar -->
-                </div>
-                <div class="col-lg-9 col-md-8 col-12">
+                <div class="col-lg-12 col-md-12 col-12">
                     <div class="main-content">
                         <!-- Start Post Ad Block Area -->
                         <div class="dashboard-block mt-0">
-                            <h3 class="block-title">Post Ad</h3>
+                            <h3 class="block-title">축제 요청</h3>
                             <div class="inner-block">
                                 <!-- Start Post Ad Tab -->
                                 <div class="post-ad-tab">
@@ -72,21 +64,21 @@
                                                 aria-controls="nav-item-info" aria-selected="true">
                                                 <span class="serial">01</span>
                                                 Step
-                                                <span class="sub-title">Ad Information</span>
+                                                <span class="sub-title">축제 이름</span>
                                             </button>
                                             <button class="nav-link" id="nav-item-details-tab" data-bs-toggle="tab"
                                                 data-bs-target="#nav-item-details" type="button" role="tab"
                                                 aria-controls="nav-item-details" aria-selected="false">
                                                 <span class="serial">02</span>
                                                 Step
-                                                <span class="sub-title">Ad Details</span>
+                                                <span class="sub-title">축제 정보</span>
                                             </button>
                                             <button class="nav-link" id="nav-user-info-tab" data-bs-toggle="tab"
                                                 data-bs-target="#nav-user-info" type="button" role="tab"
                                                 aria-controls="nav-user-info" aria-selected="false">
                                                 <span class="serial">03</span>
                                                 Step
-                                                <span class="sub-title">User Information</span>
+                                                <span class="sub-title">축제 상세 정보</span>
                                             </button>
                                         </div>
                                     </nav>
@@ -99,7 +91,7 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <label>Add Title*</label>
+                                                                <label>축제명</label>
                                                                 <input name="title" type="text"
                                                                     placeholder="Enter Title">
                                                             </div>

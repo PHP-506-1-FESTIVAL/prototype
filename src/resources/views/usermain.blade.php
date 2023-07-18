@@ -46,6 +46,8 @@
                                 <li><a href="{{route('user.favorites')}}"><i class="lni lni-heart"></i> 찜 목록</a></li>
                                 <li><a href="{{route('user.articles')}}"><i class="lni lni-pencil"></i> 작성 글 목록</a></li>
                                 <li><a href="{{route('user.comments')}}"><i class="lni lni-comments"></i> 작성 댓글 목록</a></li>
+                                <li><a href="my-items.html"><i class="lni lni-bolt-alt"></i> 광고 목록</a></li>
+                                <li><a class="active" href="{{route('main.request')}}"><i class="lni lni-circle-plus"></i> 광고 요청</a></li>
                                 <li><a href="/user/pwchk/1"><i class="lni lni-trash"></i> 회원탈퇴</a></li>
                             </ul>
                             <div class="button">
