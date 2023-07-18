@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OpenApiController;
 use App\Mail\OrderShipped;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\SocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -156,3 +157,5 @@ Route::post('admin/loginpost', [AdminMainController::class, 'loginpost'])->name(
 Route::get('admin/logout', [AdminMainController::class, 'logout'])->name('admin.logout');
 Route::get('admin/user', [AdminMainController::class, 'userget'])->name('admin.user');
 Route::post('admin/user', [AdminMainController::class, 'userpost'])->name('admin.userpost');
+Route::get('/kakao',[SocialController::class,'redirect']);
+Route::get('/kakao/back',[SocialController::class,'back']);

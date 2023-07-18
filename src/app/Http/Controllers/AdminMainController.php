@@ -85,9 +85,17 @@ class AdminMainController extends Controller
         }
     }
     public function userget(){
-        $users = User::paginate(10);
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
+    
+        foreach ($users as $user) {
+            if (strlen($user->user_profile) < 3) {
+                $user->user_profile = 'profile.png';
+            }
+        }
+    
         return view('admin.user')->with('users', $users);
     }
+    
     public function userpost(){
 
     }
