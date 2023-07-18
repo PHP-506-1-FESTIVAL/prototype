@@ -64,6 +64,7 @@
                 @endforeach
               </tbody>
             </table>
+            {!! $users->links('vendor.pagination.custom2') !!}
           </div>
         </div>
       </div>
