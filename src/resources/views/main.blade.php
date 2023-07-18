@@ -4,6 +4,9 @@
 
 {{-- 축제 배너 --}}
 <div class="margindiv"></div>
+
+@include('layout.weather')
+
 <div class="profile-container">
 	<div class="profile-box" style="background-image: url('https://korean.visitkorea.or.kr/kfes/upload/contents/db/4300fc7c-4d4b-4d40-85d3-c92c69fa52bb_6.png');">
 		<div class="profile-box-content">

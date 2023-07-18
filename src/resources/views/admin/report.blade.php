@@ -23,8 +23,35 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
+              <h5 class="card-title"><strong>신고 내역</strong></h5>
+              <div class="mb-3">
+                <form action="{{route('admin.report')}}" method="get">
+                  @csrf
+                  <select name="status" id="status">
+                    @if($status)
+                      <option value="">전체</option>
+                    @else
+                      <option value="" selected>전체</option>
+                    @endif
+                    @if($status == '0')
+                      <option value="0" selected>처리예정</option>
+                    @else
+                      <option value="0">처리예정</option>
+                    @endif
+                    @if($status == '1')
+                      <option value="1" selected>삭제완료</option>
+                    @else
+                      <option value="1">삭제완료</option>
+                    @endif
+                    @if($status == '2')
+                      <option value="2" selected>기각처리</option>
+                    @else
+                      <option value="2">기각처리</option>
+                    @endif
+                  </select>
+                  <button type="submit" class="btn btn-primary btn-sm rounded-pill" style="padding:1px 6px;">검색</button>
+                </form>
+              </div>
 
               <!-- Table with stripped rows -->
               <table class="table datatable table-hover">
@@ -97,8 +124,9 @@
                         @elseif($data[$key]->handle_flg == '1')
                           <button type="button" class="btn btn-secondary btn-sm rounded-pill" style="padding:1px 6px;">기각처리</button>
                         @else 
-                          <form action="{{route('report.post')}}" method="post">
+                          <form action="{{route('report.put')}}" method="post">
                             @csrf
+                            @method('put')
                             <select name="flg" id="flg">
                               <option value="" selected disabled>선택</option>
                               <option value="0">삭제</option>
@@ -110,6 +138,7 @@
                             @elseif($data[$key]->report_type == '1')
                               <input type="hidden" value="{{$data[$key]->comment_id}}" name="comment_id">
                             @endif
+                            <input type="hidden" name="status" value="{{$status}}">
                             <button type="submit" class="btn btn-primary btn-sm rounded-pill" style="padding:1px 6px;">완료</button>
                           </form>
                         @endif

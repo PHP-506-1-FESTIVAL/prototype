@@ -82,11 +82,6 @@ class MailSendController extends Controller
             return redirect()->back()->with('error', $error);
         }
 
-        $mailContent=([
-            'mail_title'=>'기존의 마실가실 계정을 찾으시려면 계속 진행해주세요.',
-            'mail_content'=>'마실가실을 활용하여 다양한 축제찾아 볼 수 있으며 커뮤니티를 활용하여 다양한 정보를 얻어보세요.'
-    ]);
-
         $mail=new RegistToken;
         $mail->send_mail=$req->email;
         $mail->mail_flg='1';
@@ -95,7 +90,7 @@ class MailSendController extends Controller
 
         $mail->mail_title='기존의 마실가실 계정을 찾으시려면 계속 진행해주세요.';
         $mail->mail_content='마실가실을 활용하여 다양한 축제찾아 볼 수 있으며 커뮤니티를 활용하여 다양한 정보를 얻어보세요.';
-        Mail::to($req->email)->send(new RegisMail($mail,$mailContent));
+        Mail::to($req->email)->send(new RegisMail($mail));
         return view('mail_success');
     }
 
