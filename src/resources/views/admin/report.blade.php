@@ -10,7 +10,7 @@
       <h1>신고 관리</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{route('admin.main')}}">Home</a></li>
           <li class="breadcrumb-item">Tables</li>
           <li class="breadcrumb-item active">Data</li>
         </ol>
@@ -27,56 +27,120 @@
               <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
 
               <!-- Table with stripped rows -->
-              <table class="table datatable">
+              <table class="table datatable table-hover">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Start Date</th>
+                    <th scope="col">구분</th>
+                    <th scope="col">글/댓글 ID</th>
+                    <th scope="col">신고자 ID</th>
+                    <th scope="col">신고 유형</th>
+                    <th scope="col">신고 상세</th>
+                    <th scope="col">신고 일시</th>
+                    <th scope="col">처리</th>
+                    <th scope="col">처리 일시</th>
+                    <th scope="col">처리자</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td>2014-12-05</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td>2011-08-12</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                  </tr>
+                  @forelse($data as $key => $val)
+                    <tr>
+                      <th scope="row">{{$data[$key]->report_id}}</th>
+                      <td>
+                        @if($data[$key]->report_type == '0')
+                          글
+                        @else
+                          댓글
+                        @endif
+                      </td>
+                      <td>
+                        @if($data[$key]->report_type == '0')
+                          <a href="javascript:popup1({{$data[$key]->board_id}})">
+                            {{$data[$key]->board_id}}
+                          </a>
+                        @else
+                          <a href="javascript:popup2({{$data[$key]->comment_id}})">
+                            {{$data[$key]->comment_id}}
+                          </a>
+                        @endif
+                      </td>
+                      <td>
+                        <a href="javascript:popup3({{$data[$key]->user_id}})">
+                          {{$data[$key]->user_id}}</td>
+                        </a>
+                      <td>
+                        @switch($data[$key]->report_no)
+                          @case('0')
+                            영리/홍보
+                            @break
+                          @case('1')
+                            음란물
+                            @break
+                          @case('2')
+                            욕설/비하
+                            @break
+                          @case('3')
+                            신상노출
+                            @break
+                          @case('4')
+                            도배
+                            @break
+                          $@default
+                            기타
+                        @endswitch
+                      </td>
+                      <td>{{$data[$key]->report_detail}}</td>
+                      <td>{{$data[$key]->created_at}}</td>
+                      <td>
+                        @if($data[$key]->handle_flg == '0')
+                          <button type="button" class="btn btn-danger btn-sm rounded-pill" style="padding:1px 6px;">삭제완료</button>
+                        @elseif($data[$key]->handle_flg == '1')
+                          <button type="button" class="btn btn-secondary btn-sm rounded-pill" style="padding:1px 6px;">기각처리</button>
+                        @else 
+                          <form action="{{route('report.post')}}" method="post">
+                            @csrf
+                            <select name="flg" id="flg">
+                              <option value="" selected disabled>선택</option>
+                              <option value="0">삭제</option>
+                              <option value="1">기각</option>
+                            </select>
+                            <input type="hidden" value="{{$data[$key]->report_id}}" name="id">
+                            @if($data[$key]->report_type == '0')
+                              <input type="hidden" value="{{$data[$key]->board_id}}" name="board_id">
+                            @elseif($data[$key]->report_type == '1')
+                              <input type="hidden" value="{{$data[$key]->comment_id}}" name="comment_id">
+                            @endif
+                            <button type="submit" class="btn btn-primary btn-sm rounded-pill" style="padding:1px 6px;">완료</button>
+                          </form>
+                        @endif
+                      </td>
+                      <td>
+                        @if($data[$key]->created_at == $data[$key]->updated_at)
+                          
+                        @else
+                          {{$data[$key]->updated_at}}
+                        @endif
+                      </td>
+                      <td>{{$data[$key]->admin_id}}</td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <th scope="row"></th>
+                      <td>아직 신고된 내역이 없습니다.</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  @endforelse
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
-
+              {!! $data->links('vendor.pagination.custom') !!}
             </div>
           </div>
 
@@ -85,5 +149,31 @@
     </section>
 
   </main><!-- End #main -->
+
+  <script>
+        function popup1(e){
+            var url = "{!! route('report.article') !!}";
+            url = url + '?id=' + e;
+            var name = "popup test";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(url, name, option);
+        }
+
+        function popup2(e){
+            var url = "{!! route('report.comment') !!}";
+            url = url + '?id=' + e;
+            var name = "popup test";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(url, name, option);
+        }
+
+        function popup3(e){
+            var url = "{!! route('report.user') !!}";
+            url = url + '?id=' + e;
+            var name = "popup test";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(url, name, option);
+        }
+  </script>
 
   @endsection

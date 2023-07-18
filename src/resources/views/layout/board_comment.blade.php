@@ -46,7 +46,7 @@
                             @foreach($comments as $comment)
                                 <div id="comment-form">
                                     <button type="submit" class="btn btn-warning">삭제</button>
-                                    @if(session('user_id') != $boards->user_id)
+                                    @if(session('user_id') != $comment->user_id)
                                         <a href="javascript:popup2({{$comment->comment_id}})">
                                             <i class="lni lni-alarm"></i>
                                             신고하기
