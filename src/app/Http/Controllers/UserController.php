@@ -348,15 +348,15 @@ class UserController extends Controller
                 'password' => 'same:pwchk|regex:/(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$/'
             ]);
             if(Hash::check($req->password, $user[0]->user_password)) {
-                $alert = '변경하실 비밀번호가 기존 비밀번호와 같습니다.';
-                return redirect()->back()->with('alert', $alert);
+                $error = '변경하실 비밀번호가 기존 비밀번호와 같습니다.';
+                return redirect()->back()->with('error', $error);
             }
             $user[0]->user_password = Hash::make($req->password);
         }
 
         $user[0]->save();
 
-
+        session()->put('pwChang_flg', '1');
         return redirect()->route('user.login');
     }
 }

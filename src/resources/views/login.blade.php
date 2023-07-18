@@ -15,6 +15,12 @@
         {{session()->forget('withdraw_flg');}}
     @endif
 
+    @if (session('pwChang_flg') === '1')
+        <script>alert('비밀번호가 변경되었습니다.');</script>
+        {{session()->forget('pwChang_flg');}}
+    @endif
+
+
     <!-- Start Breadcrumbs -->
     <div class="breadcrumbs">
         <div class="container">
