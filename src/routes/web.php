@@ -158,10 +158,12 @@ Route::get('admin/login', [AdminMainController::class, 'login'])->name('admin.lo
 Route::post('admin/loginpost', [AdminMainController::class, 'loginpost'])->name('admin.loginpost');
 Route::get('admin/logout', [AdminMainController::class, 'logout'])->name('admin.logout');
 Route::get('admin/user', [AdminMainController::class, 'userget'])->name('admin.user');
-Route::post('admin/userpost', [AdminMainController::class, 'userpost'])->name('admin.userpost');
 
 Route::get('/kakao',[SocialController::class,'redirect'])->name('kakao.login');
 Route::get('/kakao/back',[SocialController::class,'back']);
 
 Route::post('admin/search', [AdminMainController::class, 'search'])->name('admin.search');
 Route::get('admin/search', [AdminMainController::class, 'search'])->name('admin.search');
+
+Route::post('admin/delete', [AdminMainController::class, 'admindelete'])->name('admin.delete');
+Route::post('admin/blacklist', [AdminMainController::class, 'blacklist'])->name('admin.blacklist');
