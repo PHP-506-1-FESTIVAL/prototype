@@ -333,6 +333,9 @@ class UserController extends Controller
             $user2->user_profile = $imgName;
             $user2->save();
         }
+        $token=RegistToken::where('send_mail', session()->get('send_mail'))->where('mail_flg','0')->first();
+        $token->send_timer=Carbon::now()->toDateTimeString();
+        $token->save();
 
         session()->put('signup_flg', '1');
 
@@ -340,21 +343,24 @@ class UserController extends Controller
     }
     function pwChang(Request $req) {
 
-        // dump($req);
-        $user=User::select('user_password')->where('user_email',$req->email)->get();
+        $user=User::where('user_email',$req->email)->first();
+        $token=RegistToken::where('send_mail',$req->email)->where('mail_flg','1')->where('mail_token',$req->mail_token)->first();
 
         if($req->password) {
             $req->validate([
                 'password' => 'same:pwchk|regex:/(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$/'
             ]);
-            if(Hash::check($req->password, $user[0]->user_password)) {
+            if(Hash::check($req->password, $user->user_password)) {
                 $error = '변경하실 비밀번호가 기존 비밀번호와 같습니다.';
                 return redirect()->back()->with('error', $error);
             }
-            $user[0]->user_password = Hash::make($req->password);
+            $user->user_password = Hash::make($req->password);
+            $token->send_timer=Carbon::now()->toDateTimeString();
         }
 
-        $user[0]->save();
+        $user->save();
+        $token->save();
+
 
         session()->put('pwChang_flg', '1');
         return redirect()->route('user.login');
