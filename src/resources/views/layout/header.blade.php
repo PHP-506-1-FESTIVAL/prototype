@@ -43,7 +43,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item m-auto">
-                                    <form class="d-flex" method="POST" action="{{route('main.search')}}">
+                                    <form class="d-flex" method="get" action="{{route('main.search')}}">
                                         @csrf
                                         <input class="form-control me-2 dropdown-toggle headersearch" type="search" placeholder="검색어를 입력하세요." aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off" name="search" maxlength='100' style="height:35px;">
                                         <div class="button">

@@ -80,22 +80,23 @@ class MainController extends Controller
     }
     //검색 직접입력
     //$id : 서치내용
-    public function search(Request $val)
-    {
-        $val->validate(['search'=>'required|max:100']);
 
-        $result_search=DB::table('festivals')->where('festival_title','like','%'.$val->search.'%')->orderBy('festival_hit','desc')->get();
+    public function search()
+    {
+        request()->validate(['search'=>'required|max:100']);
+
+        $result_search=DB::table('festivals')->where('festival_title','like','%'.request()->search.'%')->orderBy('festival_hit','desc')->paginate(10);
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($result_search);
         $result_hot=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
-        return view('search')->with('result',$result_search)->with('recommend',$result_hot)->with('search',$val->search);
+        return view('search')->with('result',$result_search)->with('recommend',$result_hot)->with('search',request()->search);
     }
-    public function searchGet()
-    {
-        $tempArr=[];
-        $result_hot=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
-        return view('search')->with('result',$tempArr)->with('recommend',$result_hot)->with('search',' ');
-    }
+    // public function searchGet()
+    // {
+    //     $tempArr=[];
+    //     $result_hot=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
+    //     return view('search')->with('result',$tempArr)->with('recommend',$result_hot)->with('search',' ');
+    // }
     //검색 추천 클릭 /Todo 3차
     //$id : 인기순위ID
     public function Recommend($id)
@@ -112,18 +113,11 @@ class MainController extends Controller
         $mapUtil->areacodeTrans($festival);
         return view('festival_list')->with('data',$festival)->with('str',$str_val);
     }
-    //요청페이지 이동 /Todo3차                                      ----------230718 로그인 체크 udt 신유진
+    //요청페이지 이동 /Todo3차
     public function fesRequest()
     {
-        // 로그인 체크      -----230718 add 신유진
-        // if(auth()->guest()) {
-        //     return redirect()->route('user.login');
-        // }
-
         return view('festival_request');
     }
-    //                                                             ----------230718 udt end 신유진
-
     /************************************************
      * 프로젝트명   : festival_info
      * 디렉토리     : Controllers
