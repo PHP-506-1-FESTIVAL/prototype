@@ -112,11 +112,18 @@ class MainController extends Controller
         $mapUtil->areacodeTrans($festival);
         return view('festival_list')->with('data',$festival)->with('str',$str_val);
     }
-    //요청페이지 이동 /Todo3차
+    //요청페이지 이동 /Todo3차                                      ----------230718 로그인 체크 udt 신유진
     public function fesRequest()
     {
+        // 로그인 체크      -----230718 add 신유진
+        // if(auth()->guest()) {
+        //     return redirect()->route('user.login');
+        // }
+
         return view('festival_request');
     }
+    //                                                             ----------230718 udt end 신유진
+
     /************************************************
      * 프로젝트명   : festival_info
      * 디렉토리     : Controllers
