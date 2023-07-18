@@ -3,18 +3,6 @@
 @section('title', '유저관리')
 
 @section('content')
-<style>
-.search-bar{
-  border: 0;
-    font-size: 14px;
-    color: #012970;
-    border: 1px solid rgba(1, 41, 112, 0.2);
-    padding: 7px 38px 7px 8px;
-    border-radius: 3px;
-    transition: 0.3s;
-    width: 100%;
-}
-</style>
 <main id="main" class="main">
   <div class="pagetitle">
     <h1>유저관리</h1>
