@@ -344,7 +344,7 @@ class UserController extends Controller
     function pwChang(Request $req) {
 
         $user=User::where('user_email',$req->email)->first();
-        $token=RegistToken::where('send_mail',$req->email)->where('mail_flg','1')->where('mail_token',$req->mail_token)->first();
+        $token=RegistToken::where('send_mail',$req->email)->where('mail_flg','1')->where('mail_token',$req->token)->first();
 
         if($req->password) {
             $req->validate([

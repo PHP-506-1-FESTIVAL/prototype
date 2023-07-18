@@ -54,8 +54,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" name="email" value="{{$data[0]->send_mail}}">
-                                <input type="hidden" name="email" value="{{$data[0]->mail_token}}">
+                                <input type="hidden" name="email" value="{{$data->send_mail}}">
+                                <input type="hidden" name="token" value="{{$data->mail_token}}">
                                 <div class="button">
                                     <button type="submit" id="submitBtn" class="btn">비밀번호 변경</button>
                                 </div>

@@ -101,21 +101,21 @@ class MailSendController extends Controller
 
     function mailIC($id) {
 
-        $data=RegistToken::select('send_mail','send_timer','mail_flg','mail_token')->where('mail_token',$id)->get();
+        $data=RegistToken::select('send_mail','send_timer','mail_flg','mail_token')->where('mail_token',$id)->first();
         // dump($data[0]->send_timer);
         $now=Carbon::now();
         // dump($now);
-        $user=User::where('user_email',$data[0]->send_mail)->first();
-        if ($data[0]->send_timer<$now) {
+        $user=User::where('user_email',$data->send_mail)->first();
+        if ($data->send_timer<$now) {
             return view('errors.expirationToken'); //todo 토큰만료 페이지
         }
 
-        if ($data[0]->mail_flg==='0') {
+        if ($data->mail_flg==='0') {
             if ($user) {
                 return view('errors.404'); //todo 이미 존재한 회원
             }
             return view('terms')->with('data',$data);
-        } else if($data[0]->mail_flg==='1') {
+        } else if($data->mail_flg==='1') {
             return view('pw_chang')->with('data',$data);
         }
     }
