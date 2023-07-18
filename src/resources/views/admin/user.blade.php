@@ -1,6 +1,6 @@
 @extends('layout.adminlayout')
 
-@section('title','유저관리')
+@section('title', '유저관리')
 
 @section('content')
 
@@ -23,7 +23,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Datatables</h5>
-            <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
+            <p>Add lightweight datatables to your project using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add the <code>.datatable</code> class name to any table you wish to convert into a datatable.</p>
 
             <!-- Table with stripped rows -->
             <table class="table datatable">
@@ -39,30 +39,29 @@
                   <th scope="col">주소</th>
                   <th scope="col">상세주소</th>
                   <th scope="col">우편주소</th>
-                  <th scope="col">마켓팅 동의</th>
+                  <th scope="col">마케팅 동의</th>
                   <th scope="col">이메일 동의</th>
                   <th scope="col">생성일</th>
                 </tr>
               </thead>
               <tbody>
-              @foreach ($users->take(10) as $user)
-                  @foreach ($users as $user) 
+                @foreach ($users as $user)
                   <tr>
-                      <th scope="row">{{ $user->user_id }}</th>
-                      <td>{{ $user->user_name }}</td>
-                      <td>{{ $user->user_email }}</td>
-                      <td>@if ($user->user_gender == 1)남자 @elseif ($user->user_gender == 0)여자 @endif</td>
-                      <td>{{ $user->user_birthdate }}</td>
-                      <td>{{ $user->user_nickname }}</td>
-                      <td><img src="{{ $user->user_profile }}" alt="Profile Image" style="width:30px; height:30px;"></td>
-                      <td>{{ $user->user_address }}</td>
-                      <td>{{ $user->user_address_detail }}</td>
-                      <td>{{ $user->user_zipcode }}</td>
-                      <td>{{ $user->user_marketing_agreement == 1 ? '동의' : '비동의' }}</td>
-                      <td>{{ $user->user_marketing_agreement == 1 ? '동의' : '비동의' }}</td>
-                      <td>{{ $user->created_at->format('d-m-y') }}</td>
+                    <th scope="row">{{ $user->user_id }}</th>
+                    <td>{{ $user->user_name }}</td>
+                    <td>{{ $user->user_email }}</td>
+                    <td>@if ($user->user_gender == 1)남자 @else 여자 @endif</td>
+                    <td>{{ $user->user_birthdate }}</td>
+                    <td>{{ $user->user_nickname }}</td>
+                    <td><img src="{{ $user->user_profile }}" alt="Profile Image" style="width:30px; height:30px;"></td>
+                    <td>{{ $user->user_address }}</td>
+                    <td>{{ $user->user_address_detail }}</td>
+                    <td>{{ $user->user_zipcode }}</td>
+                    <td>{{ $user->user_marketing_agreement == 1 ? '동의' : '비동의' }}</td>
+                    <td>{{ $user->user_email_agreement == 1 ? '동의' : '비동의' }}</td>
+                    <td>{{ $user->created_at->format('d-m-y') }}</td>
                   </tr>
-                  @endforeach
+                @endforeach
               </tbody>
             </table>
           </div>
@@ -71,6 +70,7 @@
     </div>
   </section>
 </main>
+@endsection
 
 {{-- <main id="main" class="main">
   <div class="pagetitle">
@@ -262,5 +262,3 @@
     </div>
   </section>
 </main> --}}
-
-@endsection
