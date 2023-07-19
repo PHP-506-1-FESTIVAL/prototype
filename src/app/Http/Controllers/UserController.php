@@ -129,7 +129,6 @@ class UserController extends Controller
             ,'nickname' => 'required'
             ,'image' => 'image|mimes:png,jpg,jpeg|max:2048'
         ]);
-        Carbon::
         $id = session('user_id');
         $user = User::find($id);
         $user->user_name = $req->name;
