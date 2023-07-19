@@ -45,8 +45,7 @@
                         @empty
                         검색결과 없음
                         @endforelse
-                        {{ $result->links('vendor.pagination.custom') }}
-                        {{-- {!! $result->links('vendor.pagination.custom') !!} --}}
+                        {!! $result->appends(request()->input())->links('vendor.pagination.custom') !!}
                     </div>
                 </div>
                 <aside class="col-lg-4 col-md-5 col-12">
