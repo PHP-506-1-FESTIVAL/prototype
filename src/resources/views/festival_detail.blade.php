@@ -165,7 +165,70 @@
         font-size: 16px;
         resize: none;
     }
+    .box_like button {
+        margin: 3px;
+    }
     </style>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">글작성</button>
+
+    <!-- 모달 창 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="group_like">
+                        <br>
+                        <strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
+                        <br>
+                        <div class="box_like">
+                            <button type="button" class="btn btn-outline-primary" data-name="체험" data-id="1">
+                                <span class="txt_like">체험프로그램이 많아요</span><span class="ico_comm ico_like2"></span>
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" data-name="테마" data-id="2">
+                                <span class="txt_like">테마가 재미있어요</span><span class="ico_comm ico_like2"></span>
+                            </button>
+                            <button type="button" class="btn btn-outline-success" data-name="분위기" data-id="3">
+                                <span class="txt_like">분위기가 좋아요</span><span class="ico_comm ico_like2"></span>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" data-name="먹거리" data-id="4">
+                                <span class="txt_like">주변에 먹거리가 많아요</span><span class="ico_comm ico_like2"></span>
+                            </button>
+                            <button type="button" class="btn btn-outline-warning" data-name="화장실" data-id="5">
+                                <span class="txt_like">화장실이 깨끗해요</span><span class="ico_comm ico_like2"></span>
+                            </button>
+                            <button type="button" class="btn btn-outline-info" data-name="주차" data-id="6">
+                                <span class="txt_like">주차가 쉬워요</span><span class="ico_comm ico_like2"></span>
+                            </button>
+                            <button type="button" class="btn btn-outline-dark" data-name="가성비" data-id="7">
+                                <span class="txt_like">가성비 좋아요</span><span class="ico_comm ico_like2"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <form class="mb-3" name="myform" id="myform" method="post">
+                        <fieldset>
+                            <span class="text-bold">별점을 선택해주세요</span>
+                            <input type="radio" name="reviewStar" value="5" id="rate1" ><label for="rate1">★</label>
+                            <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
+                            <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+                            <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
+                            <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
+                        </fieldset>
+                        <p id="selectedRating"></p>            
+                        <div>
+                            <textarea class="col-auto form-control" type="text" id="reviewContents" placeholder="작성내용은 축제리스트에 노출되며 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요."></textarea>
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-danger">제출</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- <button type="button" class="btn btn-danger">글작성</button>
     <div class="group_like">
         <br><strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
         <br><div class="box_like">
@@ -209,8 +272,17 @@
                 placeholder="작성내용은 축제리스트에 노출되며 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요."></textarea>
         </div>
         <br><button type="button" class="btn btn-danger">제출</button>
-    </form>
+    </form> --}}
+    <script>
+        const radioButtons = document.querySelectorAll('input[name="reviewStar"]');
+        const selectedRating = document.getElementById('selectedRating');
 
+        radioButtons.forEach((radio) => {
+            radio.addEventListener('change', (event) => {
+                selectedRating.textContent = `선택한 별점: ${event.target.value}/5`;
+            });
+        });
+    </script>
     <script>
         const buttons = document.querySelectorAll('.box_like button');
 
