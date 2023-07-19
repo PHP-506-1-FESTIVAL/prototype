@@ -45,11 +45,16 @@
                                 <li class="nav-item m-auto">
                                     <form class="d-flex" method="get" action="{{route('main.search')}}">
                                         @csrf
-                                        <input class="form-control me-2 dropdown-toggle headersearch" type="search" placeholder="검색어를 입력하세요." aria-label="Search" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off" name="search" maxlength='100' style="height:35px;">
+                                        <input class="form-control me-2 dropdown-toggle headersearch" type="search" placeholder="검색어를 입력하세요." aria-label="Search" id="searchbox" data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off" name="search" maxlength='100' style="height:35px;">
                                         <div class="button">
                                             <button class="btn" type="submit" style="width:60px; height:35px; padding:5px;">검색</button>
                                         </div>
                                     </form>
+                                    <ul class="sub-menu collapse" id="searchhit" style="display:none;">
+                                        <li>인기 검색어</li>
+                                        <li class="nav-item"><a href="{{route('main.fesList')}}">1. 부산</a></li>
+                                        <li class="nav-item"><a href="{{route('main.request')}}">2. 수국</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -92,4 +97,39 @@
             </div>
         </div>
     </div>
+
 </header>
+
+<script>
+    const searchbox = document.getElementById('searchbox');
+    const hit = document.getElementById('searchhit');
+    searchbox.onfocus = function() {
+        hit.style.removeProperty('display');
+    };
+        // API
+    fetch(url)
+    .then(res => {
+        if(res.status !== 200) {
+            throw new Error(res.status + ' : API Response Error' );
+        }
+        return res.json();})
+    .then(apiData => {
+        if(nick.value.match(regExp) === null) {
+            nick.classList.remove('is-valid');
+            nick.classList.add('is-invalid');
+            nickval.innerHTML = "한글, 영문을 사용해 2~10글자로 입력해 주세요."
+        } else {
+            if(apiData["nickflg"] === "1") {
+                nick.classList.remove('is-valid');
+                nick.classList.add('is-invalid');
+                nickval.innerHTML = "이미 등록된 닉네임 입니다."
+            } else {
+                nick.classList.remove('is-invalid');
+                nick.classList.add('is-valid');
+                nick.setAttribute('readonly', true);
+            }
+        }
+    })
+    // 에러는 alert로 처리
+    .catch(error => alert(error.message));
+</script>

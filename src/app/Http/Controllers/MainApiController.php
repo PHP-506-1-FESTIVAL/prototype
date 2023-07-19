@@ -48,7 +48,12 @@ class MainApiController extends Controller
     $mapUtil->areacodeTrans($fes_info);
     $mapUtil->fesStat($fes_info);
     return $fes_info;
-}
+    }
+
+    public function hit() {
+        
+    }
+
     public function all()
     {
         $fes_all_info=Festival::all();

@@ -27,3 +27,6 @@ Route::get('emailchk/{id}', [ApiUserController::class, 'emailshow']);
 
 Route::get('nickchk', [ApiUserController::class, 'nickindex']);
 Route::get('nickchk/{id}', [ApiUserController::class, 'nickshow']);
+
+// 0719 이가원 add
+Route::get('hit', [MainApiController::class, 'hit'])->name('hit');

@@ -84,7 +84,9 @@ class MainController extends Controller
     public function search()
     {
         request()->validate(['search'=>'required|max:100']);
-
+        if(isset(request()->search)){
+            FestivalHit::create(['select_cnt'=>request()->search]);
+        }
         $result_search=DB::table('festivals')->where('festival_title','like','%'.request()->search.'%')->orderBy('festival_hit','desc')->paginate(10);
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($result_search);
