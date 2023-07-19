@@ -82,7 +82,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
-                                <form action="{{ route('admin.delete', ['id' => $user->user_id]) }}" method="POST">
+                                <form action="{{ route('admin.userpost', ['id' => $user->user_id]) }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="user_id" value="{{  $user->user_id }}">
                                     <button type="submit" class="btn btn-danger">삭제</button>
@@ -103,4 +103,5 @@
     </div>
   </section>
 </main>
+
 @endsection

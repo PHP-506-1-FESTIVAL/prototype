@@ -154,19 +154,21 @@ Route::get('admin/request', [AdminRequestController::class, 'requestget'])->name
  * 파일명       : web.php
  * 이력         : v002 0714 박진영 new
  ************************************************/
+//댓글
 Route::post('comment/create', [CommentController::class, 'create'])->name('comment.create');
 Route::delete('comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
-
-Route::get('admin/login', [AdminMainController::class, 'login'])->name('admin.login');
+Route::put('comment/{id}',  [CommentController::class, 'update'])->name('comment.update');
+//관리자 로그인
+Route::get('admin/login', [AdminMainController::class, 'login'])->name('admin.login');              
 Route::post('admin/loginpost', [AdminMainController::class, 'loginpost'])->name('admin.loginpost');
-Route::get('admin/logout', [AdminMainController::class, 'logout'])->name('admin.logout');
+Route::post('admin/userpost', [AdminMainController::class, 'userpost'])->name('admin.userpost');
+Route::get('admin/logout', [AdminMainController::class, 'logout'])->name('admin.logout');     
 Route::get('admin/user', [AdminMainController::class, 'userget'])->name('admin.user');
-
-Route::get('/kakao',[SocialController::class,'redirect'])->name('kakao.login');
-Route::get('/kakao/back',[SocialController::class,'back']);
-
+//카카오
+Route::get('kakao',[SocialController::class,'redirect'])->name('kakao.login');
+Route::get('kakao/back',[SocialController::class,'back']);
+// 관리자 유저 검색
 Route::post('admin/search', [AdminMainController::class, 'search'])->name('admin.search');
 Route::get('admin/search', [AdminMainController::class, 'search'])->name('admin.search');
-
-Route::post('admin/delete', [AdminMainController::class, 'admindelete'])->name('admin.delete');
-Route::post('admin/blacklist', [AdminMainController::class, 'blacklist'])->name('admin.blacklist');
+//블랙리스트
+Route::get('admin/blacklist', [AdminMainController::class, 'blacklist'])->name('admin.blacklist');

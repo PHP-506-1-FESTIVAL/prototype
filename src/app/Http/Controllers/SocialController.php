@@ -18,6 +18,7 @@ class SocialController extends Controller
     {
         $kakao = Socialite::driver('kakao')->stateless()->user();
         // dump($kakao);
+        // dump($kakao->avatar);
         $userChk=User::where('user_email',$kakao->email)->first();
         // dump($userChk);
         if (!$userChk) {
@@ -26,15 +27,15 @@ class SocialController extends Controller
             $userMake->user_email=$kakao->email;
             $userMake->user_name=$kakao->name;
             $userMake->user_nickname=$kakao->nickname;
-            $userMake->user_profile=$kakao->profile_img;
+            $userMake->user_profile=$kakao->avatar;
 
             $userMake->user_password=Hash::make('test123!@#');
             $userMake->user_gender='0';
             $userMake->user_birthdate=Carbon::now();
             $userMake->save();
         }
-        // dump($user);
         $user=User::where('user_email',$kakao->email)->first();
+        // dump($user);
         Auth::login($user);
         if(Auth::check()) {
             if(strlen($user->user_profile) < 3) {

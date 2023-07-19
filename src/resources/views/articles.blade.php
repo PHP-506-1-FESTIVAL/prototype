@@ -31,7 +31,11 @@
                     <!-- Start Dashboard Sidebar -->
                     <div class="dashboard-sidebar">
                         <div class="user-image">
-                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
+                            @if (session('kakao_flg')==='1')
+                                <img src="{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
+                            @else
+                                <img src="/img/profile/{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
+                            @endif
                             <h3>{{session()->get('user_nickname')}}
                                 <span><a href="javascript:void(0)">{{session()->get('user_email')}}</a></span>
                             </h3>
