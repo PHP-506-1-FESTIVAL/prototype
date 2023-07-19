@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminMainController;
+use App\Http\Controllers\AdminNoticeController;
 use App\Http\Controllers\AdminReportController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\FavoriteController;
@@ -112,14 +113,20 @@ Route::delete('jjm', [FavoriteController::class, 'jjmDel'])->name('favorite.jjm'
  * 이력         : v002 0714 김재성 new
  ************************************************/
 
+//회원가입 페이지이동
 Route::get('/regist/mail', [MailSendController::class, 'index'])->name('regist.mail');
+//비밀번호 찾기 페이지이동
 Route::get('/find/mail', [MailSendController::class, 'findIndex'])->name('find.mail');
+//메일 토큰 확인
 Route::get('/distributor/mail/{token}', [MailSendController::class, 'mailIC'])->name('mail.terms');
+//비밀번호 변경
 Route::post('/find/mail/', [UserController::class, 'pwChang'])->name('pw.chang');
+//회원가입 메일발송
 Route::post('/send/mail', [MailSendController::class, 'registMail'])->name('mail.send');
+//비밀번호찾기 메일 발송
 Route::post('/send/find', [MailSendController::class, 'findMail'])->name('mail.find');
 // 관리자 공지사항 페이지
-Route::get('admin/notice/search', [NoticeController::class , 'index'])->name('notice.index');
+Route::get('admin/notice/search', [AdminNoticeController::class , 'index'])->name('notice.index');
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -159,10 +166,10 @@ Route::post('comment/create', [CommentController::class, 'create'])->name('comme
 Route::delete('comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
 Route::put('comment/{id}',  [CommentController::class, 'update'])->name('comment.update');
 //관리자 로그인
-Route::get('admin/login', [AdminMainController::class, 'login'])->name('admin.login');              
+Route::get('admin/login', [AdminMainController::class, 'login'])->name('admin.login');
 Route::post('admin/loginpost', [AdminMainController::class, 'loginpost'])->name('admin.loginpost');
 Route::post('admin/userpost', [AdminMainController::class, 'userpost'])->name('admin.userpost');
-Route::get('admin/logout', [AdminMainController::class, 'logout'])->name('admin.logout');     
+Route::get('admin/logout', [AdminMainController::class, 'logout'])->name('admin.logout');
 Route::get('admin/user', [AdminMainController::class, 'userget'])->name('admin.user');
 //카카오
 Route::get('kakao',[SocialController::class,'redirect'])->name('kakao.login');
