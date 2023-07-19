@@ -39,24 +39,25 @@ class AdminMainController extends Controller
         $festivaldatacount = $festivaldata->count();
         // 게시글 all
         $board = Board::all();
+        // 메인의 게시글 5개
         $boarddata = DB::table('boards')
         ->join('users', 'boards.user_id', '=', 'users.user_id' )
         // ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.deleted_at', 'boards.board_hit')
         ->select('*')
         ->where('boards.deleted_at', null)
         ->orderBy('boards.board_id', 'DESC')
-        ->paginate(10);
+        ->paginate(5);
         $boarddatacount = $board->count();
-
-        $data = [$userdatacount, $festivaldatacount, $boarddatacount];
-
         // 신고관리
-        // $reportdata = Report::all();
+        $report = Report::all();
         $reportdata = DB::table('reports')
         ->select('*')
         ->where('deleted_at', null)
         ->orderBy('report_id', 'DESC')
         ->paginate(5);
+
+        $data = [$userdatacount, $festivaldatacount, $boarddatacount];
+
 
         // 현재 시간 생성 ------------4차로 미룸
         // $nowdatetime = Carbon::now();

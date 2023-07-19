@@ -8,12 +8,13 @@
 
   <div class="pagetitle">
     <h1>관리자 페이지 Main Dashboard</h1>
-    <nav>
+    <br>
+    {{-- <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Dashboard</li>
+        <li class="breadcrumb-item"><a href="index.html"> </a></li>
+        <li class="breadcrumb-item active"> </li>
       </ol>
-    </nav>
+    </nav> --}}
   </div><!-- End Page Title -->
 
   <section class="section dashboard">
@@ -51,7 +52,6 @@
                   <div class="ps-3">
                     <h6>{{ $userdatacount }}</h6>
                     <span class="text-success small pt-1 fw-bold">12%(140)</span>{{-- <span class="text-muted small pt-2 ps-1">추가 회원수</span> --}}
-
                   </div>
                 </div>
               </div>
@@ -87,7 +87,8 @@
                   </div>
                   <div class="ps-3">
                     <h6>{{ $festivaldatacount }}</h6>
-                    <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                    {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
+                    <br>
 
                   </div>
                 </div>
@@ -218,7 +219,7 @@
           </div><!-- End Reports -->
 
           <!-- 최근 축제 요청 -->
-          <div class="col-12">
+          {{-- <div class="col-12">
             <div class="card recent-sales overflow-auto">
 
               <div class="filter">
@@ -289,7 +290,7 @@
               </div>
 
             </div>
-          </div><!-- End 최근 축제 요청 -->
+          </div><!-- End 최근 축제 요청 --> --}}
 
           <!-- 게시글 -->
           <div class="col-12">
@@ -314,19 +315,32 @@
                 <table class="table table-borderless">
                   <thead>
                     <tr>
-                      <th scope="col">Preview</th>
-                      <th scope="col">Product</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Sold</th>
-                      <th scope="col">Revenue</th>
+                      <th scope="col">No</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">ID</th>
+                      <th scope="col">닉네임</th>
+                      <th scope="col">작성일</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {{-- @forelse($boarddata as $board) --}}
-
-                    {{-- @empty --}}
-                    {{-- @endforelse --}}
+                    @forelse($boarddata as $data)
                     <tr>
+                      <th scope="row"><a href="#"><img src="" alt="">{{ $data->board_id }}</a></th>
+                      <td><a href="#" class="text-primary fw-bold">{{ $data->board_title }}</a></td>
+                      <td>{{ $data->user_id }}</td>
+                      <td class="fw-bold">{{ $data->user_nickname }}</td>
+                      <td>{{ $data->created_at }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                      <th scope="row">게시글 없음</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    @endforelse
+                    {{-- <tr>
                       <th scope="row"><a href="#"><img src="assets/img/product-1.jpg" alt=""></a></th>
                       <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
                       <td>$64</td>
@@ -360,7 +374,7 @@
                       <td>$79</td>
                       <td class="fw-bold">41</td>
                       <td>$3,239</td>
-                    </tr>
+                    </tr> --}}
                   </tbody>
                 </table>
 
@@ -422,7 +436,7 @@
           </div>
         </div><!-- End Recent Activity -->
 
-        <!-- Budget Report -->
+        <!-- 각 지역 축제수/검색량 Budget Report -->
         <div class="card">
           <div class="filter">
             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -496,7 +510,7 @@
           </div>
         </div><!-- End Budget Report -->
 
-        <!-- 축제 지역 인기순 -->
+        <!-- 축제 인기순 TOP 10 Website Traffic -->
         <div class="card">
           <div class="filter">
             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -512,7 +526,7 @@
           </div>
 
           <div class="card-body pb-0">
-            <h5 class="card-title">축제 지역 인기 <span>| Today</span></h5>
+            <h5 class="card-title">축제 인기순 TOP 10 <span>| Today</span></h5>
 
             <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
 
@@ -573,138 +587,6 @@
 
           </div>
         </div><!-- End Website Traffic -->
-
-        <!-- 인기 축제 -->
-        <div class="card">
-          <div class="filter">
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
-
-              <li><a class="dropdown-item" href="#">Today</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-          </div>
-
-          <div class="card-body pb-0">
-            <h5 class="card-title">인기 축제 <span>| Today</span></h5>
-
-            <div id="trafficChart2" style="min-height: 400px;" class="echart"></div>
-
-            <script>
-              document.addEventListener("DOMContentLoaded", () => {
-                echarts.init(document.querySelector("#trafficChart2")).setOption({
-                  tooltip: {
-                    trigger: 'item'
-                  },
-                  legend: {
-                    top: '5%',
-                    left: 'center'
-                  },
-                  series: [{
-                    name: 'Access From',
-                    type: 'pie',
-                    radius: ['40%', '70%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                      show: false,
-                      position: 'center'
-                    },
-                    emphasis: {
-                      label: {
-                        show: true,
-                        fontSize: '18',
-                        fontWeight: 'bold'
-                      }
-                    },
-                    labelLine: {
-                      show: false
-                    },
-                    data: [{
-                        value: 1048,
-                        name: 'Search Engine'
-                      },
-                      {
-                        value: 735,
-                        name: 'Direct'
-                      },
-                      {
-                        value: 580,
-                        name: 'Email'
-                      },
-                      {
-                        value: 484,
-                        name: 'Union Ads'
-                      },
-                      {
-                        value: 300,
-                        name: 'Video Ads'
-                      }
-                    ]
-                  }]
-                });
-              });
-            </script>
-
-          </div>
-        </div><!-- End Website Traffic -->
-
-        <!-- News & Updates Traffic -->
-        {{-- <div class="card">
-          <div class="filter">
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
-
-              <li><a class="dropdown-item" href="#">Today</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-          </div>
-
-          <div class="card-body pb-0">
-            <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
-            <div class="news">
-              <div class="post-item clearfix">
-                <img src="assets/img/news-1.jpg" alt="">
-                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="assets/img/news-2.jpg" alt="">
-                <h4><a href="#">Quidem autem et impedit</a></h4>
-                <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="assets/img/news-3.jpg" alt="">
-                <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="assets/img/news-4.jpg" alt="">
-                <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="assets/img/news-5.jpg" alt="">
-                <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
-              </div>
-
-            </div><!-- End sidebar recent posts-->
-
-          </div>
-        </div><!-- End News & Updates --> --}}
 
       </div><!-- End Right side columns -->
 
