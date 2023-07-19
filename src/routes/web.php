@@ -118,7 +118,8 @@ Route::get('/distributor/mail/{token}', [MailSendController::class, 'mailIC'])->
 Route::post('/find/mail/', [UserController::class, 'pwChang'])->name('pw.chang');
 Route::post('/send/mail', [MailSendController::class, 'registMail'])->name('mail.send');
 Route::post('/send/find', [MailSendController::class, 'findMail'])->name('mail.find');
-
+// 관리자 공지사항 페이지
+Route::get('admin/notice/search', [NoticeController::class , 'index'])->name('notice.index');
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -142,8 +143,10 @@ Route::get('admin/userd', [AdminReportController::class, 'userget'])->name('repo
  * 파일명       : web.php
  * 이력         : v002 0714 신유진 new
  ************************************************/
-
+// 관리자 메인 페이지
 Route::get('admin/main', [AdminMainController::class, 'main'])->name('admin.main');
+// 관리자 축제요청 관리 페이지
+Route::get('admin/request', [AdminRequestController::class, 'requestget'])->name('admin.request');
 
 /************************************************
  * 프로젝트명   : festival_info
