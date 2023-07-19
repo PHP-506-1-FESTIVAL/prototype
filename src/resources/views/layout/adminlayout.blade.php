@@ -48,7 +48,7 @@
         <img src="/assets/images/favicon.png" alt="">
         <span class="d-none d-lg-block">MSGS Admin</span>
       </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
+      <i class="bi bi-list toggle-sidebar-btn" id="togglebtn"></i>
     </div><!-- End Logo -->
 
     <div class="search-bar">
@@ -561,7 +561,8 @@
   <script>
   
   const body = document.getElementById('body');
-  body.onclick = function() {
+  const btn = document.getElementById('togglebtn');
+  btn.onclick = function() {
     body.classList.toggle('toggle-sidebar');
   };
 
