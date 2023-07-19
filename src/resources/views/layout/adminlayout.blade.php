@@ -303,7 +303,7 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{route('admin.notice')}}">
           <i class="bi bi-megaphone"></i>
           <span>공지 사항</span>
         </a>
@@ -493,7 +493,7 @@
             <span>프로필</span>
           </a>
         </li><!-- End Profile Page Nav -->
-                
+
         <li class="nav-item">
           <a class="nav-link collapsed" href="{{ route('admin.logout') }}">
             <i class="bi bi-arrow-left-square"></i>
