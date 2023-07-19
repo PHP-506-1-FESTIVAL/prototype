@@ -14,7 +14,7 @@ class AdminNoticeController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.notice_list');
     }
 
     /**

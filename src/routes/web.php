@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\AdminNoticeController;
 use App\Http\Controllers\AdminReportController;
+use App\Http\Controllers\AdminRequestController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MailSendController;
