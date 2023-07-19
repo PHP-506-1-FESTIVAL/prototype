@@ -1,17 +1,22 @@
 .kakao{
     background-color: #ffeb00;
     border-radius: 4px;
-    display: grid;
     margin-top: 10px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-
+    min-width: 340px;
+    max-width: 522px;
 }
 .kakao a{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+}
+.kakao .kakao_img{
     grid-column: 2/3;
 }
-.kakao a img{
+.kakao .kakao_img img{
     height: 5vh;
 }
+
 .kakao span{
     grid-column: 3/5;
     color: #3c1e1e;
