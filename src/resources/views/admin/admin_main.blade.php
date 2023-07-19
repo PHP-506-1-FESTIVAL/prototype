@@ -289,7 +289,7 @@
               </div>
 
             </div>
-          </div><!-- End Recent Sales -->
+          </div><!-- End 최근 축제 요청 -->
 
           <!-- 게시글 -->
           <div class="col-12">
@@ -398,82 +398,25 @@
             <div class="activity">
               @forelse($reportdata as $val)
                 <div class="activity-item d-flex">
-                  <div class="activite-label">32 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                  <div class="activite-label">{{ $val->created_at }}  </div>
+
+                  {{-- 처리에 따른 동그라미 색깔 --}}
+                  {{-- success_초록 danger_빨강 primary_파랑 info_민트 warning_노랑 muted_검정 --}}
+                  @if($val->handle_flg == '0') {{-- 0.삭제완료.red --}}
+                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+                  @elseif($val->handle_flg == '1') {{-- 1.기각처리.gray --}}
+                  <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
+                  @else  {{-- NULL.처리안된신고. --}}
+                  <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
+                  @endif
+
                   <div class="activity-content">
-                    <a href="{{ route("admin.report") }}" class="text-dark">{{$val->report_detail}}</a>
+                    <a href="{{ route("admin.report") }}" class="text-dark">{{ $val->report_detail }}</a>
                   </div>
                 </div><!-- End activity item-->
               @empty
                 
               @endforelse
-
-              {{-- @for($i = 1; $i < 6; $i++)
-                <div class="activity-item d-flex">
-                  <div class="activite-label">32 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                  <div class="activity-content">
-                    <a href="">
-                      @if (empty($reportdata[$i]->report_detail)) {
-                        내용없음
-                      } 
-                      @else {
-                        {{$reportdata[$i]->report_detail}}
-                      }
-                      @endif
-                    </a>
-                    Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
-                  </div>
-                </div>
-              @endfor --}}
-
-              {{-- <div class="activity-item d-flex">
-                <div class="activite-label">32 min</div>
-                <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                <div class="activity-content">
-                  Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
-                </div>
-              </div><!-- End activity item-->
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">56 min</div>
-                <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                <div class="activity-content">
-                  Voluptatem blanditiis blanditiis eveniet
-                </div>
-              </div><!-- End activity item-->
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">2 hrs</div>
-                <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                <div class="activity-content">
-                  Voluptates corrupti molestias voluptatem
-                </div>
-              </div><!-- End activity item-->
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">1 day</div>
-                <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                <div class="activity-content">
-                  Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
-                </div>
-              </div><!-- End activity item-->
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">2 days</div>
-                <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                <div class="activity-content">
-                  Est sit eum reiciendis exercitationem
-                </div>
-              </div><!-- End activity item-->
-
-              <div class="activity-item d-flex">
-                <div class="activite-label">4 weeks</div>
-                <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                <div class="activity-content">
-                  Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                </div>
-              </div><!-- End activity item--> --}}
             </div>
 
           </div>
@@ -495,7 +438,7 @@
           </div>
 
           <div class="card-body pb-0">
-            <h5 class="card-title">Budget Report <span>| This Month</span></h5>
+            <h5 class="card-title">각 지역 축제수/검색량 <span>| This Month</span></h5>
 
             <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
 
