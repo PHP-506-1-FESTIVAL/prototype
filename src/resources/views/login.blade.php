@@ -3,7 +3,7 @@
 @section('title','로그인')
 
 @section('content')
-
+    <link rel="stylesheet" href="/css/login.css">
     @if (session('signup_flg') === '1')
         <script>alert('회원가입이 완료되었습니다.');</script>
         <script>alert('다시 한번 로그인 해 주세요.');</script>
@@ -76,10 +76,11 @@
                             <div class="button">
                                 <button type="submit" class="btn">로그인</button>
                             </div>
-                            <div>
+                            <div class='kakao'>
                                 <a href="{{route('kakao.login')}}">
-                                    <img src="/assets/images/kakaotalk_sharing_btn_medium.png" alt="카카오톡 로그인" >
+                                    <img src="/assets/images/kakaotalk_sharing_btn_medium_noshadow.png" alt="카카오톡 로그인" >
                                 </a>
+                                <span> 카카오 로그인</span>
                             </div>
                             <p class="outer-link">계정이 없으신가요? <a href="{{route('regist.mail')}}">회원가입</a>
                             </p>

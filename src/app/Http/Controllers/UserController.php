@@ -129,7 +129,7 @@ class UserController extends Controller
             ,'nickname' => 'required'
             ,'image' => 'image|mimes:png,jpg,jpeg|max:2048'
         ]);
-
+        Carbon::
         $id = session('user_id');
         $user = User::find($id);
         $user->user_name = $req->name;
@@ -186,6 +186,10 @@ class UserController extends Controller
     }
 
     function pwchk($id) {
+        if (session('kakao_flg')==='1') {
+            session()->put('pwchk_flg', '1');
+            return redirect()->route('user.edit');
+        }
         return view('pwchk')->with('chkflg', $id);
     }
 

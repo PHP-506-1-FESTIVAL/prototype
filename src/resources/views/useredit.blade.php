@@ -90,7 +90,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-12">
+                                        @if (session('kakao_flg')==='1')
+                                            <div class="col-lg-6 col-12" style="display:none">
+                                            @else
+                                            <div class="col-lg-6 col-12">
+                                        @endif
                                             <label for="password" class="form-label">비밀번호 <span class="text-danger">*</span></label>
                                             <div class="input-group has-validation">
                                                 <input type="password" class="form-control" id="password" name="password">
@@ -99,7 +103,11 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @if (session('kakao_flg')==='1')
+                                        <div class="col-lg-6 col-12" style="display:none">
+                                        @else
                                         <div class="col-lg-6 col-12">
+                                        @endif
                                             <label for="pwchk" class="form-label">비밀번호 확인 <span class="text-danger">*</span></label>
                                             <div class="input-group has-validation">
                                                 <input type="password" class="form-control" id="pwchk" name="pwchk">
