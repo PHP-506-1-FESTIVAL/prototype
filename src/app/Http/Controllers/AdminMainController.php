@@ -153,7 +153,17 @@ class AdminMainController extends Controller
 
         return view('admin.user')->with('users', $users);
     }
-    public function blacklist(
-        
-    )
+    public function blacklist()
+    {
+        $users = DB::table('users')
+        ->join('blacklists', 'blacklists.user_id', '=', 'users.user_id')
+        ->select('users.*')
+        ->orderBy('users.created_at', 'desc')
+        ->paginate(10);
+
+        return view('admin.blacklist')->with('users', $users);
+    }
+
+
+
 }

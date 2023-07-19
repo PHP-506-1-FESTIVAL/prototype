@@ -3,14 +3,15 @@
 @section('title', '블랙리스트')
 
 @section('content')
+
 <main id="main" class="main">
     <div class="pagetitle">
         <h1>유저관리</h1>
         <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.main') }}">메인</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('admin.user') }}">블랙리스트</a></li>
-            <li class="breadcrumb-item active">블랙스트 목록</li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.blacklist') }}">블랙리스트</a></li>
+            <li class="breadcrumb-item active">블랙리스트 관리</li>
         </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -20,17 +21,17 @@
         <div class="col-lg-12">
             <div class="card">
             <div class="card-body">
-                <h5 class="card-title">블랙리스트</h5>
+                <h5 class="card-title">블랙리스트 관리</h5>
                 
                 {{-- 검색창 --}}
                 {{-- <header id="header" class="header"> --}}
-                <div class="search-bar" >
+                {{-- <div class="search-bar" >
                 <form class="search-form d-flex align-items-center" method="POST" action="{{ route('admin.search') }}">
                     @csrf
                     <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                     <button type="submit" title="Search"><i class="bi bi-search"></i></button>
                 </form>
-                </div>
+                </div> --}}
 
                 {{-- 유저목록 --}}
                 <table class="table datatable">
@@ -48,8 +49,7 @@
                     <th scope="col">우편주소</th>
                     <th scope="col">마케팅</th>
                     <th scope="col">이메일</th>
-                    <th scope="col">생성일</th>
-                    <th scope="col">작업</th>
+                    <th scope="col">삭제일</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,41 +67,16 @@
                         <td>{{ $user->user_zipcode }}</td>
                         <td>{{ $user->user_marketing_agreement == 1 ? '동의' : '비동의' }}</td>
                         <td>{{ $user->user_email_agreement == 1 ? '동의' : '비동의' }}</td>
-                        <td>{{ $user->created_at->format('y-m-d') }}</td>
-                        <td>
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $user->user_id }}">처리</button>
-                        <div class="modal fade" id="basicModal{{ $user->user_id }}" tabindex="-1">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title">블랙리스트</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                해당 유저를 블랙리스트 처리하시겠습니까?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
-                                    <form action="{{ route('admin.userpost', ['id' => $user->user_id]) }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="user_id" value="{{  $user->user_id }}">
-                                        <button type="submit" class="btn btn-danger">삭제</button>
-                                    </form>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        </td>
+                        <td>{{ $user->deleted_at}}</td>
                     </tr>
                     @endforeach
                 </tbody>
                 </table>
-                {!! $users->links('vendor.pagination.custom2') !!}
+                {{-- {!! $users->links('vendor.pagination.custom2') !!} --}}
             </div>
             </div>
         </div>
         </div>
     </section>
 </main>
-
 @endsection
