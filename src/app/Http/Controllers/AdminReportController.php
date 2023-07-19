@@ -52,11 +52,12 @@ class AdminReportController extends Controller
             } else {
                 Comment::destroy($req->comment_id);
             }
+        } else if ($req->flg == '1') {
+            $report = Report::find($req->id);
+            $report->handle_flg = $req->flg;
+            $report->admin_id = session('admin_id');
+            $report->save();
         }
-        $report = Report::find($req->id);
-        $report->handle_flg = $req->flg;
-        $report->admin_id = session('admin_id');
-        $report->save();
         return redirect()->route('admin.report', ['status' => $req->status]);
     }
 
