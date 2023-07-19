@@ -282,7 +282,7 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{ route('admin.request') }}">
           <i class="bi bi-clipboard-plus"></i>
           <span>축제 요청 관리</span>
         </a>
