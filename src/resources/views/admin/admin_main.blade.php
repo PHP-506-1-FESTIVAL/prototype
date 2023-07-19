@@ -1,6 +1,6 @@
 @extends('layout.adminlayout')
 
-@section('title','adminmain')
+@section('title','관리자 메인 페이지')
 
 @section('content')
 
@@ -42,7 +42,7 @@
               </div>
 
               <div class="card-body">
-                <h5 class="card-title">회원 <span>| Today</span></h5>
+                <h5 class="card-title"><a href="{{ route('admin.user') }}">회원 </a><span>| Today</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -79,7 +79,7 @@
               </div>
 
               <div class="card-body">
-                <h5 class="card-title">축제 <span>| This Month</span></h5>
+                <h5 class="card-title"><a href="#adminfest">축제 </a><span>| This Month</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -234,8 +234,8 @@
                 </ul>
               </div>
 
-              <div class="card-body">
-                <h5 class="card-title">축제요청 <span>| Today</span></h5>
+              <div class="card-body" id="adminfest">
+                <h5 class="card-title">축제 요청 <span>| Today</span></h5>
 
                 <table class="table table-borderless datatable">
                   <thead>
@@ -392,7 +392,7 @@
           </div>
 
           <div class="card-body">
-            <h5 class="card-title"><a href="{{ route("admin.report") }}">신고 관리 </a><span>| Today</span></h5>
+            <h5 class="card-title text-dark"><a href="{{ route("admin.report") }}">신고 관리 </a><span>| Today</span></h5>
             {{-- <p>{{ $reportdata }} </p> --}}
 
             <div class="activity">
