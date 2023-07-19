@@ -126,7 +126,100 @@
             window.open(link); // 링크를 새 창에서 열기
         }
     </script>
+    {{-- 리뷰 --}}
+    {{-- 리뷰 --}}
+    {{-- @include('layout.list_comment') --}}
+    <style>
+    #myform fieldset{
+        display: inline-block;
+        direction: rtl;
+        border:0;
+    }
+    #myform fieldset legend{
+        text-align: right;
+    }
+    #myform input[type=radio]{
+        display: none;
+    }
+    #myform label{
+        font-size: 3em;
+        color: transparent;
+        text-shadow: 0 0 0 #f0f0f0;
+    }
+    #myform label:hover{
+        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    }
+    #myform label:hover ~ label{
+        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    }
+    #myform input[type=radio]:checked ~ label{
+        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    }
+    #reviewContents {
+        width: 100%;
+        height: 150px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: solid 1.5px #D3D3D3;
+        border-radius: 5px;
+        font-size: 16px;
+        resize: none;
+    }
+    </style>
+    <div class="group_like">
+        <br><strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
+        <br><div class="box_like">
+            <button type="button" class="btn btn-danger" data-name="체험" data-id="1">
+                <span class="txt_like">체험프로그램이 많아요</span><span class="ico_comm ico_like2"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-name="테마" data-id="2">
+                <span class="txt_like">테마가 재미있어요</span><span class="ico_comm ico_like2"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-name="분위기" data-id="3">
+                <span class="txt_like">분위기가 좋아요</span><span class="ico_comm ico_like2"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-name="먹거리" data-id="4">
+                <span class="txt_like">주변에 먹거리가 많아요</span><span class="ico_comm ico_like2"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-name="화장실" data-id="5">
+                <span class="txt_like">화장실이 깨끗해요</span><span class="ico_comm ico_like2"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-name="친절" data-id="6">
+                <span class="txt_like">친절해요</span><span class="ico_comm ico_like2"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-name="주차" data-id="7">
+                <span class="txt_like">주차가 쉬워요</span><span class="ico_comm ico_like2"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-name="가성비" data-id="8">
+                <span class="txt_like">가성비 좋아요</span><span class="ico_comm ico_like2"></span>
+            </button>
+        </div>
+        </div>
+    <form class="mb-3" name="myform" id="myform" method="post">
+        <fieldset>
+            <span class="text-bold">별점을 선택해주세요</span>
+            <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
+            <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
+            <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+            <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
+            <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
+        </fieldset>
+        <div>
+            <textarea class="col-auto form-control" type="text" id="reviewContents" style="width:75%"
+                placeholder="작성내용은 축제리스트에 노출되며 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요."></textarea>
+        </div>
+        <br><button type="button" class="btn btn-danger">제출</button>
+    </form>
 
+    <script>
+        const buttons = document.querySelectorAll('.box_like button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+            button.classList.toggle('active');
+            });
+        });
+    </script>
     {{-- 연관축제 --}}
     <h1 style="padding-top:30px;">이런 축제는 어때요?</h1>
     <div class="row" style="text-align:center;">
@@ -155,7 +248,5 @@
     </div>
 </div>
 </section>
-{{-- 댓글 --}}
-    @include('layout.list_comment')
 <script src="{{asset('js/festival.js')}}"></script>
 @endsection

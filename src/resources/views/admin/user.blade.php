@@ -10,24 +10,23 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.main') }}">메인</a></li>
         <li class="breadcrumb-item"><a href="{{ route('admin.user') }}">유저</a></li>
-        <li class="breadcrumb-item active">유저관리</li>
       </ol>
     </nav>
-  </div><!-- End Page Title -->
+  </div>
 
   <section class="section">
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">유저 관리</h5>
+            <h5 class="card-title"><strong>유저 관리</strong></h5>
             
             {{-- 검색창 --}}
             {{-- <header id="header" class="header"> --}}
-            <div class="search-bar" >
+            <div class="search-bar">
               <form class="search-form d-flex align-items-center" method="POST" action="{{ route('admin.search') }}">
                 @csrf
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <input type="text" name="query" placeholder="이름,이메일,닉네임 검색" title="Enter search keyword">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
               </form>
             </div>
@@ -81,12 +80,12 @@
                               해당 유저를 블랙리스트 처리하시겠습니까?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
-                                <form action="{{ route('admin.userpost', ['id' => $user->user_id]) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="user_id" value="{{  $user->user_id }}">
-                                    <button type="submit" class="btn btn-danger">네</button>
-                                </form>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+                              <form action="{{ route('admin.userpost', ['id' => $user->user_id]) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{  $user->user_id }}">
+                                <button type="submit" class="btn btn-danger">네</button>
+                              </form>
                             </div>
                           </div>
                         </div>
