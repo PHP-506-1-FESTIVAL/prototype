@@ -26,7 +26,7 @@ class AdminMainController extends Controller
     public function main() {
         // 로그인 체크(관리자 아이디만 접속 가능하고 나머지는 404error)
         if(auth()->guest()) {
-            return redirect()->route('admin.admin_login');
+            return redirect()->route('admin.login');
         }
 
         // 메인 화면에 나올 data

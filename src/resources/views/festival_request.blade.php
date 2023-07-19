@@ -91,7 +91,7 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <label>축제명</label>
+                                                                <label>축제명*</label>
                                                                 <input name="title" type="text"
                                                                     placeholder="축제명을 입력해주세요.">
                                                             </div>
@@ -100,18 +100,18 @@
                                                             <div class="form-group">
                                                                 <label>축제 카테고리*</label>
                                                                 <div class="selector-head">
-                                                                    <span class="arrow"><i
-                                                                            class="lni lni-chevron-down"></i></span>
+                                                                    <span class="arrow"><i class="lni lni-chevron-down"></i></span>
                                                                     <select class="user-chosen-select">
-                                                                        <option value="none">문화관광축제</option>
+                                                                        <option value="none">축제 카테고리를 선택해주세요.</option>
                                                                         <option value="none">일반축제</option>
+                                                                        <option value="none">문화관광축제</option>
                                                                         <option value="none">전통공연</option>
                                                                         <option value="none">뮤지컬</option>
                                                                         <option value="none">오페라</option>
                                                                         <option value="none">영화</option>
                                                                         <option value="none">기타행사</option>
                                                                         <option value="1">직접입력</option>
-                                                                    </select>3  
+                                                                    </select>
                                                                 </div>
                                                                 
                                                             </div>
@@ -120,21 +120,23 @@
                                                             <div class="form-group">
                                                                 <label>시작일*</label>
                                                                 <div class="selector-head">
-                                                                    <span class="arrow"><i
+                                                                    {{-- <span class="arrow"><i
                                                                             class="lni lni-chevron-down"></i></span>
                                                                     <select class="user-chosen-select">
                                                                         <option value="none">Select an option</option>
                                                                         <option value="none">Option 1</option>
                                                                         <option value="none">Option 2</option>
                                                                         <option value="none">Option 3</option>
-                                                                    </select>
+                                                                    </select> --}}
+                                                                    <input id="input_date" type="date">
+                                                                    {{-- <input id="input_submit" type="submit" onclick="input()" value="확인"> --}}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-12">
                                                             <div class="form-group">
                                                                 <label>종료일*</label>
-                                                                <div class="selector-head">
+                                                                {{-- <div class="selector-head">
                                                                     <span class="arrow"><i
                                                                             class="lni lni-chevron-down"></i></span>
                                                                     <select class="user-chosen-select">
@@ -142,7 +144,9 @@
                                                                         <option value="none">Used</option>
                                                                         <option value="none">Brand New</option>
                                                                     </select>
-                                                                </div>
+                                                                </div> --}}
+                                                                <input id="input_date" type="date">
+                                                                {{-- <input id="input_submit" type="submit" onclick="input()" value="확인"> --}}
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
