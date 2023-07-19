@@ -17,6 +17,7 @@ class SocialController extends Controller
     public function back()
     {
         $kakao = Socialite::driver('kakao')->stateless()->user();
+        // dump($kakao);
         $userChk=User::where('user_email',$kakao->email)->first();
         // dump($userChk);
         if (!$userChk) {
@@ -40,6 +41,7 @@ class SocialController extends Controller
                 $user->user_profile = 'profile.png';
             }
             session($user->only('user_id', 'user_email', 'user_nickname', 'user_profile')); // 세션에 인증된 회원 pk 등록
+            session()->put('kakao_flg', '1');
             return redirect()->intended(route('main'));
         } else {
             $error = '인증작업 에러';
