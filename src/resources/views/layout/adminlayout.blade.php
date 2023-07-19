@@ -38,7 +38,7 @@
   ======================================================== -->
 </head>
 
-<body>
+<body id="body">
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -557,6 +557,15 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+  
+  const body = document.getElementById('body');
+  body.onclick = function() {
+    body.classList.toggle('toggle-sidebar');
+  };
+
+  </script>
 
   <!-- Vendor JS Files -->
   <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
