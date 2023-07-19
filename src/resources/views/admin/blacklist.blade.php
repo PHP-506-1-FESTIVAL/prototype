@@ -34,7 +34,7 @@
                 </div> --}}
 
                 {{-- 유저목록 --}}
-                <table class="table datatable">
+                <table class="table datatable table-hover">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -43,7 +43,7 @@
                     <th scope="col">성별</th>
                     <th scope="col">생일</th>
                     <th scope="col">닉네임</th>
-                    <th scope="col">프로필</th>
+                    {{-- <th scope="col">프로필</th> --}}
                     <th scope="col">주소</th>
                     <th scope="col">상세주소</th>
                     <th scope="col">우편주소</th>
@@ -61,7 +61,7 @@
                         <td>{{ $user->user_gender == 0 ? '남자' : '여자' }}</td>
                         <td>{{ $user->user_birthdate }}</td>
                         <td>{{ $user->user_nickname }}</td>
-                        <td><img src="/img/profile/{{ $user->user_profile }}" alt="" class="img-thumbnail img-fluid" style="width:30px;height:30px;border-radius:50%;border:none;object-fit:cover;"></td>
+                        {{-- <td><img src="/img/profile/{{ $user->user_profile }}" alt="" class="img-thumbnail img-fluid" style="width:30px;height:30px;border-radius:50%;border:none;object-fit:cover;"></td> --}}
                         <td>{{ $user->user_address }}</td>
                         <td>{{ $user->user_address_detail }}</td>
                         <td>{{ $user->user_zipcode }}</td>
@@ -72,7 +72,7 @@
                     @endforeach
                 </tbody>
                 </table>
-                {{-- {!! $users->links('vendor.pagination.custom2') !!} --}}
+                {!! $users->links('vendor.pagination.custom2') !!}
             </div>
             </div>
         </div>
