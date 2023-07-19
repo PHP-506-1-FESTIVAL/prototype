@@ -81,8 +81,12 @@
                               해당 유저를 블랙리스트 처리하시겠습니까?
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
-                              <button type="button" class="btn btn-danger">네</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+                                <form action="{{ route('admin.delete', ['id' => $user->user_id]) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{  $user->user_id }}">
+                                    <button type="submit" class="btn btn-danger">삭제</button>
+                                </form>
                             </div>
                           </div>
                         </div>
