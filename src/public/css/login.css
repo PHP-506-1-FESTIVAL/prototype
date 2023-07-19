@@ -1,0 +1,21 @@
+.kakao{
+    background-color: #ffeb00;
+    border-radius: 4px;
+    display: grid;
+    margin-top: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+}
+.kakao a{
+    grid-column: 2/3;
+}
+.kakao a img{
+    height: 5vh;
+}
+.kakao span{
+    grid-column: 3/5;
+    color: #3c1e1e;
+    font-size: large;
+    display: flex;
+    align-items: center;
+}
