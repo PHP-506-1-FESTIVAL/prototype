@@ -87,4 +87,17 @@ class CommentController extends Controller
 
     return redirect()->back()->with('success', '댓글이 삭제되었습니다.');
     }
+    public function update(Request $request, $id)
+    {
+        $comment = Comment::findOrFail($id);
+
+        if ($comment->user_id != Auth::id()) {
+            return redirect()->back()->with('error', 'Unauthorized');
+        }
+
+        $comment->comment_content = $request->input('comment_content');
+        $comment->save();
+
+        return redirect()->back()->with('success', '댓글이 수정되었습니다');
+    }
 }

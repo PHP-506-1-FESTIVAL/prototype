@@ -11,4 +11,5 @@ class Blacklist extends Model
     use HasFactory, SoftDeletes;
 
     protected $primaryKey = 'blacklist_id';
+    public $timestamps = false;
 }

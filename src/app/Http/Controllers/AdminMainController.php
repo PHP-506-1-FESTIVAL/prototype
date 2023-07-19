@@ -120,47 +120,25 @@ class AdminMainController extends Controller
         return view('admin.user')->with('users', $users);
     }
     
-    // public function userpost(Request $request)
-    // {
-    //     $userId = $request->input('user_id');
-
-    //     // 유저 삭제 로직
-    //     User::where('user_id', $userId)->delete();
-
-    //     // 블랙리스트 테이블에 정보 저장 로직
-    //     $blacklist = new Blacklist;
-    //     $blacklist->user_id = $userId;
-    //     $blacklist->banned_at = now();
-    //     // 필요한 다른 정보들을 설정합니다.
-    //     $blacklist->save();
-
-    //     return redirect()->back()->with('success', '유저가 블랙리스트로 처리되었습니다.');
-    // }
-    
-    public function admindelete(Request $request)
+    // 회원 탈퇴&블랙리스트 추가
+    public function userpost(Request $request)
     {
         $userId = $request->input('user_id');
 
         // 유저 삭제 로직
         User::where('user_id', $userId)->delete();
-
-        return redirect()->back()->with('success', '유저가 삭제되었습니다.');
-    }
-
-    public function blacklist(Request $request)
-    {
-        $userId = $request->input('user_id');
-    
+        
         // 블랙리스트 테이블에 정보 저장 로직
         $blacklist = new Blacklist;
+        $blacklist->admin_id = Auth::id();
         $blacklist->user_id = $userId;
         $blacklist->banned_at = now();
         // 필요한 다른 정보들을 설정합니다.
         $blacklist->save();
-    
+
         return redirect()->back()->with('success', '유저가 블랙리스트로 처리되었습니다.');
     }
-
+    //유저 검색
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -175,4 +153,7 @@ class AdminMainController extends Controller
 
         return view('admin.user')->with('users', $users);
     }
+    public function blacklist(
+        
+    )
 }

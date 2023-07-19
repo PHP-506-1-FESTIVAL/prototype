@@ -52,7 +52,7 @@
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $comment->comment_id }}">삭제</button>
                                         @endif
 
-                                        <!-- Delete Confirmation Modal -->
+                                        <!-- 삭제 Modal -->
                                         <div class="modal fade" id="deleteModal{{ $comment->comment_id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $comment->comment_id }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -71,6 +71,28 @@
                                             </div>
                                         </div>
                                     </form>
+                                    <!-- 수정 -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $comment->comment_id }}">수정</button>
+
+                                        <!-- 수정 Modal -->
+                                        <div class="modal fade" id="editModal{{ $comment->comment_id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $comment->comment_id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editModalLabel{{ $comment->comment_id }}">댓글 수정</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{{ route('comment.update', ['id' => $comment->comment_id]) }}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <textarea name="comment_content" class="form-control" placeholder="댓글을 입력하세요" required>{{ $comment->comment_content }}</textarea>
+                                                            <button type="submit" class="btn btn-primary">수정</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @if(session('user_id') != $comment->user_id)
                                         <a href="javascript:popup2({{$comment->comment_id}})">
                                             <i class="lni lni-alarm"></i>
