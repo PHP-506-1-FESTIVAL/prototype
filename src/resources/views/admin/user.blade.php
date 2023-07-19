@@ -33,7 +33,7 @@
             </div>
 
             {{-- 유저목록 --}}
-            <table class="table datatable">
+            <table class="table datatable table-hover">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -42,7 +42,7 @@
                   <th scope="col">성별</th>
                   <th scope="col">생일</th>
                   <th scope="col">닉네임</th>
-                  <th scope="col">프로필</th>
+                  {{-- <th scope="col">프로필</th> --}}
                   <th scope="col">주소</th>
                   <th scope="col">상세주소</th>
                   <th scope="col">우편주소</th>
@@ -61,7 +61,7 @@
                     <td>{{ $user->user_gender == 0 ? '남자' : '여자' }}</td>
                     <td>{{ $user->user_birthdate }}</td>
                     <td>{{ $user->user_nickname }}</td>
-                    <td><img src="/img/profile/{{ $user->user_profile }}" alt="" class="img-thumbnail img-fluid" style="width:30px;height:30px;border-radius:50%;border:none;object-fit:cover;"></td>
+                    {{-- <td><img src="/img/profile/{{ $user->user_profile }}" alt="" class="img-thumbnail img-fluid" style="width:30px;height:30px;border-radius:50%;border:none;object-fit:cover;"></td> --}}
                     <td>{{ $user->user_address }}</td>
                     <td>{{ $user->user_address_detail }}</td>
                     <td>{{ $user->user_zipcode }}</td>
@@ -69,7 +69,7 @@
                     <td>{{ $user->user_email_agreement == 1 ? '동의' : '비동의' }}</td>
                     <td>{{ $user->created_at->format('y-m-d') }}</td>
                     <td>
-                      <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $user->user_id }}">처리</button>
+                      <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $user->user_id }}">정지</button>
                       <div class="modal fade" id="basicModal{{ $user->user_id }}" tabindex="-1">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -85,7 +85,7 @@
                                 <form action="{{ route('admin.userpost', ['id' => $user->user_id]) }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="user_id" value="{{  $user->user_id }}">
-                                    <button type="submit" class="btn btn-danger">삭제</button>
+                                    <button type="submit" class="btn btn-danger">네</button>
                                 </form>
                             </div>
                           </div>
