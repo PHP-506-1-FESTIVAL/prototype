@@ -36,7 +36,11 @@
                     <!-- Start Dashboard Sidebar -->
                     <div class="dashboard-sidebar">
                         <div class="user-image">
-                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
+                            @if (session('kakao_flg')==='1')
+                                <img src="{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
+                            @else
+                                <img src="/img/profile/{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
+                            @endif
                             <h3>{{session()->get('user_nickname')}}
                                 <span><a href="javascript:void(0)">{{session()->get('user_email')}}</a></span>
                             </h3>
@@ -66,7 +70,11 @@
                             <h3 class="block-title">회원정보 수정</h3>
                             <div class="inner-block">
                                 <div class="image mb-4">
-                                    <img src="/img/profile/{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
+                                    @if (session('kakao_flg')==='1')
+                                        <img src="{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
+                                    @else
+                                        <img src="/img/profile/{{session()->get('user_profile')}}" alt="#" style="object-fit:cover;">
+                                    @endif
                                 </div>
                                 <form action="{{route('user.update')}}" method="post" id="signupForm" class="needs-validation" enctype="multipart/form-data" onsubmit="return false">
                                     @csrf
@@ -155,7 +163,11 @@
                                                 <div class="invalid-feedback" id="birthval">
                                                 </div>
                                         </div>
-                                        <div class="col-12">
+                                        @if (session('kakao_flg')==='1')
+                                            <div class="col-lg-6 col-12" style="display:none">
+                                            @else
+                                            <div class="col-lg-6 col-12">
+                                        @endif
                                             <label class="form-label">프로필 이미지 변경 <span class="text-muted">(선택)</span></label>
                                             <div class="input-group">
                                                 <input type="file" class="form-control" id="image" name=image>
