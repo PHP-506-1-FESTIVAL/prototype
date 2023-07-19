@@ -15,7 +15,6 @@ use App\Models\Report;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Blacklist;
-use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +25,9 @@ class AdminMainController extends Controller
     // 메인 페이지 이동
     public function main() {
         // 로그인 체크(관리자 아이디만 접속 가능하고 나머지는 404error)
-
+        if(auth()->guest()) {
+            return redirect()->route('admin.admin_login');
+        }
 
         // 메인 화면에 나올 data
         $data = [];
@@ -37,26 +38,44 @@ class AdminMainController extends Controller
         $festivaldata = Festival::all();
         $festivaldatacount = $festivaldata->count();
         // 게시글 all
-        $boarddata = Board::all();
-        // $boards = DB::table('boards')
-        // ->join('users', 'boards.user_id', '=', 'users.user_id' )
-        // ->select('*')
-        // ->where('boards.board_id', $board_id)->get();
-        $boarddatacount = $boarddata->count();
+        $board = Board::all();
+        $boarddata = DB::table('boards')
+        ->join('users', 'boards.user_id', '=', 'users.user_id' )
+        // ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.deleted_at', 'boards.board_hit')
+        ->select('*')
+        ->where('boards.deleted_at', null)
+        ->orderBy('boards.board_id', 'DESC')
+        ->paginate(10);
+        $boarddatacount = $board->count();
 
         $data = [$userdatacount, $festivaldatacount, $boarddatacount];
 
-        $reportdata = Report::all();
+        // 신고관리
+        // $reportdata = Report::all();
+        $reportdata = DB::table('reports')
+        ->select('*')
+        ->where('deleted_at', null)
+        ->orderBy('report_id', 'DESC')
+        ->paginate(5);
+
+        // 현재 시간 생성 ------------4차로 미룸
+        // $nowdatetime = Carbon::now();
+        // $reportcreatedate = $reportdata->created_at;
+        // $reportdate = $nowdatetime - $reportcreatedate;
+        // dump($nowdatetime);
+        // dump($reportcreatedate);
+        // dump($reportdate);
 
         return view('admin/admin_main')
         ->with('userdatacount', $userdatacount)
         ->with('festivaldatacount', $festivaldatacount)
+        ->with('boarddata', $boarddata)
         ->with('boarddatacount', $boarddatacount)
         ->with('data', $data)
         ->with('reportdata', $reportdata)
         ;
-        
     }
+
     // 로그인
     public function login()
     {
@@ -68,6 +87,7 @@ class AdminMainController extends Controller
         Auth::logout(); // 로그아웃
         return redirect()->route('admin.login');
     }
+
     public function loginpost(Request $req)
     {
         $admin = Admin::where('admin_email', $req->username)->first();
@@ -86,6 +106,7 @@ class AdminMainController extends Controller
             return redirect()->back()->with('error', $error);
         }
     }
+
     //유저관리
     public function userget(){
         $users = User::orderBy('created_at', 'desc')->paginate(10);
@@ -115,6 +136,7 @@ class AdminMainController extends Controller
 
     //     return redirect()->back()->with('success', '유저가 블랙리스트로 처리되었습니다.');
     // }
+    
     public function admindelete(Request $request)
     {
         $userId = $request->input('user_id');
@@ -124,6 +146,7 @@ class AdminMainController extends Controller
 
         return redirect()->back()->with('success', '유저가 삭제되었습니다.');
     }
+
     public function blacklist(Request $request)
     {
         $userId = $request->input('user_id');
@@ -152,12 +175,4 @@ class AdminMainController extends Controller
 
         return view('admin.user')->with('users', $users);
     }
-
-
-    // 축제
-    // 게시글
-    // 축제 요청
-    // 신고 관리
-    // 인기 지역
-    // 인기 축제
 }
