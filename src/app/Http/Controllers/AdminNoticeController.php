@@ -16,6 +16,10 @@ class AdminNoticeController extends Controller
     {
         return view('admin.notice_list');
     }
+    public function write()
+    {
+        return view('admin.notice_write');
+    }
 
     /**
      * Show the form for creating a new resource.
