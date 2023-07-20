@@ -138,14 +138,14 @@
     height: 62px;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
 }
 .line_notice a{
     display: flex;
     align-items: center;
     color: #fff;
     text-decoration: none;
-    grid-column: 2/3;
 }
 /* .image{height: 300px; width: 450px;} */
 .Pline{
@@ -163,4 +163,16 @@
 }
 .padding10{
     padding: 10px;
+}
+/* 0720 이가원 udt */
+
+.notice_section{
+    height: 62px;
+    position: relative;
+    overflow: hidden;
+}
+.noticebox{
+    width:100%;
+    position:absolute;
+    transition: 0.5s ease-out;
 }

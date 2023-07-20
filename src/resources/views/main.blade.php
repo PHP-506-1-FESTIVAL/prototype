@@ -29,9 +29,19 @@
 </div>
 
 {{-- 공지사항 후순위--}}
-<div class="line_notice">
-    <a href="{{route('notice.show', $notice[4])}}"><i class="lni lni-volume-high" style="margin-right:5px;"></i> {{ $notice[4]->notice_title }}</a>
+<div class="notice_section">
+    <div class="noticebox" id="noticebox">
+    @foreach($notice as $key => $val)
+        <div class="line_notice">
+            <div></div>
+            <div>
+                <a href="{{route('notice.show', $notice[$key]->notice_id)}}"><i class="lni lni-bullhorn" style="margin-right:5px;"></i> {{ $notice[$key]->notice_title }}</a>
+            </div>
+        </div>
+    @endforeach
+    </div>
 </div>
+
 {{-- 지도 --}}
 <div class="row">
     <div class="col-sm-5">
