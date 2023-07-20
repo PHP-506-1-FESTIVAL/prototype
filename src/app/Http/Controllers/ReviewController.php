@@ -45,8 +45,7 @@ class ReviewController extends Controller
         $review->user_id = Auth::id();
         $review->festival_id = $request->input('festival_id');
         $review->review_content = $request->input('review_content');
-        // Update the following fields to use the correct names
-        $review->review_img = $request->input('review_img');
+        // $review->review_img = $request->input('review_img');
         $review->rate = $request->input('rate');
         $review->like_experience = $request->input('like_experience');
         $review->like_theme = $request->input('like_theme');
