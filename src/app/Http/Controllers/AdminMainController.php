@@ -158,7 +158,8 @@ class AdminMainController extends Controller
     {
         $users = DB::table('users')
         ->join('blacklists', 'blacklists.user_id', '=', 'users.user_id')
-        ->select('users.*')
+        // ->select('users.*')  {{-- ----- 230720 del 블랙리스트 사유 추가(users.* -> *) 신유진 ----- --}}
+        ->select('*') // {{-- ----- 230720 add 블랙리스트 사유 추가(users.* -> *) 신유진 ----- --}}
         ->orderBy('users.created_at', 'desc')
         ->paginate(10);
 
