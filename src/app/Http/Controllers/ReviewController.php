@@ -56,7 +56,6 @@ class ReviewController extends Controller
         $review->like_parking = $request->input('like_parking');
         $review->like_cost = $request->input('like_cost');
         $review->save();
-
         return redirect()->back()->with('review', $review);
     }
 

@@ -218,7 +218,7 @@
                             <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
                             <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
                         </fieldset>
-                        <p id="selectedRating"></p>            
+                        <p id="selectedRating"></p>
                         <div>
                             <textarea class="col-auto form-control" type="text" id="reviewContents" placeholder="작성내용은 축제리스트에 노출되며 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요."></textarea>
                         </div>
@@ -240,7 +240,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form class="mb-3" name="myform" id="myform" method="post" action="{{ route('review.create') }}">
+                <form class="mb-3" name="myform" id="myform" method="post" action="{{ route('review.create') }}">
                     <div class="modal-body">
                         <div class="group_like">
                             <br>
@@ -248,31 +248,31 @@
                             <br>
                             <div class="box_like">
                                 <button type="button" class="btn btn-outline-primary" name="like_experience" id="likeBtn1">
-                                    <input type="hidden" name="like_experience" id="like_experience_input" value="">
+                                    <input type="hidden" name="like_experience" id="like_experience_input" value="0">
                                     <span class="txt_like">체험프로그램이 많아요</span>
                                 </button>
-                                <button type="button" class="btn btn-outline-secondary" name="like_theme" id="likeBtn2>
-                                    <input type="hidden" name="like_theme" id="like_theme_input" value="">
+                                <button type="button" class="btn btn-outline-secondary" name="like_theme" id="likeBtn2">
+                                    <input type="hidden" name="like_theme" id="like_theme_input" value="0">
                                     <span class="txt_like">테마가 재미있어요</span>
                                 </button>
                                 <button type="button" class="btn btn-outline-success" name="like_mood" id="likeBtn3">
-                                    <input type="hidden" name="like_mood" id="like_mood_input" value="">
+                                    <input type="hidden" name="like_mood" id="like_mood_input" value="0">
                                     <span class="txt_like">분위기가 좋아요</span>
                                 </button>
                                 <button type="button" class="btn btn-outline-danger" name="like_food" id="likeBtn4">
-                                    <input type="hidden" name="like_food" id="like_food_input" value="">
+                                    <input type="hidden" name="like_food" id="like_food_input" value="0">
                                     <span class="txt_like">주변에 먹거리가 많아요</span>
                                 </button>
                                 <button type="button" class="btn btn-outline-warning" name="like_toilet" id="likeBtn5">
-                                    <input type="hidden" name="like_toilet" id="like_toilet_input" value="">
+                                    <input type="hidden" name="like_toilet" id="like_toilet_input" value="0">
                                     <span class="txt_like">화장실이 깨끗해요</span>
                                 </button>
                                 <button type="button" class="btn btn-outline-info" name="like_parking" id="likeBtn6">
-                                    <input type="hidden" name="like_parking" id="like_parking_input" value="">
+                                    <input type="hidden" name="like_parking" id="like_parking_input" value="0">
                                     <span class="txt_like">주차가 쉬워요</span>
                                 </button>
                                 <button type="button" class="btn btn-outline-dark" name="like_cost" id="likeBtn7">
-                                    <input type="hidden" name="like_cost" id="like_cost_input" value="">
+                                    <input type="hidden" name="like_cost" id="like_cost_input" value="0">
                                     <span class="txt_like">가성비 좋아요</span>
                                 </button>
                         </div>
@@ -298,7 +298,7 @@
             </div>
         </div>
     </div>
-    <script>//버튼클릭
+    {{-- <script>//버튼클릭
         const buttons = document.querySelectorAll('.box_like button');
 
         buttons.forEach(button => {
@@ -306,7 +306,7 @@
             button.classList.toggle('active');
             });
         });
-    </script>
+    </script> --}}
     {{-- 별점 스크립트 --}}
     <script>
         const radioButtons = document.querySelectorAll('input[name="rate"]');
@@ -333,23 +333,34 @@
         var inputElement = document.getElementById(buttonId + '_input');
 
         // Check if the input element exists
-        if (inputElement) {
+        if (inputElement.value==='0') {
             // Set the value to "1"
             inputElement.value = "1";
+        }else{
+            inputElement.value = "0";
         }
     }
 
     // Function to toggle active class on buttons
-    function toggleActiveClass(buttonId) {
-        // Remove active class from all buttons
-        var buttons = document.getElementsByClassName('btn');
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove('active');
-        }
+    // function toggleActiveClass(buttonId) {
+    //     // Remove active class from all buttons
+    //     var buttons = document.getElementsByClassName('btn');
+    //     for (var i = 0; i < buttons.length; i++) {
+    //         buttons[i].classList.remove('active');
+    //     }
 
+    //     // Add active class to the clicked button
+    //     var button = document.getElementById(buttonId);
+    //     if (button) {
+    //         button.classList.add('active');
+    //     }
+    // }
+    function toggleActiveClass(buttonId) {
         // Add active class to the clicked button
-        var button = document.getElementById(buttonId);
-        if (button) {
+        const button = document.getElementById(buttonId);
+        if (button.classList[2]==='active') {
+            button.classList.remove('active')
+        }else{
             button.classList.add('active');
         }
     }
@@ -419,5 +430,5 @@
     </div>
 </div>
 </section>
-<script src="{{asset('js/festival.js')}}"></script>
+{{-- <script src="{{asset('js/festival.js')}}"></script> --}}
 @endsection
