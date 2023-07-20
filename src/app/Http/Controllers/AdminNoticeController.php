@@ -14,7 +14,10 @@ class AdminNoticeController extends Controller
      */
     public function index()
     {
-        return view('admin.notice_list');
+        $notice=Notice::all();
+        // dump($notice);
+        // exit;
+        return view('admin.notice_list')->with('notice',$notice);
     }
     public function write()
     {
