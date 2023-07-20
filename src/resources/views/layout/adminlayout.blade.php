@@ -26,6 +26,9 @@
   <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
+  <!-- Include stylesheet --> {{-- ----- 230720 add Quill추가 신유진 ----- --}}
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
 
@@ -369,13 +372,23 @@
   <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/assets/vendor/chart.js/chart.umd.js"></script>
   <script src="/assets/vendor/echarts/echarts.min.js"></script>
-  <script src="/assets/vendor/quill/quill.min.js"></script>
+  {{-- <script src="docs/Template Admin/assets/vendor/quill/quill.min.js"></script> --}}{{-- ----- 230720 del 기존Quill삭제 신유진 ----- --}}
+  <!-- Include the Quill library -->{{-- ----- 230720 add Quill추가 신유진 ----- --}}
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
   <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="/assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
+
+  <!-- Initialize Quill editor -->
+  <script>
+    var quill = new Quill('#editor', {
+      theme: 'snow'
+    });
+  </script>
 
 </body>
 

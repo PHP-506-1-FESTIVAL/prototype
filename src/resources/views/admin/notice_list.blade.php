@@ -5,69 +5,92 @@
 @section('content')
 
     <main id="main" class="main">
-
         <div class="pagetitle">
             <h1>공지 관리</h1>
             <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.main')}}">메인</a></li>
-                <li class="breadcrumb-item">공지</li>
-                <li class="breadcrumb-item active">리스트</li>
-            </ol>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{route('admin.main')}}">메인</a></li>
+                    <li class="breadcrumb-item">공지</li>
+                    <li class="breadcrumb-item active">리스트</li>
+                </ol>
             </nav>
         </div><!-- End Page Title -->
-        <div>
-            <button type="button" class="btn btn-outline-secondary">공지작성</button>
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <form action="{{route('admNotice.write')}}" method="get">
+                        <button type="submit" class="btn btn-outline-secondary">공지작성</button>
+                    </form>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성일</th>
+                            <th scope="col">수정일</th>
+                            <th scope="col">상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($notice as $item)
+                        <tr>
+                            <th scope="row">{{$item->notice_id}}</th>
+                            <td>{{$item->notice_title}}</td>
+                            <td>{{$item->admin_id}}</td>
+                            <td>{{$item->created_at}}</td>
+                            <td>{{$item->updated_at}}</td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $item->notice_id }}">삭제</button>
+                                        <div class="modal fade" id="basicModal{{ $item->notice_id }}" tabindex="-1">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">공지사항 삭제</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        해당공지를 삭제하겠습니까?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+                                                        <form action="" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="user_id" value="{{  $item->notice_id }}">
+                                                            <button type="submit" class="btn btn-danger">네</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <form action="" method="get">
+                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $item->notice_id }}">수정</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <th scope="row"></th>
+                            <td>아직 신고된 내역이 없습니다.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        @endforelse
+                </tbody>
+            </table>
         </div>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">제목</th>
-            <th scope="col">작성자</th>
-            <th scope="col">작성일</th>
-            <th scope="col">조회수</th>
-            <th scope="col">수정일</th>
-            <th scope="col">상태</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Brandon Jacob</td>
-            <td>Designer</td>
-            <td>28</td>
-            <td>2016-05-25</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Bridie Kessler</td>
-            <td>Developer</td>
-            <td>35</td>
-            <td>2014-12-05</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Ashleigh Langosh</td>
-            <td>Finance</td>
-            <td>45</td>
-            <td>2011-08-12</td>
-        </tr>
-        <tr>
-            <th scope="row">4</th>
-            <td>Angus Grady</td>
-            <td>HR</td>
-            <td>34</td>
-            <td>2012-06-11</td>
-        </tr>
-        <tr>
-            <th scope="row">5</th>
-            <td>Raheem Lehner</td>
-            <td>Dynamic Division Officer</td>
-            <td>47</td>
-            <td>2011-04-19</td>
-        </tr>
-        </tbody>
-    </table>
-</main>
+    </main>
 @endsection
