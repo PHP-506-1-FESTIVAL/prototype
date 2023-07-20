@@ -47,7 +47,7 @@
                                         @csrf
                                         <input class="form-control me-2 dropdown-toggle headersearch" type="search" placeholder="검색어를 입력하세요." aria-label="Search" id="searchbox" data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off" name="search" maxlength='100' style="height:35px;">
                                         <div class="button">
-                                            <button class="btn" type="submit" style="width:60px; height:35px; padding:5px;">검색</button>
+                                            <button class="btn" type="submit" style="width:60px; height:35px; padding:5px;"><i class="lni lni-search-alt"></i></button>
                                         </div>
                                     </form>
                                     <ul class="sub-menu collapse" id="searchhit" style="display:none;">

@@ -39,11 +39,30 @@ class MainController extends Controller
                 $month[]=$i;
             }
         }
+        $area = [
+            'AC1' => '서울',
+            'AC2' => '인천',
+            'AC3' => '대전',
+            'AC4' => '대구',
+            'AC5' => '광주',
+            'AC6' => '부산',
+            'AC7' => '울산',
+            'AC8' => '세종',
+            'AC31' => '경기',
+            'AC32' => '강원',
+            'AC33' => '충북',
+            'AC34' => '충남',
+            'AC35' => '경북',
+            'AC36' => '경남',
+            'AC37' => '전북',
+            'AC38' => '전남',
+            'AC39' => '제주',
+        ];
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($result);
         $mapUtil->fesStat($result);
 
-        return view('main')->with('fesData',$result)->with('month',$month)->with('notice',$notice);
+        return view('main')->with('fesData',$result)->with('month',$month)->with('notice',$notice)->with('area', $area);
     }
     //로그아웃
     //$id : 유저ID

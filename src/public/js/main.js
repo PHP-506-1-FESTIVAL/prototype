@@ -5,11 +5,15 @@ const fesDetail = 'fesdetail/'
 let noneImg='img/festival.jpg';
 
 function changeText() {
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     const changVal = document.getElementById('fesOrederIp');
     changVal.setAttribute('value',","+monthStr);
-    resColor()
+    resColor();
     make_api_list(","+monthStr);
+}
+
+function changeArea() {
+    const area = document.getElementById('category2').value;
 }
 
 function make_api_list(str_val) {
@@ -144,26 +148,23 @@ let AC38 = document.getElementById('AC38');
 let AC39 = document.getElementById('AC39');
 
 function resColor() {
-    AC1.style.fill='#e9e9e9';
-    AC2.style.fill='#e9e9e9';
-    AC3.style.fill='#e9e9e9';
-    AC4.style.fill='#e9e9e9';
-    AC5.style.fill='#e9e9e9';
-    AC6.style.fill='#e9e9e9';
-    AC7.style.fill='#e9e9e9';
-    AC8.style.fill='#e9e9e9';
-    AC31.style.fill='#e9e9e9';
-    AC32.style.fill='#e9e9e9';
-    AC33.style.fill='#e9e9e9';
-    AC37.style.fill='#e9e9e9';
-    AC39.style.fill='#e9e9e9';
-    AC35.style.fill='#e9e9e9';
-    AC36.style.fill='#e9e9e9';
-    AC38.style.fill='#e9e9e9';
-    AC34.style.fill='#e9e9e9';
-
-
-
+    AC1.style.fill='';
+    AC2.style.fill='';
+    AC3.style.fill='';
+    AC4.style.fill='';
+    AC5.style.fill='';
+    AC6.style.fill='';
+    AC7.style.fill='';
+    AC8.style.fill='';
+    AC31.style.fill='';
+    AC32.style.fill='';
+    AC33.style.fill='';
+    AC37.style.fill='';
+    AC39.style.fill='';
+    AC35.style.fill='';
+    AC36.style.fill='';
+    AC38.style.fill='';
+    AC34.style.fill='';
 }
 
 AC1.addEventListener('click',()=>{
