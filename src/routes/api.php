@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiUserController;
+use App\Http\Controllers\CommentApiController;
 use App\Http\Controllers\MainApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,19 @@ Route::get('nickchk/{id}', [ApiUserController::class, 'nickshow']);
 
 // 0719 이가원 add
 Route::get('hit', [MainApiController::class, 'hit'])->name('hit');
+
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : api.php
+ * 이력         : v002 20 김재성 new
+ ************************************************/
+
+//해당 보드 댓글 발송
+Route::get('comments/{board_id}',[CommentApiController::class, 'boardComment']);
+//댓글 작성
+Route::post('comments/{board_id}',[CommentApiController::class, 'store']);
+//댓글 수정
+Route::put('comments/{comment_id}',[CommentApiController::class, 'update']);
+//댓글 삭제
+Route::delete('comments/{comment_id}',[CommentApiController::class, 'destroy']);
