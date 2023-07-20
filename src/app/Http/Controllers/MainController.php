@@ -29,7 +29,7 @@ class MainController extends Controller
         $result=Festival::select([
             'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
         ])->where('festival_state','<','2')->orderBy('festival_hit')->limit(4)->get();
-        $notice=Notice::all();
+        $notice=Notice::orderBy('notice_id', 'desc')->limit(3)->get();
         $month=[];
         for ($i=0; $i < 13; $i++) {
             if ($i===0) {
