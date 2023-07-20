@@ -127,7 +127,6 @@
         }
     </script>
     {{-- 리뷰 --}}
-    {{-- 리뷰 --}}
     {{-- @include('layout.list_comment') --}}
     <style>
     #myform fieldset{
@@ -298,6 +297,26 @@
             </div>
         </div>
     </div>
+    <div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="blog-comment">
+                <h3 class="text-success">리뷰</h3>
+                <ul class="comments">
+                    @foreach($reviews as $review)
+                        <li class="clearfix">
+                            <div class="post-comments">
+                            <img src="/img/profile/{{$review->user_profile}}" alt="" class="img-thumbnail img-fluid" style="width:40px;height:40px;border-radius:50%;border:none;object-fit:cover;">
+                                <p class="meta">작성자:{{ $review->user_nickname }} 작성일:{{ $review->updated_at }} </p>
+                                <p>{{ $review->review_content }}</p>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
     {{-- <script>//버튼클릭
         const buttons = document.querySelectorAll('.box_like button');
 

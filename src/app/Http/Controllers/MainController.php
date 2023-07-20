@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Support\Facades\Cookie;
+use App\Models\Review;
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -157,12 +158,11 @@ class MainController extends Controller
             Cookie::queue($cookieName, true, $hitsTime->timestamp);
             $festhit->save();
         }
-
         $festival[0] = Festival::find($id);
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($festival);
         $mapUtil->fesStat($festival);
-        $jjm = Favorite::where('festival_id', $id)->where('user_id', session()->get('user_id'))->get(); // 현재 사용자가 해당 축제를 찜했는지 확인
+        $jjm = Favorite::where('festival_id', $id)->where('user_id', session('user_id'))->get(); // 현재 사용자가 해당 축제를 찜했는지 확인
         $favoriteCount = Favorite::where('festival_id', $id)->count(); // 찜한 갯수
         $jjmFlg = [];
         if(isset($jjm[0])) {
@@ -174,12 +174,23 @@ class MainController extends Controller
         ->orderBy('comments.updated_at', 'desc')
         ->get();
 
+        // $reviews = DB::table('reviews')
+        // ->join('users', 'users.user_id', '=', 'reviews.user_id')
+        // ->select('*')
+        // ->orderBy('reviews.updated_at', 'desc')->get();
+        $reviews = DB::table('reviews')
+        ->join('users', 'users.user_id', '=', 'reviews.user_id')
+        ->select('*')
+        ->where('reviews.festival_id', $id)
+        ->orderBy('reviews.updated_at', 'desc')
+        ->get();
 
         return view('festival_detail')
             ->with('festival', $festival[0]) // 축제 정보를 뷰로 전달
             ->with('favoriteCount', $favoriteCount) // 찜한 갯수를 뷰로 전달
             ->with('jjmFlg', $jjmFlg)
             ->with('fesid', $id) // 사용자의 찜 여부를 뷰로 전달
-            ->with('comments', $comments);
+            ->with('comments', $comments)
+            ->with('reviews', $reviews);
         }
 }
