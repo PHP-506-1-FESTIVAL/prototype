@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="/css/board.css"> {{-- add0627.shin --}}
     {{-- <link rel="stylesheet" href="/css/comment.css"> 콘솔창 에러로 주석 --}}
+
+    {{-- axios cdn --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div class="d-flex flex-column min-vh-100 ">
