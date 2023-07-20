@@ -3,9 +3,8 @@
 @section('title','공지작성.수정')
 
 @section('content')
-
     <main id="main" class="main">
-        <div class="pagetitle">
+        {{-- <div class="pagetitle">
             <h1>공지 관리</h1>
             <nav>
                 <ol class="breadcrumb">
@@ -27,6 +26,13 @@
                     <p>This is Quill <strong>full</strong> editor</p>
                 </div>
             <!-- End Quill Editor Full -->
+        </div> --}}
+
+        <div id="editor">{{-- ----- 230720 add Quill추가 신유진 ----- --}}
+            <p>Hello World!</p>
+            <p>Some initial <strong>bold</strong> text</p>
+            <p><br></p>
         </div>
+        
     </main>
 @endsection
