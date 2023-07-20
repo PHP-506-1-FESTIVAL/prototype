@@ -69,7 +69,7 @@
                         <option value="" selected>전체</option>
                         @foreach ($area as $key => $item)
                             @if ($item)
-                                <option value="{{$key}}">
+                                <option value="{{$key}}" id="{{'select'.$key}}">
                                     {{$item}}
                                 </option>
                             @endif
@@ -129,4 +129,6 @@
     <input type="hidden" name="fesStr" id="fesOrederIp" value=",">
 </form>
 <script src="{{asset('js/main.js')}}"></script>
+<script src="/js/noticeswiper.js"></script>
+
 @endsection

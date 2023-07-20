@@ -12,10 +12,6 @@ function changeText() {
     make_api_list(","+monthStr);
 }
 
-function changeArea() {
-    const area = document.getElementById('category2').value;
-}
-
 function make_api_list(str_val) {
 
 
@@ -170,107 +166,117 @@ function resColor() {
 AC1.addEventListener('click',()=>{
     resColor();
     AC1.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(1+","+monthStr);
 })
 AC2.addEventListener('click',()=>{
     resColor();
     AC2.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(2+","+monthStr);
 })
 AC3.addEventListener('click',()=>{
     resColor();
     AC3.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(3+","+monthStr);
 })
 AC4.addEventListener('click',()=>{
     resColor();
     AC4.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(4+","+monthStr);
 })
 AC5.addEventListener('click',()=>{
     resColor();
     AC5.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(5+","+monthStr);
 })
 AC6.addEventListener('click',()=>{
     resColor();
     AC6.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(6+","+monthStr);
 })
 AC7.addEventListener('click',()=>{
     resColor();
     AC7.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(7+","+monthStr);
 })
 AC8.addEventListener('click',()=>{
     resColor();
     AC8.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(8+","+monthStr);
 })
 AC31.addEventListener('click',()=>{
     resColor();
     AC31.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(31+","+monthStr);
 })
 AC32.addEventListener('click',()=>{
     resColor();
     AC32.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(32+","+monthStr);
 })
 AC33.addEventListener('click',()=>{
     resColor();
     AC33.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(33+","+monthStr);
 })
 AC34.addEventListener('click',()=>{
     resColor();
     AC34.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(34+","+monthStr);
 })
 AC35.addEventListener('click',()=>{
     resColor();
     AC35.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(35+","+monthStr);
 })
 AC36.addEventListener('click',()=>{
     resColor();
     AC36.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(36+","+monthStr);
 })
 AC37.addEventListener('click',()=>{
     resColor();
     AC37.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(37+","+monthStr);
 })
 AC38.addEventListener('click',()=>{
     resColor();
     AC38.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(38+","+monthStr);
 })
 AC39.addEventListener('click',()=>{
     resColor();
     AC39.style.fill='#5830E0';
-    const monthStr=document.getElementById('category').value
+    const monthStr=document.getElementById('category').value;
     make_api_list(39+","+monthStr);
 })
 
 function FesSub() {
     const frm=document.getElementById('fesOrderFrm')
     frm.submit();
+}
+
+function changeArea() {
+    const area = document.getElementById('category2').value;
+    const key = document.getElementById(area);
+    let areano = area.substr(2);
+    resColor();
+    key.style.fill='#5830E0';
+    const monthStr=document.getElementById('category').value
+    make_api_list(areano+","+monthStr);
 }
