@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Support\Facades\Cookie;
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -144,9 +145,19 @@ class MainController extends Controller
      * 디렉토리     : Controllers
      * 파일명       : MainController.php
      * 이력         : v001 0614 박진영 new
+     *                v002 0720 신유진 add 152-160 조회수 추가 
      ************************************************/
     public function fesDetail($id)
     {
+        $cookieName = 'festhit' . $id;  // {{-- ----- 230720 add 조회수 추가 신유진 ----- --}}
+        $hitsTime = now()->addMinutes(3); // 조회수 쿨타임 설정
+        if (!Cookie::has($cookieName)) {
+            $festhit = Festival::find($id);
+            $festhit->festival_hit++; 
+            Cookie::queue($cookieName, true, $hitsTime->timestamp);
+            $festhit->save();
+        }
+
         $festival[0] = Festival::find($id);
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($festival);
