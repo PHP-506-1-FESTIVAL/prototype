@@ -16,7 +16,7 @@ use App\Http\Controllers\OpenApiController;
 use App\Mail\OrderShipped;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\SocialController;
-
+use App\Http\Controllers\ReviewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -183,3 +183,7 @@ Route::post('admin/search', [AdminMainController::class, 'search'])->name('admin
 Route::get('admin/search', [AdminMainController::class, 'search'])->name('admin.search');
 //블랙리스트
 Route::get('admin/blacklist', [AdminMainController::class, 'blacklist'])->name('admin.blacklist');
+//리뷰
+Route::post('review/create', [ReviewController::class, 'create'])->name('review.create');
+Route::delete('review/delete/{id}', [ReviewController::class, 'delete'])->name('review.delete');
+Route::put('review/{id}',  [ReviewController::class, 'update'])->name('review.update');
