@@ -30,13 +30,16 @@ class AdminMainController extends Controller
         }
 
         // 메인 화면에 나올 data
-        $data = [];
+        // $data = [];
         // 회원 all
         $userdata = User::all();
         $userdatacount = $userdata->count();
         // 축제 all
         $festivaldata = Festival::all();
         $festivaldatacount = $festivaldata->count();
+        // 축제 인기순 TOP 10 (조히수 base)
+        $festivaltop10 = 
+
         // 게시글 all
         $board = Board::all();
         // 메인의 게시글 5개
@@ -55,9 +58,10 @@ class AdminMainController extends Controller
         ->where('deleted_at', null)
         ->orderBy('report_id', 'DESC')
         ->paginate(5);
+        $reporthandle_flg0 = Report::where('handle_flg', null)->count();
 
-        $data = [$userdatacount, $festivaldatacount, $boarddatacount];
 
+        // $data = [$userdatacount, $festivaldatacount, $boarddatacount];
 
         // 현재 시간 생성 ------------4차로 미룸
         // $nowdatetime = Carbon::now();
@@ -72,7 +76,7 @@ class AdminMainController extends Controller
         ->with('festivaldatacount', $festivaldatacount)
         ->with('boarddata', $boarddata)
         ->with('boarddatacount', $boarddatacount)
-        ->with('data', $data)
+        ->with('reporthandle_flg0', $reporthandle_flg0)
         ->with('reportdata', $reportdata)
         ;
     }
@@ -139,7 +143,8 @@ class AdminMainController extends Controller
 
         return redirect()->back()->with('success', '유저가 블랙리스트로 처리되었습니다.');
     }
-    //유저 검색
+
+    // 유저 검색
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -154,6 +159,8 @@ class AdminMainController extends Controller
 
         return view('admin.user')->with('users', $users);
     }
+
+    // 블랙리스트 목록 가져오기
     public function blacklist()
     {
         $users = DB::table('users')
@@ -165,7 +172,4 @@ class AdminMainController extends Controller
 
         return view('admin.blacklist')->with('users', $users);
     }
-
-
-
 }

@@ -79,11 +79,15 @@
               </div>
 
               <div class="card-body">
-                <h5 class="card-title"><a href="#adminfest">축제 </a><span>| This Month</span></h5>
+                <h5 class="card-title">
+                  {{-- <a href="#adminfest"> --}}
+                    축제 
+                  {{-- </a> --}}
+                  <span>| This Month</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-currency-dollar"></i>
+                    <i class="bi bi-star"></i>
                   </div>
                   <div class="ps-3">
                     <h6>{{ $festivaldatacount }}</h6>
@@ -122,7 +126,7 @@
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-people"></i>
+                    <i class="bi bi-card-text"></i>
                   </div>
                   <div class="ps-3">
                     <h6>{{ $boarddatacount }}</h6>
@@ -405,9 +409,10 @@
             </ul>
           </div>
 
-          <div class="card-body">
-            <h5 class="card-title text-dark"><a href="{{ route("admin.report") }}">신고 관리 </a><span>| Today</span></h5>
-            {{-- <p>{{ $reportdata }} </p> --}}
+          <div class="card-body" style="width: 90%">
+            <h5 class="card-title text-dark"><a href="{{ route("admin.report") }}">신고 관리 </a><span>| Today</span>
+              <span class="" style="float: right ">처리안된 신고 : {{ $reporthandle_flg0 }} 개</span>
+            </h5>
 
             <div class="activity">
               @forelse($reportdata as $val)
@@ -460,7 +465,7 @@
               document.addEventListener("DOMContentLoaded", () => {
                 var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
                   legend: {
-                    data: ['Allocated Budget', 'Actual Spending']
+                    data: ['지역별 축제수', 'Actual Spending']
                   },
                   radar: {
                     // shape: 'circle',
@@ -495,7 +500,7 @@
                     type: 'radar',
                     data: [{
                         value: [4200, 3000, 20000, 35000, 50000, 18000],
-                        name: 'Allocated Budget'
+                        name: '지역별 축제수'
                       },
                       {
                         value: [5000, 14000, 28000, 26000, 42000, 21000],
