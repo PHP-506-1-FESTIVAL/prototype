@@ -53,9 +53,9 @@
                         <div class="widget categories-widget">
                             <h5 class="widget-title"><span>인기검색어</span></h5>
                             <ul class="custom">
-                                @foreach ($recommend as $item)
+                                @foreach ($recommend as $key => $item)
                                     <li>
-                                        <a href="#">{{$item->select_cnt}}<span>{{$item->cs}}</span></a>
+                                        <a href="{{route('main.search', ['search' => $item->select_cnt])}}">{{$item->select_cnt}}<span>{{$key+1}}</span></a>
                                     </li>
                                 @endforeach
                             </ul>

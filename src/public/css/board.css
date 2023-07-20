@@ -21,3 +21,23 @@
         padding-bottom: 100px; */
         position: relative;
     }
+/* header 인기검색어 숫자 css 0720 이가원 add */
+    .hitno {
+        width:20px;
+        height:20px;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 3px;
+        margin-right:10px;
+        color: white;
+        background-color: #888;
+    }
+
+    a:hover .hitno {
+        color: #5830E0;
+        background-color: white;
+    }
+
+    .hittitle {
+        padding: 5px;
+    }

@@ -6,6 +6,7 @@ use App\Lib\MapUtil;
 use App\Models\Festival;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 
 class MainApiController extends Controller
 {
@@ -51,7 +52,8 @@ class MainApiController extends Controller
     }
 
     public function hit() {
-        
+        $hit=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
+        return $hit;
     }
 
     public function all()

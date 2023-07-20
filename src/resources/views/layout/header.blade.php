@@ -51,9 +51,12 @@
                                         </div>
                                     </form>
                                     <ul class="sub-menu collapse" id="searchhit" style="display:none;">
-                                        <li>인기 검색어</li>
-                                        <li class="nav-item"><a href="{{route('main.fesList')}}">1. 부산</a></li>
-                                        <li class="nav-item"><a href="{{route('main.request')}}">2. 수국</a></li>
+                                        <li class="hittitle"><i class="lni lni-baloon"></i> 인기 검색어</li>
+                                        <li class="nav-item"><a id="a0" href=""><span class="hitno">1</span><span id="hit0"></span></a></li>
+                                        <li class="nav-item"><a id="a1" href=""><span class="hitno">2</span><span id="hit1"></span></a></li>
+                                        <li class="nav-item"><a id="a2" href=""><span class="hitno">3</span><span id="hit2"></span></a></li>
+                                        <li class="nav-item"><a id="a3" href=""><span class="hitno">4</span><span id="hit3"></span></a></li>
+                                        <li class="nav-item"><a id="a4" href=""><span class="hitno">5</span><span id="hit4"></span></a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -103,33 +106,34 @@
 <script>
     const searchbox = document.getElementById('searchbox');
     const hit = document.getElementById('searchhit');
+    const url = "/api/hit/";
+    let searchurl = "{{route('main.search')}}";
+    let apiData = null;
+
     searchbox.onfocus = function() {
         hit.style.removeProperty('display');
-    };
+
         // API
-    fetch(url)
-    .then(res => {
-        if(res.status !== 200) {
-            throw new Error(res.status + ' : API Response Error' );
-        }
-        return res.json();})
-    .then(apiData => {
-        if(nick.value.match(regExp) === null) {
-            nick.classList.remove('is-valid');
-            nick.classList.add('is-invalid');
-            nickval.innerHTML = "한글, 영문을 사용해 2~10글자로 입력해 주세요."
-        } else {
-            if(apiData["nickflg"] === "1") {
-                nick.classList.remove('is-valid');
-                nick.classList.add('is-invalid');
-                nickval.innerHTML = "이미 등록된 닉네임 입니다."
-            } else {
-                nick.classList.remove('is-invalid');
-                nick.classList.add('is-valid');
-                nick.setAttribute('readonly', true);
+        fetch(url)
+        .then(res => {
+            if(res.status !== 200) {
+                throw new Error(res.status + ' : API Response Error' );
             }
-        }
-    })
-    // 에러는 alert로 처리
-    .catch(error => alert(error.message));
+            return res.json();})
+        .then(apiData => {
+            apiData.forEach(function(val, index) {
+                let hitid = 'hit' + index;
+                let aid = 'a' + index;
+                let hititem = document.getElementById(hitid);
+                let aitem = document.getElementById(aid);
+                searchurl = searchurl + '?search=' + val['select_cnt'];
+                hititem.innerHTML = val['select_cnt'];
+                aitem.href = searchurl;
+                searchurl = "{{route('main.search')}}";
+            });
+        })
+        // 에러는 alert로 처리
+        .catch(error => alert(error.message));
+    };
+    
 </script>
