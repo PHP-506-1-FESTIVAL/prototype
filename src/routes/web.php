@@ -126,8 +126,11 @@ Route::post('/find/mail/', [UserController::class, 'pwChang'])->name('pw.chang')
 Route::post('/send/mail', [MailSendController::class, 'registMail'])->name('mail.send');
 //비밀번호찾기 메일 발송
 Route::post('/send/find', [MailSendController::class, 'findMail'])->name('mail.find');
-// 관리자 공지사항 페이지
-Route::get('admin/notice/search', [AdminNoticeController::class , 'index'])->name('admin.notice');
+//관리자 공지사항 페이지
+Route::get('admin/notice', [AdminNoticeController::class , 'index'])->name('admin.notice');
+//관리자 공지사항 작성,수정페이지
+Route::get('admin/notice/write', [AdminNoticeController::class , 'write'])->name('admNotice.write');
+
 
 /************************************************
  * 프로젝트명   : festival_info
