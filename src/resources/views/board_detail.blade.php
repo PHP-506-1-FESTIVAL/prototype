@@ -120,6 +120,7 @@
             </div>
         </div>
     </div>
+    {{-- <input type="hidden" name="board_id" id="board_id" value="{{$boards->board_id}}"> --}}
 </section>
 <!-- End Blog Singel Area -->
 

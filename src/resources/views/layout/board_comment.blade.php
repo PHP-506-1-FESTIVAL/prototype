@@ -41,8 +41,12 @@
                                 <button type="submit" class="btn btn-primary">댓글 작성</button>
                             </form>
                         </div>
-                        {{-- 댓글 목록 --}}
                         <div class="comment-form">
+
+                        </div>
+                        @dump($boards)
+                        {{-- 댓글 목록 --}}
+                        {{-- <div class="comment-form">
                             @foreach($comments as $comment)
                                 <div id="comment-form">
                                     <form action="{{ route('comment.delete', ['id' => $comment->comment_id]) }}" method="POST">
@@ -107,12 +111,14 @@
                                     <p class="comment-time">{{ $comment->updated_at }}</p>
                                 </div>
                             @endforeach
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <input type="hidden" name="board_id" id="board_id" value="{{$boards->board_id}}">
+    <input type="hidden" name="user_id" id="board_id" value="{{session('user_id')}}">
 </section>
 {{-- 현재 페이지 숫자 추출 --}}
 <script>
@@ -129,4 +135,4 @@
         window.open(url, name, option);
     }
 </script>
-
+<script src="{{asset('js/comment.js')}}"></script>

@@ -40,10 +40,10 @@ Route::get('hit', [MainApiController::class, 'hit'])->name('hit');
  ************************************************/
 
 //해당 보드 댓글 발송
-Route::get('comments/{board_id}',[CommentApiController::class, 'boardComment']);
+Route::get('comments/{board_id}',[CommentApiController::class, 'boardComment'])->name('comments.index');
 //댓글 작성
-Route::post('comments/{board_id}',[CommentApiController::class, 'store']);
+Route::post('comments/{board_id}',[CommentApiController::class, 'store'])->name('comments.store');
 //댓글 수정
-Route::put('comments/{comment_id}',[CommentApiController::class, 'update']);
+Route::put('comments/{comment_id}',[CommentApiController::class, 'update'])->name('comments.update');
 //댓글 삭제
-Route::delete('comments/{comment_id}',[CommentApiController::class, 'destroy']);
+Route::delete('comments/{comment_id}',[CommentApiController::class, 'destroy'])->name('comments.destroy');
