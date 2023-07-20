@@ -143,6 +143,19 @@ let AC37 = document.getElementById('AC37');
 let AC38 = document.getElementById('AC38');
 let AC39 = document.getElementById('AC39');
 
+function resSelect() {
+    for (let i = 0; i <= 8; i++) {
+        let key = 'selectAC'+i;
+        let selitem = document.getElementById(key);
+        selitem.removeAttribute('selected');
+    }
+    for (let i = 31; i <= 39; i++) {
+        let key = 'selectAC'+i;
+        let selitem = document.getElementById(key);
+        selitem.removeAttribute('selected');
+    }
+}
+
 function resColor() {
     AC1.style.fill='';
     AC2.style.fill='';
@@ -165,105 +178,139 @@ function resColor() {
 
 AC1.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC1.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(1+","+monthStr);
+    document.getElementById('selectAC1').setAttribute('selected', true);
 })
 AC2.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC2.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(2+","+monthStr);
+    document.getElementById('selectAC2').setAttribute('selected', true);
 })
 AC3.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC3.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(3+","+monthStr);
+    document.getElementById('selectAC3').setAttribute('selected', true);
 })
 AC4.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC4.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(4+","+monthStr);
+    document.getElementById('selectAC4').setAttribute('selected', true);
 })
 AC5.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC5.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(5+","+monthStr);
+    document.getElementById('selectAC5').setAttribute('selected', true);
 })
 AC6.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC6.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(6+","+monthStr);
+    document.getElementById('selectAC6').setAttribute('selected', true);
 })
 AC7.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC7.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(7+","+monthStr);
+    document.getElementById('selectAC7').setAttribute('selected', true);
 })
 AC8.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC8.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(8+","+monthStr);
+    document.getElementById('selectAC8').setAttribute('selected', true);
 })
 AC31.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC31.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(31+","+monthStr);
+    document.getElementById('selectAC31').setAttribute('selected', true);
 })
 AC32.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC32.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(32+","+monthStr);
+    document.getElementById('selectAC32').setAttribute('selected', true);
 })
 AC33.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC33.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(33+","+monthStr);
+    document.getElementById('selectAC33').setAttribute('selected', true);
 })
 AC34.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC34.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(34+","+monthStr);
+    document.getElementById('selectAC34').setAttribute('selected', true);
 })
 AC35.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC35.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(35+","+monthStr);
+    document.getElementById('selectAC35').setAttribute('selected', true);
 })
 AC36.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC36.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(36+","+monthStr);
+    document.getElementById('selectAC36').setAttribute('selected', true);
 })
 AC37.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC37.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(37+","+monthStr);
+    document.getElementById('selectAC37').setAttribute('selected', true);
 })
 AC38.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC38.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(38+","+monthStr);
+    document.getElementById('selectAC38').setAttribute('selected', true);
 })
 AC39.addEventListener('click',()=>{
     resColor();
+    resSelect();
     AC39.style.fill='#5830E0';
     const monthStr=document.getElementById('category').value;
     make_api_list(39+","+monthStr);
+    document.getElementById('selectAC39').setAttribute('selected', true);
 })
 
 function FesSub() {

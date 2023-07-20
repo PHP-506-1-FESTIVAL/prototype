@@ -66,7 +66,7 @@
                 <div class="search-input col-6">
                     <label for="category2"><i class="lni lni-map-marker"></i></i></label>
                     <select name="category2" id="category2" onchange="changeArea()">
-                        <option value="" selected>전체</option>
+                        <option value="" id="selectAC0" selected>전체</option>
                         @foreach ($area as $key => $item)
                             @if ($item)
                                 <option value="{{$key}}" id="{{'select'.$key}}">
