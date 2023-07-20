@@ -169,7 +169,8 @@
         margin: 3px;
     }
     </style>
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">글작성</button>
+    <div>
+    {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">글작성</button>
 
     <!-- 모달 창 -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -227,63 +228,77 @@
                 </div>
             </div>
         </div>
-    </div>
-    {{-- <button type="button" class="btn btn-danger">글작성</button>
-    <div class="group_like">
-        <br><strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
-        <br><div class="box_like">
-            <button type="button" class="btn btn-danger" data-name="체험" data-id="1">
-                <span class="txt_like">체험프로그램이 많아요</span><span class="ico_comm ico_like2"></span>
-            </button>
-            <button type="button" class="btn btn-danger" data-name="테마" data-id="2">
-                <span class="txt_like">테마가 재미있어요</span><span class="ico_comm ico_like2"></span>
-            </button>
-            <button type="button" class="btn btn-danger" data-name="분위기" data-id="3">
-                <span class="txt_like">분위기가 좋아요</span><span class="ico_comm ico_like2"></span>
-            </button>
-            <button type="button" class="btn btn-danger" data-name="먹거리" data-id="4">
-                <span class="txt_like">주변에 먹거리가 많아요</span><span class="ico_comm ico_like2"></span>
-            </button>
-            <button type="button" class="btn btn-danger" data-name="화장실" data-id="5">
-                <span class="txt_like">화장실이 깨끗해요</span><span class="ico_comm ico_like2"></span>
-            </button>
-            <button type="button" class="btn btn-danger" data-name="친절" data-id="6">
-                <span class="txt_like">친절해요</span><span class="ico_comm ico_like2"></span>
-            </button>
-            <button type="button" class="btn btn-danger" data-name="주차" data-id="7">
-                <span class="txt_like">주차가 쉬워요</span><span class="ico_comm ico_like2"></span>
-            </button>
-            <button type="button" class="btn btn-danger" data-name="가성비" data-id="8">
-                <span class="txt_like">가성비 좋아요</span><span class="ico_comm ico_like2"></span>
-            </button>
-        </div>
-        </div>
-    <form class="mb-3" name="myform" id="myform" method="post">
-        <fieldset>
-            <span class="text-bold">별점을 선택해주세요</span>
-            <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
-            <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
-            <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-            <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
-            <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
-        </fieldset>
-        <div>
-            <textarea class="col-auto form-control" type="text" id="reviewContents" style="width:75%"
-                placeholder="작성내용은 축제리스트에 노출되며 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요."></textarea>
-        </div>
-        <br><button type="button" class="btn btn-danger">제출</button>
-    </form> --}}
-    <script>
-        const radioButtons = document.querySelectorAll('input[name="reviewStar"]');
-        const selectedRating = document.getElementById('selectedRating');
+    </div> --}}
+    <div>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">글작성</button>
 
-        radioButtons.forEach((radio) => {
-            radio.addEventListener('change', (event) => {
-                selectedRating.textContent = `선택한 별점: ${event.target.value}/5`;
-            });
-        });
-    </script>
-    <script>
+        <!-- 모달 창 -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="mb-3" name="myform" id="myform" method="post" action="{{ route('review.create') }}">
+                    <div class="modal-body">
+                        <div class="group_like">
+                            <br>
+                            <strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
+                            <br>
+                            <div class="box_like">
+                                <button type="button" class="btn btn-outline-primary" name="like_experience" id="likeBtn1">
+                                    <input type="hidden" name="like_experience" id="like_experience_input" value="">
+                                    <span class="txt_like">체험프로그램이 많아요</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" name="like_theme" id="likeBtn2>
+                                    <input type="hidden" name="like_theme" id="like_theme_input" value="">
+                                    <span class="txt_like">테마가 재미있어요</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-success" name="like_mood" id="likeBtn3">
+                                    <input type="hidden" name="like_mood" id="like_mood_input" value="">
+                                    <span class="txt_like">분위기가 좋아요</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-danger" name="like_food" id="likeBtn4">
+                                    <input type="hidden" name="like_food" id="like_food_input" value="">
+                                    <span class="txt_like">주변에 먹거리가 많아요</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-warning" name="like_toilet" id="likeBtn5">
+                                    <input type="hidden" name="like_toilet" id="like_toilet_input" value="">
+                                    <span class="txt_like">화장실이 깨끗해요</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-info" name="like_parking" id="likeBtn6">
+                                    <input type="hidden" name="like_parking" id="like_parking_input" value="">
+                                    <span class="txt_like">주차가 쉬워요</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-dark" name="like_cost" id="likeBtn7">
+                                    <input type="hidden" name="like_cost" id="like_cost_input" value="">
+                                    <span class="txt_like">가성비 좋아요</span>
+                                </button>
+                        </div>
+                            @csrf
+                            <input type="hidden" name="festival_id" id="festival-id-input" value="">
+                            <fieldset>
+                                <span class="text-bold">별점을 선택해주세요</span>
+                                <input type="radio" name="rate" value="5" id="rate1"><label for="rate1">★</label>
+                                <input type="radio" name="rate" value="4" id="rate2"><label for="rate2">★</label>
+                                <input type="radio" name="rate" value="3" id="rate3"><label for="rate3">★</label>
+                                <input type="radio" name="rate" value="2" id="rate4"><label for="rate4">★</label>
+                                <input type="radio" name="rate" value="1" id="rate5"><label for="rate5">★</label>
+                            </fieldset>
+                            <p id="selectedRating"></p>
+                            <div>
+                                <textarea class="col-auto form-control" name="review_content" placeholder="댓글을 입력하세요" required></textarea>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-danger">작성</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>//버튼클릭
         const buttons = document.querySelectorAll('.box_like button');
 
         buttons.forEach(button => {
@@ -292,6 +307,90 @@
             });
         });
     </script>
+    {{-- 별점 스크립트 --}}
+    <script>
+        const radioButtons = document.querySelectorAll('input[name="rate"]');
+        const selectedRating = document.getElementById('selectedRating');
+
+        radioButtons.forEach((radio) => {
+            radio.addEventListener('change', (event) => {
+                selectedRating.textContent = `선택한 별점: ${event.target.value}/5`;
+            });
+        });
+    </script>
+    {{-- 현재페이지 숫자 추출 --}}
+    <script>
+        var initialUrl = window.location.href;
+        var numericPart = initialUrl.match(/\d+/)[0];
+
+        document.getElementById("festival-id-input").value = numericPart;
+    </script>
+<!-- Include this script in your HTML file -->
+<script>
+    // Function to handle button click
+    function handleButtonClick(buttonId) {
+        // Get the corresponding input element
+        var inputElement = document.getElementById(buttonId + '_input');
+
+        // Check if the input element exists
+        if (inputElement) {
+            // Set the value to "1"
+            inputElement.value = "1";
+        }
+    }
+
+    // Function to toggle active class on buttons
+    function toggleActiveClass(buttonId) {
+        // Remove active class from all buttons
+        var buttons = document.getElementsByClassName('btn');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('active');
+        }
+
+        // Add active class to the clicked button
+        var button = document.getElementById(buttonId);
+        if (button) {
+            button.classList.add('active');
+        }
+    }
+
+    // Add click event listeners to all buttons
+    document.getElementById('likeBtn1').addEventListener('click', function () {
+        handleButtonClick('like_experience');
+        toggleActiveClass('likeBtn1');
+    });
+
+    document.getElementById('likeBtn2').addEventListener('click', function () {
+        handleButtonClick('like_theme');
+        toggleActiveClass('likeBtn2');
+    });
+
+    document.getElementById('likeBtn3').addEventListener('click', function () {
+        handleButtonClick('like_mood');
+        toggleActiveClass('likeBtn3');
+    });
+
+    document.getElementById('likeBtn4').addEventListener('click', function () {
+        handleButtonClick('like_food');
+        toggleActiveClass('likeBtn4');
+    });
+
+    document.getElementById('likeBtn5').addEventListener('click', function () {
+        handleButtonClick('like_toilet');
+        toggleActiveClass('likeBtn5');
+    });
+
+    document.getElementById('likeBtn6').addEventListener('click', function () {
+        handleButtonClick('like_parking');
+        toggleActiveClass('likeBtn6');
+    });
+
+    document.getElementById('likeBtn7').addEventListener('click', function () {
+        handleButtonClick('like_cost');
+        toggleActiveClass('likeBtn7');
+    });
+</script>
+
     {{-- 연관축제 --}}
     <h1 style="padding-top:30px;">이런 축제는 어때요?</h1>
     <div class="row" style="text-align:center;">
