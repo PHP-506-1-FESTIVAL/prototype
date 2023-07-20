@@ -40,9 +40,16 @@ class AdminNoticeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        // dump($req);
+        $notice=new Notice;
+        $notice->notice_title=$req->title;
+        $notice->notice_content=$req->content;
+        $notice->admin_id=session('admin_id');
+        $notice->save();
+        // dump($notice);
+        return redirect()->route('admin.notice');
     }
 
     /**
@@ -51,9 +58,11 @@ class AdminNoticeController extends Controller
      * @param  \App\Models\Notice  $notice
      * @return \Illuminate\Http\Response
      */
-    public function show(Notice $notice)
+    public function show($id)
     {
-        //
+        $notice=Notice::find($id);
+        // dump($notice);
+        return view('admin.notice_update')->with('data',$notice);
     }
 
     /**
@@ -74,9 +83,18 @@ class AdminNoticeController extends Controller
      * @param  \App\Models\Notice  $notice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Notice $notice)
+    public function update(Request $req, $id)
     {
-        //
+
+        $notice= Notice::find($id);
+        // dump($notice);
+        // dump($req);
+        $notice->notice_title=$req->title;
+        $notice->notice_content=$req->content;
+        $notice->admin_id=session('admin_id');
+        $notice->save();
+        // dump($notice);
+        return redirect()->route('admin.notice');
     }
 
     /**
@@ -85,8 +103,11 @@ class AdminNoticeController extends Controller
      * @param  \App\Models\Notice  $notice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Notice $notice)
+    public function destroy($id)
     {
-        //
+        $notice=Notice::find($id);
+        // dump($notice);
+        $notice->delete();
+        return redirect()->route('admin.notice');
     }
 }

@@ -20,12 +20,13 @@
                     <button type="submit" class="btn btn-outline-secondary">취소</button>
                 </form>
                 <!-- Quill Editor Full -->
-                    <form action="{{route('admNotice.store')}}" method="post" id="notice">
+                    <form action="{{route('admNotice.update',['id'=>$data->notice_id])}}" method="post" id="notice">
                         @csrf
+                        @method('put')
                         <label for="title">제목 : </label>
-                        <input type="text" name="title" id="title">
+                        <input type="text" name="title" id="title" value="{{$data->notice_title}}">
                         <div id="editor">{{-- ----- 230720 add Quill추가 신유진 ----- --}}
-
+                            {{$data->notice_content}}
                         </div>
                         <!-- End Quill Editor Full -->
                         <input type="hidden" name="content" id="content">

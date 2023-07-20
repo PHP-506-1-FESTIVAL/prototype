@@ -57,9 +57,9 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
-                                                        <form action="" method="POST">
+                                                        <form action="{{route('admNotice.delete',['id'=>$item->notice_id])}}" method="POST">
                                                             @csrf
-                                                            <input type="hidden" name="user_id" value="{{  $item->notice_id }}">
+                                                            @method('delete')
                                                             <button type="submit" class="btn btn-danger">네</button>
                                                         </form>
                                                     </div>
@@ -68,8 +68,8 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <form action="" method="get">
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $item->notice_id }}">수정</button>
+                                        <form action="{{route('admNotice.show',['id'=>$item->notice_id])}}"method="get">
+                                            <button type="submit" class="btn btn-primary btn-sm">수정</button>
                                         </form>
                                     </li>
                                 </ul>
