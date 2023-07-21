@@ -69,7 +69,7 @@
                     <td>{{ $user->created_at->format('y-m-d') }}</td>
                     <td>
                       <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $user->user_id }}">정지</button>
-                      <div class="modal fade" id="basicModal{{ $user->user_id }}" tabindex="-1">
+                      {{-- <div class="modal fade" id="basicModal{{ $user->user_id }}" tabindex="-1">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -88,6 +88,62 @@
                               </form>
                             </div>
                           </div>
+                        </div>
+                      </div> --}}
+                      <div class="modal fade" id="basicModal{{ $user->user_id }}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalToggleLabel">유저 블랙리스트 처리</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              user ID : {{ $user->user_id }} 의 블랙리스트 처리를 시작합니다.
+                              <form action="{{ route('admin.userpost', ['id' => $user->user_id]) }}" method="POST">
+                                  @csrf
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <div class="search-input">
+                                              <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
+                                              <select name="category" id="category" required>
+                                                  <option value="" selected disabled>신고 사유 선택</option>
+                                                  <option value="0">영리/홍보</option>
+                                                  <option value="1">음란물</option>
+                                                  <option value="2">욕설/비하</option>
+                                                  <option value="3">신상노출</option>
+                                                  <option value="4">도배</option>
+                                                  <option value="5">기타</option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <div class="col-12">
+                                          <div class="search-input">
+                                              <label for="detail"><i class="lni lni-pencil-alt theme-color"></i></label>
+                                              <input type="text" name="detail" id="detail" placeholder="상세 내용 입력" size=3 maxlength =500>
+                                              {{-- <input type="hidden" name="type" value="{{$type}}"> --}}
+                                              {{-- <input type="hidden" name="no" value="{{$no}}"> --}}
+                                          </div>
+                                      </div>
+                                      {{-- <div class="col-12">
+                                          <div class="search-btn button">
+                                              <button class="btn" type="submit"><i class="lni lni-telegram-original"></i> 보내기</button>
+                                              <button type="submit" class="btn btn-danger" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">네</button>
+                                          </div>
+                                      </div> --}}
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+                                        <form action="{{ route('admin.userpost', ['id' => $user->user_id]) }}" method="POST">
+                                          @csrf
+                                          <input type="hidden" name="user_id" value="{{  $user->user_id }}">
+                                          <button type="submit" class="btn btn-danger" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">네</button>
+                                        </form>
+                                      </div>
+                                      <input type="hidden" name="user_id" value="{{  $user->user_id }}">
+                                  </div>
+                              </form>
+                            </div>
+
+
                         </div>
                       </div>
                     </td>
