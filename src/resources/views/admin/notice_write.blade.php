@@ -39,14 +39,13 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.main')}}">메인</a></li>
                     <li class="breadcrumb-item">공지</li>
-                    <li class="breadcrumb-item active">작성,수정</li>
+                    <li class="breadcrumb-item active">{{$state['submit_btn']}}</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
-                {{-- <h5 class="card-title"><strong>{{$data->card_title}}</strong></h5> --}}
-                <h5 class="card-title"><strong>작성</strong></h5>
+                <h5 class="card-title"><strong>{{$state['card_title']}}</strong></h5>
                 <!-- Quill Editor Full -->
                 <div class="content-box">
                     <form action="{{route('admNotice.store')}}" method="post" id="notice" class="notic-content">
@@ -60,13 +59,14 @@
                             </div>
                         </div>
                         <div id="editor">{{-- ----- 230720 add Quill추가 신유진 ----- --}}
-
+                            @if ($data)
+                                {{$data->notice_content}}
+                            @endif
                         </div>
                         <!-- End Quill Editor Full -->
                         <input type="hidden" name="content" id="content">
                     </form>
-                    {{-- <button class="btn btn-primary btn-sm" onclick="submit()">{{$data->submit_btn}}</button> --}}
-                    <button class="btn btn-primary btn-sm" onclick="submit()">작성</button>
+                    <button class="btn btn-primary btn-sm" onclick="submit()">{{$state['submit_btn']}}</button>
                     <form action="{{route('admin.notice')}}" method="get">
                         <button type="submit" class="btn btn-outline-secondary btn-sm cancle-btn">취소</button>
                     </form>

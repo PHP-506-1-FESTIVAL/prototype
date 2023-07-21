@@ -103,6 +103,8 @@
                         @endforelse
                 </tbody>
             </table>
+            <!-- End Table with stripped rows -->
+            {!! $notice->links('vendor.pagination.custom2') !!}
         </div>
     </main>
 @endsection
