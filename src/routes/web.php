@@ -17,6 +17,8 @@ use App\Mail\OrderShipped;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ThemeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -155,6 +157,8 @@ Route::post('report', [AdminReportController::class, 'insertpost'])->name('inser
 Route::get('admin/articled', [AdminReportController::class, 'articleget'])->name('report.article');
 Route::get('admin/commentd', [AdminReportController::class, 'commentget'])->name('report.comment');
 Route::get('admin/userd', [AdminReportController::class, 'userget'])->name('report.user');
+Route::get('theme', [ThemeController::class, 'themeget'])->name('theme');
+Route::post('theme', [ThemeController::class, 'themepost'])->name('themepost');
 
 /************************************************
  * 프로젝트명   : festival_info
