@@ -30,7 +30,7 @@ class MainController extends Controller
     {
         $result=Festival::select([
             'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
-        ])->where('festival_state','<','2')->orderBy('festival_hit')->limit(4)->get();
+        ])->where('festival_state','<','2')->orderBy('festival_start_date', 'desc')->limit(4)->get();
         $notice=Notice::orderBy('notice_id', 'desc')->limit(3)->get();
         $month=[];
         for ($i=0; $i < 13; $i++) {
@@ -108,7 +108,7 @@ class MainController extends Controller
         if(isset(request()->search)){
             FestivalHit::create(['select_cnt'=>request()->search]);
         }
-        $result_search=DB::table('festivals')->where('festival_title','like','%'.request()->search.'%')->orderBy('festival_hit','desc')->paginate(10);
+        $result_search=DB::table('festivals')->where('festival_title','like','%'.request()->search.'%')->orderBy('festival_start_date','desc')->paginate(10);
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($result_search);
         $result_hot=DB::select('SELECT select_cnt, COUNT(select_cnt) cs FROM festival_hits WHERE hit_timer > NOW() GROUP BY(select_cnt)  ORDER BY cs DESC LIMIT 5');
@@ -185,12 +185,18 @@ class MainController extends Controller
         ->orderBy('reviews.updated_at', 'desc')
         ->get();
 
+        $data = DB::table('reviews')
+        ->select('*')
+        ->where('festival_id', $id)
+        ->get();
+
         return view('festival_detail')
             ->with('festival', $festival[0]) // 축제 정보를 뷰로 전달
             ->with('favoriteCount', $favoriteCount) // 찜한 갯수를 뷰로 전달
             ->with('jjmFlg', $jjmFlg)
             ->with('fesid', $id) // 사용자의 찜 여부를 뷰로 전달
             ->with('comments', $comments)
-            ->with('reviews', $reviews);
+            ->with('reviews', $reviews)
+            ->with('data',$data);
         }
 }

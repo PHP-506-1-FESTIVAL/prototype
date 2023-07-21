@@ -63,7 +63,7 @@ class CommentApiController extends Controller
         $comment->comment_content=$req->content;
         $comment->save();
 
-        return 'Success!!!';
+        return $comment;
     }
 
     /**

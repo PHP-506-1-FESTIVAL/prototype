@@ -136,7 +136,7 @@ class BoardController extends Controller
         $comments = Comment::where('board_id', $board_id)
             ->join('users', 'comments.user_id', '=', 'users.user_id')
             ->select('comments.*', 'users.user_nickname', 'users.user_profile')
-            ->orderBy('comments.updated_at', 'desc')
+            ->orderBy('comments.created_at', 'desc')
             ->get();
 
         return view('board_detail')

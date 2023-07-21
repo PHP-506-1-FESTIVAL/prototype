@@ -41,12 +41,8 @@
                                 <button type="submit" class="btn btn-primary">댓글 작성</button>
                             </form>
                         </div>
-                        <div class="comment-form">
-
-                        </div>
-                        @dump($boards)
                         {{-- 댓글 목록 --}}
-                        {{-- <div class="comment-form">
+                        <div class="comment-form">
                             @foreach($comments as $comment)
                                 <div id="comment-form">
                                     <form action="{{ route('comment.delete', ['id' => $comment->comment_id]) }}" method="POST">
@@ -87,12 +83,8 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('comment.update', ['id' => $comment->comment_id]) }}" method="POST">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <textarea name="comment_content" class="form-control" placeholder="댓글을 입력하세요" required>{{ $comment->comment_content }}</textarea>
-                                                            <button type="submit" class="btn btn-primary">수정</button>
-                                                        </form>
+                                                        <textarea name="comment_content" class="form-control" placeholder="댓글을 입력하세요" required id="comment-content{{ $comment->comment_id }}">{{ $comment->comment_content }}</textarea>
+                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="putCommentsList({{$comment->comment_id}})">수정</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,11 +99,11 @@
                                         <img class="comment-profile-img" src="/img/profile/{{ $comment->user_profile }}" alt="프로필 이미지">
                                     </div>
                                     <p class="comment-name">{{ $comment->user_nickname }}</p>
-                                    <p class="comment-content">{{ $comment->comment_content }}</p>
+                                    <p class="comment-content" id="content{{$comment->comment_id}}">{{ $comment->comment_content }}</p>
                                     <p class="comment-time">{{ $comment->updated_at }}</p>
                                 </div>
                             @endforeach
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
