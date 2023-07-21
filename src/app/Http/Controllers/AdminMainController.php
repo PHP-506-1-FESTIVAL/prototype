@@ -37,8 +37,14 @@ class AdminMainController extends Controller
         // 축제 all
         $festivaldata = Festival::all();
         $festivaldatacount = $festivaldata->count();
-        // 축제 인기순 TOP 10 (조히수 base)
-        $festivaltop10 = 
+        // 축제 인기순 TOP 10 (조회수 base) festivals festival_hits
+        // $festivaltop10 = DB::table('festivals')
+        // ->join('festival_hits', 'festivals.user_id', '=', 'festival_hits.user_id' )
+        // ->select('*')
+        // ->where('deleted_at', null)
+        // ->orderBy('report_id', 'DESC')
+        // ->paginate(5);
+        // $reporthandle_flg0 = Report::where('handle_flg', null)->count();
 
         // 게시글 all
         $board = Board::all();
