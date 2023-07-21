@@ -12,7 +12,7 @@ class OpenApiController extends Controller
     public function store(Request $request)
     {
         // 축제 데이터를 가져올 API URL
-        $apiUrl = "https://apis.data.go.kr/B551011/KorService1/searchFestival1?serviceKey=%2Bo8Vb5NgOSYJzSk0%2BzIXmtmXJjrt8BEfzTWdSne%2BbWytU6UOZxtWQpwXvNBYPcnxx1PUuTYdhZ6tq7sp%2BwksMw%3D%3D&numOfRows=600&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=d&eventStartDate=20230101";
+        $apiUrl = "https://apis.data.go.kr/B551011/KorService1/searchFestival1?serviceKey=%2Bo8Vb5NgOSYJzSk0%2BzIXmtmXJjrt8BEfzTWdSne%2BbWytU6UOZxtWQpwXvNBYPcnxx1PUuTYdhZ6tq7sp%2BwksMw%3D%3D&numOfRows=1000&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=d&eventStartDate=20230101";
 
         // API에서 데이터를 가져옴
         $response = Http::withoutVerifying()->get($apiUrl)->json();//Http::withoutVerifying()는 SSL 인증서를 확인하지 않도록 설정하는 메서드
