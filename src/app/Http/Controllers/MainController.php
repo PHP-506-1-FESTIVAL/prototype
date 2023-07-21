@@ -213,18 +213,21 @@ class MainController extends Controller
 
         $sum_rate=0;
         $count_rate=0;
+        $star=0;
         foreach ($data as $val) {
             $sum_rate+=$val->rate;
             $count_rate++;
         }
         if ($count_rate!==0) {
             $star_percentage=floor($sum_rate/$count_rate*20);
+            $star=($sum_rate/$count_rate);
         }else{
             $star_percentage=0;
         }
         $num_data=[
             "count"=>$count_rate,
-            "star_percentage"=>$star_percentage
+            "star_percentage"=>$star_percentage,
+            "star"=>$star
         ];
 
         return view('festival_detail')

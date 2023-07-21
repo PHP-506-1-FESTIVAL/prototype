@@ -394,8 +394,8 @@ body{
 .blog-comment .post-comments {
     border: 1px solid #eee;
     margin-bottom: 20px;
-    margin-left: 85px;
     margin-right: 0;
+    margin-left: 70px;
     padding: 10px 20px;
     position: relative;
     -webkit-border-radius: 4px;
@@ -404,7 +404,7 @@ body{
     border-radius: 4px;
     background: #fff;
     color: #6b6e80;
-    position: relative;
+    width: 800px;
 }
 
 .blog-comment .meta {
