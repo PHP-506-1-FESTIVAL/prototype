@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApiUserController;
 use App\Http\Controllers\CommentApiController;
 use App\Http\Controllers\MainApiController;
+use App\Http\Controllers\ReviewApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -47,3 +48,7 @@ Route::post('comments/{board_id}',[CommentApiController::class, 'store'])->name(
 Route::put('comments/{comment_id}',[CommentApiController::class, 'update'])->name('comments.update');
 //댓글 삭제
 Route::delete('comments/{comment_id}',[CommentApiController::class, 'destroy'])->name('comments.destroy');
+
+//리뷰 수정
+Route::put('reviews/{review_id}',[ReviewApiController::class, 'update'])->name('reviews.update');
+

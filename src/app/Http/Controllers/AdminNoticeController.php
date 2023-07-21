@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Notice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AdminNoticeController extends Controller
 {
@@ -115,5 +117,18 @@ class AdminNoticeController extends Controller
         // dump($notice);
         $notice->delete();
         return redirect()->route('admin.notice');
+    }
+    public function search(Request $req)
+    {
+        // Log::debug("admin search Start");
+        // Log::debug("admin search", $req->all());
+        $req->validate(['search'=>'required|max:100']);
+        $notice_search=DB::table('notices')->where('notice_title','like','%'.$req->search.'%')->orWhere('notice_content','like','%'.$req->search.'%')->orderBy('created_at','desc')->paginate(10);
+        // dump($notice_search);
+        // exit;
+        // $json_list = json_encode($notice_search);
+        // $list = json_decode($json_list,true);
+        // Log::debug("admin search", $list);
+        return view('admin.notice_list')->with('notice',$notice_search);
     }
 }

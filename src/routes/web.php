@@ -133,11 +133,13 @@ Route::get('admin/notice/write', [AdminNoticeController::class , 'write'])->name
 //관리자 공지사항 작성
 Route::post('admin/notice/write', [AdminNoticeController::class , 'store'])->name('admNotice.store');
 //관리자 공지사항 수정페이지이동
-Route::get('admin/notice/{id}', [AdminNoticeController::class , 'show'])->name('admNotice.show');
+Route::get('admin/notice/show/{id}', [AdminNoticeController::class , 'show'])->name('admNotice.show');
 //관리자 공지사항 수정
-Route::put('admin/notice/{id}', [AdminNoticeController::class , 'update'])->name('admNotice.update');
+Route::put('admin/notice/update/{id}', [AdminNoticeController::class , 'update'])->name('admNotice.update');
 //관리자 공지사항 수정
 Route::delete('admin/notice/{id}', [AdminNoticeController::class , 'destroy'])->name('admNotice.delete');
+//관리자 공지사항 서치
+Route::get('admin/notice/search', [AdminNoticeController::class , 'search'])->name('admNotice.search');
 
 
 /************************************************

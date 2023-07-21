@@ -184,7 +184,8 @@ class MainController extends Controller
         ->where('reviews.festival_id', $id)
         ->orderBy('reviews.updated_at', 'desc')
         ->get();
-
+        // dump($reviews->review_id);
+        // exit;
         $data = Review::where('festival_id',$id)->get();
 
         $sum_rate=0;

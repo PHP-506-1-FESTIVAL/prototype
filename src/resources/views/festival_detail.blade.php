@@ -187,71 +187,72 @@
     background-position: 0 -30px;
     height: 100%;
 }
-    </style>
+</style>
+<div>
     <div>
-    <div>
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">글작성</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">글작성</button>
 
-    @php
-        $sumRates = $data->sum('rate');
-        $totalCount = $data->count();
-        $avgrate = ($totalCount > 0) ? $sumRates / $totalCount : 0;
-        $formattedAvgRate = number_format($avgrate, 1); // Format to 1 decimal place
+        @php
+            $sumRates = $data->sum('rate');
+            $totalCount = $data->count();
+            $avgrate = ($totalCount > 0) ? $sumRates / $totalCount : 0;
+            $formattedAvgRate = number_format($avgrate, 1); // Format to 1 decimal place
 
-        // Calculate the number of filled stars and the remaining fractional part
-        $filledStars = floor($avgrate);
-        $fractionalPart = $avgrate - $filledStars;
+            // Calculate the number of filled stars and the remaining fractional part
+            $filledStars = floor($avgrate);
+            $fractionalPart = $avgrate - $filledStars;
 
-        $likeCount = $data->sum('like_experience');
-        $likeCount2 = $data->sum('like_theme');
-        $likeCount3 = $data->sum('like_mood');
-        $likeCount4 = $data->sum('like_food');
-        $likeCount5 = $data->sum('like_toilet');
-        $likeCount6 = $data->sum('like_parking');
-        $likeCount7 = $data->sum('like_cost');
-    @endphp
+            $likeCount = $data->sum('like_experience');
+            $likeCount2 = $data->sum('like_theme');
+            $likeCount3 = $data->sum('like_mood');
+            $likeCount4 = $data->sum('like_food');
+            $likeCount5 = $data->sum('like_toilet');
+            $likeCount6 = $data->sum('like_parking');
+            $likeCount7 = $data->sum('like_cost');
+        @endphp
 
-    <div>
-        {{-- 별점 --}}
-        <div style="display:flex">
-            <span class="ico_star star_rate">
-                <span class="ico_star inner_star" style="width:{{$num_data['star_percentage']}}%"></span>
-            </span>
-            <span>({{$num_data['count']}})</span>
+        <div>
+            {{-- 별점 --}}
+            <div style="display:flex">
+                <span class="ico_star star_rate">
+                    <span class="ico_star inner_star" style="width:{{$num_data['star_percentage']}}%"></span>
+                </span>
+                <span>({{$num_data['count']}})</span>
+            </div>
+            {{-- 추천 목록--}}
+            <button type="button" class="btn btn-outline-primary btn-sm custom-btn">
+                <span class="txt_like">체험프로그램이 많아요 ({{ $likeCount }})</span>
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm custom-btn" name="like_theme">
+                <span class="txt_like">테마가 재미있어요 ({{ $likeCount2 }})</span>
+            </button>
+            <button type="button" class="btn btn-outline-success btn-sm custom-btn" name="like_mood">
+                <span class="txt_like">분위기가 좋아요 ({{ $likeCount3 }})</span>
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-sm custom-btn" name="like_food">
+                <span class="txt_like">주변에 먹거리가 많아요 ({{ $likeCount4 }})</span>
+            </button>
+            <button type="button" class="btn btn-outline-warning btn-sm custom-btn" name="like_toilet">
+                <span class="txt_like">화장실이 깨끗해요 ({{ $likeCount5 }})</span>
+            </button>
+            <button type="button" class="btn btn-outline-info btn-sm custom-btn" name="like_parking">
+                <span class="txt_like">주차가 쉬워요 ({{ $likeCount6 }})</span>
+            </button>
+            <button type="button" class="btn btn-outline-dark btn-sm custom-btn" name="like_cost">
+                <span class="txt_like">가성비 좋아요 ({{ $likeCount7 }})</span>
+            </button>
         </div>
-        {{-- 추천 목록--}}
-        <button type="button" class="btn btn-outline-primary btn-sm custom-btn">
-            <span class="txt_like">체험프로그램이 많아요 ({{ $likeCount }})</span>
-        </button>
-        <button type="button" class="btn btn-outline-secondary btn-sm custom-btn" name="like_theme">
-            <span class="txt_like">테마가 재미있어요 ({{ $likeCount2 }})</span>
-        </button>
-        <button type="button" class="btn btn-outline-success btn-sm custom-btn" name="like_mood">
-            <span class="txt_like">분위기가 좋아요 ({{ $likeCount3 }})</span>
-        </button>
-        <button type="button" class="btn btn-outline-danger btn-sm custom-btn" name="like_food">
-            <span class="txt_like">주변에 먹거리가 많아요 ({{ $likeCount4 }})</span>
-        </button>
-        <button type="button" class="btn btn-outline-warning btn-sm custom-btn" name="like_toilet">
-            <span class="txt_like">화장실이 깨끗해요 ({{ $likeCount5 }})</span>
-        </button>
-        <button type="button" class="btn btn-outline-info btn-sm custom-btn" name="like_parking">
-            <span class="txt_like">주차가 쉬워요 ({{ $likeCount6 }})</span>
-        </button>
-        <button type="button" class="btn btn-outline-dark btn-sm custom-btn" name="like_cost">
-            <span class="txt_like">가성비 좋아요 ({{ $likeCount7 }})</span>
-        </button>
     </div>
-</div>
         <!-- 모달 창 -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <form class="mb-3" name="myform" id="myform" method="post" action="{{ route('review.create') }}">
+                    @csrf
                     <div class="modal-body">
                         <div class="group_like">
                             <br>
@@ -286,10 +287,9 @@
                                     <input type="hidden" name="like_cost" id="like_cost_input" value="0">
                                     <span class="txt_like">가성비 좋아요</span>
                                 </button>
-                        </div>
-                            @csrf
+                            </div>
                             <input type="hidden" name="festival_id" id="festival-id-input" value="">
-                            <fieldset>
+                            <fieldset id="starRate">
                                 <span class="text-bold">별점을 선택해주세요</span>
                                 <input type="radio" name="rate" value="5" id="rate1"><label for="rate1">★</label>
                                 <input type="radio" name="rate" value="4" id="rate2"><label for="rate2">★</label>
@@ -310,27 +310,26 @@
         </div>
     </div>
     <div class="container bootstrap snippets bootdey">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="blog-comment">
-                <h3 class="text-success">리뷰</h3>
-                <ul class="comments">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="blog-comment">
+                    <h3 class="text-success">리뷰</h3>
+                    <ul class="comments">
                     @foreach($reviews as $review)
                         <li class="clearfix">
                             <div class="post-comments">
                             <img src="/img/profile/{{$review->user_profile}}" alt="" class="img-thumbnail img-fluid" style="width:40px;height:40px;border-radius:50%;border:none;object-fit:cover;">
                             @php
-                            $likeCriteria = [
-                                'like_experience' => '체험프로그램',
-                                'like_theme' => '테마',
-                                'like_mood' => '분위기',
-                                'like_food' => '먹거리',
-                                'like_toilet' => '화장실',
-                                'like_parking' => '주차',
-                                'like_cost' => '가성비',
-                            ];
+                                $likeCriteria = [
+                                    'like_experience' => '체험프로그램',
+                                    'like_theme' => '테마',
+                                    'like_mood' => '분위기',
+                                    'like_food' => '먹거리',
+                                    'like_toilet' => '화장실',
+                                    'like_parking' => '주차',
+                                    'like_cost' => '가성비',
+                                ];
                             @endphp
-
                             @foreach ($likeCriteria as $key => $label)
                                 @if ($review->$key == 1)
                                     <button type="button" class="btn btn-outline-{{ $key == 'like_cost' ? 'dark' : ($key == 'like_experience' ? 'primary' : ($key == 'like_theme' ? 'secondary' : ($key == 'like_mood' ? 'success' : ($key == 'like_food' ? 'danger' : ($key == 'like_toilet' ? 'warning' : 'info'))))) }} btn-sm custom-btn" name="{{ $key }}">
@@ -338,10 +337,75 @@
                                     </button>
                                 @endif
                             @endforeach
-
                             <p class="meta">작성자: {{ $review->user_nickname }} 작성일: {{ $review->updated_at }}  별점:{{ $review->rate }}</p>
                             <p>{{ $review->review_content }}</p>
-
+                            {{-- 수정 모달창 --}}
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-update{{$review->review_id}}">수정</button>
+                            <div class="modal fade" id="exampleModal-update{{$review->review_id}}" tabindex="-1" aria-labelledby="exampleModalLabel-update{{$review->review_id}}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel-update{{$review->review_id}}">리뷰 수정</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form class="mb-3" name="myform" id="myform" method="" action="">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="group_like">
+                                                    <br>
+                                                    <strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
+                                                    <br>
+                                                    <div class="box_like">
+                                                        <button type="button" class="btn btn-outline-primary" name="like_experience" id="likeBtn1{{$review->review_id}}" onclick="experience({{$review->review_id}})">
+                                                            <input type="hidden" name="like_experience" id="like_experience_input{{$review->review_id}}" value="0">
+                                                            <span class="txt_like">체험프로그램이 많아요</span>
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-secondary" name="like_theme" id="likeBtn2{{$review->review_id}}" onclick="theme({{$review->review_id}})">
+                                                            <input type="hidden" name="like_theme" id="like_theme_input{{$review->review_id}}" value="0">
+                                                            <span class="txt_like">테마가 재미있어요</span>
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-success" name="like_mood" id="likeBtn3{{$review->review_id}}" onclick="mood({{$review->review_id}})">
+                                                            <input type="hidden" name="like_mood" id="like_mood_input{{$review->review_id}}" value="0">
+                                                            <span class="txt_like">분위기가 좋아요</span>
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-danger" name="like_food" id="likeBtn4{{$review->review_id}}" onclick="food({{$review->review_id}})">
+                                                            <input type="hidden" name="like_food" id="like_food_input{{$review->review_id}}" value="0">
+                                                            <span class="txt_like">주변에 먹거리가 많아요</span>
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-warning" name="like_toilet" id="likeBtn5{{$review->review_id}}" onclick="toilet({{$review->review_id}})">
+                                                            <input type="hidden" name="like_toilet" id="like_toilet_input{{$review->review_id}}" value="0">
+                                                            <span class="txt_like">화장실이 깨끗해요</span>
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-info" name="like_parking" id="likeBtn6{{$review->review_id}}" onclick="parking({{$review->review_id}})">
+                                                            <input type="hidden" name="like_parking" id="like_parking_input{{$review->review_id}}" value="0">
+                                                            <span class="txt_like">주차가 쉬워요</span>
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-dark" name="like_cost" id="likeBtn7{{$review->review_id}}" onclick="cost({{$review->review_id}})">
+                                                            <input type="hidden" name="like_cost" id="like_cost_input{{$review->review_id}}" value="0">
+                                                            <span class="txt_like">가성비 좋아요</span>
+                                                        </button>
+                                                    </div>
+                                                    <input type="hidden" name="festival_id" id="festival-id-input{{$review->review_id}}" value="">
+                                                    <fieldset id="starRate{{$review->review_id}}">
+                                                        <span class="text-bold">별점을 선택해주세요</span>
+                                                        <input type="radio" name="rate" value="5" id="rate1{{$review->review_id}}"><label for="rate1">★</label>
+                                                        <input type="radio" name="rate" value="4" id="rate2{{$review->review_id}}"><label for="rate2">★</label>
+                                                        <input type="radio" name="rate" value="3" id="rate3{{$review->review_id}}"><label for="rate3">★</label>
+                                                        <input type="radio" name="rate" value="2" id="rate4{{$review->review_id}}"><label for="rate4">★</label>
+                                                        <input type="radio" name="rate" value="1" id="rate5{{$review->review_id}}"><label for="rate5">★</label>
+                                                    </fieldset>
+                                                    <p id="selectedRating{{$review->review_id}}"></p>
+                                                    <div>
+                                                        <textarea id="reviewcomment{{$review->review_id}}" class="col-auto form-control" name="review_content" placeholder="댓글을 입력하세요" required></textarea>
+                                                    </div>
+                                                    <br>
+                                                    <button type="submit" class="btn btn-danger" onclick="putRevieList({{$review->review_id}})">수정</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                     @endforeach
                 </ul>
@@ -360,6 +424,20 @@
     </script> --}}
     {{-- 별점 스크립트 --}}
     <script>
+        // const radioButtons = document.querySelectorAll('input[name="rate"]');
+        const selectedRating = document.getElementById('selectedRating');
+        const starRate=document.getElementById('starRate')
+        radioButtons.forEach((radio) => {
+            radio.addEventListener('change', (event) => {
+                selectedRating.textContent = `선택한 별점: ${event.target.value}/5`;
+            });
+        });
+        for (let index = 1; index < starRate.length; index+=2+index) {
+            console.log(index);
+        }
+        // ====================
+        // 수정 별점
+        // ====================
         const radioButtons = document.querySelectorAll('input[name="rate"]');
         const selectedRating = document.getElementById('selectedRating');
 
@@ -418,7 +496,7 @@
 
     // Add click event listeners to all buttons
     document.getElementById('likeBtn1').addEventListener('click', function () {
-        handleButtonClick('like_experience');
+        handleButtonClick('like_experience_input');
         toggleActiveClass('likeBtn1');
     });
 
@@ -451,6 +529,109 @@
         handleButtonClick('like_cost');
         toggleActiveClass('likeBtn7');
     });
+    //--------------------------------------
+    // Function to handle button click 수정
+    //--------------------------------------
+    function handleButtonClick(buttonId) {
+        // Get the corresponding input element
+        var inputElement = document.getElementById(buttonId);
+
+        // Check if the input element exists
+        if (inputElement.value==='0') {
+            // Set the value to "1"
+            inputElement.value = "1";
+        }else{
+            inputElement.value = "0";
+        }
+    }
+
+    // Function to toggle active class on buttons
+    // function toggleActiveClass(buttonId) {
+    //     // Remove active class from all buttons
+    //     var buttons = document.getElementsByClassName('btn');
+    //     for (var i = 0; i < buttons.length; i++) {
+    //         buttons[i].classList.remove('active');
+    //     }
+
+    //     // Add active class to the clicked button
+    //     var button = document.getElementById(buttonId);
+    //     if (button) {
+    //         button.classList.add('active');
+    //     }
+    // }
+    function toggleActiveClass(buttonId) {
+        // Add active class to the clicked button
+        const button = document.getElementById(buttonId);
+        if (button.classList[2]==='active') {
+            button.classList.remove('active')
+        }else{
+            button.classList.add('active');
+        }
+    }
+
+    // Add click event listeners to all buttons
+    function experience(reviewId) {
+        handleButtonClick('like_experience_input'+reviewId);
+        toggleActiveClass('likeBtn1'+reviewId);
+    }
+    function theme(reviewId) {
+        handleButtonClick('like_theme'+reviewId);
+        toggleActiveClass('likeBtn2'+reviewId);
+    }
+    function mood(reviewId) {
+        handleButtonClick('like_mood'+reviewId);
+        toggleActiveClass('likeBtn3'+reviewId);
+    }
+    function food(reviewId) {
+        handleButtonClick('like_food'+reviewId);
+        toggleActiveClass('likeBtn4'+reviewId);
+    }
+    function toilet(reviewId) {
+        handleButtonClick('like_toilet'+reviewId);
+        toggleActiveClass('likeBtn5'+reviewId);
+    }
+    function parking(reviewId) {
+        handleButtonClick('like_parking'+reviewId);
+        toggleActiveClass('likeBtn6'+reviewId);
+    }
+    function cost(reviewId) {
+        handleButtonClick('like_cost'+reviewId);
+        toggleActiveClass('likeBtn7'+reviewId);
+    }
+    // document.getElementById('likeBtn1').addEventListener('click', function () {
+    //     handleButtonClick('like_experience');
+    //     toggleActiveClass('likeBtn1');
+    // });
+
+    // document.getElementById('likeBtn2').addEventListener('click', function () {
+    //     handleButtonClick('like_theme');
+    //     toggleActiveClass('likeBtn2');
+    // });
+
+    // document.getElementById('likeBtn3').addEventListener('click', function () {
+    //     handleButtonClick('like_mood');
+    //     toggleActiveClass('likeBtn3');
+    // });
+
+    // document.getElementById('likeBtn4').addEventListener('click', function () {
+    //     handleButtonClick('like_food');
+    //     toggleActiveClass('likeBtn4');
+    // });
+
+    // document.getElementById('likeBtn5').addEventListener('click', function () {
+    //     handleButtonClick('like_toilet');
+    //     toggleActiveClass('likeBtn5');
+    // });
+
+    // document.getElementById('likeBtn6').addEventListener('click', function () {
+    //     handleButtonClick('like_parking');
+    //     toggleActiveClass('likeBtn6');
+    // });
+
+    // document.getElementById('likeBtn7').addEventListener('click', function () {
+    //     handleButtonClick('like_cost');
+    //     toggleActiveClass('likeBtn7');
+    // });
 </script>
 
     {{-- 연관축제 --}}
@@ -480,6 +661,31 @@
         @endforeach
     </div>
 </div>
+<script>
+    //수정 API
+    function putRevieList(reviewId){
+    axios.put('/api/reviews/'+reviewId,{
+        content:'test',
+        rate:'5',
+        experience:'1',
+        theme:'1',
+        mood:'1',
+        food:'1',
+        toilet:'1',
+        parking:'1',
+        cost:'1'
+    })
+    .then(res=>{
+        console.log(res.data)
+        // const targetComment=document.getElementById('content'+commentId) //수정할 우치
+        // targetComment.innerHTML=res.data.comment_content // 수정 내용
+
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+</script>
 </section>
 {{-- <script src="{{asset('js/festival.js')}}"></script> --}}
 @endsection

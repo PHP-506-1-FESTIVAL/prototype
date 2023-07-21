@@ -37,8 +37,8 @@
                 padding:0;
                 ">
                     <div class="search-bar">
-                        <form class="search-form d-flex align-items-center" method="get" action="">
-                            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                        <form class="search-form d-flex align-items-center" method="get" action="{{route('admNotice.search')}}">
+                            <input type="text" name="search" placeholder="Search" title="Enter search keyword">
                             <button type="submit" title="Search"><i class="bi bi-search" style="margin-right: 10px;"></i></button>
                         </form>
                     </div>
