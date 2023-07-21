@@ -457,7 +457,7 @@
           </div>
 
           <div class="card-body pb-0">
-            <h5 class="card-title">각 지역 축제수/검색량 <span>| This Month</span></h5>
+            <h5 class="card-title">각 지역 축제수/조회수 <span>| This Month</span></h5>
 
             <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
 
@@ -465,7 +465,7 @@
               document.addEventListener("DOMContentLoaded", () => {
                 var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
                   legend: {
-                    data: ['지역별 축제수', 'Actual Spending']
+                    data: ['지역별 축제수', '조회수']
                   },
                   radar: {
                     // shape: 'circle',
