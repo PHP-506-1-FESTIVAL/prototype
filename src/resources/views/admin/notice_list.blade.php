@@ -10,7 +10,7 @@
     }
     ul{
         margin-bottom: 0;
-    } 
+    }
     li{
         margin: 5px
     }
@@ -32,11 +32,22 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title"><strong>공지 사항</strong></h5>
-                <div>
-                    <form action="{{route('admNotice.write')}}" method="get">
-                        <button type="submit" class="btn btn-outline-secondary">공지작성</button>
-                    </form>
-                </div>
+                <header id="header" class="header d-flex justify-content-between" style="
+                box-shadow: none!important;
+                padding:0;
+                ">
+                    <div class="search-bar">
+                        <form class="search-form d-flex align-items-center" method="get" action="">
+                            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                            <button type="submit" title="Search"><i class="bi bi-search" style="margin-right: 10px;"></i></button>
+                        </form>
+                    </div>
+                    <div>
+                        <form action="{{route('admNotice.write')}}" method="get">
+                            <button type="submit" class="btn btn-outline-secondary" style="margin: 0 30px;">공지작성</button>
+                        </form>
+                    </div>
+                </header>
                 <table class="table table-hover">
                     <thead>
                         <tr>
