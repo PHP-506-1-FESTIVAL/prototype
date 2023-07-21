@@ -176,7 +176,7 @@
         font-size: 14px;
     }
     .ico_star {
-    background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/ico_star_220608.png) no-repeat;
+    background: url("/assets/img/ico_star_220608.png") no-repeat;
     display: block;
     }
     .star_rate {
@@ -226,7 +226,7 @@
         </div>
         별점: ({{ $formattedAvgRate }}) --}}
         <span class="ico_star star_rate">
-        <span class="ico_star inner_star" style="width:100%"></span>
+        <span class="ico_star inner_star" style="width:33%"></span>
         </span>
 
         <button type="button" class="btn btn-outline-primary btn-sm custom-btn">
