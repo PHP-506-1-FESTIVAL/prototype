@@ -23,40 +23,40 @@ class MapUtil {
                 case "5":
                     $areaName = '광주';
                     break;
-                case 6:
+                case "6":
                     $areaName = '부산';
                     break;
-                case 7:
+                case "7":
                     $areaName = '울산';
                     break;
-                case 8:
+                case "8":
                     $areaName = '세종';
                     break;
-                case 31:
+                case "31":
                     $areaName = '경기';
                     break;
-                case 32:
+                case "32":
                     $areaName = '강원';
                     break;
-                case 33:
+                case "33":
                     $areaName = '충북';
                     break;
-                case 34:
+                case "34":
                     $areaName = '충남';
                     break;
-                case 35:
+                case "35":
                     $areaName = '경북';
                     break;
-                case 36:
+                case "36":
                     $areaName = '경남';
                     break;
-                case 37:
+                case "37":
                     $areaName = '전북';
                     break;
-                case 38:
+                case "38":
                     $areaName = '전남';
                     break;
-                case 39:
+                case "39":
                     $areaName = '제주';
                     break;
                 default:

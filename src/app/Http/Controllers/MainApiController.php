@@ -23,27 +23,93 @@ class MainApiController extends Controller
         'area_code' => $arr_temp[0], // 축제 지역 코드
         'month' => sprintf('%02d', $arr_temp[1]), // 선택된 월
     ];
-    $fes_temp = Festival::select([
-        'festival_id', 'festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
-    ]);
+    // $fes_temp = Festival::select([
+    //     'festival_id', 'festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+    // ]);
+    // if ($arr_temp[0]===""&&$arr_temp[1]==="") {
+    //     $fes_info=$fes_temp->get();
+    // }
+    // else if($arr_temp[0]!==""&&$arr_temp[1]===""){
+    //     $fes_info=$fes_temp->where('area_code', $arr_val['area_code'])->get();
+    // }
+    // else if($arr_temp[0]===""&&$arr_temp[1]!==""){
+    //     $fes_info=$fes_temp->where(function ($query) use ($arr_val) {
+    //             $query->whereRaw('MONTH(festival_start_date) = ?', $arr_val['month']) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
+    //             ->orWhereRaw('MONTH(festival_end_date) = ?', $arr_val['month']); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
+    //     })->get();
+    // }
+    // else if($arr_temp[0]!=""&&$arr_temp[1]!=""){
+    //     $fes_info=$fes_temp->where('area_code', $arr_val['area_code'])
+    //     ->where(function ($query) use ($arr_val) {
+    //         $query->whereRaw('MONTH(festival_start_date) = ?', $arr_val['month']) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
+    //         ->orWhereRaw('MONTH(festival_end_date) = ?', $arr_val['month']); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
+    // })->get();
+    // }
     if ($arr_temp[0]===""&&$arr_temp[1]==="") {
-        $fes_info=$fes_temp->orderBy('festival_start_date', 'desc')->get();
+        $first=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '2')->orderBy('festival_end_date', 'desc')->limit(1000);
+        $second=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '1')->orderBy('festival_start_date', 'asc')->limit(1000)->union($first);
+        $fes_info=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '0')->orderBy('festival_start_date', 'desc')->limit(1000)->union($second)->get();
     }
     else if($arr_temp[0]!==""&&$arr_temp[1]===""){
-        $fes_info=$fes_temp->where('area_code', $arr_val['area_code'])->orderBy('festival_start_date', 'desc')->get();
+        $first=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '2')->where('area_code', $arr_val['area_code'])->orderBy('festival_end_date', 'desc')->limit(1000);
+        $second=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '1')->where('area_code', $arr_val['area_code'])->orderBy('festival_start_date', 'asc')->limit(1000)->union($first);
+        $fes_info=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '0')->where('area_code', $arr_val['area_code'])->orderBy('festival_start_date', 'desc')->limit(1000)->union($second)->get();
     }
     else if($arr_temp[0]===""&&$arr_temp[1]!==""){
-        $fes_info=$fes_temp->where(function ($query) use ($arr_val) {
-                $query->whereRaw('MONTH(festival_start_date) = ?', $arr_val['month']) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
-                ->orWhereRaw('MONTH(festival_end_date) = ?', $arr_val['month']); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
-        })->orderBy('festival_start_date', 'desc')->get();
+        $first=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '2')->where(function ($query) use ($arr_val) {
+            $query->whereRaw('MONTH(festival_start_date) = ?', $arr_val['month']) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
+            ->orWhereRaw('MONTH(festival_end_date) = ?', $arr_val['month']); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
+        })->orderBy('festival_end_date', 'desc')->limit(1000);
+        $second=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '1')->where(function ($query) use ($arr_val) {
+            $query->whereRaw('MONTH(festival_start_date) = ?', $arr_val['month']) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
+            ->orWhereRaw('MONTH(festival_end_date) = ?', $arr_val['month']); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
+        })->orderBy('festival_start_date', 'asc')->limit(1000)->union($first);
+        $fes_info=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '0')->where(function ($query) use ($arr_val) {
+            $query->whereRaw('MONTH(festival_start_date) = ?', $arr_val['month']) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
+            ->orWhereRaw('MONTH(festival_end_date) = ?', $arr_val['month']); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
+        })->orderBy('festival_start_date', 'desc')->limit(1000)->union($second)->get();
+        
     }
     else if($arr_temp[0]!=""&&$arr_temp[1]!=""){
-        $fes_info=$fes_temp->where('area_code', $arr_val['area_code'])
+        $first=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '2')->where('area_code', $arr_val['area_code'])
         ->where(function ($query) use ($arr_val) {
             $query->whereRaw('MONTH(festival_start_date) = ?', $arr_val['month']) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
             ->orWhereRaw('MONTH(festival_end_date) = ?', $arr_val['month']); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
-    })->orderBy('festival_start_date', 'desc')->get();
+        })->orderBy('festival_end_date', 'desc')->limit(1000);
+        $second=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '1')->where('area_code', $arr_val['area_code'])
+        ->where(function ($query) use ($arr_val) {
+            $query->whereRaw('MONTH(festival_start_date) = ?', $arr_val['month']) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
+            ->orWhereRaw('MONTH(festival_end_date) = ?', $arr_val['month']); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
+        })->orderBy('festival_start_date', 'asc')->limit(1000)->union($first);
+        $fes_info=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '0')->where('area_code', $arr_val['area_code'])
+        ->where(function ($query) use ($arr_val) {
+            $query->whereRaw('MONTH(festival_start_date) = ?', $arr_val['month']) // 축제 시작 날짜의 월과 선택된 월이 일치하는 경우
+            ->orWhereRaw('MONTH(festival_end_date) = ?', $arr_val['month']); // 축제 종료 날짜의 월과 선택된 월이 일치하는 경우
+        })->orderBy('festival_start_date', 'desc')->limit(1000)->union($second)->get();
     }
     $mapUtil=new MapUtil;
     $mapUtil->areacodeTrans($fes_info);
