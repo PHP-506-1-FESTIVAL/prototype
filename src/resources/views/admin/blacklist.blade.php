@@ -62,8 +62,8 @@
                                     <td>{{ $user->user_birthdate }}</td>
                                     <td>{{ $user->user_nickname }}</td>
                                     <td>
-                                        {{-- {{ $user->blacklist_reason }} --}} {{-- ----- 230720 del 블랙리스트 사유 추가 신유진 ----- --}}
-                                        @switch($user->blacklist_reason)    {{-- ----- 230720 add 블랙리스트 사유 추가 신유진 ----- --}}
+                                        {{-- {{ $user->blacklist_no }} --}} {{-- ----- 230720 del 블랙리스트 사유 추가 신유진 ----- --}}
+                                        @switch($user->blacklist_no)    {{-- ----- 230720 add 블랙리스트 사유 추가 신유진 ----- --}}
                                             @case('0')
                                             신고 누적
                                             @break
@@ -89,7 +89,7 @@
                                     {{-- <td>{{ $user->user_zipcode }}</td> --}}
                                     <td>{{ $user->user_marketing_agreement == 1 ? '동의' : '비동의' }}</td>
                                     <td>{{ $user->user_email_agreement == 1 ? '동의' : '비동의' }}</td>
-                                    <td>{{ $user->deleted_at}}</td>
+                                    <td>{{ $user->banned_at}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

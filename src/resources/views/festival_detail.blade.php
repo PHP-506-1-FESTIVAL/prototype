@@ -217,7 +217,7 @@
                 <span class="ico_star star_rate">
                     <span class="ico_star inner_star" style="width:{{$num_data['star_percentage']}}%"></span>
                 </span>
-                <span>({{$num_data['count']}})</span>
+                <span>평균:{{$num_data['star']}}점({{$num_data['count']}})건</span>
             </div>
             {{-- 추천 목록--}}
             <button type="button" class="btn btn-outline-primary btn-sm custom-btn">
@@ -330,14 +330,16 @@
                                     'like_cost' => '가성비',
                                 ];
                             @endphp
+                            별점:{{ $review->rate }}
                             @foreach ($likeCriteria as $key => $label)
                                 @if ($review->$key == 1)
                                     <button type="button" class="btn btn-outline-{{ $key == 'like_cost' ? 'dark' : ($key == 'like_experience' ? 'primary' : ($key == 'like_theme' ? 'secondary' : ($key == 'like_mood' ? 'success' : ($key == 'like_food' ? 'danger' : ($key == 'like_toilet' ? 'warning' : 'info'))))) }} btn-sm custom-btn" name="{{ $key }}">
                                         <span class="txt_like">{{ $label }}</span>
                                     </button>
                                 @endif
+
                             @endforeach
-                            <p class="meta">작성자: {{ $review->user_nickname }} 작성일: {{ $review->updated_at }}  별점:{{ $review->rate }}</p>
+                            <p class="meta">닉네임: {{ $review->user_nickname }} 작성일: {{ $review->updated_at }}</p>
                             <p>{{ $review->review_content }}</p>
                             {{-- 수정 모달창 --}}
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-update{{$review->review_id}}">수정</button>
@@ -687,5 +689,5 @@
 }
 </script>
 </section>
-{{-- <script src="{{asset('js/festival.js')}}"></script> --}}
+<script src="{{asset('js/festival.js')}}"></script>
 @endsection
