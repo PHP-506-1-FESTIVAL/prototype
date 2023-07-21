@@ -146,7 +146,7 @@ class MainController extends Controller
      * 디렉토리     : Controllers
      * 파일명       : MainController.php
      * 이력         : v001 0614 박진영 new
-     *                v002 0720 신유진 add 152-160 조회수 추가 
+     *                v002 0720 신유진 add 152-160 조회수 추가
      ************************************************/
     public function fesDetail($id)
     {
@@ -154,7 +154,7 @@ class MainController extends Controller
         $hitsTime = now()->addMinutes(3); // 조회수 쿨타임 설정
         if (!Cookie::has($cookieName)) {
             $festhit = Festival::find($id);
-            $festhit->festival_hit++; 
+            $festhit->festival_hit++;
             Cookie::queue($cookieName, true, $hitsTime->timestamp);
             $festhit->save();
         }
@@ -185,10 +185,23 @@ class MainController extends Controller
         ->orderBy('reviews.updated_at', 'desc')
         ->get();
 
-        $data = DB::table('reviews')
-        ->select('*')
-        ->where('festival_id', $id)
-        ->get();
+        $data = Review::where('festival_id',$id)->get();
+
+        $sum_rate=0;
+        $count_rate=0;
+        foreach ($data as $val) {
+            $sum_rate+=$val->rate;
+            $count_rate++;
+        }
+        if ($count_rate!==0) {
+            $star_percentage=floor($sum_rate/$count_rate*20);
+        }else{
+            $star_percentage=0;
+        }
+        $num_data=[
+            "count"=>$count_rate,
+            "star_percentage"=>$star_percentage
+        ];
 
         return view('festival_detail')
             ->with('festival', $festival[0]) // 축제 정보를 뷰로 전달
@@ -197,6 +210,7 @@ class MainController extends Controller
             ->with('fesid', $id) // 사용자의 찜 여부를 뷰로 전달
             ->with('comments', $comments)
             ->with('reviews', $reviews)
-            ->with('data',$data);
+            ->with('data',$data)
+            ->with('num_data',$num_data);
         }
 }

@@ -213,9 +213,12 @@
 
     <div>
         {{-- 별점 --}}
-        <span class="ico_star star_rate">
-        <span class="ico_star inner_star" style="width:33%"></span>
-        </span>
+        <div style="display:flex">
+            <span class="ico_star star_rate">
+                <span class="ico_star inner_star" style="width:{{$num_data['star_percentage']}}%"></span>
+            </span>
+            <span>({{$num_data['count']}})</span>
+        </div>
         {{-- 추천 목록--}}
         <button type="button" class="btn btn-outline-primary btn-sm custom-btn">
             <span class="txt_like">체험프로그램이 많아요 ({{ $likeCount }})</span>
@@ -316,65 +319,6 @@
                         <li class="clearfix">
                             <div class="post-comments">
                             <img src="/img/profile/{{$review->user_profile}}" alt="" class="img-thumbnail img-fluid" style="width:40px;height:40px;border-radius:50%;border:none;object-fit:cover;">
-                            {{-- @if ($review->like_experience == 1
-                                && $review->like_theme == 1
-                                && $review->like_mood == 1
-                                && $review->like_food == 1
-                                && $review->like_toilet == 1
-                                && $review->like_parking == 1
-                                && $review->like_cost == 1)
-                                <button type="button" class="btn btn-outline-primary btn-sm custom-btn" name="like_experience">
-                                    <span class="txt_like">체험프로그램이 많아요</span>
-                                </button>
-                                <button type="button" class="btn btn-outline-secondary btn-sm custom-btn" name="like_theme">
-                                    <span class="txt_like">테마가 재미있어요</span>
-                                </button>
-                                <button type="button" class="btn btn-outline-success btn-sm custom-btn" name="like_mood">
-                                    <span class="txt_like">분위기가 좋아요</span>
-                                </button>
-                                <button type="button" class="btn btn-outline-danger btn-sm custom-btn" name="like_food">
-                                    <span class="txt_like">주변에 먹거리가 많아요</span>
-                                </button>
-                                <button type="button" class="btn btn-outline-warning btn-sm custom-btn" name="like_toilet">
-                                    <span class="txt_like">화장실이 깨끗해요</span>
-                                </button>
-                                <button type="button" class="btn btn-outline-info btn-sm custom-btn" name="like_parking">
-                                    <span class="txt_like">주차가 쉬워요</span>
-                                </button>
-                                <button type="button" class="btn btn-outline-dark btn-sm custom-btn" name="like_cost">
-                                    <span class="txt_like">가성비 좋아요</span>
-                                </button>
-                            @elseif ($review->like_cost == 1)
-                                <button type="button" class="btn btn-outline-dark btn-sm custom-btn" name="like_cost">
-                                    <span class="txt_like">가성비 좋아요</span>
-                                </button>
-                            @elseif ($review->like_experience == 1)
-                                <button type="button" class="btn btn-outline-primary btn-sm custom-btn" name="like_experience">
-                                    <span class="txt_like">체험프로그램이 많아요</span>
-                                </button>
-                            @elseif ($review->like_theme == 1)
-                                <button type="button" class="btn btn-outline-secondary btn-sm custom-btn" name="like_theme">
-                                    <span class="txt_like">테마가 재미있어요</span>
-                                </button>
-                            @elseif ($review->like_mood == 1)
-                                <button type="button" class="btn btn-outline-success btn-sm custom-btn" name="like_mood">
-                                    <span class="txt_like">분위기가 좋아요</span>
-                                </button>
-                            @elseif ($review->like_food == 1)
-                                <button type="button" class="btn btn-outline-danger btn-sm custom-btn" name="like_food">
-                                    <span class="txt_like">주변에 먹거리가 많아요</span>
-                                </button>
-                            @elseif ($review->like_toilet == 1)
-                                <button type="button" class="btn btn-outline-warning btn-sm custom-btn" name="like_toilet">
-                                    <span class="txt_like">화장실이 깨끗해요</span>
-                                </button>
-                            @elseif ($review->like_parking == 1)
-                                <button type="button" class="btn btn-outline-info btn-sm custom-btn" name="like_parking">
-                                    <span class="txt_like">주차가 쉬워요</span>
-                                </button>
-                            @endif
-                            <p class="meta">작성자:{{ $review->user_nickname }} 작성일:{{ $review->updated_at }}</p>
-                            <p>{{ $review->review_content }}</p> --}}
                             @php
                             $likeCriteria = [
                                 'like_experience' => '체험프로그램',
