@@ -174,14 +174,16 @@ class MainController extends Controller
      ************************************************/
     public function fesDetail($id)
     {
-        $cookieName = 'festhit' . $id;  // {{-- ----- 230720 add 조회수 추가 신유진 ----- --}}
+        // {{-- ----- 230720 add 조회수 추가 신유진 ----- --}}
+        $cookieName = 'festhit' . $id;
         $hitsTime = now()->addMinutes(3); // 조회수 쿨타임 설정
         if (!Cookie::has($cookieName)) {
             $festhit = Festival::find($id);
-            $festhit->festival_hit++;
+            $festhit->festival_hit++; 
             Cookie::queue($cookieName, true, $hitsTime->timestamp);
             $festhit->save();
         }
+         // {{-- ----- end 230720 조회수 추가 신유진 ----- --}}
         $festival[0] = Festival::find($id);
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($festival);

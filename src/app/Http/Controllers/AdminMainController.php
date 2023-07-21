@@ -134,7 +134,13 @@ class AdminMainController extends Controller
     // 회원 탈퇴&블랙리스트 추가
     public function userpost(Request $request)
     {
+        // dump($request);
+        // exit;
         $userId = $request->input('user_id');
+        $reason = $request->category;
+        $request->validate([
+            'detail'     => 'max:500'
+        ]);
 
         // 유저 삭제 로직
         User::where('user_id', $userId)->delete();
@@ -144,10 +150,26 @@ class AdminMainController extends Controller
         $blacklist->admin_id = Auth::id();
         $blacklist->user_id = $userId;
         $blacklist->banned_at = now();
+        $blacklist->blacklist_no = $reason;
         // 필요한 다른 정보들을 설정합니다.
         $blacklist->save();
 
-        return redirect()->back()->with('success', '유저가 블랙리스트로 처리되었습니다.');
+        // if($request->type === '0') {
+        //     $data['board_id'] = $request->no;
+        // } else if($request->type === '1') {
+        //     $data['comment_id'] = $request->no;
+        // }
+
+        // $data['user_id'] = $userId;
+        // $data['admin_id'] = Auth::id();
+        // $data['blacklist_no'] = $request->reason;
+        // $data['blacklist_detail'] = $request->detail;
+        // dump($data);
+        // $blacklist = Blacklist::create($data);
+        // $blacklist->save();
+
+        return "<script>alert('블랙리스트 처리가 완료되었습니다.'); window.close();</script>";
+        // return redirect()->back()->with('success', '유저가 블랙리스트로 처리되었습니다.');
     }
 
     // 유저 검색
