@@ -3,7 +3,18 @@
 @section('title','공지사항')
 
 @section('content')
-
+<style>
+    .btn-box{
+        list-style: none;
+        padding:0;
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+    li{
+        margin: 5px
+    }
+</style>
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>공지 관리</h1>
@@ -17,6 +28,7 @@
         </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
+                <h5 class="card-title"><strong>공지 사항</strong></h5>
                 <div>
                     <form action="{{route('admNotice.write')}}" method="get">
                         <button type="submit" class="btn btn-outline-secondary">공지작성</button>
@@ -42,7 +54,7 @@
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->updated_at}}</td>
                             <td>
-                                <ul>
+                                <ul class='btn-box'>
                                     <li>
                                         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $item->notice_id }}">삭제</button>
                                         <div class="modal fade" id="basicModal{{ $item->notice_id }}" tabindex="-1">

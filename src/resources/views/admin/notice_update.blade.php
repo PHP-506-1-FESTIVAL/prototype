@@ -16,6 +16,8 @@
         </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
+                <h5 class="card-title"><strong>공지 수정</strong></h5>
+                {{-- <h5 class="card-title"><strong>{{$data->card_title}}</strong></h5> --}}
                 <form action="{{route('admin.notice')}}" method="get">
                     <button type="submit" class="btn btn-outline-secondary">취소</button>
                 </form>
