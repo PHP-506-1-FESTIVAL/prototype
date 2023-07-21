@@ -28,9 +28,15 @@ class MainController extends Controller
     //메인 페이지 이동
     public function main()
     {
+        $first=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '2')->orderBy('festival_end_date', 'desc')->limit(4);
+        $second=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '1')->orderBy('festival_start_date', 'asc')->limit(4)->union($first);
         $result=Festival::select([
             'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
-        ])->where('festival_state','<','2')->orderBy('festival_start_date', 'desc')->limit(4)->get();
+        ])->where('festival_state', '0')->orderBy('festival_start_date', 'desc')->limit(4)->union($second)->limit(4)->get();
         $notice=Notice::orderBy('notice_id', 'desc')->limit(3)->get();
         $month=[];
         for ($i=0; $i < 13; $i++) {
@@ -77,7 +83,16 @@ class MainController extends Controller
     //네비 축제목록 클릭
     public function fesList()
     {
-        $festival = Festival::all();
+        // $festival = Festival::all();
+        $first=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '2')->orderBy('festival_end_date', 'desc')->limit(1000);
+        $second=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '1')->orderBy('festival_start_date', 'asc')->limit(1000)->union($first);
+        $festival=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '0')->orderBy('festival_start_date', 'desc')->limit(1000)->union($second)->get();
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($festival);
         $mapUtil->fesStat($festival);
@@ -131,7 +146,16 @@ class MainController extends Controller
     //$arr_parm : mon(월)/local(지역코드) //월은 나중
     public function FesOrder(Request $str_val)
     {
-        $festival = Festival::all();
+        // $festival = Festival::all();
+        $first=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '2')->orderBy('festival_end_date', 'desc')->limit(1000);
+        $second=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '1')->orderBy('festival_start_date', 'asc')->limit(1000)->union($first);
+        $festival=Festival::select([
+            'festival_id','festival_title', 'festival_start_date', 'festival_end_date', 'area_code', 'poster_img', 'festival_hit', 'festival_state'
+        ])->where('festival_state', '0')->orderBy('festival_start_date', 'desc')->limit(1000)->union($second)->get();
         $mapUtil=new MapUtil;
         $mapUtil->areacodeTrans($festival);
         return view('festival_list')->with('data',$festival)->with('str',$str_val);
