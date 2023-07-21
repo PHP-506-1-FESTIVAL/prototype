@@ -21,7 +21,20 @@ class AdminNoticeController extends Controller
     }
     public function write()
     {
-        return view('admin.notice_write');
+
+        $data=[
+            'card_title'=>'공지 작성'
+            ,'submit_btn'=>'작성'
+        ];
+        // $data=collect([
+        //     'card_title'=>'공지 작성'
+        //     ,'submit_btn'=>'작성'
+        // ]);
+        // $data
+        // $data->card_title='공지 작성';
+        // dump($data);
+        // exit;
+        return view('admin.notice_write')->with('data',$data);
     }
 
     /**
@@ -61,6 +74,7 @@ class AdminNoticeController extends Controller
     public function show($id)
     {
         $notice=Notice::find($id);
+        $notice->card_title='수정';
         // dump($notice);
         return view('admin.notice_update')->with('data',$notice);
     }
