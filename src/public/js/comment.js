@@ -1,6 +1,6 @@
-const boardId=document.getElementById('board_id').value
+// const boardId=document.getElementById('board_id').value
 // const userId=document.getElementById('user_id').value
-    getCommentsList(boardId)
+    // getCommentsList(boardId)
 
 
 // function getCommentsList(boardId){
@@ -28,13 +28,13 @@ const boardId=document.getElementById('board_id').value
 // }
 
 function putCommentsList(commentId){
-    let comment=document.getElementById('comment-content')
+    let comment=document.getElementById('comment-content'+commentId)
     axios.put('/api/comments/'+commentId,{
         content:comment.value
     })
     .then(res=>{
         // console.log(res.data.comment_content)
-        const targetComment=document.getElementById('comment-content'+commentId)
+        const targetComment=document.getElementById('content'+commentId)
         targetComment.innerHTML=res.data.comment_content
 
     })

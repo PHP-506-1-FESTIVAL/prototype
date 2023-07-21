@@ -83,7 +83,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <textarea name="comment_content" class="form-control" placeholder="댓글을 입력하세요" required id="comment-content">{{ $comment->comment_content }}</textarea>
+                                                        <textarea name="comment_content" class="form-control" placeholder="댓글을 입력하세요" required id="comment-content{{ $comment->comment_id }}">{{ $comment->comment_content }}</textarea>
                                                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="putCommentsList({{$comment->comment_id}})">수정</button>
                                                     </div>
                                                 </div>
@@ -99,7 +99,7 @@
                                         <img class="comment-profile-img" src="/img/profile/{{ $comment->user_profile }}" alt="프로필 이미지">
                                     </div>
                                     <p class="comment-name">{{ $comment->user_nickname }}</p>
-                                    <p class="comment-content" id="comment-content{{$comment->comment_id}}">{{ $comment->comment_content }}</p>
+                                    <p class="comment-content" id="content{{$comment->comment_id}}">{{ $comment->comment_content }}</p>
                                     <p class="comment-time">{{ $comment->updated_at }}</p>
                                 </div>
                             @endforeach
