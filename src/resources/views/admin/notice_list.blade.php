@@ -6,13 +6,16 @@
 <style>
     .btn-box{
         list-style: none;
-        padding:0;
         display: flex;
-        align-items: center;
-        margin: 0;
     }
+    ul{
+        margin-bottom: 0;
+    } 
     li{
         margin: 5px
+    }
+        th,td {
+        vertical-align: middle;
     }
 </style>
     <main id="main" class="main">
