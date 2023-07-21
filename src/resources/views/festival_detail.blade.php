@@ -167,69 +167,136 @@
     .box_like button {
         margin: 3px;
     }
+    .custom-btn {
+        font-size: 12px;
+        padding: 4px;
+    }
+
+    .custom-btn .txt_like {
+        font-size: 14px;
+    }
+    .ico_star {
+    background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/ico_star_220608.png) no-repeat;
+    display: block;
+    }
+    .star_rate {
+        background-position: 0 0;
+        height: 27px;
+        width: 151px;
+    }
+    .star_rate .inner_star {
+    background-position: 0 -30px;
+    height: 100%;
+}
     </style>
     <div>
-    {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">글작성</button>
-
-    <!-- 모달 창 -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="group_like">
-                        <br>
-                        <strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
-                        <br>
-                        <div class="box_like">
-                            <button type="button" class="btn btn-outline-primary" data-name="체험" data-id="1">
-                                <span class="txt_like">체험프로그램이 많아요</span><span class="ico_comm ico_like2"></span>
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary" data-name="테마" data-id="2">
-                                <span class="txt_like">테마가 재미있어요</span><span class="ico_comm ico_like2"></span>
-                            </button>
-                            <button type="button" class="btn btn-outline-success" data-name="분위기" data-id="3">
-                                <span class="txt_like">분위기가 좋아요</span><span class="ico_comm ico_like2"></span>
-                            </button>
-                            <button type="button" class="btn btn-outline-danger" data-name="먹거리" data-id="4">
-                                <span class="txt_like">주변에 먹거리가 많아요</span><span class="ico_comm ico_like2"></span>
-                            </button>
-                            <button type="button" class="btn btn-outline-warning" data-name="화장실" data-id="5">
-                                <span class="txt_like">화장실이 깨끗해요</span><span class="ico_comm ico_like2"></span>
-                            </button>
-                            <button type="button" class="btn btn-outline-info" data-name="주차" data-id="6">
-                                <span class="txt_like">주차가 쉬워요</span><span class="ico_comm ico_like2"></span>
-                            </button>
-                            <button type="button" class="btn btn-outline-dark" data-name="가성비" data-id="7">
-                                <span class="txt_like">가성비 좋아요</span><span class="ico_comm ico_like2"></span>
-                            </button>
-                        </div>
-                    </div>
-                    <form class="mb-3" name="myform" id="myform" method="post">
-                        <fieldset>
-                            <span class="text-bold">별점을 선택해주세요</span>
-                            <input type="radio" name="reviewStar" value="5" id="rate1" ><label for="rate1">★</label>
-                            <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
-                            <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-                            <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
-                            <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
-                        </fieldset>
-                        <p id="selectedRating"></p>
-                        <div>
-                            <textarea class="col-auto form-control" type="text" id="reviewContents" placeholder="작성내용은 축제리스트에 노출되며 다른 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요."></textarea>
-                        </div>
-                        <br>
-                        <button type="button" class="btn btn-danger">제출</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     <div>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">글작성</button>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">글작성</button>
+
+    @php
+        $sumRates = $data->sum('rate');
+        $totalCount = $data->count();
+        $avgrate = ($totalCount > 0) ? $sumRates / $totalCount : 0;
+        $formattedAvgRate = number_format($avgrate, 1); // Format to 1 decimal place
+
+        // Calculate the number of filled stars and the remaining fractional part
+        $filledStars = floor($avgrate);
+        $fractionalPart = $avgrate - $filledStars;
+
+        $likeCount = $data->sum('like_experience');
+        $likeCount2 = $data->sum('like_theme');
+        $likeCount3 = $data->sum('like_mood');
+        $likeCount4 = $data->sum('like_food');
+        $likeCount5 = $data->sum('like_toilet');
+        $likeCount6 = $data->sum('like_parking');
+        $likeCount7 = $data->sum('like_cost');
+    @endphp
+
+    <div>
+        {{-- <div class="star-ratings">
+            @for ($i = 0; $i < 5; $i++)
+                @if ($i < $filledStars)
+                    <span class="star-filled"></span>
+                @elseif ($i == $filledStars && $fractionalPart >= 0.5)
+                    <span class="star-filled" style="background-size: {{ $fractionalPart * 100 }}%"></span>
+                @else
+                    <span></span>
+                @endif
+            @endfor
+        </div>
+        별점: ({{ $formattedAvgRate }}) --}}
+        <span class="ico_star star_rate">
+        <span class="ico_star inner_star" style="width:100%"></span>
+        </span>
+
+        <button type="button" class="btn btn-outline-primary btn-sm custom-btn">
+            <span class="txt_like">체험프로그램이 많아요 ({{ $likeCount }})</span>
+        </button>
+        <button type="button" class="btn btn-outline-secondary btn-sm custom-btn" name="like_theme">
+            <span class="txt_like">테마가 재미있어요 ({{ $likeCount2 }})</span>
+        </button>
+        <button type="button" class="btn btn-outline-success btn-sm custom-btn" name="like_mood">
+            <span class="txt_like">분위기가 좋아요 ({{ $likeCount3 }})</span>
+        </button>
+        <button type="button" class="btn btn-outline-danger btn-sm custom-btn" name="like_food">
+            <span class="txt_like">주변에 먹거리가 많아요 ({{ $likeCount4 }})</span>
+        </button>
+        <button type="button" class="btn btn-outline-warning btn-sm custom-btn" name="like_toilet">
+            <span class="txt_like">화장실이 깨끗해요 ({{ $likeCount5 }})</span>
+        </button>
+        <button type="button" class="btn btn-outline-info btn-sm custom-btn" name="like_parking">
+            <span class="txt_like">주차가 쉬워요 ({{ $likeCount6 }})</span>
+        </button>
+        <button type="button" class="btn btn-outline-dark btn-sm custom-btn" name="like_cost">
+            <span class="txt_like">가성비 좋아요 ({{ $likeCount7 }})</span>
+        </button>
+    </div>
+</div>
+
+    {{-- @php
+        $likeCounts = [
+            '체험프로그램이 많아요' => 'like_experience',
+            '테마가 재미있어요' => 'like_theme',
+            '분위기가 좋아요' => 'like_mood',
+            '주변에 먹거리가 많아요' => 'like_food',
+            '화장실이 깨끗해요' => 'like_toilet',
+            '주차가 쉬워요' => 'like_parking',
+            '가성비 좋아요' => 'like_cost'
+        ];
+
+        $classMappings = [
+            '체험프로그램이 많아요' => 'btn btn-outline-primary',
+            '테마가 재미있어요' => 'btn btn-outline-secondary',
+            '분위기가 좋아요' => 'btn btn-outline-success',
+            '주변에 먹거리가 많아요' => 'btn btn-outline-danger',
+            '화장실이 깨끗해요' => 'btn btn-outline-warning',
+            '주차가 쉬워요' => 'btn btn-outline-info',
+            '가성비 좋아요' => 'btn btn-outline-dark'
+        ];
+    @endphp
+
+    @foreach ($likeCounts as $key => $field)
+        @php
+            $count = $field === 'like_experience' ? $data->sum($field) : $data->where($field, 1)->count();
+            $count = $field === 'like_theme ' ? $data->sum($field) : $data->where($field, 1)->count();
+            $count = $field === 'like_mood' ? $data->sum($field) : $data->where($field, 1)->count();
+            $count = $field === 'like_food' ? $data->sum($field) : $data->where($field, 1)->count();
+            $count = $field === 'like_toilet' ? $data->sum($field) : $data->where($field, 1)->count();
+            $count = $field === 'like_parking' ? $data->sum($field) : $data->where($field, 1)->count();
+            $count = $field === 'like_cost' ? $data->sum($field) : $data->where($field, 1)->count();
+        @endphp
+
+        @if ($count > 0)
+            <button type="button" class="{{ $classMappings[$key] }}" name="like_{{ strtolower(str_replace(' ', '_', $key)) }}" id="likeBtn{{ $loop->index }}">
+                @if ($key === '체험프로그램이 많아요')
+                    <span class="txt_like">{{ $key }} ({{ $count }})</span>
+                @else
+                    <input type="hidden" name="like_{{ strtolower(str_replace(' ', '_', $key)) }}" id="like_{{ strtolower(str_replace(' ', '_', $key)) }}_input" value="0">
+                    <span class="txt_like">{{ $key }}</span>
+                @endif
+            </button>
+        @endif
+    @endforeach --}}
 
         <!-- 모달 창 -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

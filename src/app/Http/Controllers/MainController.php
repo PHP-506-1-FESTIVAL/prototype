@@ -185,12 +185,18 @@ class MainController extends Controller
         ->orderBy('reviews.updated_at', 'desc')
         ->get();
 
+        $data = DB::table('reviews')
+        ->select('*')
+        ->where('festival_id', $id)
+        ->get();
+
         return view('festival_detail')
             ->with('festival', $festival[0]) // 축제 정보를 뷰로 전달
             ->with('favoriteCount', $favoriteCount) // 찜한 갯수를 뷰로 전달
             ->with('jjmFlg', $jjmFlg)
             ->with('fesid', $id) // 사용자의 찜 여부를 뷰로 전달
             ->with('comments', $comments)
-            ->with('reviews', $reviews);
+            ->with('reviews', $reviews)
+            ->with('data',$data);
         }
 }
