@@ -19,7 +19,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><strong>유저 관리</strong></h5>
+                        <h5 class="card-title"><strong>블랙리스트 관리</strong></h5>
                         
                         {{-- 검색창 --}}
                         {{-- <header id="header" class="header">
