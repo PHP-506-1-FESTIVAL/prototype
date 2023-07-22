@@ -110,7 +110,7 @@ a[href^="javascript:popup2"] {
                                             <div class="groupbtn" role="group" style="display: flex; justify-content: flex-end; padding:0 10px;">
                                             <!-- 수정 -->
                                             @if(session('user_id') == $comment->user_id)
-                                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $comment->comment_id }}">수정</button>
+                                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $comment->comment_id }}" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">수정</button>
                                             @endif
                                             <!-- 수정 Modal -->
                                             <div class="modal fade" id="editModal{{ $comment->comment_id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $comment->comment_id }}" aria-hidden="true">
@@ -122,7 +122,7 @@ a[href^="javascript:popup2"] {
                                                         </div>
                                                         <div class="modal-body">
                                                             <textarea name="comment_content" class="form-control" placeholder="댓글을 입력하세요" required id="comment-content{{ $comment->comment_id }}">{{ $comment->comment_content }}</textarea>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="putCommentsList({{$comment->comment_id}})">수정</button>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="float:right; margin-top:10px;" onclick="putCommentsList({{$comment->comment_id}})" >수정</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -132,7 +132,7 @@ a[href^="javascript:popup2"] {
                                                 @csrf
                                                 @method('DELETE')
                                                 @if(session('user_id') == $comment->user_id)
-                                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $comment->comment_id }}">삭제</button>
+                                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $comment->comment_id }}" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">삭제</button>
                                                 @endif
                                                 <!-- 삭제 Modal -->
                                                 <div class="modal fade" id="deleteModal{{ $comment->comment_id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $comment->comment_id }}" aria-hidden="true">
