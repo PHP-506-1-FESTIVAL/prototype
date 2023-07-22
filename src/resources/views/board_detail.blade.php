@@ -55,7 +55,7 @@
                                         <li>
                                             <a href="javascript:void(0)">
                                                 <i class="lni lni-comments"></i>
-                                                35 Comments
+                                                {{ count($comments) }} Comments
                                             </a>
                                         </li>
                                         <li>
