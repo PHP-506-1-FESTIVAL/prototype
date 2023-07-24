@@ -2,7 +2,7 @@
 공공 API를 활용한 축제 정보 및 커뮤니티 사이트
 
 # 시연 영상
-https://youtu.be/VAoJOxkBHT4
+https://youtu.be/2BJAUwpk7so
 
 # 개발 기간
 2023-06-05 ~ 2023-06-28
