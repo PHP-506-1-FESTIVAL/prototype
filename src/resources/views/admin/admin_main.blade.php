@@ -50,10 +50,11 @@
                     <i class="bi bi-people"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>{{ $userdatacount }}</h6>
-                    <span class="text-success small pt-1 fw-bold">12%(140)</span>{{-- <span class="text-muted small pt-2 ps-1">추가 회원수</span> --}}
+                    <h6>{{ $useralldatacount }}</h6>
+                    <span class="text-success small pt-1 fw-bold">{{ ROUND((($useralldatacount-$userdatacount)*100)/( $useralldatacount)) }}%({{$useralldatacount-$userdatacount}})</span>{{-- <span class="text-muted small pt-2 ps-1">추가 회원수</span> --}}
                   </div>
                 </div>
+
               </div>
 
             </div>
@@ -430,7 +431,61 @@
                   @endif
 
                   <div class="activity-content">
-                    <a href="{{ route("admin.report") }}" class="text-dark">{{ $val->report_detail }}</a>
+                    @switch( $val->report_no )
+                      @case('0')
+                        영리/홍보 (
+                          @if($val->report_detail == '')
+                            상세 내용이 없습니다.
+                          @else
+                            {{$val->report_detail;}}
+                          @endif
+                          )
+                        @break
+                      @case('1')
+                        음란물 (
+                          @if($val->report_detail == '')
+                            상세 내용이 없습니다.
+                          @else
+                            {{$val->report_detail;}}
+                          @endif
+                          )
+                        @break
+                      @case('2')
+                        욕설/비하 (
+                          @if($val->report_detail == '')
+                            상세 내용이 없습니다.
+                          @else
+                            {{$val->report_detail;}}
+                          @endif
+                          )
+                        @break
+                      @case('3')
+                        신상노출 (
+                          @if($val->report_detail == '')
+                            상세 내용이 없습니다.
+                          @else
+                            {{$val->report_detail;}}
+                          @endif
+                          )
+                        @break
+                      @case('4')
+                        도배 (
+                          @if($val->report_detail == '')
+                            상세 내용이 없습니다.
+                          @else
+                            {{$val->report_detail;}}
+                          @endif
+                          )
+                        @break
+                      $@default
+                        기타 (
+                          @if($val->report_detail == '')
+                            상세 내용이 없습니다.
+                          @else
+                            {{$val->report_detail;}}
+                          @endif
+                          )
+                    @endswitch
                   </div>
                 </div><!-- End activity item-->
               @empty
