@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiThemeController;
 use App\Http\Controllers\ApiUserController;
 use App\Http\Controllers\CommentApiController;
 use App\Http\Controllers\MainApiController;
@@ -52,3 +53,12 @@ Route::delete('comments/{comment_id}',[CommentApiController::class, 'destroy'])-
 //리뷰 수정
 Route::put('reviews/{review_id}',[ReviewApiController::class, 'update'])->name('reviews.update');
 
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : routes
+ * 파일명       : api.php
+ * 이력         : v002 0724 이가원 new
+ ************************************************/
+
+// 테마별 축제목록
+Route::get('theme/{id}', [ApiThemeController::class, 'theme'])->name('apitheme');
