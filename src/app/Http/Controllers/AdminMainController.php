@@ -120,6 +120,9 @@ class AdminMainController extends Controller
 
     //유저관리
     public function userget(){
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
         $users = User::orderBy('created_at', 'desc')->paginate(10);
     
         foreach ($users as $user) {
@@ -134,6 +137,9 @@ class AdminMainController extends Controller
     // 회원 탈퇴&블랙리스트 추가
     public function userpost(Request $request)
     {
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
         // dump($request);
         // exit;
         $userId = $request->input('user_id');
@@ -191,6 +197,9 @@ class AdminMainController extends Controller
     // 블랙리스트 목록 가져오기
     public function blacklist()
     {
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
         $users = DB::table('users')
         ->join('blacklists', 'blacklists.user_id', '=', 'users.user_id')
         // ->select('users.*')  {{-- ----- 230720 del 블랙리스트 사유 추가(users.* -> *) 신유진 ----- --}}

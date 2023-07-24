@@ -69,14 +69,14 @@
             <i class="bi bi-search"></i>
           </a>
         </li><!-- End Search Icon-->
-
+        @auth
         <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number">4</span>
           </a><!-- End Notification Icon -->
-
+          
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               You have 4 new notifications
@@ -208,26 +208,27 @@
             </li>
 
           </ul><!-- End Messages Dropdown Items -->
-
+          
+          
         </li><!-- End Messages Nav -->
 
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7SEwUFfhhkTqeqiezDsWUO75RWZHb5EgYFGUUyeL3K6ePOK4Qu4O_RhdRpKvZ2zyU1xI&usqp=CAU" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ session('admin_name') }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{ session('admin_name') }}</h6>
-              <span>관리자 등급 자리</span>
+              <span>최고 관리자</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
-            <li>
+            {{-- <li>
               <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-person"></i>
                 <span>마이프로필</span>
@@ -255,7 +256,7 @@
             </li>
             <li>
               <hr class="dropdown-divider">
-            </li>
+            </li> --}}
 
             <li>
                 <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.logout') }}">
@@ -263,7 +264,7 @@
                     <span>로그아웃</span>
                 </a>
             </li>
-
+          @endauth
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
 
@@ -328,13 +329,14 @@
         </a>
       </li><!-- End Profile Page Nav --> --}}
 
+      @auth
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('admin.logout') }}">
           <i class="bi bi-arrow-left-square"></i>
           <span>로그아웃</span>
         </a>
       </li>
-
+      @endauth
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -344,14 +346,14 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>MSGS Admin</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      Designed by <a href="https://github.com/PHP-506-1-FESTIVAL">MSGS</a>
     </div>
   </footer><!-- End Footer -->
 

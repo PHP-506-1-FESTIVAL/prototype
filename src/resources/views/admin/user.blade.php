@@ -22,13 +22,14 @@
             <h5 class="card-title"><strong>유저 관리</strong></h5>
             
             {{-- 검색창 --}}
-            {{-- <header id="header" class="header"> --}}
-            <div class="search-bar">
-              <form class="search-form d-flex align-items-center" method="POST" action="{{ route('admin.search') }}">
-                @csrf
-                <input type="text" name="query" placeholder="이름,이메일,닉네임 검색" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-              </form>
+            <div id="header" class="header" style="box-shadow: 0px 0px 0px; width:360px;">
+              <div class="search-bar">
+                <form class="search-form d-flex align-items-center" method="POST" action="{{ route('admin.search') }}">
+                  @csrf
+                  <input type="text" name="query" placeholder="이름,이메일,닉네임 검색" title="Enter search keyword">
+                  <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                </form>
+              </div>
             </div>
 
             {{-- 유저목록 --}}

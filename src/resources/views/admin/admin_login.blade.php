@@ -15,7 +15,7 @@
               <div class="d-flex justify-content-center py-4">
                 <a href="{{ route('admin.main') }}" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">MSGSAdmin</span>
+                  <span class="d-none d-lg-block">MSGS Admin</span>
                 </a>
               </div><!-- End Logo -->
               
@@ -61,7 +61,7 @@
 
               <div class="credits">
 
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                Designed by <a href="https://github.com/PHP-506-1-FESTIVAL">MSGS</a>
               </div>
             </div>
           </div>
