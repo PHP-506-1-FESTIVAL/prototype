@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/assets/css/LineIcons.2.0.css" />
     <link rel="stylesheet" href="/assets/css/animate.css" />
-    {{-- <link rel="stylesheet" href="/assets/css/tiny-slider.css" /> --}}
+    <link rel="stylesheet" href="/assets/css/tiny-slider.css" />
     <link rel="stylesheet" href="/assets/css/glightbox.min.css" />
     <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="/css/board.css"> {{-- add0627.shin --}}
@@ -62,70 +62,9 @@
     <!-- ========================= JS here ========================= -->
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/wow.min.js"></script>
-    <script src="/assets/js/tiny-slider.js"></script>
+    {{-- <script src="/assets/js/tiny-slider.js"></script> --}}
     <script src="/assets/js/glightbox.min.js"></script>
     <script src="/assets/js/main.js"></script>
-    <script type="text/javascript">
-        //========= Category Slider
-        // tns({ //콘솔에러
-        //     container: '.category-slider',
-        //     items: 3,
-        //     slideBy: 'page',
-        //     autoplay: false,
-        //     mouseDrag: true,
-        //     gutter: 0,
-        //     nav: false,
-        //     controls: true,
-        //     controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-        //     responsive: {
-        //         0: {
-        //             items: 1,
-        //         },
-        //         540: {
-        //             items: 2,
-        //         },
-        //         768: {
-        //             items: 4,
-        //         },
-        //         992: {
-        //             items: 5,
-        //         },
-        //         1170: {
-        //             items: 6,
-        //         }
-        //     }
-        // });
-
-        //========= testimonial
-        // tns({    //콘솔에러
-        //     container: '.testimonial-slider',
-        //     items: 3,
-        //     slideBy: 'page',
-        //     autoplay: false,
-        //     mouseDrag: true,
-        //     gutter: 0,
-        //     nav: true,
-        //     controls: false,
-        //     controlsText: ['<i class="lni lni-arrow-left"></i>', '<i class="lni lni-arrow-right"></i>'],
-        //     responsive: {
-        //         0: {
-        //             items: 1,
-        //         },
-        //         540: {
-        //             items: 1,
-        //         },
-        //         768: {
-        //             items: 2,
-        //         },
-        //         992: {
-        //             items: 2,
-        //         },
-        //         1170: {
-        //             items: 2,
-        //         }
-        //     }
-        // });
-    </script>
 
 </body>
 </html>

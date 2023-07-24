@@ -8659,3 +8659,16 @@ footer-item-title,
   line-height: 20px;
   margin-top: 17.5px;
 }
+
+.themebanner {
+  width:100%;
+  height:600px;
+  background-image: url('/assets/images/themes/festival.jpg');
+  background-size: cover;
+  background-position: center;
+  transition: all 0.4s ease;
+}
+
+.category-slider a {
+  color: #5830E0;
+}

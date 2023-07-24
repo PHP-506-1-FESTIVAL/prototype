@@ -29,6 +29,7 @@
                                         aria-label="Toggle navigation">축제</a>
                                     <ul class="sub-menu collapse" id="submenu-1-3">
                                         <li class="nav-item"><a href="{{route('main.fesList')}}">축제일정</a></li>
+                                        <li class="nav-item"><a href="{{route('theme')}}">테마별 축제</a></li>
                                         <li class="nav-item"><a href="{{route('main.request')}}">축제요청</a></li>
                                     </ul>
                             </li>{{--                                                                               230718 add end 신유진 --}}
