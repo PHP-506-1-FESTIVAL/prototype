@@ -271,7 +271,7 @@ PIN번호 : 숫자로 이루어진 비밀번호
                 <div class="button">
                     <button type="submit" id="submitBtn" class="btn">회원정보 입력</button>
                 </div>
-                <input type="hidden" name="send_mail" value="{{$data[0]->send_mail}}">
+                <input type="hidden" name="send_mail" value="{{$data->send_mail}}">
             </form>
                     </div>
                 </div>
