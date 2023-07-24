@@ -34,6 +34,10 @@ class AdminMainController extends Controller
         // 회원 all
         $userdata = User::all();
         $userdatacount = $userdata->count();
+        $useralldatacount = DB::table('users')
+        ->select('*')->count();
+        
+
         // 축제 all
         $festivaldata = Festival::all();
         $festivaldatacount = $festivaldata->count();
@@ -66,7 +70,6 @@ class AdminMainController extends Controller
         ->paginate(5);
         $reporthandle_flg0 = Report::where('handle_flg', null)->count();
 
-
         // $data = [$userdatacount, $festivaldatacount, $boarddatacount];
 
         // 현재 시간 생성 ------------4차로 미룸
@@ -84,6 +87,7 @@ class AdminMainController extends Controller
         ->with('boarddatacount', $boarddatacount)
         ->with('reporthandle_flg0', $reporthandle_flg0)
         ->with('reportdata', $reportdata)
+        ->with('useralldatacount', $useralldatacount)
         ;
     }
 
