@@ -63,14 +63,19 @@
                         @forelse ($notice as $item)
                         <tr>
                             <th scope="row">{{$item->notice_id}}</th>
-                            <td>{{$item->notice_title}}</td>
+                            <td><a href="javascript:popup({{$item->notice_id}})">{{$item->notice_title}}</a></td>
                             <td>{{$item->admin_id}}</td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->updated_at}}</td>
                             <td>
                                 <ul class='btn-box'>
                                     <li>
-                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $item->notice_id }}">삭제</button>
+                                        @if ($item->deleted_at===null)
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $item->notice_id }}">삭제</button>
+                                        @else
+                                            <button type="button" class="btn btn-secondary btn-sm">삭제완료</button>
+                                        @endif
+
                                         <div class="modal fade" id="basicModal{{ $item->notice_id }}" tabindex="-1">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -95,7 +100,9 @@
                                     </li>
                                     <li>
                                         <form action="{{route('admNotice.show',['id'=>$item->notice_id])}}"method="get">
-                                            <button type="submit" class="btn btn-primary btn-sm">수정</button>
+                                            @if ($item->deleted_at===null)
+                                                <button type="submit" class="btn btn-primary btn-sm">수정</button>
+                                            @endif
                                         </form>
                                     </li>
                                 </ul>
@@ -121,4 +128,13 @@
             {!! $notice->links('vendor.pagination.custom2') !!}
         </div>
     </main>
+    <script>
+        function popup(e){
+            let url = "{!! route('admNotice.articled') !!}";
+            url +='?id=' + e;
+            const name = "popup test";
+            const option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(url, name, option);
+        }
+    </script>
 @endsection

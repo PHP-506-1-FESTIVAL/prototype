@@ -16,17 +16,18 @@ class AdminNoticeController extends Controller
      */
     public function index()
     {
-        $notice=Notice::select('*')->orderBy('created_at', 'desc')->paginate(10);
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
+        $notice=Notice::withTrashed()->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.notice_list')->with('notice',$notice);
     }
     public function write()
     {
-
-        $state=[
-            'card_title'=>'공지 작성'
-            ,'submit_btn'=>'작성'
-        ];
-        return view('admin.notice_write')->with('state',$state);
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
+        return view('admin.notice_write');
     }
 
     /**
@@ -48,6 +49,10 @@ class AdminNoticeController extends Controller
     public function store(Request $req)
     {
         // dump($req);
+        $req->validate([
+            'title'     => 'required|between:1,50'
+            ,'content'  => 'required|max:2000'
+        ]);
         $notice=new Notice;
         $notice->notice_title=$req->title;
         $notice->notice_content=$req->content;
@@ -65,12 +70,11 @@ class AdminNoticeController extends Controller
      */
     public function show($id)
     {
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
         $notice=Notice::find($id);
-        $state=[
-            'card_title'=>'공지 수정'
-            ,'submit_btn'=>'수정'
-        ];
-        return view('admin.notice_update')->with('data',$notice)->with('state',$state);
+        return view('admin.notice_update')->with('data',$notice);
     }
 
     /**
@@ -93,7 +97,10 @@ class AdminNoticeController extends Controller
      */
     public function update(Request $req, $id)
     {
-
+        $req->validate([
+            'title'     => 'required|between:1,50'
+            ,'content'  => 'required|max:2000'
+        ]);
         $notice= Notice::find($id);
         // dump($notice);
         // dump($req);
@@ -120,15 +127,29 @@ class AdminNoticeController extends Controller
     }
     public function search(Request $req)
     {
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
         // Log::debug("admin search Start");
         // Log::debug("admin search", $req->all());
         $req->validate(['search'=>'required|max:100']);
-        $notice_search=DB::table('notices')->where('notice_title','like','%'.$req->search.'%')->orWhere('notice_content','like','%'.$req->search.'%')->orderBy('created_at','desc')->paginate(10);
+        $notice_search=DB::table('notices')->
+        where(function ($query) use ($req) {
+            $query->where('notice_title','like','%'.$req->search.'%') // 제목에 검색내용이 포함된경우
+            ->orWhere('notice_content','like','%'.$req->search.'%'); // 보드내용에 검색내용이 포함된경우
+        })->orderBy('created_at','desc')->paginate(10);
         // dump($notice_search);
         // exit;
         // $json_list = json_encode($notice_search);
         // $list = json_decode($json_list,true);
         // Log::debug("admin search", $list);
         return view('admin.notice_list')->with('notice',$notice_search);
+    }
+    function articled(Request $req) {
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
+        $notice = Notice::withTrashed()->find($req->id);
+        return view('admin/notice_article')->with('notice', $notice);
     }
 }

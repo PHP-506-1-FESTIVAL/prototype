@@ -142,6 +142,9 @@ Route::put('admin/notice/update/{id}', [AdminNoticeController::class , 'update']
 Route::delete('admin/notice/{id}', [AdminNoticeController::class , 'destroy'])->name('admNotice.delete');
 //관리자 공지사항 서치
 Route::get('admin/notice/search', [AdminNoticeController::class , 'search'])->name('admNotice.search');
+//관리자 공지사항 파업창
+Route::get('admin/notice/articled', [AdminNoticeController::class , 'articled'])->name('admNotice.articled');
+
 
 
 /************************************************
