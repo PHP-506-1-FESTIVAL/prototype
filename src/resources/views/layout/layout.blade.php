@@ -31,7 +31,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <div class="d-flex flex-column min-vh-100 ">
+    <div class="d-flex flex-column">
 
         <!-- Preloader -->
         <div class="preloader">

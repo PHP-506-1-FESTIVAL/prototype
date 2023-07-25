@@ -1,12 +1,25 @@
 @extends('layout.layout')
 
-@section('title','테마')
+@section('title','테마별 축제')
 
 @section('content')
 
     <div class="margindiv"></div>
 
-    <div class="themebanner" id="themebanner"></div>
+    <section class="hero-area themebanner" id="themebanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
+                    <div class="hero-text text-center">
+                        <div class="section-heading themeheader">
+                            <h2 class="wow fadeInUp" data-wow-delay=".3s">다채로운 즐거움이 가득!</h2>
+                            <h5 class="wow fadeInUp" data-wow-delay=".5s" style="color:white; font-weight:300"><span class="msgs">마실가실</span>이 준비한 추천 테마축제</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Start Categories Area -->
     <section class="categories">
@@ -52,84 +65,48 @@
                             </a>
                             <!-- End Single Category -->
                             <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
+                            <a href="javascript:themeclick('music', '음악')" class="single-cat">
                                 <div class="icon">
-                                    <img src="/assets/images/categories/jobs.svg" alt="#">
+                                    <i class="lni lni-music" style="font-size:2.3rem"></i>
                                 </div>
-                                <h3>Jobs</h3>
+                                <h3>음악</h3>
                                 <h5 class="total">44</h5>
                             </a>
                             <!-- End Single Category -->
                             <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
+                            <a href="javascript:themeclick('activity', '액티비티')" class="single-cat">
                                 <div class="icon">
-                                    <img src="/assets/images/categories/real-estate.svg" alt="#">
+                                    <i class="lni lni-bi-cycle" style="font-size:2.3rem"></i>
                                 </div>
-                                <h3>Real Estate</h3>
+                                <h3>액티비티</h3>
                                 <h5 class="total">65</h5>
                             </a>
                             <!-- End Single Category -->
                             <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
+                            <a href="javascript:themeclick('culture', '문화')" class="single-cat">
                                 <div class="icon">
-                                    <img src="/assets/images/categories/laptop.svg" alt="#">
+                                    <i class="lni lni-flags" style="font-size:2.3rem"></i>
                                 </div>
-                                <h3>Education</h3>
+                                <h3>문화</h3>
                                 <h5 class="total">35</h5>
                             </a>
                             <!-- End Single Category -->
                             <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
+                            <a href="javascript:themeclick('nature', '자연')" class="single-cat">
                                 <div class="icon">
-                                    <img src="/assets/images/categories/hospital.svg" alt="#">
+                                    <i class="lni lni-sprout" style="font-size:2.3rem"></i>
                                 </div>
-                                <h3>Health & Beauty</h3>
+                                <h3>자연</h3>
                                 <h5 class="total">22</h5>
                             </a>
                             <!-- End Single Category -->
                             <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
+                            <a href="javascript:themeclick('concert', '콘서트')" class="single-cat">
                                 <div class="icon">
-                                    <img src="/assets/images/categories/tshirt.svg" alt="#">
+                                    <i class="lni lni-microphone" style="font-size:2.3rem"></i>
                                 </div>
-                                <h3>Fashion</h3>
-                                <h5 class="total">25</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="/assets/images/categories/education.svg" alt="#">
-                                </div>
-                                <h3>Education</h3>
-                                <h5 class="total">42</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="/assets/images/categories/controller.svg" alt="#">
-                                </div>
-                                <h3>Gadgets</h3>
-                                <h5 class="total">32</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="/assets/images/categories/travel.svg" alt="#">
-                                </div>
-                                <h3>Backpacks</h3>
-                                <h5 class="total">15</h5>
-                            </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-                            <a href="category.html" class="single-cat">
-                                <div class="icon">
-                                    <img src="/assets/images/categories/watch.svg" alt="#">
-                                </div>
-                                <h3>Watches</h3>
-                                <h5 class="total">65</h5>
+                                <h3>콘서트</h3>
+                                <h5 class="total">22</h5>
                             </a>
                             <!-- End Single Category -->
                         </div>
@@ -176,8 +153,7 @@
         .then(apiData => {
             let themearr = apiData['data'];
             themearr.forEach((item, index, array) => {
-                console.log(item);
-                result.innerHTML += "<div class='col-lg-4 col-md-6 col-12 mb-4'><div class='single-news wow fadeInUp' data-wow-delay='.5s'><div class='image'><a href='blog-single-sidebar.html'><img class='thumb' src=" + item['poster_img'] + " alt='#' style='width:400px; height:230px; object-fit: cover;'></a></div><div class='content-body'><h4 class='title'><a href='blog-single-sidebar.html'>" + item['festival_title'] + "</a></h4><div class='meta-details'><ul><li><a href='javascript:void(0)'>" + item['festival_start_date'] + " ~ " + item['festival_end_date'] + "</a></li><li><a href='javascript:void(0)'>" + item['area_code'] + "</a></li></ul></div></div></div></div>";
+                result.innerHTML += "<div class='col-lg-4 col-md-6 col-12 mb-4'><div class='single-news wow fadeInUp' data-wow-delay='.5s'><div class='image'><a href='{{route('fes.detail', 2018)}}'><img class='thumb' src=" + item['poster_img'] + " alt='#' style='width:410px; height:230px; object-fit: cover;'></a></div><div class='content-body'><h4 class='title'><a href='blog-single-sidebar.html'>" + item['festival_title'] + "</a></h4><div class='meta-details'><ul><li><a href='javascript:void(0)'>" + item['festival_start_date'] + " ~ " + item['festival_end_date'] + "</a></li><li><a href='javascript:void(0)'>" + item['area_code'] + "</a></li></ul></div></div></div></div>";
             });
         })
         // 에러는 alert로 처리

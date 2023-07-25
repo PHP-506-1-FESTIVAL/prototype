@@ -338,8 +338,8 @@ height: 100%;
                             @endforeach
                             <p class="meta">닉네임: {{ $review->user_nickname }} 작성일: {{ $review->updated_at }}</p>
                             <p style="padding:0 0 10px;">{{ $review->review_content }}</p>
-                                                                                                @if(session('user_id') != $review->user_id)
-                                                <a href="javascript:popup()">
+                                        @if(session('user_id') != $review->user_id)
+                                                <a href="javascript:popup({{$review->review_id}})">
                                                     <i class="lni lni-alarm"></i>
                                                     신고하기
                                                 </a>
@@ -825,14 +825,15 @@ height: 100%;
         })
     }
 </script>
-{{-- <script>
-                function popup(){
-            var url = "{!! route('insert.report', ['no' => $reviews->review_id, 'type' => '1']) !!}";
+<script>
+                function popup(e){
+            var url = "{!! route('insert.report', ['type' => '2']) !!}";
+            url = url + "&no=" + e;
             var name = "popup test";
             var option = "width = 500, height = 500, top = 100, left = 200, location = no"
             window.open(url, name, option);
         }
-</script> --}}
+</script>
 </section>
 {{-- <script src="{{asset('js/festival.js')}}"></script> --}}
 @endsection

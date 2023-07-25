@@ -58,7 +58,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">구분</th>
-                    <th scope="col">글/댓글 ID</th>
+                    <th scope="col">ID</th>
                     <th scope="col">신고자 ID</th>
                     <th scope="col">신고 유형</th>
                     <th scope="col">신고 상세</th>
@@ -75,8 +75,10 @@
                       <td>
                         @if($data[$key]->report_type == '0')
                           글
-                        @else
+                        @elseif($data[$key]->report_type == '1')
                           댓글
+                        @else
+                          리뷰
                         @endif
                       </td>
                       <td>
@@ -84,9 +86,13 @@
                           <a href="javascript:popup1({{$data[$key]->board_id}})">
                             {{$data[$key]->board_id}}
                           </a>
-                        @else
+                        @elseif($data[$key]->report_type == '1')
                           <a href="javascript:popup2({{$data[$key]->comment_id}})">
                             {{$data[$key]->comment_id}}
+                          </a>
+                        @else
+                          <a href="javascript:popup4({{$data[$key]->review_id}})">
+                            {{$data[$key]->review_id}}
                           </a>
                         @endif
                       </td>
@@ -136,6 +142,8 @@
                               <input type="hidden" value="{{$data[$key]->board_id}}" name="board_id">
                             @elseif($data[$key]->report_type == '1')
                               <input type="hidden" value="{{$data[$key]->comment_id}}" name="comment_id">
+                            @else
+                              <input type="hidden" value="{{$data[$key]->review_id}}" name="review_id">
                             @endif
                             <input type="hidden" name="status" value="{{$status}}">
                             <button type="submit" class="btn btn-primary btn-sm rounded-pill" style="padding:1px 6px;">완료</button>
@@ -197,6 +205,14 @@
 
         function popup3(e){
             var url = "{!! route('report.user') !!}";
+            url = url + '?id=' + e;
+            var name = "popup test";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(url, name, option);
+        }
+
+        function popup4(e){
+            var url = "{!! route('report.review') !!}";
             url = url + '?id=' + e;
             var name = "popup test";
             var option = "width = 500, height = 500, top = 100, left = 200, location = no"

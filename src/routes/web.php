@@ -161,6 +161,7 @@ Route::get('report', [AdminReportController::class, 'insertget'])->name('insert.
 Route::post('report', [AdminReportController::class, 'insertpost'])->name('insert.post');
 Route::get('admin/articled', [AdminReportController::class, 'articleget'])->name('report.article');
 Route::get('admin/commentd', [AdminReportController::class, 'commentget'])->name('report.comment');
+Route::get('admin/reviewd', [AdminReportController::class, 'reviewget'])->name('report.review');
 Route::get('admin/userd', [AdminReportController::class, 'userget'])->name('report.user');
 Route::get('theme', [ThemeController::class, 'themeget'])->name('theme');
 Route::post('theme', [ThemeController::class, 'themepost'])->name('themepost');

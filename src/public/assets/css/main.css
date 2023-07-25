@@ -8672,3 +8672,13 @@ footer-item-title,
 .category-slider a {
   color: #5830E0;
 }
+
+.themeheader {
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.msgs {
+  background-color: #5830E0;
+  text-shadow: none;
+  padding:2px;
+}

@@ -11,17 +11,17 @@
 
 {{-- 비주얼배너 --}}
 @php
-    $banner = \App\Models\Festival::whereIn('festival_id', [322, 556, 412])->get();
+    $banner = \App\Models\Festival::whereIn('festival_id', [2193, 2463, 2301])->get();
 @endphp
 <div class="profile-container">
     @foreach ($banner as $festival)
-        @if ($festival->festival_id === 322)
+        @if ($festival->festival_id === 2193)
             @php
                 $backgroundImage = 'https://sokorea.or.kr/img/mna5.jpg';
                 $festivalTitle = $festival->festival_title;
                 $description = '발달장애인과 비장애인이 함께 만들고 즐겨온 전세계유일의 국제 발달장애인문화축제';
             @endphp
-        @elseif ($festival->festival_id === 556)
+        @elseif ($festival->festival_id === 2463)
             @php
                 $backgroundImage = 'https://cdn.imweb.me/thumbnail/20230529/fef8d075c2292.jpg';
                 $festivalTitle = $festival->festival_title;
