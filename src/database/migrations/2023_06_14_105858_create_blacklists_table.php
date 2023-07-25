@@ -19,6 +19,8 @@ return new class extends Migration
             $table->timestamp('banned_at');
             $table->softDeletes();
             $table->integer('admin_id');
+            $table->char('blacklist_no',1)->nullable();
+            $table->string('blacklist_detail',512)->nullable();
         });
     }
 

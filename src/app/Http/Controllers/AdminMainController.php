@@ -20,6 +20,25 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+// area_code
+// 1서울
+// 2인천
+// 3대전
+// 4대구
+// 5광주
+// 6부산
+// 7울산
+// 8세종
+// 31경기
+// 32강원
+// 33충북
+// 34충남
+// 35경북
+// 36경남
+// 37전북
+// 38전남
+// 39제주
+
 class AdminMainController extends Controller
 {
     // 메인 페이지 이동
@@ -37,21 +56,28 @@ class AdminMainController extends Controller
         $useralldatacount = DB::table('users')
         ->select('*')->count();
         
-
         // 축제 all
         $festivaldata = Festival::all();
         $festivaldatacount = $festivaldata->count();
         // 축제 인기순 TOP 10 (조회수 base) festivals festival_hits
-        // $festivaltop10 = DB::table('festivals')
-        // ->join('festival_hits', 'festivals.user_id', '=', 'festival_hits.user_id' )
+        $festivaltop10 = DB::table('festivals')
+        ->select('*')
+        ->orderBy('festival_hit', 'DESC')
+        ->get()
+        ;
+        // 지역별 축제
+        // $festivalarea_code = DB::table('festivals')
         // ->select('*')
-        // ->where('deleted_at', null)
-        // ->orderBy('report_id', 'DESC')
-        // ->paginate(5);
-        // $reporthandle_flg0 = Report::where('handle_flg', null)->count();
+        // ->orderBy('area_code', 'ASC')
+        // ->get()
+        // ;
+
+        // dump($festivaltop10);
 
         // 게시글 all
         $board = Board::all();
+        // 게시글 정렬
+        // $weekboard = Board::all();
         // 메인의 게시글 5개
         $boarddata = DB::table('boards')
         ->join('users', 'boards.user_id', '=', 'users.user_id' )
@@ -61,6 +87,7 @@ class AdminMainController extends Controller
         ->orderBy('boards.board_id', 'DESC')
         ->paginate(5);
         $boarddatacount = $board->count();
+
         // 신고관리
         $report = Report::all();
         $reportdata = DB::table('reports')
@@ -83,6 +110,8 @@ class AdminMainController extends Controller
         return view('admin/admin_main')
         ->with('userdatacount', $userdatacount)
         ->with('festivaldatacount', $festivaldatacount)
+        ->with('festivaltop10', $festivaltop10)
+        // ->with('festivalarea_code', $festivalarea_code)
         ->with('boarddata', $boarddata)
         ->with('boarddatacount', $boarddatacount)
         ->with('reporthandle_flg0', $reporthandle_flg0)
@@ -144,13 +173,14 @@ class AdminMainController extends Controller
         if(auth()->guest()) {
             return redirect()->route('admin.login');
         }
-        // dump($request);
-        // exit;
-        $userId = $request->input('user_id');
-        $reason = $request->category;
+        
         $request->validate([
             'detail'     => 'max:500'
         ]);
+
+        $userId = $request->input('user_id');
+        $reason = $request->category;
+        $reasondetail = $request->detail;
 
         // 유저 삭제 로직
         User::where('user_id', $userId)->delete();
@@ -161,25 +191,16 @@ class AdminMainController extends Controller
         $blacklist->user_id = $userId;
         $blacklist->banned_at = now();
         $blacklist->blacklist_no = $reason;
+        $blacklist->blacklist_detail = $reasondetail;
+
         // 필요한 다른 정보들을 설정합니다.
         $blacklist->save();
 
-        // if($request->type === '0') {
-        //     $data['board_id'] = $request->no;
-        // } else if($request->type === '1') {
-        //     $data['comment_id'] = $request->no;
-        // }
-
-        // $data['user_id'] = $userId;
-        // $data['admin_id'] = Auth::id();
-        // $data['blacklist_no'] = $request->reason;
-        // $data['blacklist_detail'] = $request->detail;
-        // dump($data);
-        // $blacklist = Blacklist::create($data);
-        // $blacklist->save();
-
-        return "<script>alert('블랙리스트 처리가 완료되었습니다.'); window.close();</script>";
+        // return view('admin.blacklist');
+        return redirect()->route('admin.blacklist');
+        // return "<script>alert('블랙리스트 처리가 완료되었습니다.'); window.close();</script>";
         // return redirect()->back()->with('success', '유저가 블랙리스트로 처리되었습니다.');
+        
     }
 
     // 유저 검색
@@ -208,9 +229,9 @@ class AdminMainController extends Controller
         ->join('blacklists', 'blacklists.user_id', '=', 'users.user_id')
         // ->select('users.*')  {{-- ----- 230720 del 블랙리스트 사유 추가(users.* -> *) 신유진 ----- --}}
         ->select('*') // {{-- ----- 230720 add 블랙리스트 사유 추가(users.* -> *) 신유진 ----- --}}
-        ->orderBy('users.created_at', 'desc')
-        ->paginate(10);
-
+        // ->orderBy('users.created_at', 'desc') // {{-- ----- 230725 add 블랙리스트 정렬 변경(users.created_at -> blacklists.banned_at) 신유진 ----- --}}
+        ->orderBy('blacklists.banned_at', 'desc') // {{-- ----- 230725 add 블랙리스트 정렬 변경(users.created_at -> blacklists.banned_at) 신유진 ----- --}}
+        ->paginate(6);
         return view('admin.blacklist')->with('users', $users);
     }
 }

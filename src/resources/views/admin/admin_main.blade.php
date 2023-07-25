@@ -8,13 +8,13 @@
 
   <div class="pagetitle">
     <h1>관리자 페이지 Main Dashboard</h1>
-    <br>
     {{-- <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html"> </a></li>
         <li class="breadcrumb-item active"> </li>
       </ol>
     </nav> --}}
+    <br>
   </div><!-- End Page Title -->
 
   <section class="section dashboard">
@@ -50,8 +50,10 @@
                     <i class="bi bi-people"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>{{ $useralldatacount }}</h6>
-                    <span class="text-success small pt-1 fw-bold">{{ ROUND((($useralldatacount-$userdatacount)*100)/( $useralldatacount)) }}%({{$useralldatacount-$userdatacount}})</span>{{-- <span class="text-muted small pt-2 ps-1">추가 회원수</span> --}}
+                    {{-- <h6>{{ $useralldatacount }}</h6>  전체 회원수 --}}
+                    <h6>{{ $userdatacount }}</h6>  {{-- 전체-블랙수 --}}
+                    <span class="text-muted small pt-2 ps-1">블랙수</span>
+                    <span class="text-success small pt-1 fw-bold">{{ ROUND(((($useralldatacount-$userdatacount)*100)/( $useralldatacount)),1) }}%({{$useralldatacount-$userdatacount}})</span>{{-- <span class="text-muted small pt-2 ps-1">추가 회원수</span> --}}
                   </div>
                 </div>
 
@@ -131,6 +133,9 @@
                   </div>
                   <div class="ps-3">
                     <h6>{{ $boarddatacount }}</h6>
+                    <span class="text-muted small pt-2 ps-1">새글</span>
+                    {{-- <span class="text-success small pt-1 fw-bold">{{ ROUND(((($useralldatacount-$userdatacount)*100)/( $useralldatacount)),1) }}%({{$useralldatacount-$userdatacount}})</span><span class="text-muted small pt-2 ps-1">추가 회원수</span> --}}
+                  
                     <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                   </div>
@@ -223,80 +228,6 @@
             </div>
           </div><!-- End Reports -->
 
-          <!-- 최근 축제 요청 -->
-          {{-- <div class="col-12">
-            <div class="card recent-sales overflow-auto">
-
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
-
-                  <li><a class="dropdown-item" href="#">ALL</a></li>
-                  <li><a class="dropdown-item" href="#">승인</a></li>
-                  <li><a class="dropdown-item" href="#">미승인</a></li>
-                </ul>
-              </div>
-
-              <div class="card-body" id="adminfest">
-                <h5 class="card-title">축제 요청 <span>| Today</span></h5>
-
-                <table class="table table-borderless datatable">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Customer</th>
-                      <th scope="col">Product</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row"><a href="#">#2457</a></th>
-                      <td>Brandon Jacob</td>
-                      <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                      <td>$64</td>
-                      <td><span class="badge bg-success">Approved</span></td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#2147</a></th>
-                      <td>Bridie Kessler</td>
-                      <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                      <td>$47</td>
-                      <td><span class="badge bg-warning">Pending</span></td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#2049</a></th>
-                      <td>Ashleigh Langosh</td>
-                      <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                      <td>$147</td>
-                      <td><span class="badge bg-success">Approved</span></td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#2644</a></th>
-                      <td>Angus Grady</td>
-                      <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                      <td>$67</td>
-                      <td><span class="badge bg-danger">Rejected</span></td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#">#2644</a></th>
-                      <td>Raheem Lehner</td>
-                      <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                      <td>$165</td>
-                      <td><span class="badge bg-success">Approved</span></td>
-                    </tr>
-                  </tbody>
-                </table>
-
-              </div>
-
-            </div>
-          </div><!-- End 최근 축제 요청 --> --}}
-
           <!-- 게시글 -->
           <div class="col-12">
             <div class="card top-selling overflow-auto">
@@ -345,41 +276,6 @@
                       <td></td>
                     </tr>
                     @endforelse
-                    {{-- <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-1.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
-                      <td>$64</td>
-                      <td class="fw-bold">124</td>
-                      <td>$5,828</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
-                      <td>$46</td>
-                      <td class="fw-bold">98</td>
-                      <td>$4,508</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                      <td>$59</td>
-                      <td class="fw-bold">74</td>
-                      <td>$4,366</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                      <td>$32</td>
-                      <td class="fw-bold">63</td>
-                      <td>$2,016</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                      <td>$79</td>
-                      <td class="fw-bold">41</td>
-                      <td>$3,239</td>
-                    </tr> --}}
                   </tbody>
                 </table>
 
@@ -520,7 +416,7 @@
               document.addEventListener("DOMContentLoaded", () => {
                 var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
                   legend: {
-                    data: ['지역별 축제수', '조회수']
+                    data: ['축제수', '조회수']
                   },
                   radar: {
                     // shape: 'circle',
@@ -555,11 +451,11 @@
                     type: 'radar',
                     data: [{
                         value: [4200, 3000, 20000, 35000, 50000, 18000],
-                        name: '지역별 축제수'
+                        name: '축제수'
                       },
                       {
                         value: [5000, 14000, 28000, 26000, 42000, 21000],
-                        name: 'Actual Spending'
+                        name: '조회수'
                       }
                     ]
                   }]
@@ -570,7 +466,9 @@
           </div>
         </div><!-- End Budget Report -->
 
-        <!-- 축제 인기순 TOP 10 Website Traffic -->
+
+        
+        <!-- 축제 인기순 TOP 5 Website Traffic -->
         <div class="card">
           <div class="filter">
             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -586,8 +484,8 @@
           </div>
 
           <div class="card-body pb-0">
-            <h5 class="card-title">축제 인기순 TOP 10 <span>| Today</span></h5>
-
+            <h5 class="card-title">축제 인기순 TOP 5 <span>| Today</span></h5>
+            
             <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
 
             <script>
@@ -619,26 +517,28 @@
                     labelLine: {
                       show: false
                     },
-                    data: [{
-                        value: 1048,
-                        name: 'Search Engine'
+                    data: [
+                      {
+                        value: {{$festivaltop10[0]->festival_hit}},
+                        name: '{{$festivaltop10[0]->festival_title}}'
                       },
                       {
-                        value: 735,
-                        name: 'Direct'
+                        value: {{$festivaltop10[1]->festival_hit}},
+                        name: '{{$festivaltop10[1]->festival_title}}'
                       },
                       {
-                        value: 580,
-                        name: 'Email'
+                        value: {{$festivaltop10[2]->festival_hit}},
+                        name: '{{$festivaltop10[2]->festival_title}}'
                       },
                       {
-                        value: 484,
-                        name: 'Union Ads'
+                        value: {{$festivaltop10[3]->festival_hit}},
+                        name: '{{$festivaltop10[3]->festival_title}}'
                       },
                       {
-                        value: 300,
-                        name: 'Video Ads'
+                        value: {{$festivaltop10[4]->festival_hit}},
+                        name: '{{$festivaltop10[4]->festival_title}}'
                       }
+
                     ]
                   }]
                 });

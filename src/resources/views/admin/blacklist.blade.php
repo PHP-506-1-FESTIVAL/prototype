@@ -42,7 +42,7 @@
                                     <th scope="col">성별</th>
                                     <th scope="col">생일</th>
                                     <th scope="col">닉네임</th>
-                                    <th scope="col">블랙사유</th>   {{-- ----- 230720 add 컬럼추가 신유진 ----- --}}
+                                    <th scope="col">블랙사유 (상세 내용)</th>   {{-- ----- 230720 add 컬럼추가 신유진 ----- --}}
                                     {{-- <th scope="col">프로필</th> --}}
                                     {{-- <th scope="col">주소</th> --}}   {{-- ----- 230720 del 블랙사유추가로 삭제 신유진 ----- --}}
                                     {{-- <th scope="col">상세주소</th>
@@ -82,6 +82,8 @@
                                             $@default
                                             (정보없음)
                                         @endswitch
+                                        <br>
+                                        ({{ $user->blacklist_detail }})
                                     </td>
                                     {{-- <td><img src="/img/profile/{{ $user->user_profile }}" alt="" class="img-thumbnail img-fluid" style="width:30px;height:30px;border-radius:50%;border:none;object-fit:cover;"></td> --}}
                                     {{-- <td>{{ $user->user_address }}</td> --}}

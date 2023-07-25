@@ -108,19 +108,18 @@
                                               <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
                                               <select name="category" id="category" required>
                                                   <option value="" selected disabled>신고 사유 선택</option>
-                                                  <option value="0">영리/홍보</option>
-                                                  <option value="1">음란물</option>
-                                                  <option value="2">욕설/비하</option>
-                                                  <option value="3">신상노출</option>
-                                                  <option value="4">도배</option>
-                                                  <option value="5">기타</option>
+                                                  <option value="0">신고 누적</option>
+                                                  <option value="1">이상 패턴으로 감지</option>
+                                                  <option value="2">블랙리스트로 등록된 고객과 동일 IP인 경우</option>
+                                                  <option value="3">지속적 악성 댓글 및 게시글 작성</option>
+                                                  <option value="4">기타</option>
                                               </select>
                                           </div>
                                       </div>
                                       <div class="col-12">
                                           <div class="search-input">
                                               <label for="detail"><i class="lni lni-pencil-alt theme-color"></i></label>
-                                              <input type="text" name="detail" id="detail" placeholder="상세 내용 입력" size=3 maxlength =500>
+                                              <input type="text" name="detail" id="detail" placeholder="상세 내용 입력" size=37 maxlength =500>
                                               {{-- <input type="hidden" name="type" value="{{$type}}"> --}}
                                               {{-- <input type="hidden" name="no" value="{{$no}}"> --}}
                                           </div>
