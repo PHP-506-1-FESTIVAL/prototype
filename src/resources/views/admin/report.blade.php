@@ -65,7 +65,6 @@
                     <th scope="col">신고 일시</th>
                     <th scope="col">처리</th>
                     <th scope="col">처리 일시</th>
-                    <th scope="col">처리자</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -157,7 +156,6 @@
                           {{$data[$key]->updated_at}}
                         @endif
                       </td>
-                      <td>{{$data[$key]->admin_id}}</td>
                     </tr>
                   @empty
                     <tr>
