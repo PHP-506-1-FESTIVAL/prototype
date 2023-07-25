@@ -338,11 +338,12 @@ height: 100%;
                             @endforeach
                             <p class="meta">닉네임: {{ $review->user_nickname }} 작성일: {{ $review->updated_at }}</p>
                             <p style="padding:0 0 10px;">{{ $review->review_content }}</p>
-                                                       <div class="col-4" style="padding:0;">
+                            <div class="col-4" style="padding:0;">
+                                <div class="button-group" style="display: flex; gap: 5px;">
                                 <form action="{{ route('review.delete', ['id' => $review->review_id]) }}" method="post" name="removefrm_{{ $review->review_id }}">
                                     @csrf
                                     @method('delete')
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalToggle_{{ $review->review_id }}" style="margin: 0 0 0 9%;">삭제하기</button>
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModalToggle_{{ $review->review_id }}">삭제</button>
                                     {{-- 모달창 구현 --}}
                                     <div class="modal fade" id="exampleModalToggle_{{ $review->review_id }}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel_{{ $review->review_id }}" tabindex="-1">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -362,7 +363,7 @@ height: 100%;
                                         </div>
                                     </div>
                                 </form>
-                            </div>
+                            
                             {{-- 수정 모달창 --}}
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-update{{$review->review_id}}" onclick="changeStar({{$review->review_id}})">수정</button>
                             <div class="modal fade" id="exampleModal-update{{$review->review_id}}" tabindex="-1" aria-labelledby="exampleModalLabel-update{{$review->review_id}}" aria-hidden="true">
@@ -426,6 +427,8 @@ height: 100%;
                                                 </div>
                                             </div>
                                         </form>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
