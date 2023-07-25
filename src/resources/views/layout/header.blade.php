@@ -74,7 +74,11 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="padding: 0;">
                                 <li>
                                     <div>
-                                        <img src="/img/profile/{{session()->get('user_profile')}}" alt="" class="img-fluid borderRadius" style="width:50px;height:50px;border-radius:50%;margin-top:5px;margin-top:12px;margin-left:12px;object-fit:cover;">
+                                        @if (session('kakao_flg') === '1')
+                                        <img src="{{session()->get('user_profile')}}" alt="" class="img-fluid borderRadius" style="width:50px;height:50px;border-radius:50%;margin-top:5px;margin-top:12px;margin-left:12px;object-fit:cover;">
+                                        @else
+                                            <img src="/img/profile/{{session()->get('user_profile')}}" alt="" class="img-fluid borderRadius" style="width:50px;height:50px;border-radius:50%;margin-top:5px;margin-top:12px;margin-left:12px;object-fit:cover;">
+                                        @endif
                                     </div>
                                     <div>
                                         <a class="dropdown-item" href="{{route('user.main')}}">{{session()->get('user_nickname')}}</a>
