@@ -269,8 +269,8 @@ class UserController extends Controller
 
     function termspost(Request $req) {
         $req->validate([
-            'termsagree'=>'required|([1])',
-            'privacyagree'=>'required|([1])'
+            'termsagree'=>'required|regex:/([1])/',
+            'privacyagree'=>'required|regex:/([1])/'
         ]);
 
         if(!$req->marketing) {
