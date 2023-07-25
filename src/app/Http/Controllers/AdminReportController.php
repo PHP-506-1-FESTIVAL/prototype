@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Comment;
 use App\Models\Report;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,22 +20,22 @@ class AdminReportController extends Controller
         $status = request()->status;
 
         if($status == '0') {
-            $data = Report::select('report_id', 'board_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
+            $data = Report::select('report_id', 'board_id', 'review_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
                 ->where('handle_flg', null)
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         } else if ($status == '1') {
-            $data = Report::select('report_id', 'board_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
+            $data = Report::select('report_id', 'board_id', 'review_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
                 ->where('handle_flg', '0')
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         } else if ($status == '2') {
-            $data = Report::select('report_id', 'board_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
+            $data = Report::select('report_id', 'board_id', 'review_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
                 ->where('handle_flg', '1')
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         } else {
-            $data = Report::select('report_id', 'board_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
+            $data = Report::select('report_id', 'board_id', 'review_id', 'comment_id', 'user_id', 'report_type', 'report_no', 'report_detail', 'created_at', 'updated_at', 'handle_flg', 'admin_id')
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         }
@@ -49,8 +50,10 @@ class AdminReportController extends Controller
         if($req->flg == '0') {
             if($req->board_id) {
                 Board::destroy($req->board_id);
-            } else {
+            } else if($req->comment_id) {
                 Comment::destroy($req->comment_id);
+            } else {
+                Review::destroy($req->review_id);
             }
         } else if ($req->flg == '1') {
             $report = Report::find($req->id);
@@ -77,6 +80,11 @@ class AdminReportController extends Controller
             if($chk) {
                 return "<script>alert('이미 신고한 댓글입니다.'); window.close();</script>";
             }
+        } else if($type == '2') {
+            $chk = Report::where('user_id', session('user_id'))->where('review_id', $no)->first();
+            if($chk) {
+                return "<script>alert('이미 신고한 리뷰입니다.'); window.close();</script>";
+            }
         }
         return view('insertreport')->with('type', $type)->with('no', $no);
     }
@@ -95,6 +103,8 @@ class AdminReportController extends Controller
             $data['board_id'] = $req->no;
         } else if($req->type === '1') {
             $data['comment_id'] = $req->no;
+        } else if($req->type === '2') {
+            $data['review_id'] = $req->no;
         }
         $data['user_id'] = session('user_id');
         $data['report_no'] = $req->reason;
@@ -130,5 +140,13 @@ class AdminReportController extends Controller
             $user->user_profile = 'profile.png';
         }
         return view('admin/report_user')->with('user', $user);
+    }
+
+    function reviewget() {
+        if(auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
+        $review = Review::withTrashed()->find(request()->id);
+        return view('admin/report_review')->with('review', $review);
     }
 }
