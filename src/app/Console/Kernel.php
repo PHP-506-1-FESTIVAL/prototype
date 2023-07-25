@@ -15,8 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('jjim:send')->dailyAt('13:00');
-        $schedule->command('jjim:send')->everyMinute();
+        $schedule->command('jjim:send')->dailyAt('13:00');
+        // $schedule->command('jjim:send')->everyMinute();
     }
 
     /**
