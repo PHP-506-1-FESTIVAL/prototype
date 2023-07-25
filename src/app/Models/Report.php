@@ -19,6 +19,7 @@ class Report extends Model
         'report_type',
         'admin_id',
         'handle_flg',
+        'review_id',
     ];
 
     protected $primaryKey = 'report_id';
