@@ -126,82 +126,76 @@
             window.open(link); // 링크를 새 창에서 열기
         }
     </script>
-    {{-- 리뷰 --}}
-    <style>
-    .myform fieldset{
-        display: inline-block;
-        direction: rtl;
-        border:0;
-    }
-    .myform fieldset legend{
-        text-align: right;
-    }
-    .myform input[type=radio]{
-        display: none;
-    }
-    .myform label{
-        font-size: 3em;
-        color: transparent;
-        text-shadow: 0 0 0 #f0f0f0;
-    }
-    .myform label:hover{
-        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-    }
-    .myform label:hover ~ label{
-        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-    }
-    .myform input[type=radio]:checked ~ label{
-        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-    }
-    #reviewContents {
-        width: 100%;
-        height: 150px;
-        padding: 10px;
-        box-sizing: border-box;
-        border: solid 1.5px #D3D3D3;
-        border-radius: 5px;
-        font-size: 16px;
-        resize: none;
-    }
-    .box_like button {
-        margin: 3px;
-    }
-    .custom-btn {
-        font-size: 12px;
-        padding: 4px;
-    }
+{{-- 리뷰 --}}
+<style>
+.myform fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+.myform fieldset legend{
+    text-align: right;
+}
+.myform input[type=radio]{
+    display: none;
+}
+.myform label{
+    font-size: 3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+.myform label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+.myform label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+.myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#reviewContents {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+}
+.box_like button {
+    margin: 3px;
+}
+.custom-btn {
+    font-size: 12px;
+    padding: 4px;
+}
 
-    .custom-btn .txt_like {
-        font-size: 14px;
-    }
-    .ico_star {
-    background: url("/assets/img/ico_star_220608.png") no-repeat;
-    display: block;
-    }
-    .star_rate {
-        background-position: 0 0;
-        height: 27px;
-        width: 151px;
-    }
-    .star_rate .inner_star {
-    background-position: 0 -30px;
-    height: 100%;
+.custom-btn .txt_like {
+    font-size: 14px;
+}
+.ico_star {
+background: url("/assets/img/ico_star_220608.png") no-repeat;
+display: block;
+}
+.star_rate {
+    background-position: 0 0;
+    height: 27px;
+    width: 151px;
+}
+.star_rate .inner_star {
+background-position: 0 -30px;
+height: 100%;
+}
+.blog-comment .post-comments{
+    width:900px;
+    margin-top:10px;
 }
 </style>
-<div>
+<div class="review-container" style="border: solid 1.5px #D3D3D3; padding:20px; margin:20px; width:1140px;">
+<h3 class="text-success" style="margin-bottom:10px;">리뷰 목록</h3>
     <div>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">글작성</button>
-
         @php
-            // $sumRates = $data->sum('rate');
-            // $totalCount = $data->count();
-            // $avgrate = ($totalCount > 0) ? $sumRates / $totalCount : 0;
-            // $formattedAvgRate = number_format($avgrate, 1); // Format to 1 decimal place
-
-            // // Calculate the number of filled stars and the remaining fractional part
-            // $filledStars = floor($avgrate);
-            // $fractionalPart = $avgrate - $filledStars;
-
             $likeCount = $data->sum('like_experience');
             $likeCount2 = $data->sum('like_theme');
             $likeCount3 = $data->sum('like_mood');
@@ -217,10 +211,11 @@
                 <span class="ico_star star_rate">
                     <span class="ico_star inner_star" style="width:{{$num_data['star_percentage']}}%"></span>
                 </span>
-                <span>평균:{{$num_data['star']}}점({{$num_data['count']}})건</span>
+                <span style="font-size:1.4rem; margin-left:10px;">평균:{{$num_data['star']}}점({{$num_data['count']}})건</span>
+                
             </div>
             {{-- 추천 목록--}}
-            <div id='recommend'>
+            <div id='recommend' style="margin: 10px 0 10px 0;">
                 <button type="button" class="btn btn-outline-primary btn-sm custom-btn">
                     <span class="txt_like">체험프로그램이 많아요 ({{ $likeCount }})</span>
                 </button>
@@ -243,6 +238,7 @@
                     <span class="txt_like">가성비 좋아요 ({{ $likeCount7 }})</span>
                 </button>
             </div>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" >리뷰 작성</button>
         </div>
     </div>
         <!-- 모달 창 -->
@@ -315,7 +311,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="blog-comment">
-                    <h3 class="text-success">리뷰</h3>
                     <ul class="comments">
                     @foreach($reviews as $review)
                         <li class="clearfix" id="review{{$review->review_id}}">
@@ -332,7 +327,7 @@
                                     'like_cost' => '가성비',
                                 ];
                             @endphp
-                            별점:{{ $review->rate }}
+                            별점:{{ $review->rate }} 
                             @foreach ($likeCriteria as $key => $label)
                                 @if ($review->$key == 1)
                                     <button type="button" class="btn btn-outline-{{ $key == 'like_cost' ? 'dark' : ($key == 'like_experience' ? 'primary' : ($key == 'like_theme' ? 'secondary' : ($key == 'like_mood' ? 'success' : ($key == 'like_food' ? 'danger' : ($key == 'like_toilet' ? 'warning' : 'info'))))) }} btn-sm custom-btn" name="{{ $key }}">
@@ -342,7 +337,32 @@
 
                             @endforeach
                             <p class="meta">닉네임: {{ $review->user_nickname }} 작성일: {{ $review->updated_at }}</p>
-                            <p>{{ $review->review_content }}</p>
+                            <p style="padding:0 0 10px;">{{ $review->review_content }}</p>
+                                                       <div class="col-4" style="padding:0;">
+                                <form action="{{ route('review.delete', ['id' => $review->review_id]) }}" method="post" name="removefrm_{{ $review->review_id }}">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalToggle_{{ $review->review_id }}" style="margin: 0 0 0 9%;">삭제하기</button>
+                                    {{-- 모달창 구현 --}}
+                                    <div class="modal fade" id="exampleModalToggle_{{ $review->review_id }}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel_{{ $review->review_id }}" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalToggleLabel_{{ $review->review_id }}">삭제 확인</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    정말로 삭제 하시겠습니까?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger">확인</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                             {{-- 수정 모달창 --}}
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-update{{$review->review_id}}" onclick="changeStar({{$review->review_id}})">수정</button>
                             <div class="modal fade" id="exampleModal-update{{$review->review_id}}" tabindex="-1" aria-labelledby="exampleModalLabel-update{{$review->review_id}}" aria-hidden="true">
@@ -416,15 +436,8 @@
         </div>
     </div>
 </div>
-    {{-- <script>//버튼클릭
-        const buttons = document.querySelectorAll('.box_like button');
+</div>
 
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-            button.classList.toggle('active');
-            });
-        });
-    </script> --}}
     {{-- 별점 스크립트 --}}
     <script>
         const radioButtons = document.getElementById('starRate').querySelectorAll('input[name="rate"]');
@@ -453,19 +466,6 @@
                 });
             });
         }
-
-        // function changeStar(reviewID) {
-        //     for (let index = 0; index < 5; index++) {
-        //         const starBox=document.getElementById('starRate'+reviewID);
-        //         const starLab=starBox.children[index];
-        //         const changeRating = document.getElementById('selectedRating'+reviewID);
-        //         // console.log(starLab.radio);
-        //         starLab.addEventListener('change', (event) => {
-        //         selectedRating.textContent = `선택한 별점: ${event.target.value}/5`;
-        //         console.log('동작확인')
-        //         });
-        //     }
-        // }
     </script>
     {{-- 현재페이지 숫자 추출 --}}
     <script>
@@ -489,21 +489,6 @@
             inputElement.value = "0";
         }
     }
-
-    // Function to toggle active class on buttons
-    // function toggleActiveClass(buttonId) {
-    //     // Remove active class from all buttons
-    //     var buttons = document.getElementsByClassName('btn');
-    //     for (var i = 0; i < buttons.length; i++) {
-    //         buttons[i].classList.remove('active');
-    //     }
-
-    //     // Add active class to the clicked button
-    //     var button = document.getElementById(buttonId);
-    //     if (button) {
-    //         button.classList.add('active');
-    //     }
-    // }
     function toggleActiveClass(buttonId) {
         // Add active class to the clicked button
         const button = document.getElementById(buttonId);
@@ -565,20 +550,6 @@
         }
     }
 
-    // Function to toggle active class on buttons
-    // function toggleActiveClass(buttonId) {
-    //     // Remove active class from all buttons
-    //     var buttons = document.getElementsByClassName('btn');
-    //     for (var i = 0; i < buttons.length; i++) {
-    //         buttons[i].classList.remove('active');
-    //     }
-
-    //     // Add active class to the clicked button
-    //     var button = document.getElementById(buttonId);
-    //     if (button) {
-    //         button.classList.add('active');
-    //     }
-    // }
     function toggleActiveClassChang(buttonId) {
         // Add active class to the clicked button
         const button = document.getElementById(buttonId);
@@ -618,40 +589,6 @@
         handleButtonClickChang('like_cost_input'+reviewId);
         toggleActiveClassChang('likeBtn7'+reviewId);
     }
-    // document.getElementById('likeBtn1').addEventListener('click', function () {
-    //     handleButtonClick('like_experience');
-    //     toggleActiveClass('likeBtn1');
-    // });
-
-    // document.getElementById('likeBtn2').addEventListener('click', function () {
-    //     handleButtonClick('like_theme');
-    //     toggleActiveClass('likeBtn2');
-    // });
-
-    // document.getElementById('likeBtn3').addEventListener('click', function () {
-    //     handleButtonClick('like_mood');
-    //     toggleActiveClass('likeBtn3');
-    // });
-
-    // document.getElementById('likeBtn4').addEventListener('click', function () {
-    //     handleButtonClick('like_food');
-    //     toggleActiveClass('likeBtn4');
-    // });
-
-    // document.getElementById('likeBtn5').addEventListener('click', function () {
-    //     handleButtonClick('like_toilet');
-    //     toggleActiveClass('likeBtn5');
-    // });
-
-    // document.getElementById('likeBtn6').addEventListener('click', function () {
-    //     handleButtonClick('like_parking');
-    //     toggleActiveClass('likeBtn6');
-    // });
-
-    // document.getElementById('likeBtn7').addEventListener('click', function () {
-    //     handleButtonClick('like_cost');
-    //     toggleActiveClass('likeBtn7');
-    // });
 </script>
 
     {{-- 연관축제 --}}
@@ -680,7 +617,7 @@
             </div>
         @endforeach
     </div>
-</div>
+
 <script>
     //수정 API
     function putRevieList(reviewId){

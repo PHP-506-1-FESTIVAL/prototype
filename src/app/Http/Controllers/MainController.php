@@ -15,6 +15,7 @@ use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Review;
+use Carbon\Carbon;
 
 /************************************************
  * 프로젝트명   : festival_info
@@ -200,18 +201,19 @@ class MainController extends Controller
         ->orderBy('comments.updated_at', 'desc')
         ->get();
 
-        // $reviews = DB::table('reviews')
-        // ->join('users', 'users.user_id', '=', 'reviews.user_id')
-        // ->select('*')
-        // ->orderBy('reviews.updated_at', 'desc')->get();
         $reviews = DB::table('reviews')
         ->join('users', 'users.user_id', '=', 'reviews.user_id')
-        ->select('*')
+        ->select('reviews.*', 'users.user_nickname', 'users.user_profile')
         ->where('reviews.festival_id', $id)
+        ->whereNull('reviews.deleted_at') // Exclude deleted reviews
         ->orderBy('reviews.updated_at', 'desc')
         ->get();
-        // dump($reviews->review_id);
-        // exit;
+    
+        foreach ($reviews as $review) {
+            $review->created_at = Carbon::parse($review->created_at); // created_at 컬럼을 Carbon 객체로 변환
+            $review->updated_at = Carbon::parse($review->updated_at); // updated_at 컬럼을 Carbon 객체로 변환
+        }
+
         $data = Review::where('festival_id',$id)->get();
 
         $sum_rate=0;
