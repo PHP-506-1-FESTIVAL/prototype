@@ -339,11 +339,14 @@ height: 100%;
                             <p class="meta">닉네임: {{ $review->user_nickname }} 작성일: {{ $review->updated_at }}</p>
                             <p style="padding:0 0 10px;">{{ $review->review_content }}</p>
                             <div class="col-4" style="padding:0;">
+
                                 <div class="button-group" style="display: flex; gap: 5px;">
                                 <form action="{{ route('review.delete', ['id' => $review->review_id]) }}" method="post" name="removefrm_{{ $review->review_id }}">
                                     @csrf
                                     @method('delete')
+                                    @if(session('user_id') == $review->user_id)
                                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModalToggle_{{ $review->review_id }}">삭제</button>
+                                    @endauth
                                     {{-- 모달창 구현 --}}
                                     <div class="modal fade" id="exampleModalToggle_{{ $review->review_id }}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel_{{ $review->review_id }}" tabindex="-1">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -363,9 +366,11 @@ height: 100%;
                                         </div>
                                     </div>
                                 </form>
-                            
+
                             {{-- 수정 모달창 --}}
+                            @if(session('user_id') == $review->user_id)
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-update{{$review->review_id}}" onclick="changeStar({{$review->review_id}})">수정</button>
+                            @endauth
                             <div class="modal fade" id="exampleModal-update{{$review->review_id}}" tabindex="-1" aria-labelledby="exampleModalLabel-update{{$review->review_id}}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
