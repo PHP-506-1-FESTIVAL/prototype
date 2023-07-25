@@ -55,7 +55,7 @@
                         <div class="row mb-3 title-box">
                             <label for="inputText" class="col-sm-1 col-form-label">제 목:</label>
                             <div class="col-sm-11">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="title" id="inputText">
                             </div>
                         </div>
                         <div id="editor">{{-- ----- 230720 add Quill추가 신유진 ----- --}}

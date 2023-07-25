@@ -138,7 +138,7 @@ Route::post('admin/notice/write', [AdminNoticeController::class , 'store'])->nam
 Route::get('admin/notice/show/{id}', [AdminNoticeController::class , 'show'])->name('admNotice.show');
 //관리자 공지사항 수정
 Route::put('admin/notice/update/{id}', [AdminNoticeController::class , 'update'])->name('admNotice.update');
-//관리자 공지사항 수정
+//관리자 공지사항 삭제
 Route::delete('admin/notice/{id}', [AdminNoticeController::class , 'destroy'])->name('admNotice.delete');
 //관리자 공지사항 서치
 Route::get('admin/notice/search', [AdminNoticeController::class , 'search'])->name('admNotice.search');

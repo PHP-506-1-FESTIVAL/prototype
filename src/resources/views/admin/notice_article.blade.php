@@ -7,8 +7,8 @@
         <div class="col-12">
             <div class="search-input">
             <h6 class="mb-2">작성자</h6>
-            <a href="javascript:popup({{$notice->notice_id}})">
-                <h6 style="font-weight:100;">{{$notice->notice_id}}</h6>
+            <a href="javascript:popup({{$notice->admin_id}})">
+                <h6 style="font-weight:100;">{{$notice->admin_id}}</h6>
             </a>
             </div>
         </div>

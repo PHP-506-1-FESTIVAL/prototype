@@ -48,14 +48,15 @@
                 <h5 class="card-title"><strong>공지 수정</strong></h5>
                 <!-- Quill Editor Full -->
                 <div class="content-box">
-                    <form action="{{route('admNotice.store')}}" method="post" id="notice" class="notic-content">
+                    <form action="{{route('admNotice.update',['id'=>$data->notice_id])}}" method="post" id="notice" class="notic-content">
                         @csrf
+                        @method('put')
                         {{-- <label for="title">제목 : </label>
                         <input type="text" name="title" placeholder="제목" id="title"> --}}
                         <div class="row mb-3 title-box">
                             <label for="inputText" class="col-sm-1 col-form-label">제 목:</label>
                             <div class="col-sm-11">
-                                <input type="text" class="form-control" name="title" value="{{$data->notice_title}}">
+                                <input type="text" class="form-control" name="title" id="inputText" value="{{$data->notice_title}}">
                             </div>
                         </div>
                         <div id="editor">{{-- ----- 230720 add Quill추가 신유진 ----- --}}
