@@ -22,7 +22,9 @@ class User extends Authenticatable
         'user_address',
         'user_address_detail',
         'user_marketing_agreement',
-        'user_email_agreement'
+        'user_email_agreement',
+        'termsagree',
+        'privacyagree'
     ];
 
     protected $primaryKey = 'user_id';

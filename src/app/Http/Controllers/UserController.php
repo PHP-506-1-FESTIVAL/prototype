@@ -327,6 +327,8 @@ class UserController extends Controller
         $data['user_email_agreement'] = session()->get('promotion');
         $data['termsagree'] = session()->get('termsagree');
         $data['privacyagree'] = session()->get('privacyagree');
+        // dump($data);
+        // exit;
 
         $user = User::create($data);
 

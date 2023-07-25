@@ -65,7 +65,11 @@
                         @auth
                         <li class="dropdown list-group-item" style="border:none;">
                             <a class="dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/img/profile/{{session()->get('user_profile')}}" alt="" class="img-thumbnail img-fluid" style="width:50px;height:50px;border-radius:50%;border:none;object-fit:cover;">
+                                @if (session('kakao_flg') === '1')
+                                    <img src="{{session()->get('user_profile')}}" alt="" class="img-thumbnail img-fluid" style="width:50px;height:50px;border-radius:50%;border:none;object-fit:cover;">
+                                @else
+                                    <img src="/img/profile/{{session()->get('user_profile')}}" alt="" class="img-thumbnail img-fluid" style="width:50px;height:50px;border-radius:50%;border:none;object-fit:cover;">
+                                @endif
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="padding: 0;">
                                 <li>
@@ -136,5 +140,5 @@
         // 에러는 alert로 처리
         .catch(error => alert(error.message));
     };
-    
+
 </script>
