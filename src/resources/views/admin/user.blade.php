@@ -107,7 +107,7 @@
                                           <div class="search-input">
                                               <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
                                               <select name="category" id="category" required>
-                                                  <option value="" selected disabled>신고 사유 선택</option>
+                                                  <option value="" selected disabled>블랙 사유 선택</option>
                                                   <option value="0">신고 누적</option>
                                                   <option value="1">이상 패턴으로 감지</option>
                                                   <option value="2">블랙리스트로 등록된 고객과 동일 IP인 경우</option>
