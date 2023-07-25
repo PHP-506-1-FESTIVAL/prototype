@@ -268,6 +268,11 @@ class UserController extends Controller
      ************************************************/
 
     function termspost(Request $req) {
+        $req->validate([
+            'termsagree'=>'required|([1])',
+            'privacyagree'=>'required|([1])'
+        ]);
+
         if(!$req->marketing) {
             session()->put('marketing', '0');
         } else {
@@ -279,6 +284,9 @@ class UserController extends Controller
         } else {
             session()->put('promotion', '1');
         }
+
+        session()->put('termsagree', $req->termsagree);
+        session()->put('privacyagree', $req->privacyagree);
         session()->put('send_mail', $req->send_mail);
         // dump(session());
         return redirect()->route('user.signup');
@@ -317,6 +325,8 @@ class UserController extends Controller
         $data['user_address_detail'] = $req->address2;
         $data['user_marketing_agreement'] = session()->get('marketing');
         $data['user_email_agreement'] = session()->get('promotion');
+        $data['termsagree'] = session()->get('termsagree');
+        $data['privacyagree'] = session()->get('privacyagree');
 
         $user = User::create($data);
 
