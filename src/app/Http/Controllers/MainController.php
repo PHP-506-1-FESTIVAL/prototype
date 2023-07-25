@@ -180,7 +180,7 @@ class MainController extends Controller
         $hitsTime = now()->addMinutes(3); // 조회수 쿨타임 설정
         if (!Cookie::has($cookieName)) {
             $festhit = Festival::find($id);
-            $festhit->festival_hit++; 
+            $festhit->festival_hit++;
             Cookie::queue($cookieName, true, $hitsTime->timestamp);
             $festhit->save();
         }
@@ -208,7 +208,7 @@ class MainController extends Controller
         ->whereNull('reviews.deleted_at') // Exclude deleted reviews
         ->orderBy('reviews.updated_at', 'desc')
         ->get();
-    
+
         foreach ($reviews as $review) {
             $review->created_at = Carbon::parse($review->created_at); // created_at 컬럼을 Carbon 객체로 변환
             $review->updated_at = Carbon::parse($review->updated_at); // updated_at 컬럼을 Carbon 객체로 변환
@@ -225,7 +225,7 @@ class MainController extends Controller
         }
         if ($count_rate!==0) {
             $star_percentage=floor($sum_rate/$count_rate*20);
-            $star=($sum_rate/$count_rate);
+            $star=round($sum_rate/$count_rate,1);
         }else{
             $star_percentage=0;
         }

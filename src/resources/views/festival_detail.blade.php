@@ -212,7 +212,7 @@ height: 100%;
                     <span class="ico_star inner_star" style="width:{{$num_data['star_percentage']}}%"></span>
                 </span>
                 <span style="font-size:1.4rem; margin-left:10px;">평균:{{$num_data['star']}}점({{$num_data['count']}})건</span>
-                
+
             </div>
             {{-- 추천 목록--}}
             <div id='recommend' style="margin: 10px 0 10px 0;">
@@ -312,133 +312,133 @@ height: 100%;
             <div class="col-md-12">
                 <div class="blog-comment">
                     <ul class="comments">
-                    @foreach($reviews as $review)
-                        <li class="clearfix" id="review{{$review->review_id}}">
-                            <div class="post-comments">
-                            <img src="/img/profile/{{$review->user_profile}}" alt="" class="img-thumbnail img-fluid" style="width:40px;height:40px;border-radius:50%;border:none;object-fit:cover;">
-                            @php
-                                $likeCriteria = [
-                                    'like_experience' => '체험프로그램',
-                                    'like_theme' => '테마',
-                                    'like_mood' => '분위기',
-                                    'like_food' => '먹거리',
-                                    'like_toilet' => '화장실',
-                                    'like_parking' => '주차',
-                                    'like_cost' => '가성비',
-                                ];
-                            @endphp
-                            별점:{{ $review->rate }} 
-                            @foreach ($likeCriteria as $key => $label)
-                                @if ($review->$key == 1)
-                                    <button type="button" class="btn btn-outline-{{ $key == 'like_cost' ? 'dark' : ($key == 'like_experience' ? 'primary' : ($key == 'like_theme' ? 'secondary' : ($key == 'like_mood' ? 'success' : ($key == 'like_food' ? 'danger' : ($key == 'like_toilet' ? 'warning' : 'info'))))) }} btn-sm custom-btn" name="{{ $key }}">
-                                        <span class="txt_like">{{ $label }}</span>
-                                    </button>
-                                @endif
+                        @foreach($reviews as $review)
+                            <li class="clearfix" id="review{{$review->review_id}}">
+                                <div class="post-comments">
+                                <img src="/img/profile/{{$review->user_profile}}" alt="" class="img-thumbnail img-fluid" style="width:40px;height:40px;border-radius:50%;border:none;object-fit:cover;">
+                                @php
+                                    $likeCriteria = [
+                                        'like_experience' => '체험프로그램',
+                                        'like_theme' => '테마',
+                                        'like_mood' => '분위기',
+                                        'like_food' => '먹거리',
+                                        'like_toilet' => '화장실',
+                                        'like_parking' => '주차',
+                                        'like_cost' => '가성비',
+                                    ];
+                                @endphp
+                                별점:{{ $review->rate }}
+                                @foreach ($likeCriteria as $key => $label)
+                                    @if ($review->$key == 1)
+                                        <button type="button" class="btn btn-outline-{{ $key == 'like_cost' ? 'dark' : ($key == 'like_experience' ? 'primary' : ($key == 'like_theme' ? 'secondary' : ($key == 'like_mood' ? 'success' : ($key == 'like_food' ? 'danger' : ($key == 'like_toilet' ? 'warning' : 'info'))))) }} btn-sm custom-btn" name="{{ $key }}">
+                                            <span class="txt_like">{{ $label }}</span>
+                                        </button>
+                                    @endif
 
-                            @endforeach
-                            <p class="meta">닉네임: {{ $review->user_nickname }} 작성일: {{ $review->updated_at }}</p>
-                            <p style="padding:0 0 10px;">{{ $review->review_content }}</p>
-                                        @if(session('user_id') != $review->user_id)
-                                                <a href="javascript:popup({{$review->review_id}})">
-                                                    <i class="lni lni-alarm"></i>
-                                                    신고하기
-                                                </a>
-                                        @endif
-                            <div class="col-4" style="padding:0;">
-                        
-                                <div class="button-group" style="display: flex; gap: 5px;">
-                                <form action="{{ route('review.delete', ['id' => $review->review_id]) }}" method="post" name="removefrm_{{ $review->review_id }}">
-                                    @csrf
-                                    @method('delete')
-                                    @if(session('user_id') == $review->user_id)
-                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModalToggle_{{ $review->review_id }}">삭제</button>
-                                    @endauth
-                                    {{-- 모달창 구현 --}}
-                                    <div class="modal fade" id="exampleModalToggle_{{ $review->review_id }}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel_{{ $review->review_id }}" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalToggleLabel_{{ $review->review_id }}">삭제 확인</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    정말로 삭제 하시겠습니까?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-danger">확인</button>
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                @endforeach
+                                <p class="meta">닉네임: {{ $review->user_nickname }} 작성일: {{ $review->updated_at }}</p>
+                                <p style="padding:0 0 10px;">{{ $review->review_content }}</p>
+                                            @if(session('user_id') != $review->user_id)
+                                                    <a href="javascript:popup({{$review->review_id}})">
+                                                        <i class="lni lni-alarm"></i>
+                                                        신고하기
+                                                    </a>
+                                            @endif
+                                <div class="col-4" style="padding:0;">
 
-                            {{-- 수정 모달창 --}}
-                            @if(session('user_id') == $review->user_id)
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-update{{$review->review_id}}" onclick="changeStar({{$review->review_id}})">수정</button>
-                            @endauth
-                            <div class="modal fade" id="exampleModal-update{{$review->review_id}}" tabindex="-1" aria-labelledby="exampleModalLabel-update{{$review->review_id}}" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel-update{{$review->review_id}}">리뷰 수정</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <form class="mb-3 myform" name="myform" id="myform{{$review->review_id}}" method="" action="">
-                                            <div class="modal-body">
-                                                <div class="group_like">
-                                                    <br>
-                                                    <strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
-                                                    <br>
-                                                    <div class="box_like">
-                                                        <button type="button" class="btn btn-outline-primary" name="like_experience" id="likeBtn1{{$review->review_id}}" onclick="experience({{$review->review_id}})">
-                                                            <input type="hidden" name="like_experience" id="like_experience_input{{$review->review_id}}" value="0">
-                                                            <span class="txt_like">체험프로그램이 많아요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-secondary" name="like_theme" id="likeBtn2{{$review->review_id}}" onclick="theme({{$review->review_id}})">
-                                                            <input type="hidden" name="like_theme" id="like_theme_input{{$review->review_id}}" value="0">
-                                                            <span class="txt_like">테마가 재미있어요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-success" name="like_mood" id="likeBtn3{{$review->review_id}}" onclick="mood({{$review->review_id}})">
-                                                            <input type="hidden" name="like_mood" id="like_mood_input{{$review->review_id}}" value="0">
-                                                            <span class="txt_like">분위기가 좋아요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-danger" name="like_food" id="likeBtn4{{$review->review_id}}" onclick="food({{$review->review_id}})">
-                                                            <input type="hidden" name="like_food" id="like_food_input{{$review->review_id}}" value="0">
-                                                            <span class="txt_like">주변에 먹거리가 많아요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-warning" name="like_toilet" id="likeBtn5{{$review->review_id}}" onclick="toilet({{$review->review_id}})">
-                                                            <input type="hidden" name="like_toilet" id="like_toilet_input{{$review->review_id}}" value="0">
-                                                            <span class="txt_like">화장실이 깨끗해요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-info" name="like_parking" id="likeBtn6{{$review->review_id}}" onclick="parking({{$review->review_id}})">
-                                                            <input type="hidden" name="like_parking" id="like_parking_input{{$review->review_id}}" value="0">
-                                                            <span class="txt_like">주차가 쉬워요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-dark" name="like_cost" id="likeBtn7{{$review->review_id}}" onclick="cost({{$review->review_id}})">
-                                                            <input type="hidden" name="like_cost" id="like_cost_input{{$review->review_id}}" value="0">
-                                                            <span class="txt_like">가성비 좋아요</span>
-                                                        </button>
+                                    <div class="button-group" style="display: flex; gap: 5px;">
+                                        <form action="{{ route('review.delete', ['id' => $review->review_id]) }}" method="post" name="removefrm_{{ $review->review_id }}">
+                                            @csrf
+                                            @method('delete')
+                                            @if(session('user_id') == $review->user_id)
+                                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModalToggle_{{ $review->review_id }}">삭제</button>
+                                            @endauth
+                                            {{-- 모달창 구현 --}}
+                                            <div class="modal fade" id="exampleModalToggle_{{ $review->review_id }}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel_{{ $review->review_id }}" tabindex="-1">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalToggleLabel_{{ $review->review_id }}">삭제 확인</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            정말로 삭제 하시겠습니까?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-danger">확인</button>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                        </div>
                                                     </div>
-                                                    <input type="hidden" name="festival_id" id="festival-id-input{{$review->review_id}}" value="">
-                                                    <fieldset id="starRate{{$review->review_id}}">
-                                                        <span class="text-bold">별점을 선택해주세요</span>
-                                                        <input type="radio" name="rate" value="5" id="rate1{{$review->review_id}}"><label for="rate1{{$review->review_id}}">★</label>
-                                                        <input type="radio" name="rate" value="4" id="rate2{{$review->review_id}}"><label for="rate2{{$review->review_id}}">★</label>
-                                                        <input type="radio" name="rate" value="3" id="rate3{{$review->review_id}}"><label for="rate3{{$review->review_id}}">★</label>
-                                                        <input type="radio" name="rate" value="2" id="rate4{{$review->review_id}}"><label for="rate4{{$review->review_id}}">★</label>
-                                                        <input type="radio" name="rate" value="1" id="rate5{{$review->review_id}}"><label for="rate5{{$review->review_id}}">★</label>
-                                                    </fieldset>
-                                                    <p id="selectedRating{{$review->review_id}}"></p>
-                                                    <div>
-                                                        <textarea id="reviewcomment{{$review->review_id}}" class="col-auto form-control" name="review_content" placeholder="댓글을 입력하세요" required></textarea>
-                                                    </div>
-                                                    <br>
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="putRevieList({{$review->review_id}})">수정</button>
                                                 </div>
                                             </div>
                                         </form>
-                                        </div>
+
+                                    {{-- 수정 모달창 --}}
+                                    @if(session('user_id') == $review->user_id)
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-update{{$review->review_id}}" onclick="changeStar({{$review->review_id}})">수정</button>
+                                    @endauth
+                                    <div class="modal fade" id="exampleModal-update{{$review->review_id}}" tabindex="-1" aria-labelledby="exampleModalLabel-update{{$review->review_id}}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel-update{{$review->review_id}}">리뷰 수정</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form class="mb-3 myform" name="myform" id="myform{{$review->review_id}}" method="" action="">
+                                                    <div class="modal-body">
+                                                        <div class="group_like">
+                                                            <br>
+                                                            <strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
+                                                            <br>
+                                                            <div class="box_like">
+                                                                <button type="button" class="btn btn-outline-primary" name="like_experience" id="likeBtn1{{$review->review_id}}" onclick="experience({{$review->review_id}})">
+                                                                    <input type="hidden" name="like_experience" id="like_experience_input{{$review->review_id}}" value="0">
+                                                                    <span class="txt_like">체험프로그램이 많아요</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-outline-secondary" name="like_theme" id="likeBtn2{{$review->review_id}}" onclick="theme({{$review->review_id}})">
+                                                                    <input type="hidden" name="like_theme" id="like_theme_input{{$review->review_id}}" value="0">
+                                                                    <span class="txt_like">테마가 재미있어요</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-outline-success" name="like_mood" id="likeBtn3{{$review->review_id}}" onclick="mood({{$review->review_id}})">
+                                                                    <input type="hidden" name="like_mood" id="like_mood_input{{$review->review_id}}" value="0">
+                                                                    <span class="txt_like">분위기가 좋아요</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-outline-danger" name="like_food" id="likeBtn4{{$review->review_id}}" onclick="food({{$review->review_id}})">
+                                                                    <input type="hidden" name="like_food" id="like_food_input{{$review->review_id}}" value="0">
+                                                                    <span class="txt_like">주변에 먹거리가 많아요</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-outline-warning" name="like_toilet" id="likeBtn5{{$review->review_id}}" onclick="toilet({{$review->review_id}})">
+                                                                    <input type="hidden" name="like_toilet" id="like_toilet_input{{$review->review_id}}" value="0">
+                                                                    <span class="txt_like">화장실이 깨끗해요</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-outline-info" name="like_parking" id="likeBtn6{{$review->review_id}}" onclick="parking({{$review->review_id}})">
+                                                                    <input type="hidden" name="like_parking" id="like_parking_input{{$review->review_id}}" value="0">
+                                                                    <span class="txt_like">주차가 쉬워요</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-outline-dark" name="like_cost" id="likeBtn7{{$review->review_id}}" onclick="cost({{$review->review_id}})">
+                                                                    <input type="hidden" name="like_cost" id="like_cost_input{{$review->review_id}}" value="0">
+                                                                    <span class="txt_like">가성비 좋아요</span>
+                                                                </button>
+                                                            </div>
+                                                            <input type="hidden" name="festival_id" id="festival-id-input{{$review->review_id}}" value="">
+                                                            <fieldset id="starRate{{$review->review_id}}">
+                                                                <span class="text-bold">별점을 선택해주세요</span>
+                                                                <input type="radio" name="rate" value="5" id="rate1{{$review->review_id}}"><label for="rate1{{$review->review_id}}">★</label>
+                                                                <input type="radio" name="rate" value="4" id="rate2{{$review->review_id}}"><label for="rate2{{$review->review_id}}">★</label>
+                                                                <input type="radio" name="rate" value="3" id="rate3{{$review->review_id}}"><label for="rate3{{$review->review_id}}">★</label>
+                                                                <input type="radio" name="rate" value="2" id="rate4{{$review->review_id}}"><label for="rate4{{$review->review_id}}">★</label>
+                                                                <input type="radio" name="rate" value="1" id="rate5{{$review->review_id}}"><label for="rate5{{$review->review_id}}">★</label>
+                                                            </fieldset>
+                                                            <p id="selectedRating{{$review->review_id}}"></p>
+                                                            <div>
+                                                                <textarea id="reviewcomment{{$review->review_id}}" class="col-auto form-control" name="review_content" placeholder="댓글을 입력하세요" required></textarea>
+                                                            </div>
+                                                            <br>
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="putRevieList({{$review->review_id}})">수정</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -717,68 +717,93 @@ height: 100%;
                             tempStr+=`
                             <p class="meta">닉네임: `+res.data.user_nickname+` 작성일: `+updateTime+`</p>
                             <p>`+res.data.review_content+`</p>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-update`+res.data.review_id+`" onclick="changeStar(`+res.data.review_id+`)">수정</button>
-                            <div class="modal fade" id="exampleModal-update`+res.data.review_id+`" tabindex="-1" aria-labelledby="exampleModalLabel-update`+res.data.review_id+`" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel-update{`+res.data.review_id+`">리뷰 수정</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <form class="mb-3 myform" name="myform" id="myform`+res.data.review_id+`" method="" action="">
-                                            <div class="modal-body">
-                                                <div class="group_like">
-                                                    <br>
-                                                    <strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
-                                                    <br>
-                                                    <div class="box_like">
-                                                        <button type="button" class="btn btn-outline-primary" name="like_experience" id="likeBtn1`+res.data.review_id+`" onclick="experience(`+res.data.review_id+`)">
-                                                            <input type="hidden" name="like_experience" id="like_experience_input`+res.data.review_id+`" value="0">
-                                                            <span class="txt_like">체험프로그램이 많아요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-secondary" name="like_theme" id="likeBtn2`+res.data.review_id+`" onclick="theme(`+res.data.review_id+`)">
-                                                            <input type="hidden" name="like_theme" id="like_theme_input`+res.data.review_id+`" value="0">
-                                                            <span class="txt_like">테마가 재미있어요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-success" name="like_mood" id="likeBtn3`+res.data.review_id+`" onclick="mood(`+res.data.review_id+`)">
-                                                            <input type="hidden" name="like_mood" id="like_mood_input`+res.data.review_id+`" value="0">
-                                                            <span class="txt_like">분위기가 좋아요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-danger" name="like_food" id="likeBtn4`+res.data.review_id+`" onclick="food(`+res.data.review_id+`)">
-                                                            <input type="hidden" name="like_food" id="like_food_input`+res.data.review_id+`" value="0">
-                                                            <span class="txt_like">주변에 먹거리가 많아요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-warning" name="like_toilet" id="likeBtn5`+res.data.review_id+`" onclick="toilet(`+res.data.review_id+`)">
-                                                            <input type="hidden" name="like_toilet" id="like_toilet_input`+res.data.review_id+`" value="0">
-                                                            <span class="txt_like">화장실이 깨끗해요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-info" name="like_parking" id="likeBtn6`+res.data.review_id+`" onclick="parking(`+res.data.review_id+`)">
-                                                            <input type="hidden" name="like_parking" id="like_parking_input`+res.data.review_id+`" value="0">
-                                                            <span class="txt_like">주차가 쉬워요</span>
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-dark" name="like_cost" id="likeBtn7`+res.data.review_id+`" onclick="cost(`+res.data.review_id+`)">
-                                                            <input type="hidden" name="like_cost" id="like_cost_input`+res.data.review_id+`" value="0">
-                                                            <span class="txt_like">가성비 좋아요</span>
-                                                        </button>
-                                                    </div>
-                                                    <input type="hidden" name="festival_id" id="festival-id-input`+res.data.review_id+`" value="">
-                                                    <fieldset id="starRate`+res.data.review_id+`">
-                                                        <span class="text-bold">별점을 선택해주세요</span>
-                                                        <input type="radio" name="rate" value="5" id="rate1`+res.data.review_id+`"><label for="rate1`+res.data.review_id+`">★</label>
-                                                        <input type="radio" name="rate" value="4" id="rate2`+res.data.review_id+`"><label for="rate2`+res.data.review_id+`">★</label>
-                                                        <input type="radio" name="rate" value="3" id="rate3`+res.data.review_id+`"><label for="rate3`+res.data.review_id+`">★</label>
-                                                        <input type="radio" name="rate" value="2" id="rate4`+res.data.review_id+`"><label for="rate4`+res.data.review_id+`">★</label>
-                                                        <input type="radio" name="rate" value="1" id="rate5`+res.data.review_id+`"><label for="rate5`+res.data.review_id+`">★</label>
-                                                    </fieldset>
-                                                    <p id="selectedRating`+res.data.review_id+`"></p>
-                                                    <div>
-                                                        <textarea id="reviewcomment`+res.data.review_id+`" class="col-auto form-control" name="review_content" placeholder="댓글을 입력하세요" required></textarea>
-                                                    </div>
-                                                    <br>
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="putRevieList(`+res.data.review_id+`)">수정</button>
+
+                            <div class="button-group" style="display: flex; gap: 5px;">
+                                <form action="http://localhost/review/delete/`+res.data.review_id+`" method="post" name="removefrm_`+res.data.review_id+`">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModalToggle_`+res.data.review_id+`">삭제</button>
+                                    <div class="modal fade" id="exampleModalToggle_`+res.data.review_id+`" aria-hidden="true" aria-labelledby="exampleModalToggleLabel_`+res.data.review_id+`" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalToggleLabel_`+res.data.review_id+`">삭제 확인</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    정말로 삭제 하시겠습니까?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger">확인</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
+                                    </div>
+                                </form>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-update`+res.data.review_id+`" onclick="changeStar(`+res.data.review_id+`)">수정</button>
+                                <div class="modal fade" id="exampleModal-update`+res.data.review_id+`" tabindex="-1" aria-labelledby="exampleModalLabel-update`+res.data.review_id+`" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel-update{`+res.data.review_id+`">리뷰 수정</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form class="mb-3 myform" name="myform" id="myform`+res.data.review_id+`" method="" action="">
+                                                <div class="modal-body">
+                                                    <div class="group_like">
+                                                        <br>
+                                                        <strong class="tit_group">이 장소의 추천포인트는?<span class="txt_guide">(중복선택 가능)</span></strong>
+                                                        <br>
+                                                        <div class="box_like">
+                                                            <button type="button" class="btn btn-outline-primary" name="like_experience" id="likeBtn1`+res.data.review_id+`" onclick="experience(`+res.data.review_id+`)">
+                                                                <input type="hidden" name="like_experience" id="like_experience_input`+res.data.review_id+`" value="0">
+                                                                <span class="txt_like">체험프로그램이 많아요</span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-secondary" name="like_theme" id="likeBtn2`+res.data.review_id+`" onclick="theme(`+res.data.review_id+`)">
+                                                                <input type="hidden" name="like_theme" id="like_theme_input`+res.data.review_id+`" value="0">
+                                                                <span class="txt_like">테마가 재미있어요</span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-success" name="like_mood" id="likeBtn3`+res.data.review_id+`" onclick="mood(`+res.data.review_id+`)">
+                                                                <input type="hidden" name="like_mood" id="like_mood_input`+res.data.review_id+`" value="0">
+                                                                <span class="txt_like">분위기가 좋아요</span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-danger" name="like_food" id="likeBtn4`+res.data.review_id+`" onclick="food(`+res.data.review_id+`)">
+                                                                <input type="hidden" name="like_food" id="like_food_input`+res.data.review_id+`" value="0">
+                                                                <span class="txt_like">주변에 먹거리가 많아요</span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-warning" name="like_toilet" id="likeBtn5`+res.data.review_id+`" onclick="toilet(`+res.data.review_id+`)">
+                                                                <input type="hidden" name="like_toilet" id="like_toilet_input`+res.data.review_id+`" value="0">
+                                                                <span class="txt_like">화장실이 깨끗해요</span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-info" name="like_parking" id="likeBtn6`+res.data.review_id+`" onclick="parking(`+res.data.review_id+`)">
+                                                                <input type="hidden" name="like_parking" id="like_parking_input`+res.data.review_id+`" value="0">
+                                                                <span class="txt_like">주차가 쉬워요</span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-dark" name="like_cost" id="likeBtn7`+res.data.review_id+`" onclick="cost(`+res.data.review_id+`)">
+                                                                <input type="hidden" name="like_cost" id="like_cost_input`+res.data.review_id+`" value="0">
+                                                                <span class="txt_like">가성비 좋아요</span>
+                                                            </button>
+                                                        </div>
+                                                        <input type="hidden" name="festival_id" id="festival-id-input`+res.data.review_id+`" value="">
+                                                        <fieldset id="starRate`+res.data.review_id+`">
+                                                            <span class="text-bold">별점을 선택해주세요</span>
+                                                            <input type="radio" name="rate" value="5" id="rate1`+res.data.review_id+`"><label for="rate1`+res.data.review_id+`">★</label>
+                                                            <input type="radio" name="rate" value="4" id="rate2`+res.data.review_id+`"><label for="rate2`+res.data.review_id+`">★</label>
+                                                            <input type="radio" name="rate" value="3" id="rate3`+res.data.review_id+`"><label for="rate3`+res.data.review_id+`">★</label>
+                                                            <input type="radio" name="rate" value="2" id="rate4`+res.data.review_id+`"><label for="rate4`+res.data.review_id+`">★</label>
+                                                            <input type="radio" name="rate" value="1" id="rate5`+res.data.review_id+`"><label for="rate5`+res.data.review_id+`">★</label>
+                                                        </fieldset>
+                                                        <p id="selectedRating`+res.data.review_id+`"></p>
+                                                        <div>
+                                                            <textarea id="reviewcomment`+res.data.review_id+`" class="col-auto form-control" name="review_content" placeholder="댓글을 입력하세요" required></textarea>
+                                                        </div>
+                                                        <br>
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" onclick="putRevieList(`+res.data.review_id+`)">수정</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
