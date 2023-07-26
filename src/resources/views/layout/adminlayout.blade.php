@@ -294,7 +294,7 @@
       @auth
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href='/api/store'>
           <i class="bi bi-download"></i>
           <span>축제목록 갱신</span>
         </a>
