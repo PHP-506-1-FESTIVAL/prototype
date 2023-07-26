@@ -31,7 +31,6 @@
         height: 5vh;
     }
 </style>
-{{-- @dump($data) --}}
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>공지 관리</h1>
