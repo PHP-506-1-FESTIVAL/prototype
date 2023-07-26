@@ -125,7 +125,7 @@
                 </tbody>
             </table>
             <!-- End Table with stripped rows -->
-            {!! $notice->links('vendor.pagination.custom2') !!}
+            {!! $notice->appends(request()->input())->links('vendor.pagination.custom2') !!}
         </div>
     </main>
     <script>

@@ -20,7 +20,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><strong>유저 관리</strong></h5>
-            
+
             {{-- 검색창 --}}
             <div id="header" class="header" style="box-shadow: 0px 0px 0px; width:360px;">
               <div class="search-bar">
@@ -151,7 +151,7 @@
                 @endforeach
               </tbody>
             </table>
-            {!! $users->links('vendor.pagination.custom2') !!}
+            {!! $users->appends(request()->input())->links('vendor.pagination.custom2') !!}
           </div>
         </div>
       </div>
