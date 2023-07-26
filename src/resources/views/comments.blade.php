@@ -3,8 +3,6 @@
 @section('title','작성 댓글 목록')
 
 @section('content')
-
-    <!-- Start Breadcrumbs -->
     <div class="breadcrumbs">
         <div class="container">
             <div class="row align-items-center">
@@ -22,13 +20,11 @@
             </div>
         </div>
     </div>
-    <!-- End Breadcrumbs -->
 
     <section class="dashboard section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12">
-                    <!-- Start Dashboard Sidebar -->
                     <div class="dashboard-sidebar">
                         <div class="user-image">
                             @if (session('kakao_flg')==='1')
@@ -56,15 +52,12 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Start Dashboard Sidebar -->
                 </div>
                 <div class="col-lg-9 col-md-12 col-12">
                     <div class="main-content">
                         <div class="dashboard-block mt-0">
                             <h3 class="block-title">작성 댓글 목록</h3>
-                            <!-- Start Items Area -->
                             <div class="my-items">
-                                <!-- Start List Title -->
                                 <div class="item-list-title">
                                     <div class="row align-items-center">
                                         <div class="col-lg-2 col-md-3 col-12">
@@ -81,9 +74,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End List Title -->
                                 @forelse($data as $key => $val)
-                                <!-- Start Single List -->
                                 <div class="single-item-list">
                                     <div class="row align-items-center">
                                         <div class="col-lg-2 col-md-3 col-12">
@@ -100,9 +91,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Single List -->
                                 @empty
-                                <!-- Start Single List -->
                                 <div class="single-item-list">
                                     <div class="row align-items-center">
                                         <div class="col-lg-2 col-md-3 col-12">
@@ -119,18 +108,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Single List -->
                                 @endforelse
                                 {{-- 커스텀 페이지네이션 --}}
                                 {!! $data->links('vendor.pagination.custom') !!}
                             </div>
-                            <!-- End Items Area -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Dashboard Section -->
 
 @endsection

@@ -488,23 +488,17 @@ height: 100%;
 
         document.getElementById("festival-id-input").value = numericPart;
     </script>
-<!-- Include this script in your HTML file -->
 <script>
-    // Function to handle button click
     function handleButtonClick(buttonId) {
-        // Get the corresponding input element
         var inputElement = document.getElementById(buttonId);
 
-        // Check if the input element exists
         if (inputElement.value==='0') {
-            // Set the value to "1"
             inputElement.value = "1";
         }else{
             inputElement.value = "0";
         }
     }
     function toggleActiveClass(buttonId) {
-        // Add active class to the clicked button
         const button = document.getElementById(buttonId);
         if (button.classList[2]==='active') {
             button.classList.remove('active')
@@ -513,7 +507,6 @@ height: 100%;
         }
     }
 
-    // Add click event listeners to all buttons
     document.getElementById('likeBtn1').addEventListener('click', function () {
         handleButtonClick('like_experience_input');
         toggleActiveClass('likeBtn1');
@@ -552,12 +545,9 @@ height: 100%;
     // Function to handle button click 수정
     //--------------------------------------
     function handleButtonClickChang(buttonId) {
-        // Get the corresponding input element
         var inputElement = document.getElementById(buttonId);
 
-        // Check if the input element exists
         if (inputElement.value==='0') {
-            // Set the value to "1"
             inputElement.value = "1";
         }else{
             inputElement.value = "0";
@@ -565,7 +555,6 @@ height: 100%;
     }
 
     function toggleActiveClassChang(buttonId) {
-        // Add active class to the clicked button
         const button = document.getElementById(buttonId);
         if (button.classList[2]==='active') {
             button.classList.remove('active')
@@ -574,7 +563,6 @@ height: 100%;
         }
     }
 
-    // Add click event listeners to all buttons
     function experience(reviewId) {
         handleButtonClickChang('like_experience_input'+reviewId);
         toggleActiveClassChang('likeBtn1'+reviewId);
@@ -860,5 +848,4 @@ height: 100%;
         }
 </script>
 </section>
-{{-- <script src="{{asset('js/festival.js')}}"></script> --}}
 @endsection

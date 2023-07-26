@@ -12,29 +12,6 @@ use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 class ReviewController extends Controller
 {
-    // public function create(Request $request)
-    // {
-    // if (!Auth::check()) {
-    //     return redirect()->route('user.login');
-    // }
-
-    // $review = new Review();
-    // $review->user_id = Auth::id();
-    // $review->festival_id = $request->input('festival_id');
-    // $review->review_content = $request->input('review_content');
-    // $review->review_img = $request->input('review_img');
-    // $review->rate = $request->input('rate');
-    // $review->like_experience = $request->input('like_experience');
-    // $review->like_theme = $request->input('like_theme');
-    // $review->like_mood = $request->input('like_mood');
-    // $review->like_food = $request->input('like_food');
-    // $review->like_toilet = $request->input('like_toilet');
-    // $review->like_parking = $request->input('like_parking');
-    // $review->like_cost = $request->input('like_cost');
-    // $review->save();
-
-    // return redirect()->back()->with('review', $review);
-    // }
     public function create(Request $request)
     {
         if (!Auth::check()) {
@@ -45,7 +22,6 @@ class ReviewController extends Controller
         $review->user_id = Auth::id();
         $review->festival_id = $request->input('festival_id');
         $review->review_content = $request->input('review_content');
-        // $review->review_img = $request->input('review_img');
         $review->rate = $request->input('rate');
         $review->like_experience = $request->input('like_experience');
         $review->like_theme = $request->input('like_theme');

@@ -61,7 +61,6 @@
                     <td>{{ $user->user_gender == 0 ? '남자' : '여자' }}</td>
                     <td>{{ $user->user_birthdate }}</td>
                     <td>{{ $user->user_nickname }}</td>
-                    {{-- <td><img src="/img/profile/{{ $user->user_profile }}" alt="" class="img-thumbnail img-fluid" style="width:30px;height:30px;border-radius:50%;border:none;object-fit:cover;"></td> --}}
                     <td>{{ $user->user_address }}</td>
                     <td>{{ $user->user_address_detail }}</td>
                     <td>{{ $user->user_zipcode }}</td>
@@ -70,27 +69,6 @@
                     <td>{{ $user->created_at->format('y-m-d') }}</td>
                     <td>
                       <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $user->user_id }}">정지</button>
-                      {{-- <div class="modal fade" id="basicModal{{ $user->user_id }}" tabindex="-1">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title">블랙리스트</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              해당 유저를 블랙리스트 처리하시겠습니까?
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
-                              <form action="{{ route('admin.userpost', ['id' => $user->user_id]) }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="user_id" value="{{  $user->user_id }}">
-                                <button type="submit" class="btn btn-danger">네</button>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div> --}}
                       <div class="modal fade" id="basicModal{{ $user->user_id }}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
@@ -120,16 +98,8 @@
                                           <div class="search-input">
                                               <label for="detail"><i class="lni lni-pencil-alt theme-color"></i></label>
                                               <input type="text" name="detail" id="detail" placeholder="상세 내용 입력" size=37 maxlength =500>
-                                              {{-- <input type="hidden" name="type" value="{{$type}}"> --}}
-                                              {{-- <input type="hidden" name="no" value="{{$no}}"> --}}
                                           </div>
                                       </div>
-                                      {{-- <div class="col-12">
-                                          <div class="search-btn button">
-                                              <button class="btn" type="submit"><i class="lni lni-telegram-original"></i> 보내기</button>
-                                              <button type="submit" class="btn btn-danger" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">네</button>
-                                          </div>
-                                      </div> --}}
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
                                         <form action="{{ route('admin.userpost', ['id' => $user->user_id]) }}" method="POST">
@@ -142,8 +112,6 @@
                                   </div>
                               </form>
                             </div>
-
-
                         </div>
                       </div>
                     </td>
@@ -158,5 +126,4 @@
     </div>
   </section>
 </main>
-
 @endsection

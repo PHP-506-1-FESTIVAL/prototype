@@ -1,5 +1,10 @@
 <?php
-
+/************************************************
+ * 프로젝트명   : festival_info
+ * 디렉토리     : Controllers
+ * 파일명       : ReviewApiController.php
+ * 이력         : v002 0720 박진영 new
+ ************************************************/
 namespace App\Http\Controllers;
 
 use App\Models\Review;
