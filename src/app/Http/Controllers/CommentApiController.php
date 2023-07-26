@@ -14,8 +14,6 @@ class CommentApiController extends Controller
      */
     public function boardComment($board_id)
     {
-        // dump($id);
-        // exit;
         $comment=Comment::where('board_id',$board_id)->get();
         return $comment;
     }
@@ -28,8 +26,6 @@ class CommentApiController extends Controller
      */
     public function store(Request $req,$board_id)
     {
-        // dump($req);
-        // exit;
         $comment=new Comment;
         $comment->board_id=$board_id;
         $comment->user_id=$req->user;

@@ -288,7 +288,6 @@ class UserController extends Controller
         session()->put('termsagree', $req->termsagree);
         session()->put('privacyagree', $req->privacyagree);
         session()->put('send_mail', $req->send_mail);
-        // dump(session());
         return redirect()->route('user.signup');
     }
 
@@ -301,15 +300,12 @@ class UserController extends Controller
 
         // 유효성검사
         $req->validate([
-            // 'email' => 'required|regex:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i|max:320'
-            // ,
             'password' => 'required|regex:/(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{2,20}).{8,20}$/'
             ,'name' => 'required'
             ,'gender' => 'required'
             ,'birthyear' => 'required'
             ,'birthmonth' => 'required'
             ,'birthday' => 'required'
-            // ,'nickname' => 'required|regex:/^[a-zA-Z가-힣]{2,10}$/'
             ,'nickname' => 'required'
             ,'image' => 'image|mimes:png,jpg,jpeg|max:2048'
         ]);
@@ -327,8 +323,6 @@ class UserController extends Controller
         $data['user_email_agreement'] = session()->get('promotion');
         $data['termsagree'] = session()->get('termsagree');
         $data['privacyagree'] = session()->get('privacyagree');
-        // dump($data);
-        // exit;
 
         $user = User::create($data);
 

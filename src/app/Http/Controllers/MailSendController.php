@@ -41,15 +41,11 @@ class MailSendController extends Controller
      */
     public function registMail(Request $req)
     {
-
-        // dump($req);
-        // dump($req->user);
         $req->validate([
             'email' => 'required|regex:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i|max:320'
         ]);
 
         $data=User::all()->where('user_email',$req->email)->count('*');
-        // dump($data);
         if ($data!==0) {
             $error = '이미 존재한 이메일입니다';
             return redirect()->back()->with('error', $error);
@@ -68,15 +64,11 @@ class MailSendController extends Controller
     }
     public function findMail(Request $req)
     {
-
-        // dump($req);
-        // dump($req->user);
         $req->validate([
             'email' => 'required|regex:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i|max:320'
         ]);
 
         $data=User::all()->where('user_email',$req->email)->count('*');
-        // dump($data);
         if ($data===0) {
             $error = '존재하지않는 이메일입니다';
             return redirect()->back()->with('error', $error);
@@ -97,9 +89,7 @@ class MailSendController extends Controller
     function mailIC($id) {
 
         $data=RegistToken::select('send_mail','send_timer','mail_flg','mail_token')->where('mail_token',$id)->first();
-        // dump($data[0]->send_timer);
         $now=Carbon::now();
-        // dump($now);
         $user=User::where('user_email',$data->send_mail)->first();
         if ($data->send_timer<$now) {
             return view('errors.expirationToken'); //todo 토큰만료 페이지
