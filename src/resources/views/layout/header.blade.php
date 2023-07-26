@@ -19,9 +19,6 @@
                                 <li class="nav-item">
                                     <a href="{{route('main')}}" aria-label="Toggle navigation">메인</a>
                                 </li>
-                                {{-- <li class="nav-item">                                                          230718 del 신유진
-                                    <a href="{{route('main.fesList')}}" aria-label="Toggle navigation">축제일정</a>
-                                </li> --}}
                                 <li class="nav-item">{{--                                                           230718 add start 신유진 --}}
                                     <a class="dd-menu collapsed" href="javascript:void(0)"
                                         data-bs-toggle="collapse" data-bs-target="#submenu-1-3"

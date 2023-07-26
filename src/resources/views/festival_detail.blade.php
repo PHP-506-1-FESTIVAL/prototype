@@ -455,16 +455,12 @@ height: 100%;
     {{-- 별점 스크립트 --}}
     <script>
         const radioButtons = document.getElementById('starRate').querySelectorAll('input[name="rate"]');
-        // const starRate=document.getElementById('starRate')
         radioButtons.forEach((radio) => {
             radio.addEventListener('change', (event) => {
                 const selectedRating = document.getElementById('selectedRating');
                 selectedRating.textContent = `선택한 별점: ${event.target.value}/5`;
             });
         });
-        for (let index = 1; index < starRate.length; index+=2+index) {
-            console.log(index);
-        }
         // ====================
         // 수정 별점
         // ====================
