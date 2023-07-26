@@ -38,7 +38,7 @@ class FavoriteSendMailCommand extends Command
         $timer=Carbon::now()->addWeek(1)->format('Y-m-d');
         $temp_fesId = DB::table('favorites')
                 ->join('festivals', 'favorites.festival_id', '=', 'festivals.festival_id' )
-                ->select('*')->where('festival_start_date','<',$timer)->get();
+                ->select('*')->where('festival_start_date',$timer)->get();
         // dump($temp_fesId);
         // dump($timer);
         $i=0;
