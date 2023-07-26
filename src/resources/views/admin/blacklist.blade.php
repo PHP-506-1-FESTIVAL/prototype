@@ -21,15 +21,6 @@
                     <div class="card-body">
                         <h5 class="card-title"><strong>블랙리스트 관리</strong></h5>
                         
-                        {{-- 검색창 --}}
-                        {{-- <header id="header" class="header">
-                        <div class="search-bar" >
-                            <form class="search-form d-flex align-items-center" method="POST" action="{{ route('admin.search') }}">
-                                @csrf
-                                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-                            </form>
-                        </div> --}}
                         <br><br>
 
                         {{-- 블랙리스트 목록 --}}
@@ -85,10 +76,6 @@
                                         <br>
                                         ({{ $user->blacklist_detail }})
                                     </td>
-                                    {{-- <td><img src="/img/profile/{{ $user->user_profile }}" alt="" class="img-thumbnail img-fluid" style="width:30px;height:30px;border-radius:50%;border:none;object-fit:cover;"></td> --}}
-                                    {{-- <td>{{ $user->user_address }}</td> --}}
-                                    {{-- <td>{{ $user->user_address_detail }}</td> --}}
-                                    {{-- <td>{{ $user->user_zipcode }}</td> --}}
                                     <td>{{ $user->user_marketing_agreement == 1 ? '동의' : '비동의' }}</td>
                                     <td>{{ $user->user_email_agreement == 1 ? '동의' : '비동의' }}</td>
                                     <td>{{ $user->banned_at}}</td>

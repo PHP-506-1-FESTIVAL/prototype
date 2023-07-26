@@ -94,7 +94,8 @@
                   </div>
                   <div class="ps-3">
                     <h6>{{ $festivaldatacount }}</h6>
-                    {{-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
+                    {{-- <span class="text-success small pt-1 fw-bold">8%</span>  --}}
+                    <span class="text-muted small pt-2 ps-1">Last update : 23.07.26</span>
                     <br>
 
                   </div>
@@ -135,9 +136,8 @@
                     <h6>{{ $boarddatacount }}</h6>
                     <span class="text-muted small pt-2 ps-1">새글</span>
                     {{-- <span class="text-success small pt-1 fw-bold">{{ ROUND(((($useralldatacount-$userdatacount)*100)/( $useralldatacount)),1) }}%({{$useralldatacount-$userdatacount}})</span><span class="text-muted small pt-2 ps-1">추가 회원수</span> --}}
-                  
-                    <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
+                    <span class="text-danger small pt-1 fw-bold">12%</span>
+                    {{-- <span class="text-muted small pt-2 ps-1">decrease</span> --}}
                   </div>
                 </div>
 
@@ -173,13 +173,13 @@
                   document.addEventListener("DOMContentLoaded", () => {
                     new ApexCharts(document.querySelector("#reportsChart"), {
                       series: [{
-                        name: 'Sales',
+                        name: '회원',
                         data: [31, 40, 28, 51, 42, 82, 56],
                       }, {
-                        name: 'Revenue',
+                        name: '축제',
                         data: [11, 32, 45, 32, 34, 52, 41]
                       }, {
-                        name: 'Customers',
+                        name: '게시글',
                         data: [15, 11, 32, 18, 9, 24, 11]
                       }],
                       chart: {
@@ -421,27 +421,27 @@
                   radar: {
                     // shape: 'circle',
                     indicator: [{
-                        name: 'Sales',
+                        name: '대구',
                         max: 6500
                       },
                       {
-                        name: 'Administration',
+                        name: '서울',
                         max: 16000
                       },
                       {
-                        name: 'Information Technology',
+                        name: '경기',
                         max: 30000
                       },
                       {
-                        name: 'Customer Support',
+                        name: '부산',
                         max: 38000
                       },
                       {
-                        name: 'Development',
+                        name: '제주',
                         max: 52000
                       },
                       {
-                        name: 'Marketing',
+                        name: '광주',
                         max: 25000
                       }
                     ]

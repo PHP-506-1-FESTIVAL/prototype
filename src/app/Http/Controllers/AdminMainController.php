@@ -48,8 +48,6 @@ class AdminMainController extends Controller
             return redirect()->route('admin.login');
         }
 
-        // 메인 화면에 나올 data
-        // $data = [];
         // 회원 all
         $userdata = User::all();
         $userdatacount = $userdata->count();
@@ -72,8 +70,6 @@ class AdminMainController extends Controller
         // ->get()
         // ;
 
-        // dump($festivaltop10);
-
         // 게시글 all
         $board = Board::all();
         // 게시글 정렬
@@ -81,7 +77,6 @@ class AdminMainController extends Controller
         // 메인의 게시글 5개
         $boarddata = DB::table('boards')
         ->join('users', 'boards.user_id', '=', 'users.user_id' )
-        // ->select('boards.board_id', 'users.user_nickname', 'boards.board_title', 'boards.board_content', 'boards.created_at', 'boards.updated_at', 'boards.deleted_at', 'boards.board_hit')
         ->select('*')
         ->where('boards.deleted_at', null)
         ->orderBy('boards.board_id', 'DESC')
@@ -89,7 +84,6 @@ class AdminMainController extends Controller
         $boarddatacount = $board->count();
 
         // 신고관리
-        $report = Report::all();
         $reportdata = DB::table('reports')
         ->select('*')
         ->where('deleted_at', null)
@@ -111,7 +105,6 @@ class AdminMainController extends Controller
         ->with('userdatacount', $userdatacount)
         ->with('festivaldatacount', $festivaldatacount)
         ->with('festivaltop10', $festivaltop10)
-        // ->with('festivalarea_code', $festivalarea_code)
         ->with('boarddata', $boarddata)
         ->with('boarddatacount', $boarddatacount)
         ->with('reporthandle_flg0', $reporthandle_flg0)
