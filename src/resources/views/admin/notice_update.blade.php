@@ -12,13 +12,7 @@
     }
     .notic-content{
         grid-area: 1/1/2/4;
-        /* display: grid;
-        grid-template-rows: 5vh 5vh 1fr;
-        grid-template-columns: 5vh 1fr; */
     }
-    /* .ql-toolbar ql-snow{
-        grid-area: 2/1/4/3;
-    } */
     #editor{
         height: 80%;
         border-radius: 0 0 5px 5px
