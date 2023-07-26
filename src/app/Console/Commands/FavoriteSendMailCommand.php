@@ -35,7 +35,7 @@ class FavoriteSendMailCommand extends Command
     {
         // $a='';
         // Mail::to('test123@aa.aa')->send(new RegisMail($a));
-        $timer=Carbon::now()->addMonth(1)->format('Y-m-d');
+        $timer=Carbon::now()->addWeek(1)->format('Y-m-d');
         $temp_fesId = DB::table('favorites')
                 ->join('festivals', 'favorites.festival_id', '=', 'festivals.festival_id' )
                 ->select('*')->where('festival_start_date','<',$timer)->get();
