@@ -330,6 +330,14 @@
       </li><!-- End Profile Page Nav --> --}}
 
       @auth
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="">
+          <i class="bi bi-download"></i>
+          <span>축제목록 갱신</span>
+        </a>
+      </li>
+
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('admin.logout') }}">
           <i class="bi bi-arrow-left-square"></i>
