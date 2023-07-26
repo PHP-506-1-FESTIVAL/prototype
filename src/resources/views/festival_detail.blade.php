@@ -670,7 +670,7 @@ height: 100%;
                     tempStr+=`
                         <div class="post-comments">
                             <img src="/img/profile/`+res.data.user_profile+`" alt="" class="img-thumbnail img-fluid" style="width:40px;height:40px;border-radius:50%;border:none;object-fit:cover;">
-                            별점:`+res.data.rate;
+                            별점:`+res.data.rate+` `;
 
                             if (res.data.like_experience==="1") {
                                 tempStr+=
@@ -815,14 +815,14 @@ height: 100%;
                 <span class="ico_star star_rate">
                         <span class="ico_star inner_star" style="width:`+res.data.star_percentage+`%"></span>
                 </span>
-                <span>평균:`+res.data.star+`점(`+res.data.count+`)건</span>
+                <span style="font-size:1.4rem; margin-left:10px;">평균:`+res.data.star+`점(`+res.data.count+`)건</span>
                 `;
                 star.innerHTML=starStr;
             //테마
             const recommend=document.getElementById('recommend');
             let recStr=`
             <button type="button" class="btn btn-outline-primary btn-sm custom-btn">
-                    <span class="txt_like">체험프로그램이 많아요 (`+res.data.experienceCnt+`})</span>
+                    <span class="txt_like">체험프로그램이 많아요 (`+res.data.experienceCnt+`)</span>
                 </button>
                 <button type="button" class="btn btn-outline-secondary btn-sm custom-btn" name="like_theme">
                     <span class="txt_like">테마가 재미있어요 (`+res.data.themeCnt+`)</span>
