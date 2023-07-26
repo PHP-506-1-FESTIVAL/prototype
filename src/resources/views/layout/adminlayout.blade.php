@@ -28,47 +28,36 @@
 
   <!-- Include stylesheet --> {{-- ----- 230720 add Quill추가 신유진 ----- --}}
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
 </head>
-
 <body id="body">
-
-  <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
-
     <div class="d-flex align-items-center justify-content-between">
       <a href="{{route('admin.main')}}" class="logo d-flex align-items-center">
         <img src="/assets/images/favicon.png" alt="">
         <span class="d-none d-lg-block">MSGS Admin</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn" id="togglebtn"></i>
-    </div><!-- End Logo -->
-
+    </div>
     <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
-    </div><!-- End Search Bar -->
-
+    </div>
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-
         <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
           </a>
-        </li><!-- End Search Icon-->
+        </li>
         @auth
         <li class="nav-item dropdown">
-
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-          
+          </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               You have 4 new notifications
@@ -77,7 +66,6 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li class="notification-item">
               <i class="bi bi-exclamation-circle text-warning"></i>
               <div>
@@ -86,11 +74,9 @@
                 <p>30 min. ago</p>
               </div>
             </li>
-
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li class="notification-item">
               <i class="bi bi-x-circle text-danger"></i>
               <div>
@@ -99,11 +85,9 @@
                 <p>1 hr. ago</p>
               </div>
             </li>
-
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li class="notification-item">
               <i class="bi bi-check-circle text-success"></i>
               <div>
@@ -112,11 +96,9 @@
                 <p>2 hrs. ago</p>
               </div>
             </li>
-
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li class="notification-item">
               <i class="bi bi-info-circle text-primary"></i>
               <div>
@@ -125,25 +107,19 @@
                 <p>4 hrs. ago</p>
               </div>
             </li>
-
             <li>
               <hr class="dropdown-divider">
             </li>
             <li class="dropdown-footer">
               <a href="#">Show all notifications</a>
             </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
+          </ul>
+        </li>
         <li class="nav-item dropdown">
-
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
             <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
+          </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
               You have 3 new messages
@@ -152,7 +128,6 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li class="message-item">
               <a href="#">
                 <img src="/assets/img/messages-1.jpg" alt="" class="rounded-circle">
@@ -166,7 +141,6 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li class="message-item">
               <a href="#">
                 <img src="/assets/img/messages-2.jpg" alt="" class="rounded-circle">
@@ -180,7 +154,6 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li class="message-item">
               <a href="#">
                 <img src="/assets/img/messages-3.jpg" alt="" class="rounded-circle">
@@ -194,23 +167,16 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li class="dropdown-footer">
               <a href="#">Show all messages</a>
             </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-          
-          
-        </li><!-- End Messages Nav -->
-
+          </ul>
+        </li>
         <li class="nav-item dropdown pe-3">
-
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7SEwUFfhhkTqeqiezDsWUO75RWZHb5EgYFGUUyeL3K6ePOK4Qu4O_RhdRpKvZ2zyU1xI&usqp=CAU" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ session('admin_name') }}</span>
-          </a><!-- End Profile Iamge Icon -->
-
+          </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{ session('admin_name') }}</h6>
@@ -219,7 +185,6 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li>
                 <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.logout') }}">
                     <i class="bi bi-box-arrow-right"></i>
@@ -227,15 +192,11 @@
                 </a>
             </li>
           @endauth
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
+          </ul>
+        </li>
       </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
+    </nav>
+  </header>
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
@@ -245,61 +206,39 @@
           <i class="bi bi-grid"></i>
           <span>메인페이지</span>
         </a>
-      </li><!-- End Dashboard Nav -->
-
-      {{-- <li class="nav-item">  ----- 230718 del start 신유진 -----
-        <a class="nav-link collapsed" href="{{ route('admin.request') }}">
-          <i class="bi bi-clipboard-plus"></i>
-          <span>축제 요청 관리</span>
-        </a>
-      </li><!-- End Dashboard Nav --> --}}
-
+      </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('admin.user') }}">
           <i class="bi bi-people"></i>
           <span>회원 관리</span>
         </a>
-      </li><!-- End Dashboard Nav -->
-
+      </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('admin.blacklist') }}">
           <i class="bi bi-person-x"></i>
           <span>블랙리스트 목록</span>
         </a>
-      </li><!-- End Dashboard Nav -->
-
+      </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('admin.report') }}">
           <i class="bi bi-bell"></i>
           <span>신고 관리</span>
         </a>
-      </li><!-- End Dashboard Nav -->
-
+      </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.notice')}}">
           <i class="bi bi-megaphone"></i>
           <span>공지 사항</span>
         </a>
-      </li><!-- End Dashboard Nav -->
-
+      </li>
       <hr>
-
-      {{-- <li class="nav-item">  ----- 230718 del start 신유진 -----
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>프로필</span>
-        </a>
-      </li><!-- End Profile Page Nav --> --}}
-
       @auth
-
       <li class="nav-item">
         <a class="nav-link collapsed" href='/api/store'>
           <i class="bi bi-download"></i>
           <span>축제목록 갱신</span>
         </a>
       </li>
-
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('admin.logout') }}">
           <i class="bi bi-arrow-left-square"></i>
@@ -308,12 +247,8 @@
       </li>
       @endauth
     </ul>
-
-  </aside><!-- End Sidebar-->
-
+  </aside>
 @yield('content')
-
-  <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>MSGS Admin</span></strong>. All Rights Reserved
@@ -321,10 +256,8 @@
     <div class="credits">
       Designed by <a href="https://github.com/PHP-506-1-FESTIVAL">MSGS</a>
     </div>
-  </footer><!-- End Footer -->
-
+  </footer>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
   <script>
   
   const body = document.getElementById('body');
@@ -332,7 +265,6 @@
   btn.onclick = function() {
     body.classList.toggle('toggle-sidebar');
   };
-
   </script>
 
   <!-- Vendor JS Files -->
@@ -357,7 +289,5 @@
       theme: 'snow'
     });
   </script>
-
 </body>
-
 </html>
