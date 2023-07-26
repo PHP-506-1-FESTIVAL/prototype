@@ -17,11 +17,7 @@ class SocialController extends Controller
     public function back()
     {
         $kakao = Socialite::driver('kakao')->stateless()->user();
-        // dump($kakao);
-        // exit;
-        // dump($kakao->avatar);
         $userChk=User::where('user_email',$kakao->email)->first();
-        // dump($userChk);
         if (!$userChk) {
             $userMake=new User;
 
@@ -52,27 +48,4 @@ class SocialController extends Controller
             return redirect()->back()->with('error', $error);
         }
     }
-    //     public function back()
-    // {
-    //     $userSocial = Socialite::driver('kakao')->user();
-
-    //     $users = User::where(['user_email' => $userSocial->getEmail()])->first();
-
-    //     if ($users) {
-    //         Auth::login($users);
-    //         return redirect('/');
-    //     } else {
-    //         $user = User::create([
-    //             'user_name'      => $userSocial->getName(),
-    //             'user_email'     => $userSocial->getEmail(),
-    //             // 'user_gender'    => $userSocial->getGender(),
-    //             'user_gender'    => null,
-    //             'user_birthdate' => $userSocial->getDateOfBirth(),
-    //             // 'provider_id'    => $userSocial->getId(),
-    //         ]);
-
-    //         Auth::login($user);
-    //         return redirect('/');
-    //     }
-    // }
 }

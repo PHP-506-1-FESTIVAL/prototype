@@ -50,8 +50,6 @@
                 <div class="content-box">
                     <form action="{{route('admNotice.store')}}" method="post" id="notice" class="notic-content">
                         @csrf
-                        {{-- <label for="title">제목 : </label>
-                        <input type="text" name="title" placeholder="제목" id="title"> --}}
                         <div class="row mb-3 title-box">
                             <label for="inputText" class="col-sm-1 col-form-label">제 목:</label>
                             <div class="col-sm-11">
