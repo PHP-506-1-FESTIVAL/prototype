@@ -18,22 +18,6 @@ class FestivalRequestController extends Controller
     // [축제 요청] DB에 저장하는 함수
     public function store(Request $request)
     {
-        // 'user_id',
-        // 'req_title',
-        // 'req_start_date',
-        // 'req_end_date',
-        // 'area_code',
-        // 'sigungu_code',
-        // 'map_x',
-        // 'map_y',
-        // 'content_type_id',
-        // 'tel',
-        // 'poster_img',
-        // 'list_img',
-        // 'homepage',
-        // 'business_id',
-        // 'req_state',
-        // 'admin_id '
 
         $request->validate([
             // '받은 값' => '체크해줄것'

@@ -82,7 +82,7 @@
                                             <a href="{{route('board.edit', ['board' => $boards->board_id])}}"><button class="btn btn-primary" type="button">수정</button></a>
                                         </div>
                                         <div class="col-4" style="padding:0;">
-</div>
+                                        </div>
                                     @endif
                                     {{-- // [버튼] 목록으로 --}}
                                     <div class="col-5" style="padding: 0">
@@ -98,7 +98,6 @@
             </div>
         </div>
     </div>
-    {{-- <input type="hidden" name="board_id" id="board_id" value="{{$boards->board_id}}"> --}}
 </section>
 <!-- End Blog Singel Area -->
 

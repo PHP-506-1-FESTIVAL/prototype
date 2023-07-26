@@ -8,12 +8,6 @@
 
   <div class="pagetitle">
     <h1>관리자 페이지 Main Dashboard</h1>
-    {{-- <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html"> </a></li>
-        <li class="breadcrumb-item active"> </li>
-      </ol>
-    </nav> --}}
     <br>
   </div><!-- End Page Title -->
 
@@ -50,7 +44,6 @@
                     <i class="bi bi-people"></i>
                   </div>
                   <div class="ps-3">
-                    {{-- <h6>{{ $useralldatacount }}</h6>  전체 회원수 --}}
                     <h6>{{ $userdatacount }}</h6>  {{-- 전체-블랙수 --}}
                     <span class="text-muted small pt-2 ps-1">블랙수</span>
                     <span class="text-success small pt-1 fw-bold">{{ ROUND(((($useralldatacount-$userdatacount)*100)/( $useralldatacount)),1) }}%({{$useralldatacount-$userdatacount}})</span>{{-- <span class="text-muted small pt-2 ps-1">추가 회원수</span> --}}
@@ -83,9 +76,7 @@
 
               <div class="card-body">
                 <h5 class="card-title">
-                  {{-- <a href="#adminfest"> --}}
                     축제 
-                  {{-- </a> --}}
                   <span>| This Month</span></h5>
 
                 <div class="d-flex align-items-center">
@@ -94,7 +85,6 @@
                   </div>
                   <div class="ps-3">
                     <h6>{{ $festivaldatacount }}</h6>
-                    {{-- <span class="text-success small pt-1 fw-bold">8%</span>  --}}
                     <span class="text-muted small pt-2 ps-1">Last update : 23.07.26</span>
                     <br>
 
@@ -135,9 +125,7 @@
                   <div class="ps-3">
                     <h6>{{ $boarddatacount }}</h6>
                     <span class="text-muted small pt-2 ps-1">새글</span>
-                    {{-- <span class="text-success small pt-1 fw-bold">{{ ROUND(((($useralldatacount-$userdatacount)*100)/( $useralldatacount)),1) }}%({{$useralldatacount-$userdatacount}})</span><span class="text-muted small pt-2 ps-1">추가 회원수</span> --}}
                     <span class="text-danger small pt-1 fw-bold">12%</span>
-                    {{-- <span class="text-muted small pt-2 ps-1">decrease</span> --}}
                   </div>
                 </div>
 
@@ -291,7 +279,6 @@
       <div class="col-lg-4">
 
         <!-- 신고관리 admin/report -->
-        {{-- https://jisu069.tistory.com/m/91 --}}
         <div class="card">
           <div class="filter">
             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>

@@ -45,18 +45,6 @@
                                             </div>
                                         </form>
 									</div>
-									{{-- // [3차] 정렬기능 --}}
-									{{-- <div class="col-md-1">
-										<li class="board-array nav-item dropdown">
-											<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">정렬</a>
-											<ul class="dropdown-menu">
-											<li><a class="dropdown-item" href="#">최신순</a></li>
-											<li><a class="dropdown-item" href="#">오래된순</a></li>
-											<li><hr class="dropdown-divider"></li>
-											<li><a class="dropdown-item" href="#">모든 정렬 삭제</a></li>
-											</ul>
-										</li>
-									</div> --}}
 								</div>
 							</div>
 

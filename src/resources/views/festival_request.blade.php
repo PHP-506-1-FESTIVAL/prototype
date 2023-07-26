@@ -1,25 +1,3 @@
-{{-- CREATE TABLE `festival_requests` (
-    요청번호 `req_id`	INT	NOT NULL	COMMENT 'PK, AUTO_INCREMENT',
-    요청자 ID `user_id`	INT	NOT NULL	COMMENT 'FK',
-    요청 날짜 `created_at`	TIMESTAMP	NULL,
-    축제 이름 `req_title`	VARCHAR(255)	NOT NULL,
-    행사 시작일 `req_start_date`	DATE	NOT NULL,
-    행사 종료일 `req_end_date`	DATE	NOT NULL,
-    지역코드 `area_code`	VARCHAR(64)	NOT NULL,
-    시군구 코드 `sigungu_code`	VARCHAR(64)	NOT NULL,
-    GPS X좌표 `map_x`	VARCHAR(64)	NOT NULL,
-    GPS Y좌표 `map_y`	VARCHAR(64)	NOT NULL,
-    관광타입 `content_type_id`	VARCHAR(64)	NOT NULL,
-    전화 번호 `tel`	VARCHAR(64)	NOT NULL,
-    포스터 이미지 `poster_img`	VARCHAR(512)	NULL	COMMENT 'path',
-    썸네일 이미지 `list_img`	VARCHAR(512)	NULL	COMMENT 'path',
-    홈페이지 `homepage`	VARCHAR(512)	NULL,
-    사업자 번호 `business_id`	VARCHAR(64)	NOT NULL,
-    요청 상태 `req_state`	CHAR(1)	NOT NULL	DEFAULT '0'	COMMENT '0미승인, 1승인,2 반려',
-    처리 날짜 `updated_at`	TIMESTAMP	NULL,
-    처리관리자 번호 `admin_id`	INT	NOT NULL	COMMENT 'FK'
-); --}}
-
 @extends('layout.layout')
 
 @section('title','축제 요청')
@@ -120,33 +98,14 @@
                                                             <div class="form-group">
                                                                 <label>시작일*</label>
                                                                 <div class="selector-head">
-                                                                    {{-- <span class="arrow"><i
-                                                                            class="lni lni-chevron-down"></i></span>
-                                                                    <select class="user-chosen-select">
-                                                                        <option value="none">Select an option</option>
-                                                                        <option value="none">Option 1</option>
-                                                                        <option value="none">Option 2</option>
-                                                                        <option value="none">Option 3</option>
-                                                                    </select> --}}
                                                                     <input id="input_date" type="date">
-                                                                    {{-- <input id="input_submit" type="submit" onclick="input()" value="확인"> --}}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-12">
                                                             <div class="form-group">
                                                                 <label>종료일*</label>
-                                                                {{-- <div class="selector-head">
-                                                                    <span class="arrow"><i
-                                                                            class="lni lni-chevron-down"></i></span>
-                                                                    <select class="user-chosen-select">
-                                                                        <option value="none">Select an option</option>
-                                                                        <option value="none">Used</option>
-                                                                        <option value="none">Brand New</option>
-                                                                    </select>
-                                                                </div> --}}
                                                                 <input id="input_date" type="date">
-                                                                {{-- <input id="input_submit" type="submit" onclick="input()" value="확인"> --}}
                                                             </div>
                                                         </div>
                                                         <div class="col-12">

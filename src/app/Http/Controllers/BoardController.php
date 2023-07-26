@@ -44,7 +44,6 @@ class BoardController extends Controller
         // 2. latest() 페이징
         // $data = $this->Board->latest()->paginate(10);
 
-        // return view('뷰파일 이름', compact('보내줄 변수명'));
         return view('board_list', ['data' => $data]);
     }
 
@@ -161,15 +160,6 @@ class BoardController extends Controller
 
         $boards = Board::find($board_id);
 
-        // 작성자 체크(작성자가 지금 로그인 되어있는 사람일 경우만 접근)
-        // ***********************************************************3차의 팀원에게 맡김 화면상에서는 안보이지만 악성 유저가 관리자 모드로 건드릴시를 위해 한번더 체크
-        // if(auth() === $boards->board_id) {
-        //     return view('board_edit')->with('boards', Board::findOrFail($board_id));
-        // }
-        // else {
-        //     return redirect()->route('user.login');
-        // }
-
         return view('board_edit')->with('boards', Board::findOrFail($board_id));
     }
 
@@ -192,15 +182,6 @@ class BoardController extends Controller
             ,'content'  => 'required|max:2000'
             ,'user_id'       => 'required|integer'
         ]);
-
-        // $validator->fails() : error가 있다면 true ---------------------------3차에게
-        // if($validator->fails()) {
-            // redirect()->back(); : 이전에 요청이 왔던 페이지로 돌아감
-        //     return redirect()
-        //         ->back()
-        //         ->withErrors($validator)
-        //         ->withInput($request->only('title', 'content'));
-        // }
 
         $boards = Board::find($board_id);
         $boards->board_title = $request->title;

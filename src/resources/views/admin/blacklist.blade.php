@@ -34,10 +34,6 @@
                                     <th scope="col">생일</th>
                                     <th scope="col">닉네임</th>
                                     <th scope="col">블랙사유 (상세 내용)</th>   {{-- ----- 230720 add 컬럼추가 신유진 ----- --}}
-                                    {{-- <th scope="col">프로필</th> --}}
-                                    {{-- <th scope="col">주소</th> --}}   {{-- ----- 230720 del 블랙사유추가로 삭제 신유진 ----- --}}
-                                    {{-- <th scope="col">상세주소</th>
-                                    <th scope="col">우편주소</th> --}}
                                     <th scope="col">마케팅</th>
                                     <th scope="col">이메일</th>
                                     <th scope="col">삭제일</th>

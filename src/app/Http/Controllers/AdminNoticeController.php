@@ -130,19 +130,12 @@ class AdminNoticeController extends Controller
         if(auth()->guest()) {
             return redirect()->route('admin.login');
         }
-        // Log::debug("admin search Start");
-        // Log::debug("admin search", $req->all());
         $req->validate(['search'=>'required|max:100']);
         $notice_search=DB::table('notices')->
         where(function ($query) use ($req) {
             $query->where('notice_title','like','%'.$req->search.'%') // 제목에 검색내용이 포함된경우
             ->orWhere('notice_content','like','%'.$req->search.'%'); // 보드내용에 검색내용이 포함된경우
         })->orderBy('created_at','desc')->paginate(10);
-        // dump($notice_search);
-        // exit;
-        // $json_list = json_encode($notice_search);
-        // $list = json_decode($json_list,true);
-        // Log::debug("admin search", $list);
         return view('admin.notice_list')->with('notice',$notice_search);
     }
     function articled(Request $req) {

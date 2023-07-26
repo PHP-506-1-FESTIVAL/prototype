@@ -63,12 +63,6 @@ class AdminMainController extends Controller
         ->orderBy('festival_hit', 'DESC')
         ->get()
         ;
-        // 지역별 축제
-        // $festivalarea_code = DB::table('festivals')
-        // ->select('*')
-        // ->orderBy('area_code', 'ASC')
-        // ->get()
-        // ;
 
         // 게시글 all
         $board = Board::all();
@@ -90,16 +84,6 @@ class AdminMainController extends Controller
         ->orderBy('report_id', 'DESC')
         ->paginate(5);
         $reporthandle_flg0 = Report::where('handle_flg', null)->count();
-
-        // $data = [$userdatacount, $festivaldatacount, $boarddatacount];
-
-        // 현재 시간 생성 ------------4차로 미룸
-        // $nowdatetime = Carbon::now();
-        // $reportcreatedate = $reportdata->created_at;
-        // $reportdate = $nowdatetime - $reportcreatedate;
-        // dump($nowdatetime);
-        // dump($reportcreatedate);
-        // dump($reportdate);
 
         return view('admin/admin_main')
         ->with('userdatacount', $userdatacount)
@@ -189,10 +173,7 @@ class AdminMainController extends Controller
         // 필요한 다른 정보들을 설정합니다.
         $blacklist->save();
 
-        // return view('admin.blacklist');
         return redirect()->route('admin.blacklist');
-        // return "<script>alert('블랙리스트 처리가 완료되었습니다.'); window.close();</script>";
-        // return redirect()->back()->with('success', '유저가 블랙리스트로 처리되었습니다.');
         
     }
 
