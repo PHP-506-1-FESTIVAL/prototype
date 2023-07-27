@@ -235,7 +235,7 @@
       @auth
       <li class="nav-item">
         <a class="nav-link collapsed" href='{{route('admJjim.list')}}'>
-            <i class="bi bi-suit-heart-fill"></i>
+            <i class="bi bi-suit-heart"></i>
             <span>찜 유저</span>
         </a>
       </li>
