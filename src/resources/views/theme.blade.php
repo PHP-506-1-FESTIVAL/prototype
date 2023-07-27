@@ -120,7 +120,7 @@
     <!-- Start Single Widget -->
     <div class="widget popular-tag-widget areatag d-flex justify-content-center" style="margin-top:150px;">
         <div class="tags">
-            <a href="javascript:void(0)" id="area0" class="themeactive">전체</a>
+            <a href="javascript:totalclick()" id="area0" class="themeactive">전체</a>
             <a href="javascript:areaclick(1)" id="area1">서울</a>
             <a href="javascript:areaclick(2)" id="area2">인천</a>
             <a href="javascript:areaclick(3)" id="area3">대전</a>
@@ -162,16 +162,36 @@
 
     let themestr = '';
     let areaarr = [];
-    
+
+    function totalclick() {
+        if(themestr == '') {
+            return alert('테마를 먼저 선택해 주세요.')
+        }
+
+        totalreset();
+        let url = '/api/theme/' + themestr + '/blank'
+        let result = document.getElementById('themeresult');
+        result.innerHTML = "";
+        // API
+        fetch(url)
+        .then(res => {
+            if(res.status !== 200) {
+                throw new Error(res.status + ' : API Response Error' );
+            }
+            return res.json();})
+        .then(apiData => {
+            let themearr = apiData;
+            themearr.forEach((item, index, array) => {
+                result.innerHTML += "<div class='col-lg-4 col-md-6 col-12 mb-4'><div class='single-news wow fadeInUp' data-wow-delay='.5s'><div class='image'><a href='/fesdetail/" + item['festival_id'] +"'><img class='thumb' src=" + item['poster_img'] + " alt='#' style='width:410px; height:230px; object-fit: cover;'></a></div><div class='content-body'><h4 class='title'><a href='blog-single-sidebar.html'>" + item['festival_title'] + "</a></h4><div class='meta-details'><ul><li><a href='javascript:void(0)'>" + item['festival_start_date'] + " ~ " + item['festival_end_date'] + "</a></li><li><a href='javascript:void(0)'>" + item['area_code'] + "</a></li></ul></div></div></div></div>";
+            });
+        })
+        // 에러는 alert로 처리
+        .catch(error => alert(error.message));
+    }
+
     function themeclick(e, k) {
-        areaarr = [];
-        for(let i = 1; i < 9; i++) {
-            document.getElementById('area' + i).classList.remove('themeactive');
-        }
-        for(let i = 31; i < 40; i++) {
-            document.getElementById('area' + i).classList.remove('themeactive');
-        }
-        document.getElementById('area0').classList.add('themeactive');
+
+        totalreset();
         themestr = k;
         let banner = document.getElementById('themebanner');
         let url = '/api/theme/' + k + '/blank'
@@ -196,6 +216,10 @@
     }
 
     function areaclick(e) {
+        if(themestr == '') {
+            return alert('테마를 먼저 선택해 주세요.')
+        }
+        
         let url = '/api/theme/' + themestr;
         let areaa = document.getElementById('area' + e);
         let result = document.getElementById('themeresult');
@@ -238,6 +262,17 @@
         areaa.classList.toggle('themeactive');
     }
     
+    function totalreset() {
+        areaarr = [];
+        for(let i = 1; i < 9; i++) {
+            document.getElementById('area' + i).classList.remove('themeactive');
+        }
+        for(let i = 31; i < 40; i++) {
+            document.getElementById('area' + i).classList.remove('themeactive');
+        }
+        document.getElementById('area0').classList.add('themeactive');
+    }
+
     </script>
 
     <script src="/assets/js/tiny-slider.js"></script>
