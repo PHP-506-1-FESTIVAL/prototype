@@ -39,7 +39,7 @@ class FavoriteSendMailCommand extends Command
                 ->select('*')->where('festival_start_date',$timer)->get();
         $i=0;
         foreach ($temp_fesId as $value) {
-            $user[$i]=User::find($value->user_id);
+            $user[$i]=User::find($value->user_id)->where('user_email_agreement','1')->get();
             $i++;
         }
         foreach ($user as $key=>$value) {
