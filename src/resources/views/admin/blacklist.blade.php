@@ -19,9 +19,6 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><strong>블랙리스트 관리</strong></h5>
-                        
-                        <br><br>
-
                         {{-- 블랙리스트 목록 --}}
                         <table class="table datatable table-hover">
                             <thead>
@@ -36,6 +33,7 @@
                                     <th scope="col">마케팅</th>
                                     <th scope="col">이메일</th>
                                     <th scope="col">삭제일</th>
+                                    <th scope="col">작업</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,6 +72,34 @@
                                     <td>{{ $user->user_marketing_agreement == 1 ? '동의' : '비동의' }}</td>
                                     <td>{{ $user->user_email_agreement == 1 ? '동의' : '비동의' }}</td>
                                     <td>{{ $user->banned_at}}</td>
+                                    <td>
+                                    <!-- Button to trigger the modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rollbackModal{{ $user->user_id }}">
+                                        복구
+                                    </button>
+                                    
+                                    <!-- Modal window for confirmation -->
+                                    <div class="modal fade" id="rollbackModal{{ $user->user_id }}" tabindex="-1" aria-labelledby="rollbackModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="rollbackModalLabel">블랙리스트 복구</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>이 사용자를 블랙리스트에서 복구하시겠습니까?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                <form action="{{ route('admin.unblacklist', ['user_id' => $user->user_id]) }}" method="post">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                    <button type="submit" class="btn btn-danger">복구</button>
+                                                </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                                 </tr>
                                 @endforeach
                             </tbody>

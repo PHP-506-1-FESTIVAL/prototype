@@ -204,16 +204,32 @@ class AdminMainController extends Controller
     // 블랙리스트 목록 가져오기
     public function blacklist()
     {
-        if(auth()->guest()) {
+        if (auth()->guest()) {
             return redirect()->route('admin.login');
         }
+
         $users = DB::table('users')
-        ->join('blacklists', 'blacklists.user_id', '=', 'users.user_id')
-        // ->select('users.*')  {{-- ----- 230720 del 블랙리스트 사유 추가(users.* -> *) 신유진 ----- --}}
-        ->select('*') // {{-- ----- 230720 add 블랙리스트 사유 추가(users.* -> *) 신유진 ----- --}}
-        // ->orderBy('users.created_at', 'desc') // {{-- ----- 230725 add 블랙리스트 정렬 변경(users.created_at -> blacklists.banned_at) 신유진 ----- --}}
-        ->orderBy('blacklists.banned_at', 'desc') // {{-- ----- 230725 add 블랙리스트 정렬 변경(users.created_at -> blacklists.banned_at) 신유진 ----- --}}
-        ->paginate(6);
+            ->join('blacklists', 'blacklists.user_id', '=', 'users.user_id')
+            ->select('*')
+            ->whereNull('blacklists.deleted_at') // Exclude records with deleted_at not null
+            ->orderBy('blacklists.banned_at', 'desc')
+            ->paginate(6);
+
         return view('admin.blacklist')->with('users', $users);
+    }
+
+    public function unblacklist(Request $request)
+    {
+        if (auth()->guest()) {
+            return redirect()->route('admin.login');
+        }
+
+        $userId = $request->input('user_id');
+
+        Blacklist::where('user_id', $userId)->delete();
+
+        DB::table('users')->where('user_id', $userId)->update(['deleted_at' => null]);
+
+        return redirect()->route('admin.blacklist')->with('success', '회원이 블랙리스트에서 제거되었습니다.');
     }
 }
