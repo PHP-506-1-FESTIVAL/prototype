@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
@@ -374,5 +375,42 @@ class UserController extends Controller
         session()->put('pwChang_flg', '1');
         return redirect()->route('user.login');
     }
+    public function adminupdate(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return back()->with('error', 'User not found.');
+        }
+
+        $request->validate([
+            'user_name' => 'required|string',
+            'user_email' => 'required|email',
+            'user_gender' => 'required|in:0,1',
+            'user_birthdate' => 'nullable|date',
+            'user_nickname' => 'required|string',
+            'user_address' => 'nullable|string',
+            'user_address_detail' => 'nullable|string',
+            'user_zipcode' => 'nullable|string',
+            'user_marketing_agreement' => 'nullable|in:0,1',
+            'user_email_agreement' => 'nullable|in:0,1',
+        ]);
+
+        $user->update([
+            'user_name' => $request->input('user_name'),
+            'user_email' => $request->input('user_email'),
+            'user_gender' => $request->input('user_gender'),
+            'user_birthdate' => $request->input('user_birthdate'),
+            'user_nickname' => $request->input('user_nickname'),
+            'user_address' => $request->input('user_address'),
+            'user_address_detail' => $request->input('user_address_detail'),
+            'user_zipcode' => $request->input('user_zipcode'),
+            'user_marketing_agreement' => $request->input('user_marketing_agreement'),
+            'user_email_agreement' => $request->input('user_email_agreement'),
+        ]);
+
+        return redirect()->route('admin.user');
+    }
+
 }
 

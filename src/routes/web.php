@@ -205,3 +205,5 @@ Route::get('admin/blacklist', [AdminMainController::class, 'blacklist'])->name('
 Route::post('review/create', [ReviewController::class, 'create'])->name('review.create');
 Route::delete('review/delete/{id}', [ReviewController::class, 'delete'])->name('review.delete');
 Route::put('review/{id}',  [ReviewController::class, 'update'])->name('review.update');
+//유저 정보 수정
+Route::put('admin/user/{id}/update', [UserController::class, 'adminupdate'])->name('admin.user.update');
