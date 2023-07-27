@@ -27,7 +27,15 @@ class AdminNoticeController extends Controller
         if(auth()->guest()) {
             return redirect()->route('admin.login');
         }
-        return view('admin.notice_write');
+        $data=[
+            'notice_id'=>0,
+            'notice_title'=>'',
+            'notice_content'=>'',
+            'flg'=>'0',
+            'state'=>'작성'
+        ];
+        // return view('admin.notice_write');
+        return view('admin.notice_write')->with('data',$data);
     }
 
     /**
@@ -74,7 +82,14 @@ class AdminNoticeController extends Controller
             return redirect()->route('admin.login');
         }
         $notice=Notice::find($id);
-        return view('admin.notice_update')->with('data',$notice);
+        $data=[
+            'notice_id'=>$notice->notice_id,
+            'notice_title'=>$notice->notice_title,
+            'notice_content'=>$notice->notice_content,
+            'flg'=>'1',
+            'state'=>'수정'
+        ];
+        return view('admin.notice_write')->with('data',$data);
     }
 
     /**
