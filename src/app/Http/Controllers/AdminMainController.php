@@ -67,7 +67,14 @@ class AdminMainController extends Controller
         // 게시글 all
         $board = Board::all();
         // 게시글 정렬
-        // $weekboard = Board::all();
+        // 한달전부터의 새글
+        // SELECT * FROM boards WHERE created_at BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH) AND NOW();
+        $newboardmonth = DB::table('boards')
+        ->select('*')
+        ->where('created_at', '>=', DB::raw('DATE_SUB(NOW(), INTERVAL 1 MONTH)'))
+        ->get()
+        ->count()
+        ;
         // 메인의 게시글 5개
         $boarddata = DB::table('boards')
         ->join('users', 'boards.user_id', '=', 'users.user_id' )
@@ -89,6 +96,7 @@ class AdminMainController extends Controller
         ->with('userdatacount', $userdatacount)
         ->with('festivaldatacount', $festivaldatacount)
         ->with('festivaltop10', $festivaltop10)
+        ->with('newboardmonth', $newboardmonth)
         ->with('boarddata', $boarddata)
         ->with('boarddatacount', $boarddatacount)
         ->with('reporthandle_flg0', $reporthandle_flg0)

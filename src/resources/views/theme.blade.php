@@ -117,10 +117,33 @@
     </section>
     <!-- /End Categories Area -->
 
-    <div class="margindiv"></div>
+    <!-- Start Single Widget -->
+    <div class="widget popular-tag-widget areatag d-flex justify-content-center" style="margin-top:150px;">
+        <div class="tags">
+            <a href="javascript:void(0)">전체</a>
+            <a href="javascript:void(0)">서울</a>
+            <a href="javascript:void(0)">인천</a>
+            <a href="javascript:void(0)">대전</a>
+            <a href="javascript:void(0)">대구</a>
+            <a href="javascript:void(0)">광주</a>
+            <a href="javascript:void(0)">부산</a>
+            <a href="javascript:void(0)">울산</a>
+            <a href="javascript:void(0)">세종</a>
+            <a href="javascript:void(0)">경기</a>
+            <a href="javascript:void(0)">강원</a>
+            <a href="javascript:void(0)">충북</a>
+            <a href="javascript:void(0)">충남</a>
+            <a href="javascript:void(0)">경북</a>
+            <a href="javascript:void(0)">경남</a>
+            <a href="javascript:void(0)">전북</a>
+            <a href="javascript:void(0)">전남</a>
+            <a href="javascript:void(0)">제주</a>
+        </div>
+    </div>
+    <!-- End Single Widget -->
 
     <!-- Start Latest News Area -->
-    <div class="latest-news-area section">
+    <div class="latest-news-area section" style="padding-top:50px;">
         <div class="container">
             <div class="row">
                 <div class="col-12">
