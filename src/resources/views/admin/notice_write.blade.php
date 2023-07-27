@@ -1,6 +1,6 @@
 @extends('layout.adminlayout')
 
-@section('title','공지작성')
+@section('title','공지 작성•수정')
 
 @section('content')
 <style>
@@ -25,6 +25,7 @@
         height: 5vh;
     }
 </style>
+
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>공지 관리</h1>
@@ -32,30 +33,35 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.main')}}">메인</a></li>
                     <li class="breadcrumb-item">공지</li>
-                    <li class="breadcrumb-item active">작성</li>
+                    <li class="breadcrumb-item active">{{$data['state']}}</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title"><strong>공지 작성</strong></h5>
+                <h5 class="card-title"><strong>공지 {{$data['state']}}</strong></h5>
                 <!-- Quill Editor Full -->
                 <div class="content-box">
-                    <form action="{{route('admNotice.store')}}" method="post" id="notice" class="notic-content">
+                    @if ($data['flg']==='0')
+                        <form action="{{route('admNotice.store')}}" method="post" id="notice" class="notic-content">
+                    @else
+                        <form action="{{route('admNotice.update',['id'=>$data['notice_id']])}}" method="post" id="notice" class="notic-content">
+                            @method('put')
+                    @endif
                         @csrf
                         <div class="row mb-3 title-box">
                             <label for="inputText" class="col-sm-1 col-form-label">제 목:</label>
                             <div class="col-sm-11">
-                                <input type="text" class="form-control" name="title" id="inputText">
+                                <input type="text" class="form-control" name="title" id="inputText" value="{{$data['notice_title']}}">
                             </div>
                         </div>
                         <div id="editor">{{-- ----- 230720 add Quill추가 신유진 ----- --}}
-
+                            {{$data['notice_content']}}
                         </div>
                         <!-- End Quill Editor Full -->
                         <input type="hidden" name="content" id="content">
                     </form>
-                    <button class="btn btn-primary btn-sm" onclick="submit()">작성</button>
+                    <button class="btn btn-primary btn-sm" onclick="submit()">{{$data['state']}}</button>
                     <form action="{{route('admin.notice')}}" method="get">
                         <button type="submit" class="btn btn-outline-secondary btn-sm cancle-btn">취소</button>
                     </form>
