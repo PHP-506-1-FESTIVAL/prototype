@@ -409,7 +409,7 @@ class UserController extends Controller
             'user_email_agreement' => $request->input('user_email_agreement'),
         ]);
 
-        return redirect()->route('admin.user');
+        return back()->with('성공', '수정 성공');
     }
 
 }

@@ -29,10 +29,10 @@
                                     <th scope="col">성별</th>
                                     <th scope="col">생일</th>
                                     <th scope="col">닉네임</th>
-                                    <th scope="col">블랙사유 (상세 내용)</th>   {{-- ----- 230720 add 컬럼추가 신유진 ----- --}}
+                                    <th scope="col">정지 사유 (상세 내용)</th>   {{-- ----- 230720 add 컬럼추가 신유진 ----- --}}
                                     <th scope="col">마케팅</th>
                                     <th scope="col">이메일</th>
-                                    <th scope="col">삭제일</th>
+                                    <th scope="col">정지일</th>
                                     <th scope="col">작업</th>
                                 </tr>
                             </thead>
