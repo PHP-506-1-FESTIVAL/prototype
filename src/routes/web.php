@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminJjimMailController;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\AdminNoticeController;
 use App\Http\Controllers\AdminReportController;
@@ -144,6 +145,10 @@ Route::delete('admin/notice/{id}', [AdminNoticeController::class , 'destroy'])->
 Route::get('admin/notice/search', [AdminNoticeController::class , 'search'])->name('admNotice.search');
 //관리자 공지사항 파업창
 Route::get('admin/notice/articled', [AdminNoticeController::class , 'articled'])->name('admNotice.articled');
+//찜메일 대상자 확인
+Route::get('admin/jjim/list', [AdminJjimMailController::class , 'index'])->name('admJjim.list');
+//찜메일 파업창
+Route::get('admin/jjim/articled', [AdminJjimMailController::class , 'articled'])->name('admJjim.articled');
 
 
 
