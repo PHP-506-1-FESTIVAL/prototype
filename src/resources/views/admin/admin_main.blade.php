@@ -116,7 +116,7 @@
               </div>
 
               <div class="card-body">
-                <h5 class="card-title">게시글 <span>| This Year</span></h5>
+                <h5 class="card-title">게시글 <span>| This Month</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -125,7 +125,9 @@
                   <div class="ps-3">
                     <h6>{{ $boarddatacount }}</h6>
                     <span class="text-muted small pt-2 ps-1">새글</span>
-                    <span class="text-danger small pt-1 fw-bold">12%</span>
+                    <span class="text-danger small pt-1 fw-bold">12%
+                      ({{$newboardmonth}})
+                    </span>
                   </div>
                 </div>
 
@@ -249,8 +251,8 @@
                   <tbody>
                     @forelse($boarddata as $data)
                     <tr>
-                      <th scope="row"><a href="#"><img src="" alt="">{{ $data->board_id }}</a></th>
-                      <td><a href="#" class="text-primary fw-bold">{{ $data->board_title }}</a></td>
+                      <th scope="row"><a href="{{route('board.show', ['board' => $data->board_id])}}"><img src="" alt="">{{ $data->board_id }}</a></th>
+                      <td><a href="{{route('board.show', ['board' => $data->board_id])}}" class="text-primary fw-bold">{{ $data->board_title }}</a></td>
                       <td>{{ $data->user_id }}</td>
                       <td class="fw-bold">{{ $data->user_nickname }}</td>
                       <td>{{ $data->created_at }}</td>
