@@ -234,6 +234,12 @@
       <hr>
       @auth
       <li class="nav-item">
+        <a class="nav-link collapsed" href='{{route('admJjim.list')}}'>
+            <i class="bi bi-geo-alt-fill"></i>
+            <span>찜 유저</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link collapsed" href='/api/store'>
           <i class="bi bi-download"></i>
           <span>축제목록 갱신</span>
@@ -259,7 +265,7 @@
   </footer>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <script>
-  
+
   const body = document.getElementById('body');
   const btn = document.getElementById('togglebtn');
   btn.onclick = function() {
