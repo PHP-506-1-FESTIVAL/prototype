@@ -8682,3 +8682,12 @@ footer-item-title,
   text-shadow: none;
   padding:2px;
 }
+
+/* 0727 이가원 add */
+
+.areatag > .tags > a {
+  padding-top:7px;
+  padding-bottom:7px;
+  padding-left:15px;
+  padding-right:15px;
+}
