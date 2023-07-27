@@ -149,6 +149,8 @@ Route::get('admin/notice/articled', [AdminNoticeController::class , 'articled'])
 Route::get('admin/jjim/list', [AdminJjimMailController::class , 'index'])->name('admJjim.list');
 //찜메일 파업창
 Route::get('admin/jjim/articled', [AdminJjimMailController::class , 'articled'])->name('admJjim.articled');
+//찜메일 날짜 선택
+Route::get('admin/jjim/search', [AdminJjimMailController::class , 'search'])->name('admJjim.search');
 
 
 
