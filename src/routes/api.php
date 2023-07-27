@@ -61,4 +61,4 @@ Route::put('reviews/{review_id}',[ReviewApiController::class, 'update'])->name('
  ************************************************/
 
 // 테마별 축제목록
-Route::get('theme/{id}', [ApiThemeController::class, 'theme'])->name('apitheme');
+Route::get('theme/{id}/{area}', [ApiThemeController::class, 'theme'])->name('apitheme');

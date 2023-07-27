@@ -120,24 +120,24 @@
     <!-- Start Single Widget -->
     <div class="widget popular-tag-widget areatag d-flex justify-content-center" style="margin-top:150px;">
         <div class="tags">
-            <a href="javascript:void(0)">전체</a>
-            <a href="javascript:void(0)">서울</a>
-            <a href="javascript:void(0)">인천</a>
-            <a href="javascript:void(0)">대전</a>
-            <a href="javascript:void(0)">대구</a>
-            <a href="javascript:void(0)">광주</a>
-            <a href="javascript:void(0)">부산</a>
-            <a href="javascript:void(0)">울산</a>
-            <a href="javascript:void(0)">세종</a>
-            <a href="javascript:void(0)">경기</a>
-            <a href="javascript:void(0)">강원</a>
-            <a href="javascript:void(0)">충북</a>
-            <a href="javascript:void(0)">충남</a>
-            <a href="javascript:void(0)">경북</a>
-            <a href="javascript:void(0)">경남</a>
-            <a href="javascript:void(0)">전북</a>
-            <a href="javascript:void(0)">전남</a>
-            <a href="javascript:void(0)">제주</a>
+            <a href="javascript:void(0)" id="area0" class="themeactive">전체</a>
+            <a href="javascript:areaclick(1)" id="area1">서울</a>
+            <a href="javascript:areaclick(2)" id="area2">인천</a>
+            <a href="javascript:areaclick(3)" id="area3">대전</a>
+            <a href="javascript:areaclick(4)" id="area4">대구</a>
+            <a href="javascript:areaclick(5)" id="area5">광주</a>
+            <a href="javascript:areaclick(6)" id="area6">부산</a>
+            <a href="javascript:areaclick(7)" id="area7">울산</a>
+            <a href="javascript:areaclick(8)" id="area8">세종</a>
+            <a href="javascript:areaclick(31)" id="area31">경기</a>
+            <a href="javascript:areaclick(32)" id="area32">강원</a>
+            <a href="javascript:areaclick(33)" id="area33">충북</a>
+            <a href="javascript:areaclick(34)" id="area34">충남</a>
+            <a href="javascript:areaclick(35)" id="area35">경북</a>
+            <a href="javascript:areaclick(36)" id="area36">경남</a>
+            <a href="javascript:areaclick(37)" id="area37">전북</a>
+            <a href="javascript:areaclick(38)" id="area38">전남</a>
+            <a href="javascript:areaclick(39)" id="area39">제주</a>
         </div>
     </div>
     <!-- End Single Widget -->
@@ -159,10 +159,22 @@
     <!-- End Latest News Area -->
 
     <script type="text/javascript">
+
+    let themestr = '';
+    let areaarr = [];
     
     function themeclick(e, k) {
+        areaarr = [];
+        for(let i = 1; i < 9; i++) {
+            document.getElementById('area' + i).classList.remove('themeactive');
+        }
+        for(let i = 31; i < 40; i++) {
+            document.getElementById('area' + i).classList.remove('themeactive');
+        }
+        document.getElementById('area0').classList.add('themeactive');
+        themestr = k;
         let banner = document.getElementById('themebanner');
-        let url = '/api/theme/' + k
+        let url = '/api/theme/' + k + '/blank'
         let result = document.getElementById('themeresult');
         banner.style.backgroundImage = "url('/assets/images/themes/" + e + ".jpg')";
         result.innerHTML = "";
@@ -174,13 +186,56 @@
             }
             return res.json();})
         .then(apiData => {
-            let themearr = apiData['data'];
+            let themearr = apiData;
             themearr.forEach((item, index, array) => {
                 result.innerHTML += "<div class='col-lg-4 col-md-6 col-12 mb-4'><div class='single-news wow fadeInUp' data-wow-delay='.5s'><div class='image'><a href='/fesdetail/" + item['festival_id'] +"'><img class='thumb' src=" + item['poster_img'] + " alt='#' style='width:410px; height:230px; object-fit: cover;'></a></div><div class='content-body'><h4 class='title'><a href='blog-single-sidebar.html'>" + item['festival_title'] + "</a></h4><div class='meta-details'><ul><li><a href='javascript:void(0)'>" + item['festival_start_date'] + " ~ " + item['festival_end_date'] + "</a></li><li><a href='javascript:void(0)'>" + item['area_code'] + "</a></li></ul></div></div></div></div>";
             });
         })
         // 에러는 alert로 처리
         .catch(error => alert(error.message));
+    }
+
+    function areaclick(e) {
+        let url = '/api/theme/' + themestr;
+        let areaa = document.getElementById('area' + e);
+        let result = document.getElementById('themeresult');
+        result.innerHTML = "";
+        if(areaarr.includes(e)) {
+            for(let i = 0; i < areaarr.length; i++) {
+                if (areaarr[i] === e) {
+                    areaarr.splice(i, 1);
+                }
+            }
+        } else {
+            areaarr.push(e);
+        }
+        let areastr = areaarr.join('+');
+
+        document.getElementById('area0').classList.remove('themeactive');
+
+        if(areaarr.length == 0) {
+            areastr = 'blank';
+            document.getElementById('area0').classList.add('themeactive');
+        }
+
+        url = 'api/theme/' + themestr + '/' + areastr;
+                // API
+        fetch(url)
+        .then(res => {
+            if(res.status !== 200) {
+                throw new Error(res.status + ' : API Response Error' );
+            }
+            return res.json();})
+        .then(apiData => {
+            let themearr = apiData;
+            themearr.forEach((item, index, array) => {
+                result.innerHTML += "<div class='col-lg-4 col-md-6 col-12 mb-4'><div class='single-news wow fadeInUp' data-wow-delay='.5s'><div class='image'><a href='/fesdetail/" + item['festival_id'] +"'><img class='thumb' src=" + item['poster_img'] + " alt='#' style='width:410px; height:230px; object-fit: cover;'></a></div><div class='content-body'><h4 class='title'><a href='blog-single-sidebar.html'>" + item['festival_title'] + "</a></h4><div class='meta-details'><ul><li><a href='javascript:void(0)'>" + item['festival_start_date'] + " ~ " + item['festival_end_date'] + "</a></li><li><a href='javascript:void(0)'>" + item['area_code'] + "</a></li></ul></div></div></div></div>";
+            });
+        })
+        // 에러는 alert로 처리
+        .catch(error => alert(error.message));
+
+        areaa.classList.toggle('themeactive');
     }
     
     </script>

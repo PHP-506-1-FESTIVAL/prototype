@@ -240,7 +240,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href='/api/store'>
+        <a class="nav-link collapsed" href=''>
           <i class="bi bi-download"></i>
           <span>축제목록 갱신</span>
         </a>

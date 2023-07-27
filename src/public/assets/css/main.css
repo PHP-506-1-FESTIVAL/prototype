@@ -8691,3 +8691,9 @@ footer-item-title,
   padding-left:15px;
   padding-right:15px;
 }
+
+.themeactive {
+  border: 1px solid #5830E0 !important;
+  background-color: #5830E0 !important;
+  color:white !important;
+}
