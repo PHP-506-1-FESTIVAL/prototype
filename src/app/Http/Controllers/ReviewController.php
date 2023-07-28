@@ -34,9 +34,9 @@ class ReviewController extends Controller
         return redirect()->back()->with('review', $review);
     }
 
-    public function delete($id)
+    public function delete(Request $req)
     {
-        $review = Review::findOrFail($id);
+        $review = Review::findOrFail($req->festival_id);
         $review->delete();
 
         return redirect()->back()->with('success', '리뷰가 삭제되었습니다.');

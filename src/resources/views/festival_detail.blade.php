@@ -351,6 +351,7 @@ height: 100%;
                                             @csrf
                                             @method('delete')
                                             @if(session('user_id') == $review->user_id)
+                                            <input type="hidden" name="festival_id" id="festival-id-input{{ $review->review_id }}" value="{{ $review->review_id }}">
                                                 <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModalToggle_{{ $review->review_id }}">삭제</button>
                                             @endauth
                                             {{-- 모달창 구현 --}}
@@ -619,6 +620,7 @@ height: 100%;
 <script>
     //수정 API
     function putRevieList(reviewId){
+        const host=document.location.hostname
         const contestValue=document.getElementById('reviewcomment'+reviewId).value;
         const experienceValue=document.getElementById('like_experience_input'+reviewId).value;
         const themeValue=document.getElementById('like_theme_input'+reviewId).value;
@@ -703,9 +705,10 @@ height: 100%;
                             <p>`+res.data.review_content+`</p>
 
                             <div class="button-group" style="display: flex; gap: 5px;">
-                                <form action="http://localhost/review/delete/`+res.data.review_id+`" method="post" name="removefrm_`+res.data.review_id+`">
+                                <form action="{!! route('review.delete') !!}" method="post" name="removefrm_`+res.data.review_id+`">
                                     @csrf
                                     @method('delete')
+                                    <input type="hidden" name="festival_id" id="festival-id-input`+res.data.review_id+`" value="`+res.data.review_id+`">
                                     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModalToggle_`+res.data.review_id+`">삭제</button>
                                     <div class="modal fade" id="exampleModalToggle_`+res.data.review_id+`" aria-hidden="true" aria-labelledby="exampleModalToggleLabel_`+res.data.review_id+`" tabindex="-1">
                                         <div class="modal-dialog modal-dialog-centered">
