@@ -14,8 +14,7 @@ class JjimMail extends Mailable
     use Queueable, SerializesModels;
 
 
-    public $user;
-    public $fes;
+    public $data;
 
     /**
      * Create a new message instance.
@@ -23,10 +22,9 @@ class JjimMail extends Mailable
      * @return void
      */
 
-    public function __construct($user,$fes)
+    public function __construct($data)
     {
-        $this->user=$user;
-        $this->fes=$fes;
+        $this->data=$data;
     }
 
     /**

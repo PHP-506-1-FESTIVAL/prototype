@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\JjimMail;
 use App\Models\Favorite;
 use App\Models\Festival;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AdminJjimMailController extends Controller
 {
@@ -20,15 +22,11 @@ class AdminJjimMailController extends Controller
     {
         $jjim_id = DB::table('favorites')
                 ->join('festivals', 'favorites.festival_id', '=', 'festivals.festival_id' )
+                ->join('users','favorites.user_id','=','users.user_id',)
+                ->where('user_marketing_agreement','1')
                 ->select('*')->paginate(10);
-                // ->select('*')->where('festival_start_date',$timer)->paginate(10);
-        $i=0;
-        $user=[];
-        foreach ($jjim_id as $value) {
-            $user[$i]=User::find($value->user_id);
-            $i++;
-        }
-        return view('admin.jjim_mail_list')->with('users',$user)->with('jjim',$jjim_id);
+
+        return view('admin.jjim_mail_list')->with('jjim',$jjim_id);
     }
 
     /**
@@ -100,16 +98,17 @@ class AdminJjimMailController extends Controller
         if(auth()->guest()) {
             return redirect()->route('admin.login');
         }
-        $jjim_id=Favorite::find($req->id);
-        $user=User::withTrashed()->find($jjim_id->user_id);
-        $festival = Festival::find($jjim_id->festival_id);
 
-        return view('emails/orders/jjimMail')->with('fes', $festival)->with('user',$user);
+        $jjim_id = DB::table('favorites')
+        ->join('festivals', 'favorites.festival_id', '=', 'festivals.festival_id' )
+        ->join('users','favorites.user_id','=','users.user_id',)
+        ->where('user_marketing_agreement','1')->where('favorite_id',$req->id)
+        ->select('*')->first();
+
+        return view('emails/orders/jjimMail')->with('data', $jjim_id);
     }
     public function search(Request $req)
     {
-        // dump($req);
-        // exit;
         if(auth()->guest()) {
             return redirect()->route('admin.login');
         }
@@ -117,13 +116,9 @@ class AdminJjimMailController extends Controller
         $timer=Carbon::createFromFormat('Y-m-d',$req->date)->addWeek(1)->format('Y-m-d');
         $jjim_id = DB::table('favorites')
         ->join('festivals', 'favorites.festival_id', '=', 'festivals.festival_id' )
-        ->select('*')->where('festival_start_date',$timer)->paginate(10);
-        $i=0;
-        $user=[];
-        foreach ($jjim_id as $value) {
-            $user[$i]=User::find($value->user_id);
-            $i++;
-        }
-        return view('admin.jjim_mail_list')->with('users',$user)->with('jjim',$jjim_id);
+        ->join('users','favorites.user_id','=','users.user_id',)
+        ->where('user_marketing_agreement','1')->where('festival_start_date',$timer)
+        ->select('*')->paginate(10);
+        return view('admin.jjim_mail_list')->with('jjim',$jjim_id);
     }
 }

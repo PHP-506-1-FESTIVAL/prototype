@@ -11,18 +11,18 @@
         <img src="https://i.ibb.co/PrJKj3m/logo.png" alt="Logo">
     </a>
     <hr>
-    <h1>{{$fes->festival_title}}</h1>
+    <h1>{{$data->festival_title}}</h1>
     <br>
     <div>
         <p>
-            <strong>{{$user->user_nickname}}</strong>님 찜한 축제가 얼마남지 않았습니다.
+            <strong>{{$data->user_nickname}}</strong>님 찜한 축제가 얼마남지 않았습니다.
             <br>
-            <strong>{{$fes->festival_title}}</strong>축제가 <strong>{{$fes->festival_start_date}}</strong>에 시작합니다
+            <strong>{{$data->festival_title}}</strong>축제가 <strong>{{$data->festival_start_date}}</strong>에 시작합니다
         </p>
     </div>
     <div style="
         display: flex;">
-        <img src="{{$fes->poster_img}}" alt="{{route('fes.detail',['id'=>$fes->festival_id])}}" style="margin: 1% auto;">
+        <img src="{{$data->poster_img}}" alt="{{route('fes.detail',['id'=>$data->festival_id])}}" style="margin: 1% auto;">
         <br>
     </div>
     <div style="
@@ -31,7 +31,7 @@
     align-items: center;
     ">
         <br>
-        <a href="{{route('fes.detail',['id'=>$fes->festival_id])}}">
+        <a href="{{route('fes.detail',['id'=>$data->festival_id])}}">
         <button style="
             background-color: #5830E0;
             color: #fff;

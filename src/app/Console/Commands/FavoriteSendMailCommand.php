@@ -34,16 +34,14 @@ class FavoriteSendMailCommand extends Command
     public function handle()
     {
         $timer=Carbon::now()->addWeek(1)->format('Y-m-d');
-        $temp_fesId = DB::table('favorites')
-                ->join('festivals', 'favorites.festival_id', '=', 'festivals.festival_id' )
-                ->select('*')->where('festival_start_date',$timer)->get();
-        $i=0;
-        foreach ($temp_fesId as $value) {
-            $user[$i]=User::find($value->user_id)->where('user_email_agreement','1')->get();
-            $i++;
-        }
-        foreach ($user as $key=>$value) {
-            Mail::to($value->user_email)->send(new JjimMail($user[$key],$temp_fesId[$key]));
+        $jjim_id = DB::table('favorites')
+        ->join('festivals', 'favorites.festival_id', '=', 'festivals.festival_id' )
+        ->join('users','favorites.user_id','=','users.user_id',)
+        ->where('user_marketing_agreement','1')->where('festival_start_date',$timer)
+        ->select('*')->get();
+
+        foreach ($jjim_id as $value) {
+            Mail::to($value->user_email)->send(new JjimMail($value));
         }
     }
 }

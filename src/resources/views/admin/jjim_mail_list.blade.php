@@ -49,19 +49,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($jjim as $key=>$item)
+                @foreach ($jjim as $item)
                 <tr>
                     <th scope="row">{{ $item->favorite_id }}</th>
-                    <td>{{ $users[$key]->user_name }}</td>
-                    <td>{{ $users[$key]->user_email }}</td>
-                    <td>{{ $users[$key]->user_nickname }}</td>
+                    <td>{{ $item->user_name }}</td>
+                    <td>{{ $item->user_email }}</td>
+                    <td>{{ $item->user_nickname }}</td>
                     <td>{{ $item->festival_title }}</td>
                     <td>
                         {{ $item->festival_start_date }}
                         ~
                         {{ $item->festival_end_date }}
                     </td>
-                    <td>{{ $users[$key]->user_email_agreement == 1 ? '동의' : '비동의' }}</td>
+                    <td>{{ $item->user_email_agreement == 1 ? '동의' : '비동의' }}</td>
                     <td>
                         <div>
                             <a href="javascript:popup({{$item->favorite_id}})">
