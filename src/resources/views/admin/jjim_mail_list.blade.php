@@ -49,7 +49,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($jjim as $item)
+                @forelse ($jjim as $item)
                 <tr>
                     <th scope="row">{{ $item->favorite_id }}</th>
                     <td>{{ $item->user_name }}</td>
@@ -70,7 +70,15 @@
                         </div>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <th></th>
+                <td></td>
+                <td></td>
+                <td>결과값이 없습니다</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            @endforelse
             </tbody>
             </table>
             {!! $jjim->appends(request()->input())->links('vendor.pagination.custom2') !!}
