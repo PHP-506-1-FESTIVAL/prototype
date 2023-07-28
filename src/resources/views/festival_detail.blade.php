@@ -286,7 +286,7 @@ height: 100%;
                                     <span class="txt_like">가성비 좋아요</span>
                                 </button>
                             </div>
-                            <input type="hidden" name="festival_id" id="festival-id-input" value="">
+                            <input type="hidden" name="festival_id" id="festival-id-input" value="{{$festival->festival_id}}">
                             <fieldset id="starRate">
                                 <span class="text-bold">별점을 선택해주세요</span>
                                 <input type="radio" name="rate" value="5" id="rate1"><label for="rate1">★</label>
@@ -479,10 +479,10 @@ height: 100%;
     </script>
     {{-- 현재페이지 숫자 추출 --}}
     <script>
-        var initialUrl = window.location.href;
-        var numericPart = initialUrl.match(/\d+/)[0];
+        // var initialUrl = window.location.href;
+        // var numericPart = initialUrl.match(/\d+/)[0];
 
-        document.getElementById("festival-id-input").value = numericPart;
+        // document.getElementById("festival-id-input").value = numericPart;
     </script>
 <script>
     function handleButtonClick(buttonId) {

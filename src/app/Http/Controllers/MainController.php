@@ -228,7 +228,6 @@ class MainController extends Controller
             "star_percentage"=>$star_percentage,
             "star"=>$star
         ];
-
         return view('festival_detail')
             ->with('festival', $festival[0]) // 축제 정보를 뷰로 전달
             ->with('favoriteCount', $favoriteCount) // 찜한 갯수를 뷰로 전달

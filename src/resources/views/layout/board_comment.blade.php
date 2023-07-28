@@ -82,7 +82,7 @@ a[href^="javascript:popup2"] {
                             <form action="{{ route('comment.create') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="type_flg" value="1">
-                                <input type="hidden" name="board_id" id="board-id-input" value="">
+                                <input type="hidden" name="board_id" id="board-id-input" value="{{$boards->board_id}}">
                                 <textarea name="comment_content" class="form-control" placeholder="댓글을 입력하세요" required></textarea>
                                 <button type="submit" class="btn btn-primary" style="float:right; margin-top:5px;">작성</button>
                             </form>
@@ -105,7 +105,7 @@ a[href^="javascript:popup2"] {
                                                 <img class="comment-profile-img" src="/img/profile/{{ $comment->user_profile }}" alt="프로필 이미지">
                                             </div>
                                             <span class="comment-name">{{ $comment->user_nickname }} |</span>
-                                            <span class="comment-time">{{ $comment->updated_at->format('y-m-d') }}</span>                                        
+                                            <span class="comment-time">{{ $comment->updated_at->format('y-m-d') }}</span>
                                         </div>
                                             <div class="groupbtn" role="group" style="display: flex; justify-content: flex-end; padding:0 10px;">
                                             <!-- 수정 -->
@@ -168,10 +168,10 @@ a[href^="javascript:popup2"] {
 </section>
 {{-- 현재 페이지 숫자 추출 --}}
 <script>
-    var initialUrl = window.location.href;
-    var numericPart = initialUrl.match(/\d+/)[0];
+    // var initialUrl = window.location.href;
+    // var numericPart = initialUrl.match(/\d+/)[0];
 
-    document.getElementById("board-id-input").value = numericPart;
+    // document.getElementById("board-id-input").value = numericPart;
 
     function popup2(e){
         var url = "{!! route('insert.report', ['type' => '1']) !!}";
